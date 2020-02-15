@@ -1,0 +1,23 @@
+import { useEffect, useState } from 'react'
+
+// The hook is just a simple function which we can export
+export const FetchApi = () => {
+
+    const [data, setdata] = useState({});
+
+  async function fetchData() {
+    const res = await fetch("http://wheathwaapi.vielife.com.tw/api/DriverInfo/Get/15");
+    res.json()
+      .then(res => {
+        console.log(res.msg);
+        setdata(res);
+      })
+      .catch(err => {console.log("HAHA ERROR!")});
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  return { data };
+}
