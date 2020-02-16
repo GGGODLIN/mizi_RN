@@ -7,7 +7,7 @@ import 'react-native-gesture-handler';
  * @flow
  */
 
-import React, { useState ,useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -17,6 +17,7 @@ import {
   StatusBar,
 } from 'react-native';
 
+import AsyncStorage from '@react-native-community/async-storage';
 import {
   Header,
   LearnMoreLinks,
@@ -25,97 +26,89 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {NavigationContainer} from '@react-navigation/native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-import { Button, ThemeProvider } from 'react-native-elements';
+import {Button, ThemeProvider} from 'react-native-elements';
 
 import Screen from './Screen';
-
-
-
+import LoginScreen from './LoginScreen';
 
 const App: () => React$Node = () => {
+  const [logged, setlogged] = useState(false);
 
-  const [data, setdata] = useState({});
-  const [loading, setloading] = useState({lodingOrNot:true});
-
-  async function fetchData() {
-    const res = await fetch("http://wheathwaapi.vielife.com.tw/api/DriverInfo/Get/15");
-    res.json()
-      .then(res => {
-        console.log(res.msg);
-        setdata(res);
-        setloading({lodingOrNot:false});
-      })
-      .catch(err => {console.log("HAHA ERROR!")});
+  {
+    /*const [data, setdata] = useState({});
+    const [loading, setloading] = useState({lodingOrNot:true});
+  
+    async function fetchData() {
+      const res = await fetch("http://wheathwaapi.vielife.com.tw/api/DriverInfo/Get/15");
+      res.json()
+        .then(res => {
+          console.log(res.msg);
+          setdata(res);
+          setloading({lodingOrNot:false});
+        })
+        .catch(err => {console.log("HAHA ERROR!")});
+    }
+  
+    useEffect(() => {
+      fetchData();
+    }, []);*/
   }
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  _storeData = async () => {
+    try {
+      await AsyncStorage.setItem('TASKS', 'I like to save it.');
+    } catch (error) {
+      console.log('LOCALSTORAGE WRONG');
+      // Error saving data
+    }
+  };
+
+  _retrieveData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('TASKS');
+      if (value !== null) {
+        // We have data!!
+        console.log(value);
+      }
+    } catch (error) {
+      console.log('cannot get ITEM');
+      // Error retrieving data
+    }
+  };
 
 
-  
+  handleLogin = async res => {
+    try {
+      await AsyncStorage.setItem('userLoginInfo', JSON.stringify(res));
+      console.log('SAVED ASYNC',res);
+      setlogged(res.success);
+    } catch (error) {
+      console.log('LOCALSTORAGE WRONG');
+      // Error saving data
+    }
+    //console.log("handel",res);
+    
+  };
 
-  
   return (
     <>
-    {/*<ThemeProvider>*/}
-      <Button title={loading.lodingOrNot?"LOADING...":data.msg} />
-    {/*</ThemeProvider>*/}
-    <Screen data={loading.lodingOrNot?{}:data}  loading= {loading}/>
-    {/*
+      <ThemeProvider>
+      <LoginScreen handleLogin={handleLogin} switchOn={!logged} />
+      <Screen switchOn={logged} />
+      </ThemeProvider>
+      
+      
       <StatusBar barStyle="dark-content" />
-*/}
-      {/*<SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step OneHEHE</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.js</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
-          </View>
-        </ScrollView>
-      </SafeAreaView>*/}
+
     </>
   );
 };
 
 const styles = StyleSheet.create({
-  scrollView: {
-    
-  },
+  scrollView: {},
   engine: {
     position: 'absolute',
     right: 0,
