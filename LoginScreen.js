@@ -31,35 +31,33 @@ class LoginScreen extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {res:{}};
+    this.state = {res: {}};
     this.handleLogin = this.handleLogin.bind(this);
   }
 
   handleLogin = async () => {
     let url = `http://wheathwaapi.vielife.com.tw/api/DriverInfo/DriverLogin?`;
-    let query =`acc=${this.emailInput.input._lastNativeText}`;
-    let query2 =`pwd=${this.passwordInput.input._lastNativeText}`;
+    let query = `acc=${this.emailInput.input._lastNativeText}`;
+    let query2 = `pwd=${this.passwordInput.input._lastNativeText}`;
     url += query + '&' + query2;
 
     console.log(`Making LOGGING request to: ${url}`);
 
-    const data = await fetch(
-      url,{
+    const data = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-    }
-    )
+    })
       .then(response => response.json())
       .then(res => {
-        console.log("LOGGING AJAX",res.success);
+        console.log('LOGGING AJAX', res.success);
         this.props.handleLogin(res);
       });
   };
 
   render() {
-    if(!this.props.switchOn){
+    if (!this.props.switchOn) {
       return null;
     }
     return (
@@ -210,9 +208,7 @@ class LoginScreen extends Component {
                     width: SCREEN_WIDTH - 80,
                     backgroundColor: 'white',
                   }}
-                
                   containerStyle={{paddingHorizontal: 0}}
-                  
                   placeholder="請輸入密碼 (預設為身分證後4碼)"
                   placeholderTextColor="gray"
                   autoCapitalize="none"

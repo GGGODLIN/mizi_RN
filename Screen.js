@@ -31,6 +31,8 @@ import {ThemeProvider, Avatar} from 'react-native-elements';
 import {Header} from 'react-native-elements';
 import {Button, Card, Title, Paragraph} from 'react-native-paper';
 import InfoScreen from './InfoScreen';
+import HistoryTaskList from './HistoryTaskList';
+import CheckMainScreen from './CheckMainScreen';
 
 export default class Screen extends Component {
   constructor(props) {
@@ -127,8 +129,8 @@ export default class Screen extends Component {
           inactiveColor="black"
           barStyle={{backgroundColor: '#694fad'}}>
           <Tab.Screen name="基本資料" component={InfoScreen} />
-          <Tab.Screen name="每日檢查" component={this.checkTodayScreen} />
-          <Tab.Screen name="今日任務" component={this.taskTodayScreen} />
+          <Tab.Screen name="每日檢查" component={CheckMainScreen} />
+          <Tab.Screen name="今日任務" component={HistoryTaskList} />
           <Tab.Screen name="聯繫行控" component={InfoScreen} />
         </Tab.Navigator>
       </NavigationContainer>
