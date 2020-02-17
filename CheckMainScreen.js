@@ -25,10 +25,14 @@ import {ThemeProvider, Avatar} from 'react-native-elements';
 import {Button, Card, Title, Paragraph, Divider} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+import CarCheckScreen from './CarCheckScreen';
+
 const CheckMainScreen = props => {
   console.log('Navigation?', props.navigation);
   const [data, setdata] = useState({});
   const [isLoading, setLoading] = useState(true);
+  const [carChecked, setcarChecked] = useState(false);
+  const [bodyChecked, setbodyChecked] = useState(false);
 
   async function fetchData() {
     try {
@@ -59,7 +63,8 @@ const CheckMainScreen = props => {
   } else {
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center',width:'100%'}}>
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <View style={{flex: 2, justifyContent: 'center', alignItems: 'center',flexDirection: 'row',}}>
+          <Icon name="close" size={30} color="#900" style={{flex:0.2}}/>
           <Text>您今日尚未完成檢查</Text>
         </View>
         <View
@@ -100,7 +105,7 @@ const CheckMainScreen = props => {
           }}>
           <Button
             color='orange'
-            style={{flex:0.2,marginVertical: 8,marginHorizontal: 16,borderRadius:50}}
+            style={carChecked?{flex:0.2,marginVertical: 8,marginHorizontal: 16,borderRadius:50,display:'none'}:{flex:0.2,marginVertical: 8,marginHorizontal: 16,borderRadius:50}}
             labelStyle={{color:'black'}}
             contentStyle={{width:'100%',height:'100%'}}
             icon="car"
@@ -110,7 +115,7 @@ const CheckMainScreen = props => {
           </Button>
           <Button
             color='orange'
-            style={{flex:0.2,marginVertical: 8,marginHorizontal: 16,borderRadius:50}}
+            style={bodyChecked?{flex:0.2,marginVertical: 8,marginHorizontal: 16,borderRadius:50,display:'none'}:{flex:0.2,marginVertical: 8,marginHorizontal: 16,borderRadius:50}}
             labelStyle={{color:'black'}}
             contentStyle={{width:'100%',height:'100%'}}
             icon="heart"
