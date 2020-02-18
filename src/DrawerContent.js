@@ -74,7 +74,7 @@ export default function DrawerContent(props) {
               mode="outlined"
               onPress={() =>
                 props.navigation.navigate('Home', {
-                  screen: 'InfoScreen',
+                  screen: '基本資料',
                 })
               }>
               基本資料
@@ -109,7 +109,7 @@ export default function DrawerContent(props) {
             mode="text"
             onPress={() =>
               props.navigation.navigate('Home', {
-                screen: 'CheckStackScreen',
+                screen: '每日檢查',
                 params: {
                   screen: 'CarCheckScreen',
                 },
@@ -126,7 +126,7 @@ export default function DrawerContent(props) {
             mode="text"
             onPress={() =>
               props.navigation.navigate('Home', {
-                screen: 'CheckStackScreen',
+                screen: '每日檢查',
                 params: {
                   screen: 'BodyCheckScreen',
                 },

@@ -1023,12 +1023,20 @@
     shortid "^2.2.15"
     use-subscription "^1.3.0"
 
-"@react-navigation/material-bottom-tabs@^5.0.3":
+"@react-navigation/drawer@^5.0.5":
+  version "5.0.5"
+  resolved "https://registry.yarnpkg.com/@react-navigation/drawer/-/drawer-5.0.5.tgz#4575d95996b9797ee617207384c091aa2f606f6e"
+  integrity sha512-w4fXqxDsUcVVdzGjDHbpoBZko4v/9WN/7ydCYM96L2p28pqI08yX9TONN3WrpI/EsMx03NjzjBzvV8BJIvkBqQ==
+  dependencies:
+    color "^3.1.2"
+    react-native-iphone-x-helper "^1.2.1"
+
+"@react-navigation/material-bottom-tabs@^5.0.5":
   version "5.0.5"
   resolved "https://registry.yarnpkg.com/@react-navigation/material-bottom-tabs/-/material-bottom-tabs-5.0.5.tgz#8aacae50bd3e3aa0c9709f2de9c144d7d4dff440"
   integrity sha512-e23883pfrz+UvVHBZI/EQEgPQCChwIu5StvkovklH9iXnsii1Ntd4ZGx7qzjPGKmIDnaqWtMQ1PJFhdUkMHgfw==
 
-"@react-navigation/native@^5.0.3":
+"@react-navigation/native@^5.0.5":
   version "5.0.5"
   resolved "https://registry.yarnpkg.com/@react-navigation/native/-/native-5.0.5.tgz#4ba4518ddba602086b80fc507fa7b5588c1e71c2"
   integrity sha512-k42UHDzZwjN3f9WgCUKycJmpo2xypZDlauhhvSoTJ1DG4+sv0PvS5onJwjQm83F2FGACkOSWSoBo7wbYc+fTRQ==
@@ -1041,6 +1049,14 @@
   integrity sha512-uMwjDCoCaPLegEcEOs34ocmJOIy1JMkKv9nWShMdBokk3cISv9oJYhv2Yr2YmhLaMQ3ZMzFjMQJh0DsvZ/7UOQ==
   dependencies:
     shortid "^2.2.15"
+
+"@react-navigation/stack@^5.0.5":
+  version "5.0.5"
+  resolved "https://registry.yarnpkg.com/@react-navigation/stack/-/stack-5.0.5.tgz#26fd6c13394c33e2d393d0b7fb3d1baaa606638b"
+  integrity sha512-KrTcf5mzdkYTMLfNSOUFlXOxeLD+Q0EWp8iJaZqq3G9qKgOz2GYAZ06ye1PFmTDXH2P1XGk8XpPm6mDtlbit2g==
+  dependencies:
+    color "^3.1.2"
+    react-native-iphone-x-helper "^1.2.1"
 
 "@types/babel__core@^7.1.0":
   version "7.1.4"
@@ -5242,6 +5258,11 @@ react-native-paper@^3.6.0:
     "@callstack/react-theme-provider" "^3.0.5"
     color "^3.1.2"
     react-native-safe-area-view "^0.14.6"
+
+react-native-phone-call@^1.0.9:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/react-native-phone-call/-/react-native-phone-call-1.0.9.tgz#4468ec6f95856557fbff9bd69a0db04b54c35e1d"
+  integrity sha512-OPWYg8qeWNG/U4bWGMAKcQTH/ifqJnsvUPCH4lOkvWFHbQS3fbH5M8rFhXCzcfS0GVNzHhZX9ZByMM368TFAUQ==
 
 react-native-ratings@^6.3.0:
   version "6.5.0"
