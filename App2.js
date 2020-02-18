@@ -40,11 +40,15 @@ const App = () => {
     
   };
 
+  function handleLogout  (res){
+  	setlogged(res);
+  };
+
   return (
     <PaperProvider>
     <LoginScreen handleLogin={handleLogin} switchOn={!logged} />
       <NavigationContainer>
-        <RootNavigator switchOn={logged} logindata={logindata}/>
+        <RootNavigator switchOn={logged} logindata={logindata} handleLogout={handleLogout}/>
       </NavigationContainer>
     </PaperProvider>
   );

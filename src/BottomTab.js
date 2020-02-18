@@ -9,7 +9,7 @@ import CheckStackScreen from './CheckStackScreen';
 
 const Tab = createMaterialBottomTabNavigator();
 
-export default function BottomTab () {
+export default function BottomTab (route) {
   return (
     <Tab.Navigator
       initialRouteName="HistoryTaskList"

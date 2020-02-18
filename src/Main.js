@@ -18,6 +18,12 @@ function HomeScreen() {
 
 export default function RootNavigator(props) {
   var data = props.logindata;
+  console.log("LOGOUT",props.handleLogout);
+  function handleLogout(){
+    console.log("LOG OUT!!!!");
+    props.handleLogout(false);
+  }
+
   if (!props.switchOn) {
     return null;
   }
@@ -30,8 +36,9 @@ export default function RootNavigator(props) {
         borderWidth: 0,
         top: 0,
       }}
-      drawerContent={props => <DrawerContent {...props} logindata={data} />}>
+      drawerContent={props => <DrawerContent {...props} logindata={data} handleLogout={handleLogout}/>}>
       <Drawer.Screen name="Home" component={BottomTab} />
+      <Drawer.Screen name="DrawToCheckCar" component={BottomTab} />
       <Drawer.Screen name="CarCheckScreen" component={CarCheckScreen} />
       <Drawer.Screen name="BodyCheckScreen" component={BodyCheckScreen} />
     </Drawer.Navigator>

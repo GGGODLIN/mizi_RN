@@ -21,12 +21,11 @@ import AsyncStorage from '@react-native-community/async-storage';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-import {ThemeProvider, Avatar} from 'react-native-elements';
+import {ThemeProvider, Avatar, CheckBox} from 'react-native-elements';
 import {Button, Card, Title, Paragraph, Divider} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const CarCheckScreen = props => {
-  console.log('CHECK CAR?');
+const CarCheckScreen = ({props, route}) => {
   const [data, setdata] = useState({});
   const [isLoading, setLoading] = useState(true);
   const [carChecked, setcarChecked] = useState(false);
@@ -37,7 +36,6 @@ const CarCheckScreen = props => {
       const value = await AsyncStorage.getItem('userLoginInfo');
       if (value !== null) {
         var obj_value = JSON.parse(value);
-        console.log(obj_value);
         setdata(obj_value);
         setLoading(false);
       }
@@ -52,22 +50,51 @@ const CarCheckScreen = props => {
   }, []);
 
   if (isLoading) {
-    console.log('info screen is loading...');
+    console.log('CHECKCAR screen is loading...');
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <Text>LOADING.............</Text>
       </View>
     );
   } else {
+    console.log('CHECK CAR IS RENDER',route);
     return (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center',width:'100%'}}>
-        <View style={{flex: 2, justifyContent: 'center', alignItems: 'center',flexDirection: 'row',}}>
-          <Icon name="close" size={30} color="#900" style={{flex:0.2}}/>
-          <Text>to do 檢查車子</Text>
-          <Button title="Go back" onPress={() => props.navigation.goBack()} >GO BACK!!</Button>
-        </View>
-        
-        
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          width: '100%',
+        }}>
+        <CheckBox title="Click Here" checked={carChecked} />
+
+        <CheckBox center title="Click Here" checked={carChecked} />
+
+        <CheckBox
+          center
+          title="Click Here"
+          checkedIcon="dot-circle-o"
+          uncheckedIcon="circle-o"
+          checked={carChecked}
+        />
+
+        <CheckBox
+          center
+          title="Click Here to Remove This Item"
+          iconRight
+          iconType="material"
+          checkedIcon="clear"
+          uncheckedIcon="add"
+          checkedColor="red"
+          checked={carChecked}
+        />
+
+        <CheckBox
+          checkedIcon={<Icon name="check" />}
+          uncheckedIcon={<Icon name="close" />}
+          checked={carChecked}
+          onPress={() => setcarChecked(true)}
+        />
       </View>
     );
   }

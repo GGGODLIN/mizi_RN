@@ -16,7 +16,8 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default function DrawerContent(props) {
-  const data = props.logindata;
+  const data =props.logindata;
+  console.log("DRAW LOGOUT",props.handleLogout);
 
   if (0) {
     return null;
@@ -58,7 +59,7 @@ export default function DrawerContent(props) {
               }}
               labelStyle={{color: 'white'}}
               mode="outlined"
-              onPress={() => props.navigation.navigate('CarCheckScreen')}>
+              onPress={() => {props.handleLogout()}}>
               登出
             </Button>
             <Button
@@ -71,8 +72,11 @@ export default function DrawerContent(props) {
               }}
               labelStyle={{color: 'black'}}
               mode="outlined"
-
-              onPress={() => props.navigation.navigate('CarCheckScreen')}>
+              onPress={() =>
+                props.navigation.navigate('Home', {
+                  screen: 'InfoScreen',
+                })
+              }>
               基本資料
             </Button>
           </Drawer.Section>
@@ -83,12 +87,11 @@ export default function DrawerContent(props) {
             labelStyle={{color: 'black'}}
             contentStyle={{width: '100%', padding: 10}}
             mode="text"
-
             onPress={() => console.log('Pressed')}>
             接送任務清單
           </Button>
-          </Drawer.Section>
-          <Drawer.Section style={styles.drawerSection}>
+        </Drawer.Section>
+        <Drawer.Section style={styles.drawerSection}>
           <Button
             color="red"
             labelStyle={{color: 'black'}}
@@ -97,24 +100,38 @@ export default function DrawerContent(props) {
             onPress={() => console.log('Pressed')}>
             司機教育學院
           </Button>
-          </Drawer.Section>
-          <Drawer.Section style={styles.drawerSection}>
+        </Drawer.Section>
+        <Drawer.Section style={styles.drawerSection}>
           <Button
             color="red"
             labelStyle={{color: 'black'}}
             contentStyle={{width: '100%', padding: 10}}
             mode="text"
-            onPress={() => props.navigation.navigate('CarCheckScreen')}>
+            onPress={() =>
+              props.navigation.navigate('Home', {
+                screen: 'CheckStackScreen',
+                params: {
+                  screen: 'CarCheckScreen',
+                },
+              })
+            }>
             每日車況檢查
           </Button>
-          </Drawer.Section>
-          <Drawer.Section style={styles.drawerSection}>
+        </Drawer.Section>
+        <Drawer.Section style={styles.drawerSection}>
           <Button
             color="red"
             labelStyle={{color: 'black'}}
             contentStyle={{width: '100%', padding: 10}}
             mode="text"
-            onPress={() => props.navigation.navigate('BodyCheckScreen')}>
+            onPress={() =>
+              props.navigation.navigate('Home', {
+                screen: 'CheckStackScreen',
+                params: {
+                  screen: 'BodyCheckScreen',
+                },
+              })
+            }>
             身心狀況檢查
           </Button>
         </Drawer.Section>
