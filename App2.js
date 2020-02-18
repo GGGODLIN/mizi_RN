@@ -22,6 +22,7 @@ import LoginScreen from './LoginScreen';
 
 const App = () => {
 	const [logged, setlogged] = useState(false);
+	const [logindata, setdata] = useState();
 
 	
 
@@ -29,6 +30,7 @@ const App = () => {
     try {
       await AsyncStorage.setItem('userLoginInfo', JSON.stringify(res));
       console.log('SAVED ASYNC',res);
+      await setdata(res);
       setlogged(res.success);
     } catch (error) {
       console.log('LOCALSTORAGE WRONG');
@@ -42,7 +44,7 @@ const App = () => {
     <PaperProvider>
     <LoginScreen handleLogin={handleLogin} switchOn={!logged} />
       <NavigationContainer>
-        <RootNavigator switchOn={logged}/>
+        <RootNavigator switchOn={logged} logindata={logindata}/>
       </NavigationContainer>
     </PaperProvider>
   );

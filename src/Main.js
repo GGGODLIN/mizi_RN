@@ -17,11 +17,20 @@ function HomeScreen() {
 }
 
 export default function RootNavigator(props) {
-  if (!props.switchOn){
+  var data = props.logindata;
+  if (!props.switchOn) {
     return null;
   }
   return (
-    <Drawer.Navigator drawerContent={props => <DrawerContent {...props} />}>
+    <Drawer.Navigator
+      drawerStyle={{
+        backgroundColor: 'white',
+        margin: 0,
+        padding: 0,
+        borderWidth: 0,
+        top: 0,
+      }}
+      drawerContent={props => <DrawerContent {...props} logindata={data} />}>
       <Drawer.Screen name="Home" component={BottomTab} />
       <Drawer.Screen name="CarCheckScreen" component={CarCheckScreen} />
       <Drawer.Screen name="BodyCheckScreen" component={BodyCheckScreen} />
