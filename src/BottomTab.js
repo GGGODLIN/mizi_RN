@@ -1,5 +1,6 @@
 import React from 'react';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
+import { useIsFocused } from '@react-navigation/native';
 
 import InfoScreen from '../InfoScreen';
 import CheckMainScreen from '../CheckMainScreen';
@@ -8,22 +9,41 @@ import CheckStackScreen from './CheckStackScreen';
 import call from 'react-native-phone-call';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import {Linking} from 'react-native'
-
+import {
+  useTheme,
+  Avatar,
+  Title,
+  Caption,
+  Paragraph,
+  Drawer,
+  Text,
+  TouchableRipple,
+  Switch,
+  Button,
+} from 'react-native-paper';
 const args = {
   number: '9093900003', // String value with the number to call
-  prompt: true, // Optional boolean property. Determines if the user should be prompt prior to the call
+  prompt: false, // Optional boolean property. Determines if the user should be prompt prior to the call
 };
 const Tab = createMaterialBottomTabNavigator();
 const callOut = ({ navigation }) => {
+  const isFocused = useIsFocused();
  
-  return ({call(args).then(res=>navigation.goBack()).catch(console.error)});
+  if(isFocused){
+    call(args);
+    navigation.goBack();
+    return null;
+  }
+  else{
+    return(<Text>QQ</Text>);
+  }
 };
 
 export default function BottomTab(route) {
   return (
     <Tab.Navigator
       initialRouteName="HistoryTaskList"
-      shifting={true}
+      shifting={false}
       sceneAnimationEnabled={false}>
       <Tab.Screen
         name="首頁"

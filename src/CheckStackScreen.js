@@ -5,6 +5,7 @@ import CheckMainScreen  from '../CheckMainScreen';
 import HistoryTaskList from '../HistoryTaskList';
 import CarCheckScreen from '../CarCheckScreen';
 import BodyCheckScreen from '../BodyCheckScreen';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Stack = createStackNavigator();
 
@@ -12,10 +13,14 @@ export default function CheckStackScreen() {
   return (
     <Stack.Navigator
       initialRouteName="CheckMainScreen"
-      headerMode="none"
+      headerMode="float"
       screenOptions={{
         headerTintColor: 'white',
         headerStyle: { backgroundColor: 'tomato' },
+        headerLeft:({color, size}) => (
+            <Icon name="bars" color={color} size={30} />
+          ),
+        headerLeftContainerStyle:{padding:20},
       }}
     >
       <Stack.Screen

@@ -1,6 +1,7 @@
 import React from 'react';
 import {Text, View} from 'react-native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
+import {Header} from 'react-native-elements';
 import BottomTab from './BottomTab';
 import DrawerContent from './DrawerContent';
 import CarCheckScreen from '../CarCheckScreen';
