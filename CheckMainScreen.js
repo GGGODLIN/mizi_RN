@@ -110,7 +110,7 @@ const CheckMainScreen = props => {
             contentStyle={{width:'100%',height:'100%'}}
             icon="car"
             mode="contained"
-            onPress={() => console.log('Pressed')}>
+            onPress={() => props.navigation.navigate('CarCheckScreen')}>
             進行車輛檢查
           </Button>
           <Button
@@ -120,7 +120,7 @@ const CheckMainScreen = props => {
             contentStyle={{width:'100%',height:'100%'}}
             icon="heart"
             mode="contained"
-            onPress={() => console.log('Pressed')}>
+            onPress={() => props.navigation.navigate('BodyCheckScreen')}>
             進行身心檢查
           </Button>
         </View>

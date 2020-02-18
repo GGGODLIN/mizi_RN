@@ -25,7 +25,7 @@ import {ThemeProvider, Avatar} from 'react-native-elements';
 import {Button, Card, Title, Paragraph, Divider} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const CarCheckScreen = props => {
+const BodyCheckScreen = props => {
   console.log('CHECK CAR?');
   const [data, setdata] = useState({});
   const [isLoading, setLoading] = useState(true);
@@ -63,7 +63,7 @@ const CarCheckScreen = props => {
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center',width:'100%'}}>
         <View style={{flex: 2, justifyContent: 'center', alignItems: 'center',flexDirection: 'row',}}>
           <Icon name="close" size={30} color="#900" style={{flex:0.2}}/>
-          <Text>to do 檢查車子</Text>
+          <Text>to do 檢查身體</Text>
           <Button title="Go back" onPress={() => props.navigation.goBack()} >GO BACK!!</Button>
         </View>
         
@@ -73,7 +73,7 @@ const CarCheckScreen = props => {
   }
 };
 
-export default CarCheckScreen;
+export default BodyCheckScreen;
 
 const styles = StyleSheet.create({
   button: {
