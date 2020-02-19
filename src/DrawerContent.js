@@ -87,7 +87,12 @@ export default function DrawerContent(props) {
             labelStyle={{color: 'black'}}
             contentStyle={{width: '100%', padding: 10}}
             mode="text"
-            onPress={() => console.log('Pressed')}>
+            onPress={() =>
+              props.navigation.navigate('Home', {
+                screen: '首頁',
+                
+              })
+            }>
             接送任務清單
           </Button>
         </Drawer.Section>

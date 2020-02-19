@@ -63,7 +63,7 @@ const CheckMainScreen = props => {
   } else {
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center',width:'100%'}}>
-        <View style={{flex: 2, justifyContent: 'center', alignItems: 'center',flexDirection: 'row',}}>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center',flexDirection: 'row',}}>
           <Icon name="close" size={30} color="#900" style={{flex:0.2}}/>
           <Text>您今日尚未完成檢查</Text>
         </View>
