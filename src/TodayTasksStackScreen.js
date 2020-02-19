@@ -9,10 +9,10 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Stack = createStackNavigator();
 
-export default function CheckStackScreen(props) {
+export default function TodayTasksStackScreen(props) {
   return (
     <Stack.Navigator
-      initialRouteName="CheckMainScreen"
+      initialRouteName="HistoryTaskList"
       headerMode="float"
       screenOptions={{
         headerTintColor: 'black',
@@ -25,8 +25,8 @@ export default function CheckStackScreen(props) {
       }}
     >
       <Stack.Screen
-        name="CheckMainScreen"
-        component={CheckMainScreen}
+        name="HistoryTaskList"
+        component={HistoryTaskList}
         options={{
 
         }}

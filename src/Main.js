@@ -30,6 +30,7 @@ export default function RootNavigator(props) {
   }
   return (
     <Drawer.Navigator
+      initialRouteName="Home"
       drawerStyle={{
         backgroundColor: 'white',
         margin: 0,
@@ -39,9 +40,6 @@ export default function RootNavigator(props) {
       }}
       drawerContent={props => <DrawerContent {...props} logindata={data} handleLogout={handleLogout}/>}>
       <Drawer.Screen name="Home" component={BottomTab} />
-      <Drawer.Screen name="DrawToCheckCar" component={BottomTab} />
-      <Drawer.Screen name="CarCheckScreen" component={CarCheckScreen} />
-      <Drawer.Screen name="BodyCheckScreen" component={BodyCheckScreen} />
     </Drawer.Navigator>
   );
 }

@@ -5,14 +5,15 @@ import CheckMainScreen  from '../CheckMainScreen';
 import HistoryTaskList from '../HistoryTaskList';
 import CarCheckScreen from '../CarCheckScreen';
 import BodyCheckScreen from '../BodyCheckScreen';
+import EditInfoScreen from '../EditInfoScreen';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Stack = createStackNavigator();
 
-export default function CheckStackScreen(props) {
+export default function InfoStackScreen(props) {
   return (
     <Stack.Navigator
-      initialRouteName="CheckMainScreen"
+      initialRouteName="InfoScreen"
       headerMode="float"
       screenOptions={{
         headerTintColor: 'black',
@@ -25,15 +26,15 @@ export default function CheckStackScreen(props) {
       }}
     >
       <Stack.Screen
-        name="CheckMainScreen"
-        component={CheckMainScreen}
+        name="InfoScreen"
+        component={InfoScreen}
         options={{
 
         }}
       />
       <Stack.Screen
-        name="CarCheckScreen"
-        component={CarCheckScreen}
+        name="EditInfoScreen"
+        component={EditInfoScreen}
         options={{
 
         }}

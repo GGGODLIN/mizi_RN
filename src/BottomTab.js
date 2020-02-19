@@ -6,6 +6,11 @@ import InfoScreen from '../InfoScreen';
 import CheckMainScreen from '../CheckMainScreen';
 import HistoryTaskList from '../HistoryTaskList';
 import CheckStackScreen from './CheckStackScreen';
+import InfoStackScreen from './InfoStackScreen';
+import TodayTasksStackScreen from './TodayTasksStackScreen';
+import HistoryTasksStackScreen from './HistoryTasksStackScreen';
+
+
 import call from 'react-native-phone-call';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import {Linking} from 'react-native'
@@ -42,19 +47,19 @@ const callOut = ({ navigation }) => {
 export default function BottomTab(route) {
   return (
     <Tab.Navigator
-      initialRouteName="HistoryTaskList"
+      initialRouteName="TodayTasksStackScreen"
       shifting={false}
-      sceneAnimationEnabled={false}>
+      unmountOnBlur={true}>
       <Tab.Screen
         name="首頁"
-        component={HistoryTaskList}
+        component={TodayTasksStackScreen}
         options={{
           tabBarIcon: 'home-account',
         }}
       />
       <Tab.Screen
         name="基本資料"
-        component={InfoScreen}
+        component={InfoStackScreen}
         options={{
           tabBarIcon: ({color, size}) => (
             <Icon name="user-check" color={color} size={size} />
@@ -70,7 +75,7 @@ export default function BottomTab(route) {
       />
       <Tab.Screen
         name="任務歷程"
-        component={HistoryTaskList}
+        component={HistoryTasksStackScreen}
         options={{
           tabBarIcon: 'home-account',
         }}

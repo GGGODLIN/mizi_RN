@@ -16,8 +16,8 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default function DrawerContent(props) {
-  const data =props.logindata;
-  console.log("DRAW LOGOUT",props.handleLogout);
+  const data = props.logindata;
+  console.log('DRAW LOGOUT', props.handleLogout);
 
   if (0) {
     return null;
@@ -39,7 +39,14 @@ export default function DrawerContent(props) {
                   color="red"
                   labelStyle={{color: 'orange'}}
                   mode="text"
-                  onPress={() => console.log('Pressed')}>
+                  onPress={() =>
+                    props.navigation.navigate('Home', {
+                      screen: '基本資料',
+                      params: {
+                        screen: 'EditInfoScreen',
+                      },
+                    })
+                  }>
                   編輯
                 </Button>
               </View>
@@ -59,7 +66,9 @@ export default function DrawerContent(props) {
               }}
               labelStyle={{color: 'white'}}
               mode="outlined"
-              onPress={() => {props.handleLogout()}}>
+              onPress={() => {
+                props.handleLogout();
+              }}>
               登出
             </Button>
             <Button
@@ -75,6 +84,9 @@ export default function DrawerContent(props) {
               onPress={() =>
                 props.navigation.navigate('Home', {
                   screen: '基本資料',
+                  params: {
+                    screen: 'InfoScreen',
+                  },
                 })
               }>
               基本資料
@@ -90,7 +102,9 @@ export default function DrawerContent(props) {
             onPress={() =>
               props.navigation.navigate('Home', {
                 screen: '首頁',
-                
+                params: {
+                  screen: 'HistoryTaskList',
+                },
               })
             }>
             接送任務清單

@@ -26,11 +26,12 @@ import {Button, Card, Title, Paragraph, Divider} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ToggleSwitch from 'toggle-switch-react-native';
 
-const CarCheckScreen = ({props, route}) => {
+const CarCheckScreen = props => {
   const [data, setdata] = useState({});
   const [isLoading, setLoading] = useState(true);
   const [carChecked, setcarChecked] = useState(false);
   const [bodyChecked, setbodyChecked] = useState(false);
+  const [allChecked, setallChecked] = useState(false);
   const [checkData, setcheckData] = useState({
     allChecked: false,
     a: {
@@ -60,7 +61,7 @@ const CarCheckScreen = ({props, route}) => {
     }
   }
 
-  const handleLogin = async () => {
+  const fetchDataModal = async () => {
     let url = `http://wheathwaapi.vielife.com.tw/api/CheckItem/GetCheckCarViewModel`;
 
     console.log(`Making Modal request to: ${url}`);
@@ -78,8 +79,20 @@ const CarCheckScreen = ({props, route}) => {
       });
   };
 
+  const handleCheckAll = async () => {
+    let tempData = {...checkDataModal};
+    const nameList = Object.values(tempData.response).map(
+      item => (item.HasChange = !allChecked),
+    );
+    const nameList2 = Object.values(tempData.response).map(item =>
+      item.CheckCarChildViewModel.map(item2 => (item2.HasChange = !allChecked)),
+    );
+    setallChecked(!allChecked);
+    setcheckDataModal(tempData);
+  };
+
   useEffect(() => {
-    handleLogin().then(() => setLoading(false));
+    fetchDataModal().then(() => setLoading(false));
   }, []);
 
   if (isLoading) {
@@ -90,25 +103,33 @@ const CarCheckScreen = ({props, route}) => {
       </View>
     );
   } else {
+    const nameList = Object.values(checkDataModal.response).map(
+      item => item.HasChange,
+    );
+    const nameList2 = Object.values(checkDataModal.response).map(item =>
+      item.CheckCarChildViewModel.map(item2 => item2.HasChange),
+    );
+    console.log('GET OBJ', nameList);
+    console.log('GET OBJ2', nameList2);
     return (
       <ScrollView>
         <View
           style={{
-            justifyContent: 'center',
+            justifyContent: 'space-around',
             alignItems: 'center',
             flexDirection: 'row',
-            padding: 10,
+            padding: 15,
+            backgroundColor: '#3C4856',
           }}>
-          <Icon name="close" size={30} color="#900" style={{flex: 0.2}} />
-          <Text>您今日尚未完成檢查</Text>
+          <Text style={{color:'white',fontSize:20,fontWeight:'bold'}}>每日車輛檢查</Text>
           <ToggleSwitch
-            isOn={false}
-            onColor="green"
-            offColor="red"
-            label="Example label"
-            labelStyle={{color: 'black', fontWeight: '900'}}
-            size="large"
-            onToggle={isOn => console.log('changed to : ', isOn)}
+            isOn={allChecked}
+            onColor="#F8A91E"
+            offColor="#CACACA"
+            label="全部檢查完畢"
+            labelStyle={{color: 'white'}}
+            size="medium"
+            onToggle={isOn => handleCheckAll()}
           />
         </View>
         <View
@@ -118,50 +139,63 @@ const CarCheckScreen = ({props, route}) => {
             width: '100%',
           }}>
           <View style={styles.checkTable} elevation={5}>
-            <CheckBox
-              title={checkDataModal.response[0].CheckCarName}
-              checked={checkDataModal.response[0].HasChange}
-              containerStyle={styles.checkElementTop}
-              onPress={() => {
-                let newData = {...checkDataModal};
-                newData.response[0].HasChange = newData.response[0].HasChange
-                  ? false
-                  : true;
-                newData.response[0].CheckCarChildViewModel[0].HasChange = !newData
-                  .response[0].HasChange
-                  ? false
-                  : true;
-                newData.response[0].CheckCarChildViewModel[1].HasChange = !newData
-                  .response[0].HasChange
-                  ? false
-                  : true;
-                newData.response[0].CheckCarChildViewModel[2].HasChange = !newData
-                  .response[0].HasChange
-                  ? false
-                  : true;
-                newData.response[0].CheckCarChildViewModel[3].HasChange = !newData
-                  .response[0].HasChange
-                  ? false
-                  : true;
-                newData.response[0].CheckCarChildViewModel[4].HasChange = !newData
-                  .response[0].HasChange
-                  ? false
-                  : true;
-                newData.response[0].CheckCarChildViewModel[5].HasChange = !newData
-                  .response[0].HasChange
-                  ? false
-                  : true;
-                newData.response[0].CheckCarChildViewModel[6].HasChange = !newData
-                  .response[0].HasChange
-                  ? false
-                  : true;
-                newData.response[0].CheckCarChildViewModel[7].HasChange = !newData
-                  .response[0].HasChange
-                  ? false
-                  : true;
-                setcheckDataModal(newData);
-              }}
-            />
+            <View style={styles.toggleBar}>
+              <ToggleSwitch
+                onColor="#F8A91E"
+                offColor="#CACACA"
+                size="medium"
+                label={' '}
+                isOn={checkDataModal.response[0].HasChange}
+                labelStyle={{
+                  color: 'black',
+                  padding: 10,
+                  paddingLeft: 0,
+                  margin: 0,
+                }}
+                onToggle={() => {
+                  let newData = {...checkDataModal};
+                  newData.response[0].HasChange = newData.response[0].HasChange
+                    ? false
+                    : true;
+                  newData.response[0].CheckCarChildViewModel[0].HasChange = !newData
+                    .response[0].HasChange
+                    ? false
+                    : true;
+                  newData.response[0].CheckCarChildViewModel[1].HasChange = !newData
+                    .response[0].HasChange
+                    ? false
+                    : true;
+                  newData.response[0].CheckCarChildViewModel[2].HasChange = !newData
+                    .response[0].HasChange
+                    ? false
+                    : true;
+                  newData.response[0].CheckCarChildViewModel[3].HasChange = !newData
+                    .response[0].HasChange
+                    ? false
+                    : true;
+                  newData.response[0].CheckCarChildViewModel[4].HasChange = !newData
+                    .response[0].HasChange
+                    ? false
+                    : true;
+                  newData.response[0].CheckCarChildViewModel[5].HasChange = !newData
+                    .response[0].HasChange
+                    ? false
+                    : true;
+                  newData.response[0].CheckCarChildViewModel[6].HasChange = !newData
+                    .response[0].HasChange
+                    ? false
+                    : true;
+                  newData.response[0].CheckCarChildViewModel[7].HasChange = !newData
+                    .response[0].HasChange
+                    ? false
+                    : true;
+                  setcheckDataModal(newData);
+                }}
+              />
+              <Text style={styles.toggleBarText}>
+                {checkDataModal.response[0].CheckCarName}
+              </Text>
+            </View>
             <View
               style={{
                 color: 'black',
@@ -334,34 +368,47 @@ const CarCheckScreen = ({props, route}) => {
           </View>
 
           <View style={styles.checkTable} elevation={5}>
-            <CheckBox
-              title={checkDataModal.response[1].CheckCarName}
-              checked={checkDataModal.response[1].HasChange}
-              containerStyle={styles.checkElementTop}
-              onPress={() => {
-                let newData = {...checkDataModal};
-                newData.response[1].HasChange = newData.response[1].HasChange
-                  ? false
-                  : true;
-                newData.response[1].CheckCarChildViewModel[0].HasChange = !newData
-                  .response[1].HasChange
-                  ? false
-                  : true;
-                newData.response[1].CheckCarChildViewModel[1].HasChange = !newData
-                  .response[1].HasChange
-                  ? false
-                  : true;
-                newData.response[1].CheckCarChildViewModel[2].HasChange = !newData
-                  .response[1].HasChange
-                  ? false
-                  : true;
-                newData.response[1].CheckCarChildViewModel[3].HasChange = !newData
-                  .response[1].HasChange
-                  ? false
-                  : true;
-                setcheckDataModal(newData);
-              }}
-            />
+            <View style={styles.toggleBar}>
+              <ToggleSwitch
+                onColor="#F8A91E"
+                offColor="#CACACA"
+                size="medium"
+                label={' '}
+                isOn={checkDataModal.response[1].HasChange}
+                labelStyle={{
+                  color: 'black',
+                  padding: 10,
+                  paddingLeft: 0,
+                  margin: 0,
+                }}
+                onToggle={() => {
+                  let newData = {...checkDataModal};
+                  newData.response[1].HasChange = newData.response[1].HasChange
+                    ? false
+                    : true;
+                  newData.response[1].CheckCarChildViewModel[0].HasChange = !newData
+                    .response[1].HasChange
+                    ? false
+                    : true;
+                  newData.response[1].CheckCarChildViewModel[1].HasChange = !newData
+                    .response[1].HasChange
+                    ? false
+                    : true;
+                  newData.response[1].CheckCarChildViewModel[2].HasChange = !newData
+                    .response[1].HasChange
+                    ? false
+                    : true;
+                  newData.response[1].CheckCarChildViewModel[3].HasChange = !newData
+                    .response[1].HasChange
+                    ? false
+                    : true;
+                  setcheckDataModal(newData);
+                }}
+              />
+              <Text style={styles.toggleBarText}>
+                {checkDataModal.response[1].CheckCarName}
+              </Text>
+            </View>
             <View
               style={{
                 color: 'black',
@@ -454,34 +501,47 @@ const CarCheckScreen = ({props, route}) => {
           </View>
 
           <View style={styles.checkTable} elevation={5}>
-            <CheckBox
-              title={checkDataModal.response[2].CheckCarName}
-              checked={checkDataModal.response[2].HasChange}
-              containerStyle={styles.checkElementTop}
-              onPress={() => {
-                let newData = {...checkDataModal};
-                newData.response[2].HasChange = newData.response[2].HasChange
-                  ? false
-                  : true;
-                newData.response[2].CheckCarChildViewModel[0].HasChange = !newData
-                  .response[2].HasChange
-                  ? false
-                  : true;
-                newData.response[2].CheckCarChildViewModel[1].HasChange = !newData
-                  .response[2].HasChange
-                  ? false
-                  : true;
-                newData.response[2].CheckCarChildViewModel[2].HasChange = !newData
-                  .response[2].HasChange
-                  ? false
-                  : true;
-                newData.response[2].CheckCarChildViewModel[3].HasChange = !newData
-                  .response[2].HasChange
-                  ? false
-                  : true;
-                setcheckDataModal(newData);
-              }}
-            />
+            <View style={styles.toggleBar}>
+              <ToggleSwitch
+                onColor="#F8A91E"
+                offColor="#CACACA"
+                size="medium"
+                label={' '}
+                isOn={checkDataModal.response[2].HasChange}
+                labelStyle={{
+                  color: 'black',
+                  padding: 10,
+                  paddingLeft: 0,
+                  margin: 0,
+                }}
+                onToggle={() => {
+                  let newData = {...checkDataModal};
+                  newData.response[2].HasChange = newData.response[2].HasChange
+                    ? false
+                    : true;
+                  newData.response[2].CheckCarChildViewModel[0].HasChange = !newData
+                    .response[2].HasChange
+                    ? false
+                    : true;
+                  newData.response[2].CheckCarChildViewModel[1].HasChange = !newData
+                    .response[2].HasChange
+                    ? false
+                    : true;
+                  newData.response[2].CheckCarChildViewModel[2].HasChange = !newData
+                    .response[2].HasChange
+                    ? false
+                    : true;
+                  newData.response[2].CheckCarChildViewModel[3].HasChange = !newData
+                    .response[2].HasChange
+                    ? false
+                    : true;
+                  setcheckDataModal(newData);
+                }}
+              />
+              <Text style={styles.toggleBarText}>
+                {checkDataModal.response[2].CheckCarName}
+              </Text>
+            </View>
             <View
               style={{
                 color: 'black',
@@ -574,34 +634,47 @@ const CarCheckScreen = ({props, route}) => {
           </View>
 
           <View style={styles.checkTable} elevation={5}>
-            <CheckBox
-              title={checkDataModal.response[3].CheckCarName}
-              checked={checkDataModal.response[3].HasChange}
-              containerStyle={styles.checkElementTop}
-              onPress={() => {
-                let newData = {...checkDataModal};
-                newData.response[3].HasChange = newData.response[3].HasChange
-                  ? false
-                  : true;
-                newData.response[3].CheckCarChildViewModel[0].HasChange = !newData
-                  .response[3].HasChange
-                  ? false
-                  : true;
-                newData.response[3].CheckCarChildViewModel[1].HasChange = !newData
-                  .response[3].HasChange
-                  ? false
-                  : true;
-                newData.response[3].CheckCarChildViewModel[2].HasChange = !newData
-                  .response[3].HasChange
-                  ? false
-                  : true;
-                newData.response[3].CheckCarChildViewModel[3].HasChange = !newData
-                  .response[3].HasChange
-                  ? false
-                  : true;
-                setcheckDataModal(newData);
-              }}
-            />
+            <View style={styles.toggleBar}>
+              <ToggleSwitch
+                onColor="#F8A91E"
+                offColor="#CACACA"
+                size="medium"
+                label={' '}
+                isOn={checkDataModal.response[3].HasChange}
+                labelStyle={{
+                  color: 'black',
+                  padding: 10,
+                  paddingLeft: 0,
+                  margin: 0,
+                }}
+                onToggle={() => {
+                  let newData = {...checkDataModal};
+                  newData.response[3].HasChange = newData.response[3].HasChange
+                    ? false
+                    : true;
+                  newData.response[3].CheckCarChildViewModel[0].HasChange = !newData
+                    .response[3].HasChange
+                    ? false
+                    : true;
+                  newData.response[3].CheckCarChildViewModel[1].HasChange = !newData
+                    .response[3].HasChange
+                    ? false
+                    : true;
+                  newData.response[3].CheckCarChildViewModel[2].HasChange = !newData
+                    .response[3].HasChange
+                    ? false
+                    : true;
+                  newData.response[3].CheckCarChildViewModel[3].HasChange = !newData
+                    .response[3].HasChange
+                    ? false
+                    : true;
+                  setcheckDataModal(newData);
+                }}
+              />
+              <Text style={styles.toggleBarText}>
+                {checkDataModal.response[3].CheckCarName}
+              </Text>
+            </View>
             <View
               style={{
                 color: 'black',
@@ -694,34 +767,47 @@ const CarCheckScreen = ({props, route}) => {
           </View>
 
           <View style={styles.checkTable} elevation={5}>
-            <CheckBox
-              title={checkDataModal.response[4].CheckCarName}
-              checked={checkDataModal.response[4].HasChange}
-              containerStyle={styles.checkElementTop}
-              onPress={() => {
-                let newData = {...checkDataModal};
-                newData.response[4].HasChange = newData.response[4].HasChange
-                  ? false
-                  : true;
-                newData.response[4].CheckCarChildViewModel[0].HasChange = !newData
-                  .response[4].HasChange
-                  ? false
-                  : true;
-                newData.response[4].CheckCarChildViewModel[1].HasChange = !newData
-                  .response[4].HasChange
-                  ? false
-                  : true;
-                newData.response[4].CheckCarChildViewModel[2].HasChange = !newData
-                  .response[4].HasChange
-                  ? false
-                  : true;
-                newData.response[4].CheckCarChildViewModel[3].HasChange = !newData
-                  .response[4].HasChange
-                  ? false
-                  : true;
-                setcheckDataModal(newData);
-              }}
-            />
+            <View style={styles.toggleBar}>
+              <ToggleSwitch
+                onColor="#F8A91E"
+                offColor="#CACACA"
+                size="medium"
+                label={' '}
+                isOn={checkDataModal.response[4].HasChange}
+                labelStyle={{
+                  color: 'black',
+                  padding: 10,
+                  paddingLeft: 0,
+                  margin: 0,
+                }}
+                onToggle={() => {
+                  let newData = {...checkDataModal};
+                  newData.response[4].HasChange = newData.response[4].HasChange
+                    ? false
+                    : true;
+                  newData.response[4].CheckCarChildViewModel[0].HasChange = !newData
+                    .response[4].HasChange
+                    ? false
+                    : true;
+                  newData.response[4].CheckCarChildViewModel[1].HasChange = !newData
+                    .response[4].HasChange
+                    ? false
+                    : true;
+                  newData.response[4].CheckCarChildViewModel[2].HasChange = !newData
+                    .response[4].HasChange
+                    ? false
+                    : true;
+                  newData.response[4].CheckCarChildViewModel[3].HasChange = !newData
+                    .response[4].HasChange
+                    ? false
+                    : true;
+                  setcheckDataModal(newData);
+                }}
+              />
+              <Text style={styles.toggleBarText}>
+                {checkDataModal.response[4].CheckCarName}
+              </Text>
+            </View>
             <View
               style={{
                 color: 'black',
@@ -814,50 +900,63 @@ const CarCheckScreen = ({props, route}) => {
           </View>
 
           <View style={styles.checkTable} elevation={5}>
-            <CheckBox
-              title={checkDataModal.response[5].CheckCarName}
-              checked={checkDataModal.response[5].HasChange}
-              containerStyle={styles.checkElementTop}
-              onPress={() => {
-                let newData = {...checkDataModal};
-                newData.response[5].HasChange = newData.response[5].HasChange
-                  ? false
-                  : true;
-                newData.response[5].CheckCarChildViewModel[0].HasChange = !newData
-                  .response[5].HasChange
-                  ? false
-                  : true;
-                newData.response[5].CheckCarChildViewModel[1].HasChange = !newData
-                  .response[5].HasChange
-                  ? false
-                  : true;
-                newData.response[5].CheckCarChildViewModel[2].HasChange = !newData
-                  .response[5].HasChange
-                  ? false
-                  : true;
-                newData.response[5].CheckCarChildViewModel[3].HasChange = !newData
-                  .response[5].HasChange
-                  ? false
-                  : true;
-                newData.response[5].CheckCarChildViewModel[4].HasChange = !newData
-                  .response[5].HasChange
-                  ? false
-                  : true;
-                newData.response[5].CheckCarChildViewModel[5].HasChange = !newData
-                  .response[5].HasChange
-                  ? false
-                  : true;
-                newData.response[5].CheckCarChildViewModel[6].HasChange = !newData
-                  .response[5].HasChange
-                  ? false
-                  : true;
-                newData.response[5].CheckCarChildViewModel[7].HasChange = !newData
-                  .response[5].HasChange
-                  ? false
-                  : true;
-                setcheckDataModal(newData);
-              }}
-            />
+            <View style={styles.toggleBar}>
+              <ToggleSwitch
+                onColor="#F8A91E"
+                offColor="#CACACA"
+                size="medium"
+                label={' '}
+                isOn={checkDataModal.response[5].HasChange}
+                labelStyle={{
+                  color: 'black',
+                  padding: 10,
+                  paddingLeft: 0,
+                  margin: 0,
+                }}
+                onToggle={() => {
+                  let newData = {...checkDataModal};
+                  newData.response[5].HasChange = newData.response[5].HasChange
+                    ? false
+                    : true;
+                  newData.response[5].CheckCarChildViewModel[0].HasChange = !newData
+                    .response[5].HasChange
+                    ? false
+                    : true;
+                  newData.response[5].CheckCarChildViewModel[1].HasChange = !newData
+                    .response[5].HasChange
+                    ? false
+                    : true;
+                  newData.response[5].CheckCarChildViewModel[2].HasChange = !newData
+                    .response[5].HasChange
+                    ? false
+                    : true;
+                  newData.response[5].CheckCarChildViewModel[3].HasChange = !newData
+                    .response[5].HasChange
+                    ? false
+                    : true;
+                  newData.response[5].CheckCarChildViewModel[4].HasChange = !newData
+                    .response[5].HasChange
+                    ? false
+                    : true;
+                  newData.response[5].CheckCarChildViewModel[5].HasChange = !newData
+                    .response[5].HasChange
+                    ? false
+                    : true;
+                  newData.response[5].CheckCarChildViewModel[6].HasChange = !newData
+                    .response[5].HasChange
+                    ? false
+                    : true;
+                  newData.response[5].CheckCarChildViewModel[7].HasChange = !newData
+                    .response[5].HasChange
+                    ? false
+                    : true;
+                  setcheckDataModal(newData);
+                }}
+              />
+              <Text style={styles.toggleBarText}>
+                {checkDataModal.response[5].CheckCarName}
+              </Text>
+            </View>
             <View
               style={{
                 color: 'black',
@@ -1030,46 +1129,59 @@ const CarCheckScreen = ({props, route}) => {
           </View>
 
           <View style={styles.checkTable} elevation={5}>
-            <CheckBox
-              title={checkDataModal.response[6].CheckCarName}
-              checked={checkDataModal.response[6].HasChange}
-              containerStyle={styles.checkElementTop}
-              onPress={() => {
-                let newData = {...checkDataModal};
-                newData.response[6].HasChange = newData.response[6].HasChange
-                  ? false
-                  : true;
-                newData.response[6].CheckCarChildViewModel[0].HasChange = !newData
-                  .response[6].HasChange
-                  ? false
-                  : true;
-                newData.response[6].CheckCarChildViewModel[1].HasChange = !newData
-                  .response[6].HasChange
-                  ? false
-                  : true;
-                newData.response[6].CheckCarChildViewModel[2].HasChange = !newData
-                  .response[6].HasChange
-                  ? false
-                  : true;
-                newData.response[6].CheckCarChildViewModel[3].HasChange = !newData
-                  .response[6].HasChange
-                  ? false
-                  : true;
-                newData.response[6].CheckCarChildViewModel[4].HasChange = !newData
-                  .response[6].HasChange
-                  ? false
-                  : true;
-                newData.response[6].CheckCarChildViewModel[5].HasChange = !newData
-                  .response[6].HasChange
-                  ? false
-                  : true;
-                newData.response[6].CheckCarChildViewModel[6].HasChange = !newData
-                  .response[6].HasChange
-                  ? false
-                  : true;
-                setcheckDataModal(newData);
-              }}
-            />
+            <View style={styles.toggleBar}>
+              <ToggleSwitch
+                onColor="#F8A91E"
+                offColor="#CACACA"
+                size="medium"
+                label={' '}
+                isOn={checkDataModal.response[6].HasChange}
+                labelStyle={{
+                  color: 'black',
+                  padding: 10,
+                  paddingLeft: 0,
+                  margin: 0,
+                }}
+                onToggle={() => {
+                  let newData = {...checkDataModal};
+                  newData.response[6].HasChange = newData.response[6].HasChange
+                    ? false
+                    : true;
+                  newData.response[6].CheckCarChildViewModel[0].HasChange = !newData
+                    .response[6].HasChange
+                    ? false
+                    : true;
+                  newData.response[6].CheckCarChildViewModel[1].HasChange = !newData
+                    .response[6].HasChange
+                    ? false
+                    : true;
+                  newData.response[6].CheckCarChildViewModel[2].HasChange = !newData
+                    .response[6].HasChange
+                    ? false
+                    : true;
+                  newData.response[6].CheckCarChildViewModel[3].HasChange = !newData
+                    .response[6].HasChange
+                    ? false
+                    : true;
+                  newData.response[6].CheckCarChildViewModel[4].HasChange = !newData
+                    .response[6].HasChange
+                    ? false
+                    : true;
+                  newData.response[6].CheckCarChildViewModel[5].HasChange = !newData
+                    .response[6].HasChange
+                    ? false
+                    : true;
+                  newData.response[6].CheckCarChildViewModel[6].HasChange = !newData
+                    .response[6].HasChange
+                    ? false
+                    : true;
+                  setcheckDataModal(newData);
+                }}
+              />
+              <Text style={styles.toggleBarText}>
+                {checkDataModal.response[6].CheckCarName}
+              </Text>
+            </View>
             <View
               style={{
                 color: 'black',
@@ -1222,30 +1334,43 @@ const CarCheckScreen = ({props, route}) => {
           </View>
 
           <View style={styles.checkTable} elevation={5}>
-            <CheckBox
-              title={checkDataModal.response[7].CheckCarName}
-              checked={checkDataModal.response[7].HasChange}
-              containerStyle={styles.checkElementTop}
-              onPress={() => {
-                let newData = {...checkDataModal};
-                newData.response[7].HasChange = newData.response[7].HasChange
-                  ? false
-                  : true;
-                newData.response[7].CheckCarChildViewModel[0].HasChange = !newData
-                  .response[7].HasChange
-                  ? false
-                  : true;
-                newData.response[7].CheckCarChildViewModel[1].HasChange = !newData
-                  .response[7].HasChange
-                  ? false
-                  : true;
-                newData.response[7].CheckCarChildViewModel[2].HasChange = !newData
-                  .response[7].HasChange
-                  ? false
-                  : true;
-                setcheckDataModal(newData);
-              }}
-            />
+            <View style={styles.toggleBar}>
+              <ToggleSwitch
+                onColor="#F8A91E"
+                offColor="#CACACA"
+                size="medium"
+                label={' '}
+                isOn={checkDataModal.response[7].HasChange}
+                labelStyle={{
+                  color: 'black',
+                  padding: 10,
+                  paddingLeft: 0,
+                  margin: 0,
+                }}
+                onToggle={() => {
+                  let newData = {...checkDataModal};
+                  newData.response[7].HasChange = newData.response[7].HasChange
+                    ? false
+                    : true;
+                  newData.response[7].CheckCarChildViewModel[0].HasChange = !newData
+                    .response[7].HasChange
+                    ? false
+                    : true;
+                  newData.response[7].CheckCarChildViewModel[1].HasChange = !newData
+                    .response[7].HasChange
+                    ? false
+                    : true;
+                  newData.response[7].CheckCarChildViewModel[2].HasChange = !newData
+                    .response[7].HasChange
+                    ? false
+                    : true;
+                  setcheckDataModal(newData);
+                }}
+              />
+              <Text style={styles.toggleBarText}>
+                {checkDataModal.response[7].CheckCarName}
+              </Text>
+            </View>
             <View
               style={{
                 color: 'black',
@@ -1316,6 +1441,19 @@ const CarCheckScreen = ({props, route}) => {
               />
             </View>
           </View>
+          <Button
+            style={{
+              marginVertical: 8,
+
+              borderRadius: 50,
+              backgroundColor: 'orange',
+            }}
+            labelStyle={{color: 'black'}}
+            contentStyle={{width: '100%'}}
+            mode="outlined"
+            onPress={() => props.navigation.goBack()}>
+            提交
+          </Button>
         </View>
       </ScrollView>
     );
@@ -1325,14 +1463,10 @@ const CarCheckScreen = ({props, route}) => {
 export default CarCheckScreen;
 
 const styles = StyleSheet.create({
-  button: {
-    alignItems: 'center',
-    backgroundColor: '#DDDDDD',
-    padding: '7%',
-  },
   checkElement: {
     padding: 10,
     paddingStart: 10,
+    paddingEnd: 0,
     margin: 0,
     width: '40%',
 
@@ -1354,12 +1488,24 @@ const styles = StyleSheet.create({
     alignItems: 'center',
 
     backgroundColor: 'rgba(255, 0, 0, 0)',
-    width: '80%',
+    width: '90%',
   },
   checkTableRow: {
     alignItems: 'center',
     flexDirection: 'row',
     width: '100%',
     flexWrap: 'wrap',
+  },
+  toggleBar: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    width: '110%',
+    flexWrap: 'wrap',
+  },
+  toggleBarText: {
+    padding: 10,
+    color: '#F67E01',
+    fontWeight: '100',
+    fontSize: 25,
   },
 });
