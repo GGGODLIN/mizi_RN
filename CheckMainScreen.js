@@ -18,7 +18,7 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import AsyncStorage from '@react-native-community/async-storage';
 
-import {NavigationContainer} from '@react-navigation/native';
+import {NavigationContainer,useFocusEffect} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import {ThemeProvider, Avatar} from 'react-native-elements';
@@ -34,12 +34,27 @@ const CheckMainScreen = props => {
   const [carChecked, setcarChecked] = useState(false);
   const [bodyChecked, setbodyChecked] = useState(false);
 
+  
+
   async function fetchData() {
     try {
       const value = await AsyncStorage.getItem('userLoginInfo');
       if (value !== null) {
         var obj_value = JSON.parse(value);
-        console.log(obj_value);
+        let url = `http://wheathwaapi.vielife.com.tw/api/DriverInfo/GetDriverCheck/${
+          obj_value.response.Id
+        }`;
+        const res = await fetch(url, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .then(response => response.json())
+          .then(res => {
+            console.log('FETCH CHECKED??????', res.response.CarCheck);
+              setcarChecked(res.response.CarCheck);
+          });
         setdata(obj_value);
         setLoading(false);
       }
@@ -52,6 +67,19 @@ const CheckMainScreen = props => {
   useEffect(() => {
     fetchData();
   }, []);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      //alert('Screen was focused');
+      fetchData().then(()=>setLoading(false));
+      return () => {
+        setLoading(true);
+        //alert('Screen was unfocused');
+        // Do something when the screen is unfocused
+        // Useful for cleanup functions
+      };
+    }, [])
+  );
 
   if (isLoading) {
     console.log('info screen is loading...');
@@ -79,7 +107,7 @@ const CheckMainScreen = props => {
             style={{flex:1}}
             labelStyle={{color:'black'}}
             contentStyle={{width:'100%',height:'100%'}}
-            icon="check"
+            icon={carChecked?"check":"close"}
             mode="text"
             onPress={() => console.log('Pressed')}>
             車輛
@@ -90,7 +118,7 @@ const CheckMainScreen = props => {
             style={{flex:1}}
             labelStyle={{color:'black'}}
             contentStyle={{width:'100%',height:'100%'}}
-            icon="close"
+            icon={bodyChecked?"check":"close"}
             mode="text"
             onPress={() => console.log('Pressed')}>
             身心

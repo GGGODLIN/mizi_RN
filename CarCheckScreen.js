@@ -18,7 +18,7 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import AsyncStorage from '@react-native-community/async-storage';
 
-import {NavigationContainer} from '@react-navigation/native';
+import {NavigationContainer,useFocusEffect,StackActions} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import {ThemeProvider, Avatar, CheckBox} from 'react-native-elements';
@@ -47,12 +47,29 @@ const CarCheckScreen = props => {
     },
   });
   const [checkDataModal, setcheckDataModal] = useState({});
+  const pushAction = StackActions.push('CheckMainScreen');
 
   async function fetchData() {
     try {
       const value = await AsyncStorage.getItem('userLoginInfo');
       if (value !== null) {
         var obj_value = JSON.parse(value);
+        let url = `http://wheathwaapi.vielife.com.tw/api/DriverInfo/GetDriverCheck/${
+          obj_value.response.Id
+        }`;
+        const res = await fetch(url, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .then(response => response.json())
+          .then(res => {
+            console.log('FETCH CHECKED?', res.response.CarCheck);
+            if(res.response.CarCheck){
+              props.navigation.navigate('CheckMainScreen');
+            }
+          });
         setdata(obj_value);
       }
     } catch (error) {
@@ -91,9 +108,78 @@ const CarCheckScreen = props => {
     setcheckDataModal(tempData);
   };
 
+  const checkCarChecked = async () => {
+    let url = `http://wheathwaapi.vielife.com.tw/api/DriverInfo/GetDriverCheck/${
+      data.response.Id
+    }`;
+    const res = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(response => response.json())
+      .then(res => {
+        console.log('FETCH CHECKED?', res.response.CarCheck);
+      });
+  };
+
+  const handleSubmit = async () => {
+    let tempData = {...checkDataModal};
+    let queryHasChecked = '';
+    let queryNoChecked = '';
+
+    const nameList2 = Object.values(tempData.response).map(item =>
+      item.CheckCarChildViewModel.map(item2 =>
+        item2.HasChange
+          ? (queryHasChecked += `${item2.CheckCarName}` + ',')
+          : (queryNoChecked += `${item2.CheckCarName},`),
+      ),
+    );
+
+    console.log('queryHasChecked', queryHasChecked);
+    console.log('queryNoChecked', queryNoChecked);
+
+    let url =
+      'http://wheathwaapi.vielife.com.tw/api/CheckResult/PostCheckCarMapping';
+    const driverId = data.response.Id;
+    const carId = data.response.Cars.Id;
+    const postRes = await fetch(url, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        CarId: carId,
+        DriverId: driverId,
+        HasChecked: queryHasChecked,
+        NoChecked: queryNoChecked,
+      }),
+    });
+    console.log('POST RES', postRes);
+    console.log('SUBMIT', data.response.Cars.Id);
+    props.navigation.navigate('CheckMainScreen');
+  };
+
   useEffect(() => {
+    fetchData();
     fetchDataModal().then(() => setLoading(false));
   }, []);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      //alert('Screen was focused');
+      fetchData().then(()=>setLoading(false));
+      return () => {
+        setLoading(true);
+        props.navigation.dispatch(pushAction);
+        //alert('Screen was unfocused');
+        // Do something when the screen is unfocused
+        // Useful for cleanup functions
+      };
+    }, [])
+  );
 
   if (isLoading) {
     console.log('CHECKCAR screen is loading...');
@@ -121,7 +207,9 @@ const CarCheckScreen = props => {
             padding: 15,
             backgroundColor: '#3C4856',
           }}>
-          <Text style={{color:'white',fontSize:20,fontWeight:'bold'}}>每日車輛檢查</Text>
+          <Text style={{color: 'white', fontSize: 20, fontWeight: 'bold'}}>
+            每日車輛檢查
+          </Text>
           <ToggleSwitch
             isOn={allChecked}
             onColor="#F8A91E"
@@ -1451,7 +1539,7 @@ const CarCheckScreen = props => {
             labelStyle={{color: 'black'}}
             contentStyle={{width: '100%'}}
             mode="outlined"
-            onPress={() => props.navigation.goBack()}>
+            onPress={() => handleSubmit()}>
             提交
           </Button>
         </View>

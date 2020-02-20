@@ -7,6 +7,7 @@ import {
   Text,
   StatusBar,
   FlatList,
+  TouchableOpacity,
 } from 'react-native';
 
 import {
@@ -24,7 +25,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {ThemeProvider, Avatar, ListItem, Icon} from 'react-native-elements';
 import {Button, Card, Title, Paragraph, Divider} from 'react-native-paper';
 
-function Item({data}) {
+function Item({data,navigation}) {
   var caseName = data.DespatchDetails[0].CaseUser.Name;
   var startTime = data.DespatchDetails[0].Despatch.StartDate;
   var pos = startTime.indexOf('T');
@@ -40,6 +41,16 @@ function Item({data}) {
   var FromAddr = data.DespatchDetails[0].OrderDetails.FromAddr;
   var ToAddr = data.DespatchDetails[0].OrderDetails.ToAddr;
   return (
+    <TouchableOpacity
+         style={styles.button}
+         onPress={() =>
+              navigation.navigate('HistoryTaskOpen',{
+            itemId: 86,
+            caseName: data.DespatchDetails[0].CaseUser.Name,
+            data:data,
+          })
+            }
+       >
     <View style={styles.box}>
       <View style={styles.item}>
         <Text style={styles.title}>{startTime}</Text>
@@ -81,6 +92,7 @@ function Item({data}) {
         </View>
       </View>
     </View>
+    </TouchableOpacity>
   );
 }
 
@@ -164,7 +176,7 @@ const HistoryTaskList = props => {
         <FlatList
           data={list}
           renderItem={({item}) => (
-            <Item title={item.DespatchDetails[0].CaseUser.Name} data={item} />
+            <Item title={item.DespatchDetails[0].CaseUser.Name} data={item} navigation={props.navigation}/>
           )}
           keyExtractor={item => item.DespatchId}
         />

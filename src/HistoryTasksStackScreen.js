@@ -5,6 +5,8 @@ import CheckMainScreen  from '../CheckMainScreen';
 import HistoryTaskList from '../HistoryTaskList';
 import CarCheckScreen from '../CarCheckScreen';
 import BodyCheckScreen from '../BodyCheckScreen';
+import HistoryTaskOpen from '../HistoryTaskOpen';
+
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Stack = createStackNavigator();
@@ -32,8 +34,8 @@ export default function HistoryTasksStackScreen(props) {
         }}
       />
       <Stack.Screen
-        name="CarCheckScreen"
-        component={CarCheckScreen}
+        name="HistoryTaskOpen"
+        component={HistoryTaskOpen}
         options={{
 
         }}

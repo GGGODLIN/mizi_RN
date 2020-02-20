@@ -44,11 +44,12 @@ const callOut = ({ navigation }) => {
   }
 };
 
-export default function BottomTab(route) {
+export default function BottomTab(props) {
   return (
     <Tab.Navigator
       initialRouteName="TodayTasksStackScreen"
       shifting={false}
+      lazy={false}
       unmountOnBlur={true}>
       <Tab.Screen
         name="首頁"
