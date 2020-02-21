@@ -1,1 +1,55 @@
 AIzaSyCUaMOOcU7-pH99LS6ajo_s1WkDua92H08
+status:
+1.已派發(出發前往)
+2.以出發(顯示 抵達上車地點)->按下->跳Overlay核對身分(沒有用)
+3.顯示課上/空趟
+4.顯示克夏
+5.表單:外籍&家屬 現今按鈕->按下http://wheathwaapi.vielife.com.tw/api/OrderDetails/PutDetailRealWith?OrderDetailId=448&RealFamily=0&RealForeign=1
+http://wheathwaapi.vielife.com.tw/api/OrderDetails/PutDetailStatus?OrderDetailId=448&StatusInt=5
+5.2.可以改的實收車資 備註->確認收款->OVERLAY請付款人簽名http://wheathwaapi.vielife.com.tw/api/Img/Pic
+6.YA!
+
+<MapView
+          style={styles.map}
+          initialRegion={{
+            latitude: taskData[detailIndex].OrderDetails.FromLat,
+            longitude: taskData[detailIndex].OrderDetails.FromLon,
+            latitudeDelta:
+              Math.abs(
+                taskData[detailIndex].OrderDetails.FromLat -
+                  taskData[detailIndex].OrderDetails.ToLat,
+              ) * 2.2,
+            longitudeDelta:
+              Math.abs(
+                taskData[detailIndex].OrderDetails.FromLon -
+                  taskData[detailIndex].OrderDetails.ToLon,
+              ) * 2.2,
+          }}>
+          <Marker
+            coordinate={origin}
+            icon="write"
+            pinColor="blue"
+            title={taskData[detailIndex].OrderDetails.FromAddr}
+          />
+          <Marker
+            coordinate={destination}
+            icon="write"
+            title={taskData[detailIndex].OrderDetails.ToAddr}
+          />
+
+          <MapViewDirections
+            origin={{
+              latitude: taskData[detailIndex].OrderDetails.FromLat,
+              longitude: taskData[detailIndex].OrderDetails.FromLon,
+            }}
+            destination={{
+              latitude: taskData[detailIndex].OrderDetails.ToLat,
+              longitude: taskData[detailIndex].OrderDetails.ToLon,
+            }}
+            apikey={GOOGLE_MAPS_APIKEY}
+            strokeWidth={3}
+            strokeColor="#6495ED"
+            lineCap="round"
+            lineJoin="bevel"
+          />
+        </MapView>

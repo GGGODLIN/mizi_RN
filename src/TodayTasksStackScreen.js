@@ -6,6 +6,8 @@ import HistoryTaskList from '../HistoryTaskList';
 import CarCheckScreen from '../CarCheckScreen';
 import BodyCheckScreen from '../BodyCheckScreen';
 import HistoryTaskOpen from '../HistoryTaskOpen';
+import TodayTaskList from '../TodayTaskList';
+import TodayTaskOpen from '../TodayTaskOpen';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Stack = createStackNavigator();
@@ -13,7 +15,7 @@ const Stack = createStackNavigator();
 export default function TodayTasksStackScreen(props) {
   return (
     <Stack.Navigator
-      initialRouteName="HistoryTaskList"
+      initialRouteName="TodayTaskList"
       headerMode="float"
       screenOptions={{
         headerTintColor: 'black',
@@ -26,15 +28,15 @@ export default function TodayTasksStackScreen(props) {
       }}
     >
       <Stack.Screen
-        name="HistoryTaskList"
-        component={HistoryTaskList}
+        name="TodayTaskList"
+        component={TodayTaskList}
         options={{
 
         }}
       />
       <Stack.Screen
-        name="HistoryTaskOpen"
-        component={HistoryTaskOpen}
+        name="TodayTaskOpen"
+        component={TodayTaskOpen}
         options={{
 
         }}
