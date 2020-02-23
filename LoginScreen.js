@@ -7,6 +7,7 @@ import {
   Dimensions,
   KeyboardAvoidingView,
   Platform,
+  Image,
 } from 'react-native';
 import {
   Input,
@@ -60,114 +61,64 @@ class LoginScreen extends Component {
     if (!this.props.switchOn) {
       return null;
     }
+    let width = Dimensions.get('window').width;
     return (
       <KeyboardAvoidingView
         style={styles.keyboardAvoidingView}
         behavior={'height'}
         enabled
-        keyboardVerticalOffset={Platform.OS === 'ios' ? 64 : 84}>
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 64 : 10}>
+        <View style={{flex: 0.2, backgroundColor: 'transparent'}}>
+          <Image
+            style={{
+              height: width * 1.2,
+              width: width * 1.2,
+              position: 'absolute',
+              top: -width * 0.3,
+              left: -width * 0.1,
+              borderRadius: 500,
+            }}
+            source={require('./img/dweffcopy1.png')}
+          />
+        </View>
         <ScrollView
           style={styles.container}
           keyboardShouldPersistTaps="handled">
-          {/*<View style={styles.headerContainer}>
-          <Icon color="white" name="search" size={62} />
-          <Text style={styles.heading}>Search Bars</Text>
-        </View>*/}
-          {/*<SearchBar
-          placeholder="iOS searchbar"
-          platform="ios"
-          {...dummySearchBarProps}
-        />
-        <SearchBar
-          placeholder="Android searchbar"
-          platform="android"
-          {...dummySearchBarProps}
-        />
-        <SearchBar placeholder="Default searchbar" {...dummySearchBarProps} />*/}
-          {/*<View
-          style={[
-            styles.headerContainer,
-            { backgroundColor: '#616389', marginTop: 20 },
-          ]}
-        >
-          <Icon color="white" name="input" size={62} />
-          <Text style={styles.heading}>Inputs</Text>
-        </View>*/}
-          {/*<View style={{ alignItems: 'center', marginBottom: 16 }}>
-          <Input
-            containerStyle={{ width: '90%' }}
-            placeholder="Input with label"
-            label="LABEL"
-            labelStyle={{ marginTop: 16 }}
-          />
-          <Input
-            containerStyle={styles.inputContainerStyle}
-            placeholder="Simple input"
-          />
-          <Input
-            leftIcon={
-              <Icon
-                name="map-marker"
-                type="font-awesome"
-                color="#86939e"
-                size={25}
-              />
-            }
-            leftIconContainerStyle={{ marginLeft: 0, marginRight: 10 }}
-            containerStyle={styles.inputContainerStyle}
-            placeholder="Input with left icon"
-          />
-          <Input
-            rightIcon={
-              <Icon
-                name="chevron-right"
-                type="entypo"
-                color="#86939e"
-                size={25}
-              />
-            }
-            containerStyle={styles.inputContainerStyle}
-            placeholder="Input with right icon"
-          />
-          <Input
-            containerStyle={styles.inputContainerStyle}
-            placeholder="Input with error message"
-            errorMessage="Invalid input"
-          />
-          <Input
-            containerStyle={[styles.inputContainerStyle]}
-            placeholder="Shake input"
-            ref={ref => (this.shakeInput = ref)}
-            rightIcon={
-              <Button
-                title="Shake"
-                onPress={() => this.shakeInput && this.shakeInput.shake()}
-              />
-            }
-            errorMessage="Shake me on error !"
-          />
-        </View>*/}
           <View style={styles.contentView}>
             <View
               style={{
-                backgroundColor: '#F11212',
+                borderRadius: 20,
+                backgroundColor: 'white',
                 width: SCREEN_WIDTH,
                 alignItems: 'center',
               }}>
               <Text
                 style={{
-                  fontSize: 30,
+                  fontSize: 40,
                   marginVertical: 10,
-                  fontWeight: '300',
+                  fontWeight: 'bold',
                   marginTop: 10,
-                  color: 'white',
+                  color: '#F57A00',
+                  borderRadius: 20,
                 }}>
                 Login
+              </Text>
+              <Text
+                style={{
+                  fontSize: 20,
+                  marginBottom: 10,
+                  fontWeight: 'bold',
+
+                  color: '#F57A00',
+                  borderRadius: 20,
+                }}>
+                司機登入
               </Text>
 
               <View style={styles.overlay}>
                 <View style={styles.triangleLeft} />
                 <Input
+                  label="User"
                   inputContainerStyle={{
                     borderWidth: 1,
                     borderColor: 'white',
@@ -175,14 +126,16 @@ class LoginScreen extends Component {
                     height: 50,
                     width: SCREEN_WIDTH - 80,
                     backgroundColor: 'white',
+                    marginBottom: 10,
                   }}
+                  underlineColorAndroid='gray'
                   containerStyle={{paddingHorizontal: 0}}
                   placeholder="請輸入帳號 (預設為手機號碼)"
                   placeholderTextColor="gray"
                   autoCapitalize="none"
                   autoCorrect={false}
                   keyboardAppearance="light"
-                  keyboardType="email-address"
+                  keyboardType="default"
                   returnKeyType="next"
                   ref={input => (this.emailInput = input)}
                   onSubmitEditing={() => {
@@ -200,6 +153,7 @@ class LoginScreen extends Component {
               <View style={[styles.overlay, {marginBottom: 30, marginTop: 1}]}>
                 <View style={styles.triangleLeft} />
                 <Input
+                  label="Password"
                   inputContainerStyle={{
                     borderWidth: 1,
                     borderColor: 'white',
@@ -210,6 +164,7 @@ class LoginScreen extends Component {
                   }}
                   containerStyle={{paddingHorizontal: 0}}
                   placeholder="請輸入密碼 (預設為身分證後4碼)"
+                  underlineColorAndroid='gray'
                   placeholderTextColor="gray"
                   autoCapitalize="none"
                   keyboardAppearance="light"
@@ -230,125 +185,18 @@ class LoginScreen extends Component {
                 <View style={styles.triangleRight} />
               </View>
             </View>
-
-            <ThemeProvider
-              theme={{
-                Input: {
-                  containerStyle: {
-                    width: SCREEN_WIDTH - 50,
-                  },
-                  inputContainerStyle: {
-                    borderRadius: 40,
-                    borderWidth: 1,
-                    borderColor: 'rgba(110, 120, 170, 1)',
-                    height: 50,
-                    marginVertical: 10,
-                  },
-                  placeholderTextColor: 'rgba(110, 120, 170, 1)',
-                  inputStyle: {
-                    marginLeft: 10,
-                    color: 'white',
-                  },
-                  keyboardAppearance: 'light',
-                  blurOnSubmit: false,
-                },
-              }}>
-              <View
-                style={{
-                  backgroundColor: 'rgba(46, 50, 72, 1)',
-                  width: SCREEN_WIDTH,
-                  alignItems: 'center',
-                  paddingBottom: 30,
-                }}>
-                <Text
-                  style={{
-                    color: 'white',
-                    fontSize: 30,
-                    marginVertical: 10,
-                    fontWeight: '300',
-                  }}>
-                  Sign up
-                </Text>
-                <Input
-                  leftIcon={
-                    <Icon
-                      name="user"
-                      type="simple-line-icon"
-                      color="rgba(110, 120, 170, 1)"
-                      size={25}
-                    />
-                  }
-                  placeholder="Username"
-                  autoCapitalize="none"
-                  autoCorrect={false}
-                  keyboardType="email-address"
-                  returnKeyType="next"
-                  ref={input => (this.usernameInput = input)}
-                  onSubmitEditing={() => {
-                    this.email2Input.focus();
-                  }}
-                />
-                <Input
-                  leftIcon={
-                    <Icon
-                      name="email-outline"
-                      type="material-community"
-                      color="rgba(110, 120, 170, 1)"
-                      size={25}
-                    />
-                  }
-                  placeholder="Email"
-                  autoCapitalize="none"
-                  autoCorrect={false}
-                  keyboardType="email-address"
-                  returnKeyType="next"
-                  ref={input => (this.email2Input = input)}
-                  onSubmitEditing={() => {
-                    this.password2Input.focus();
-                  }}
-                />
-                <Input
-                  leftIcon={
-                    <Icon
-                      name="lock"
-                      type="simple-line-icon"
-                      color="rgba(110, 120, 170, 1)"
-                      size={25}
-                    />
-                  }
-                  placeholder="Password"
-                  autoCapitalize="none"
-                  secureTextEntry={true}
-                  autoCorrect={false}
-                  keyboardType="default"
-                  returnKeyType="next"
-                  ref={input => (this.password2Input = input)}
-                  onSubmitEditing={() => {
-                    this.confirmPassword2Input.focus();
-                  }}
-                />
-                <Input
-                  leftIcon={
-                    <Icon
-                      name="lock"
-                      type="simple-line-icon"
-                      color="rgba(110, 120, 170, 1)"
-                      size={25}
-                    />
-                  }
-                  placeholder="Confirm Password"
-                  autoCapitalize="none"
-                  keyboardAppearance="light"
-                  secureTextEntry={true}
-                  autoCorrect={false}
-                  keyboardType="default"
-                  returnKeyType="done"
-                  ref={input => (this.confirmPassword2Input = input)}
-                  blurOnSubmit
-                />
-              </View>
-            </ThemeProvider>
           </View>
+          <Button
+            title="司機端登入  LOGIN"
+            buttonStyle={{
+              width: '70%',
+              alignSelf: 'center',
+              backgroundColor: 'orange',
+              borderRadius:50,
+            }}
+            type="solid"
+            onPress={() => {this.handleLogin()}}
+          />
         </ScrollView>
       </KeyboardAvoidingView>
     );
@@ -357,12 +205,18 @@ class LoginScreen extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'gray',
+    backgroundColor: 'white',
+    flex: 0.5,
+    width: '90%',
+    alignSelf: 'center',
+    borderRadius: 20,
+    marginBottom: '10%',
   },
   headerContainer: {
     justifyContent: 'center',
     alignItems: 'center',
     padding: 40,
+    borderRadius: 20,
     backgroundColor: '#B46486',
   },
   heading: {
@@ -370,8 +224,10 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontSize: 22,
     fontWeight: 'bold',
+    borderRadius: 20,
   },
   contentView: {
+    borderRadius: 20,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
@@ -405,11 +261,13 @@ const styles = StyleSheet.create({
   inputContainerStyle: {
     marginTop: 16,
     width: '90%',
+    borderRadius: 20,
   },
   keyboardAvoidingView: {
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
+    backgroundColor: '#E5E5E5',
   },
 });
 
