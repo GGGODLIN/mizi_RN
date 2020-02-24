@@ -24,8 +24,9 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import {ThemeProvider, Avatar, ListItem, Icon} from 'react-native-elements';
 import {Button, Card, Title, Paragraph, Divider} from 'react-native-paper';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
-function Item({data,navigation}) {
+function Item({data, navigation}) {
   var caseName = data.DespatchDetails[0].CaseUser.Name;
   var startTime = data.DespatchDetails[0].Despatch.StartDate;
   var pos = startTime.indexOf('T');
@@ -42,56 +43,55 @@ function Item({data,navigation}) {
   var ToAddr = data.DespatchDetails[0].OrderDetails.ToAddr;
   return (
     <TouchableOpacity
-         style={styles.button}
-         onPress={() =>
-              navigation.navigate('HistoryTaskOpen',{
-            itemId: 86,
-            caseName: data.DespatchDetails[0].CaseUser.Name,
-            data:data,
-          })
-            }
-       >
-    <View style={styles.box}>
-      <View style={styles.item}>
-        <Text style={styles.title}>{startTime}</Text>
-        <Text style={styles.title}>{canShared}</Text>
-      </View>
-      <Divider />
-      <View style={styles.item2}>
-        <View style={styles.item2_1}>
-          <Text style={styles.title}>{caseName}</Text>
-          <Text style={styles.title}>{'輪椅讀啥'}</Text>
+      style={styles.button}
+      onPress={() =>
+        navigation.navigate('HistoryTaskOpen', {
+          itemId: 86,
+          caseName: data.DespatchDetails[0].CaseUser.Name,
+          data: data,
+        })
+      }>
+      <View style={styles.box}>
+        <View style={styles.item}>
+          <Text style={styles.title}>{startTime}</Text>
+          <Text style={styles.title}>{canShared}</Text>
         </View>
-        <View style={styles.item2_1}>
-          <Text style={styles.title}>{'陪伴家屬:  ' + FamilyWith}</Text>
-          <Text style={styles.title}>{'陪伴外籍:  ' + ForeignFamilyWith}</Text>
-        </View>
-      </View>
-      <View style={styles.item3}>
-        <View style={styles.item3_1}>
-          <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
-            <Icon
-              name="circle"
-              type="font-awesome"
-              color="orange"
-              size={16}
-            />
-            <Text style={{flex:1}}>{"  "+FromAddr}</Text>
-
+        <Divider />
+        <View style={styles.item2}>
+          <View style={styles.item2_1}>
+            <Text style={styles.title}>{caseName}</Text>
+            <Text style={styles.title}>{'輪椅讀啥'}</Text>
           </View>
-          <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
-            <Icon
-              name="circle"
-              type="font-awesome"
-              color="orange"
-              size={16}
-            />
-            <Text >{"  "+ToAddr}</Text>
+          <View style={styles.item2_1}>
+            <Text style={styles.title}>{'陪伴家屬:  ' + FamilyWith}</Text>
+            <Text style={styles.title}>
+              {'陪伴外籍:  ' + ForeignFamilyWith}
+            </Text>
           </View>
-          
+        </View>
+        <View style={styles.item3}>
+          <View style={styles.item3_1}>
+            <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
+              <Icon
+                name="circle"
+                type="font-awesome"
+                color="orange"
+                size={16}
+              />
+              <Text style={{flex: 1}}>{'  ' + FromAddr}</Text>
+            </View>
+            <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
+              <Icon
+                name="circle"
+                type="font-awesome"
+                color="orange"
+                size={16}
+              />
+              <Text>{'  ' + ToAddr}</Text>
+            </View>
+          </View>
         </View>
       </View>
-    </View>
     </TouchableOpacity>
   );
 }
@@ -100,6 +100,34 @@ const HistoryTaskList = props => {
   const [data, setdata] = useState({});
   const [isLoading, setLoading] = useState(true);
   const [url, seturl] = useState();
+  const [date, setDate] = useState(new Date());
+  const [mode, setMode] = useState('date');
+  const [show, setShow] = useState(false);
+  const [goPicked, setgoPicked] = useState(false);
+  const [toPicked, settoPicked] = useState(false);
+
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+
+    setDate(currentDate);
+    console.log("DATE??????",date);
+    setShow(Platform.OS === 'ios' ? true : false);
+  };
+
+  const showMode = currentMode => {
+    setShow(true);
+    setMode(currentMode);
+  };
+
+  const showDatepicker = () => {
+    showMode('date');
+    setgoPicked(true);
+  };
+
+  const showTimepicker = () => {
+    showMode('time');
+    settoPicked(true);
+  };
 
   async function fetchData() {
     try {
@@ -173,10 +201,33 @@ const HistoryTaskList = props => {
     console.log('TASKS PROPS IS', list);
     return (
       <SafeAreaView style={styles.container}>
+        <View>
+          <View>
+            <Button onPress={showDatepicker} color='white' mode='contained'>{goPicked?"date":"選擇日期區間"}</Button>
+          </View>
+          <View>
+            <Button onPress={showTimepicker} title="Show time picker!" />
+          </View>
+          {show && (
+            <DateTimePicker
+              testID="dateTimePicker"
+              timeZoneOffsetInMinutes={0}
+              value={date}
+              mode={mode}
+              is24Hour={true}
+              display="default"
+              onChange={onChange}
+            />
+          )}
+        </View>
         <FlatList
           data={list}
           renderItem={({item}) => (
-            <Item title={item.DespatchDetails[0].CaseUser.Name} data={item} navigation={props.navigation}/>
+            <Item
+              title={item.DespatchDetails[0].CaseUser.Name}
+              data={item}
+              navigation={props.navigation}
+            />
           )}
           keyExtractor={item => item.DespatchId}
         />
@@ -211,14 +262,13 @@ const styles = StyleSheet.create({
   },
   item2_1: {
     backgroundColor: 'white',
-  
+
     padding: 10,
 
     flexDirection: 'column',
   },
   item3: {
     backgroundColor: 'gray',
- 
 
     padding: 0,
 
@@ -229,7 +279,7 @@ const styles = StyleSheet.create({
   },
   item3_1: {
     backgroundColor: 'white',
-  
+
     padding: 10,
 
     flexDirection: 'column',

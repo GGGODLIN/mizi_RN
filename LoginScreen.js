@@ -193,6 +193,7 @@ class LoginScreen extends Component {
               alignSelf: 'center',
               backgroundColor: 'orange',
               borderRadius:50,
+              marginBottom:20,
             }}
             type="solid"
             onPress={() => {this.handleLogin()}}
