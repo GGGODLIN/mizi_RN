@@ -22,20 +22,51 @@ import AsyncStorage from '@react-native-community/async-storage';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-import {ThemeProvider, Avatar, ListItem, Icon} from 'react-native-elements';
+import {ThemeProvider, Avatar, ListItem} from 'react-native-elements';
 import {Button, Card, Title, Paragraph, Divider} from 'react-native-paper';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 function Item({data, navigation}) {
   var caseName = data.DespatchDetails[0].CaseUser.Name;
   var startTime = data.DespatchDetails[0].Despatch.StartDate;
+  var startDate = data.DespatchDetails[0].Despatch.StartDate;
   var pos = startTime.indexOf('T');
   if (pos != -1) {
+    startDate = startTime.substring(0, pos);
     startTime = startTime.substring(pos + 1);
   }
   var canShared = data.DespatchDetails[0].OrderDetails.CanShared
     ? '可以共乘'
     : '不可共乘';
+  var statusString =
+    data.DespatchDetails[0].OrderDetails.Status == 0
+      ? '新訂單'
+      : data.DespatchDetails[0].OrderDetails.Status == 1
+      ? '已排班'
+      : data.DespatchDetails[0].OrderDetails.Status == 2
+      ? '已出發'
+      : data.DespatchDetails[0].OrderDetails.Status == 3
+      ? '已抵達'
+      : data.DespatchDetails[0].OrderDetails.Status == 4
+      ? '客上'
+      : data.DespatchDetails[0].OrderDetails.Status == 5
+      ? '客下'
+      : data.DespatchDetails[0].OrderDetails.Status == 6
+      ? '已完成'
+      : data.DespatchDetails[0].OrderDetails.Status == 7
+      ? '未執行'
+      : data.DespatchDetails[0].OrderDetails.Status == 8
+      ? '個案取消'
+      : data.DespatchDetails[0].OrderDetails.Status == 9
+      ? '服務單位取消'
+      : data.DespatchDetails[0].OrderDetails.Status == 10
+      ? '空趟'
+      : data.DespatchDetails[0].OrderDetails.Status == 11
+      ? '無派車'
+      : data.DespatchDetails[0].OrderDetails.Status == 12
+      ? '服務單位取消-變更時間'
+      : '可撥的Bug';
   var FamilyWith = data.DespatchDetails[0].OrderDetails.FamilyWith;
   var ForeignFamilyWith =
     data.DespatchDetails[0].OrderDetails.ForeignFamilyWith;
@@ -43,51 +74,61 @@ function Item({data, navigation}) {
   var ToAddr = data.DespatchDetails[0].OrderDetails.ToAddr;
   return (
     <TouchableOpacity
-      style={styles.button}
       onPress={() =>
         navigation.navigate('HistoryTaskOpen', {
-          itemId: 86,
           caseName: data.DespatchDetails[0].CaseUser.Name,
           data: data,
+          startTime: startTime,
+          startDate: startDate,
         })
       }>
-      <View style={styles.box}>
-        <View style={styles.item}>
-          <Text style={styles.title}>{startTime}</Text>
-          <Text style={styles.title}>{canShared}</Text>
-        </View>
-        <Divider />
-        <View style={styles.item2}>
-          <View style={styles.item2_1}>
-            <Text style={styles.title}>{caseName}</Text>
-            <Text style={styles.title}>{'輪椅讀啥'}</Text>
-          </View>
-          <View style={styles.item2_1}>
-            <Text style={styles.title}>{'陪伴家屬:  ' + FamilyWith}</Text>
-            <Text style={styles.title}>
-              {'陪伴外籍:  ' + ForeignFamilyWith}
-            </Text>
-          </View>
-        </View>
-        <View style={styles.item3}>
-          <View style={styles.item3_1}>
-            <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
-              <Icon
-                name="circle"
-                type="font-awesome"
-                color="orange"
-                size={16}
-              />
-              <Text style={{flex: 1}}>{'  ' + FromAddr}</Text>
+      <View
+        style={{
+          margin: '2%',
+          width: '95%',
+          alignSelf: 'center',
+          backgroundColor: 'orange',
+        }}>
+        <View style={styles.titleBox}>
+          <View style={styles.titleTime}>
+            <View style={styles.titleLeft}>
+              <Text style={{color: 'white', fontSize: 20}}>{startTime}</Text>
             </View>
-            <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
-              <Icon
-                name="circle"
-                type="font-awesome"
-                color="orange"
-                size={16}
-              />
-              <Text>{'  ' + ToAddr}</Text>
+            <View style={styles.titleDate}>
+              <Text style={{color: 'white', fontSize: 20}}>{startDate}</Text>
+              <Text style={{color: 'white', fontSize: 20}}>{canShared}</Text>
+            </View>
+          </View>
+          <View style={styles.titleName}>
+            <View style={{flexDirection: 'row'}}>
+              <Text
+                style={{
+                  color: 'white',
+                  fontSize: 24,
+                  fontWeight: 'bold',
+                  width: '30%',
+                }}>
+                {data.DespatchDetails[0].CaseUser.Name}
+              </Text>
+              <View style={{flexDirection: 'column', justifyContent: 'center'}}>
+                <Text
+                  style={{color: 'white', fontSize: 18, fontWeight: 'bold'}}>
+                  {data.DespatchDetails[0].OrderDetails.SOrderNo}
+                </Text>
+                <Divider
+                  style={{width: 220, backgroundColor: 'white', height: 1}}
+                />
+                <Text
+                  style={{color: 'white', fontSize: 18, fontWeight: 'bold'}}>
+                  {statusString}
+                </Text>
+                <Text style={styles.addrText}>
+                  {data.DespatchDetails[0].OrderDetails.FromAddr}
+                </Text>
+                <Text style={styles.addrText}>
+                  {data.DespatchDetails[0].OrderDetails.ToAddr}
+                </Text>
+              </View>
             </View>
           </View>
         </View>
@@ -98,35 +139,36 @@ function Item({data, navigation}) {
 
 const HistoryTaskList = props => {
   const [data, setdata] = useState({});
+  const [user, setuser] = useState({});
   const [isLoading, setLoading] = useState(true);
   const [url, seturl] = useState();
+
   const [date, setDate] = useState(new Date());
-  const [mode, setMode] = useState('date');
+  const [date2, setDate2] = useState(new Date());
   const [show, setShow] = useState(false);
+  const [show2, setShow2] = useState(false);
   const [goPicked, setgoPicked] = useState(false);
-  const [toPicked, settoPicked] = useState(false);
+  const [goPicked2, setgoPicked2] = useState(false);
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
-
+    setShow(false);
     setDate(currentDate);
-    console.log("DATE??????",date);
-    setShow(Platform.OS === 'ios' ? true : false);
   };
 
-  const showMode = currentMode => {
-    setShow(true);
-    setMode(currentMode);
+  const onChange2 = (event, selectedDate) => {
+    const currentDate = selectedDate || date2;
+    setShow2(false);
+    setDate2(currentDate);
   };
 
   const showDatepicker = () => {
-    showMode('date');
+    setShow(true);
     setgoPicked(true);
   };
-
-  const showTimepicker = () => {
-    showMode('time');
-    settoPicked(true);
+  const showDatepicker2 = () => {
+    setShow2(true);
+    setgoPicked2(true);
   };
 
   async function fetchData() {
@@ -134,6 +176,7 @@ const HistoryTaskList = props => {
       const value = await AsyncStorage.getItem('userLoginInfo');
       if (value !== null) {
         var obj_value = JSON.parse(value);
+        setuser(obj_value);
         console.log('GET FROM ASYN IS', obj_value);
         var url2 =
           'http://wheathwaapi.vielife.com.tw/api/DriverInfo/GetAllPassGroup/' +
@@ -166,9 +209,13 @@ const HistoryTaskList = props => {
     }
   }
 
-  async function fetchData_test() {
+  async function fetchDataDate(sDate,eDate) {
+    await setLoading(true);
+    var url2 =
+      'http://wheathwaapi.vielife.com.tw/api/DriverInfo/GetAllPassGroup/' +
+      user.response.Cars.DriverId + '?sDate=' + sDate + '&eDate=' + eDate;
     const data = await fetch(
-      'http://wheathwaapi.vielife.com.tw/api/DriverInfo/GetAllPassGroup/15',
+      url2,
       {
         method: 'GET',
         headers: {
@@ -179,6 +226,8 @@ const HistoryTaskList = props => {
       .then(response => response.json())
       .then(res => {
         console.log('TASK AJAX', res);
+        setdata(res);
+            setLoading(false);
       })
       .catch(err => {
         console.log('TASKS ERROR!');
@@ -198,27 +247,62 @@ const HistoryTaskList = props => {
     );
   } else {
     const list = data.response;
-    console.log('TASKS PROPS IS', list);
+    var nowDate = `${date.getFullYear()}-${date.getMonth() +
+      1}-${date.getDate()}`;
+    var nowDate2 = `${date2.getFullYear()}-${date2.getMonth() +
+      1}-${date2.getDate()}`;
+    console.log('DATE??????', nowDate);
+
     return (
       <SafeAreaView style={styles.container}>
-        <View>
-          <View>
-            <Button onPress={showDatepicker} color='white' mode='contained'>{goPicked?"date":"選擇日期區間"}</Button>
+        <View style={{width: '70%'}}>
+          <View style={{flexDirection: 'row'}}>
+            <View style={{flexDirection: 'column'}}>
+              <View>
+                <Button
+                  contentStyle={{width: '100%'}}
+                  onPress={showDatepicker}
+                  color="white"
+                  mode="contained">
+                  {goPicked ? nowDate : '選擇日期區間(起)'}
+                </Button>
+              </View>
+
+              <View>
+                <Button
+                  onPress={showDatepicker2}
+                  color="white"
+                  mode="contained">
+                  {goPicked2 ? nowDate2 : '選擇日期區間(迄)'}
+                </Button>
+              </View>
+            </View>
+            <Button
+              mode="contained"
+              onPress={()=>fetchDataDate(nowDate,nowDate2)}
+              style={{
+                marginStart: 10,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              搜尋
+            </Button>
           </View>
-          <View>
-            <Button onPress={showTimepicker} title="Show time picker!" />
-          </View>
-          {show && (
+          {show ? (
             <DateTimePicker
-              testID="dateTimePicker"
-              timeZoneOffsetInMinutes={0}
               value={date}
-              mode={mode}
-              is24Hour={true}
+              mode={date}
               display="default"
               onChange={onChange}
             />
-          )}
+          ) : show2 ? (
+            <DateTimePicker
+              value={date}
+              mode={date}
+              display="default"
+              onChange={onChange2}
+            />
+          ) : null}
         </View>
         <FlatList
           data={list}
@@ -297,6 +381,82 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 16,
     flex: 0.5,
+  },
+  map: {
+    ...StyleSheet.absoluteFillObject,
+    padding: 0,
+    margin: 0,
+  },
+  addr: {
+    flexDirection: 'row',
+
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  addrText: {
+    fontSize: 15,
+    color: 'white',
+    paddingLeft: 0,
+    marginEnd: '25%',
+    flexWrap: 'wrap',
+  },
+  addr2: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  addrText2: {
+    fontSize: 18,
+    paddingLeft: 15,
+    flexWrap: 'wrap',
+  },
+  titleBox: {
+    backgroundColor: 'black',
+  },
+  titleTime: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    padding: 10,
+  },
+  titleLeft: {
+    margin: 0,
+    padding: 0,
+    flex: 1,
+  },
+  titleDate: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    margin: 0,
+    padding: 0,
+    flex: 1,
+  },
+  titleName: {
+    justifyContent: 'center',
+    backgroundColor: 'orange',
+    padding: 10,
+  },
+  titleNameText: {
+    fontSize: 30,
+    lineHeight: 50,
+    color: 'white',
+    fontWeight: 'bold',
+  },
+  titleNameText2: {
+    fontSize: 15,
+    lineHeight: 15,
+    color: 'white',
+  },
+  titleRight: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    alignSelf: 'flex-end',
+  },
+  predict: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
   },
 });
 

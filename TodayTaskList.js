@@ -19,19 +19,20 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import AsyncStorage from '@react-native-community/async-storage';
 
-import {NavigationContainer,useFocusEffect} from '@react-navigation/native';
+import {NavigationContainer, useFocusEffect} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-import {ThemeProvider, Avatar, ListItem, Icon} from 'react-native-elements';
+import {ThemeProvider, Avatar, ListItem} from 'react-native-elements';
 import {Button, Card, Title, Paragraph, Divider} from 'react-native-paper';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-function Item({data,navigation}) {
+function Item({data, navigation}) {
   var caseName = data.DespatchDetails[0].CaseUser.Name;
   var startTime = data.DespatchDetails[0].Despatch.StartDate;
   var startDate = data.DespatchDetails[0].Despatch.StartDate;
   var pos = startTime.indexOf('T');
   if (pos != -1) {
-    startDate = startTime.substring(0,pos);
+    startDate = startTime.substring(0, pos);
     startTime = startTime.substring(pos + 1);
   }
   var canShared = data.DespatchDetails[0].OrderDetails.CanShared
@@ -44,57 +45,87 @@ function Item({data,navigation}) {
   var ToAddr = data.DespatchDetails[0].OrderDetails.ToAddr;
   return (
     <TouchableOpacity
-         style={styles.button}
-         onPress={() =>
-              navigation.navigate('TodayTaskOpen',{
-            caseName: data.DespatchDetails[0].CaseUser.Name,
-            data:data,
-            startTime:startTime,
-            startDate:startDate,
-          })
-            }
-       >
-    <View style={styles.box}>
-      <View style={styles.item}>
-        <Text style={styles.title}>{startTime}</Text>
-        <Text style={styles.title}>{canShared}</Text>
-      </View>
-      <Divider />
-      <View style={styles.item2}>
-        <View style={styles.item2_1}>
-          <Text style={styles.title}>{caseName}</Text>
-          <Text style={styles.title}>{'輪椅讀啥'}</Text>
+      style={styles.button}
+      onPress={() =>
+        navigation.navigate('TodayTaskOpen', {
+          caseName: data.DespatchDetails[0].CaseUser.Name,
+          data: data,
+          startTime: startTime,
+          startDate: startDate,
+        })
+      }>
+      <View
+        style={{
+          margin: '5%',
+          paddingBottom: 20,
+          width: '95%',
+          alignSelf: 'center',
+          backgroundColor: 'white',
+        }}
+        elevation={5}>
+        <View style={styles.titleBox}>
+          <View style={styles.titleTime}>
+            <View style={styles.titleLeft}>
+              <Text style={{color: 'white', fontSize: 20}}>{startTime}</Text>
+            </View>
+            <View style={styles.titleDate}>
+              <Text style={{color: 'white', fontSize: 20}}>{startDate}</Text>
+              <Text style={{color: 'white', fontSize: 20}}>{canShared}</Text>
+            </View>
+          </View>
+          <View style={styles.titleName}>
+            <View style={{flexDirection: 'row'}}>
+              <Avatar
+                size="large"
+                containerStyle={{margin:10}}
+                rounded
+                source={{
+                  uri: `${data.DespatchDetails[0].OrderDetails.CaseUserPic}`,
+                }}
+              />
+              <View style={{flexDirection: 'column',justifyContent:'center'}}>
+                <Text style={{color: 'white', fontSize: 18}}>
+                  {data.DespatchDetails[0].OrderDetails.SOrderNo}
+                </Text>
+                <Text style={{color: 'white', fontSize: 24}}>
+                  {'個案' + data.DespatchDetails.length + '/' + '陪同' + 0}
+                </Text>
+              </View>
+            </View>
+          </View>
         </View>
-        <View style={styles.item2_1}>
-          <Text style={styles.title}>{'陪伴家屬:  ' + FamilyWith}</Text>
-          <Text style={styles.title}>{'陪伴外籍:  ' + ForeignFamilyWith}</Text>
-        </View>
-      </View>
-      <View style={styles.item3}>
-        <View style={styles.item3_1}>
-          <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
-            <Icon
-              name="circle"
-              type="font-awesome"
-              color="orange"
-              size={16}
-            />
-            <Text style={{flex:1}}>{"  "+FromAddr}</Text>
 
-          </View>
-          <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
-            <Icon
-              name="circle"
-              type="font-awesome"
-              color="orange"
-              size={16}
-            />
-            <Text >{"  "+ToAddr}</Text>
-          </View>
-          
+        <View style={styles.addr}>
+          <Icon
+            name="circle-o"
+            size={30}
+            color="orange"
+            style={{paddingLeft: 30}}
+          />
+          <Text style={styles.addrText}>
+            {data.DespatchDetails[0].OrderDetails.FromAddr}
+          </Text>
+        </View>
+        <View style={styles.addr}>
+          <Icon
+            name="angle-double-down"
+            size={30}
+            color="orange"
+            style={{paddingLeft: 32}}
+          />
+        </View>
+        <View style={styles.addr}>
+          <Icon
+            name="circle-o"
+            size={30}
+            color="orange"
+            style={{paddingLeft: 30}}
+          />
+          <Text style={styles.addrText}>
+            {data.DespatchDetails[0].OrderDetails.ToAddr}
+          </Text>
         </View>
       </View>
-    </View>
     </TouchableOpacity>
   );
 }
@@ -155,19 +186,17 @@ const TodayTaskList = props => {
       });
   }
 
-  
-
   useFocusEffect(
     React.useCallback(() => {
       //alert('Screen was focused');
-      fetchData().then(()=>setLoading(false));
+      fetchData().then(() => setLoading(false));
       return () => {
         setLoading(true);
         //alert('Screen was unfocused');
         // Do something when the screen is unfocused
         // Useful for cleanup functions
       };
-    }, [])
+    }, []),
   );
 
   if (isLoading) {
@@ -185,7 +214,11 @@ const TodayTaskList = props => {
         <FlatList
           data={list}
           renderItem={({item}) => (
-            <Item title={item.DespatchDetails[0].CaseUser.Name} data={item} navigation={props.navigation}/>
+            <Item
+              title={item.DespatchDetails[0].CaseUser.Name}
+              data={item}
+              navigation={props.navigation}
+            />
           )}
           keyExtractor={item => item.DespatchId}
         />
@@ -220,14 +253,13 @@ const styles = StyleSheet.create({
   },
   item2_1: {
     backgroundColor: 'white',
-  
+
     padding: 10,
 
     flexDirection: 'column',
   },
   item3: {
     backgroundColor: 'gray',
- 
 
     padding: 0,
 
@@ -238,7 +270,7 @@ const styles = StyleSheet.create({
   },
   item3_1: {
     backgroundColor: 'white',
-  
+
     padding: 10,
 
     flexDirection: 'column',
@@ -256,6 +288,82 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 16,
     flex: 0.5,
+  },
+  map: {
+    ...StyleSheet.absoluteFillObject,
+    padding: 0,
+    margin: 0,
+  },
+  addr: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    paddingTop:10,
+  },
+  addrText: {
+    fontSize: 20,
+    paddingLeft: 20,
+    flexWrap: 'wrap',
+    marginEnd: 40,
+  },
+  addr2: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  addrText2: {
+    fontSize: 18,
+    paddingLeft: 15,
+    flexWrap: 'wrap',
+  },
+  titleBox: {
+    backgroundColor: 'black',
+  },
+  titleTime: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    padding: 10,
+  },
+  titleLeft: {
+    margin: 0,
+    padding: 0,
+    flex: 1,
+  },
+  titleDate: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    margin: 0,
+    padding: 0,
+    flex: 1,
+  },
+  titleName: {
+    justifyContent: 'center',
+    backgroundColor: 'orange',
+    padding: 10,
+  },
+  titleNameText: {
+    fontSize: 30,
+    lineHeight: 50,
+    color: 'white',
+    fontWeight: 'bold',
+  },
+  titleNameText2: {
+    fontSize: 15,
+    lineHeight: 15,
+    color: 'white',
+  },
+  titleRight: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    alignSelf: 'flex-end',
+    padding: 10,
+  },
+  predict: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
   },
 });
 
