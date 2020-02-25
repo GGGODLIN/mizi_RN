@@ -225,7 +225,7 @@ const TodayTaskOpen = props => {
     console.log('DONE????????', doneCase);
     return (
       <ScrollView style={{flex: 1}}>
-      <Image source={{uri: 'file:///storage/emulated/0/saved_signature/signature.png',cache: 'only-if-cached',}} style={{height:100,width:100}} ></Image>
+      <Image source={{uri: 'file:///storage/emulated/0/saved_signature/signature.png'}} style={{height:100,width:100}} ></Image>
         <Overlay
           isVisible={caseStatus[detailIndex] == 3 && overlay ? true : false}
           windowBackgroundColor="rgba(255, 255, 255, .5)"
