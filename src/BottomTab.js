@@ -52,7 +52,7 @@ export default function BottomTab(props) {
       lazy={false}
       unmountOnBlur={true}>
       <Tab.Screen
-        name="首頁"
+        name="今日任務"
         component={TodayTasksStackScreen}
         options={{
           tabBarIcon: 'home-account',

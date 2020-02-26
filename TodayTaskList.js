@@ -22,8 +22,8 @@ import AsyncStorage from '@react-native-community/async-storage';
 import {NavigationContainer, useFocusEffect} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-import {ThemeProvider, Avatar, ListItem} from 'react-native-elements';
-import {Button, Card, Title, Paragraph, Divider} from 'react-native-paper';
+import {Button,ThemeProvider, Avatar, ListItem} from 'react-native-elements';
+import { Card, Title, Paragraph, Divider} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 function Item({data, navigation}) {
@@ -66,11 +66,11 @@ function Item({data, navigation}) {
         <View style={styles.titleBox}>
           <View style={styles.titleTime}>
             <View style={styles.titleLeft}>
-              <Text style={{color: 'white', fontSize: 20}}>{startTime}</Text>
+              <Text style={{color: 'white', fontSize: 20}} allowFontScaling={false}>{startTime}</Text>
             </View>
             <View style={styles.titleDate}>
-              <Text style={{color: 'white', fontSize: 20}}>{startDate}</Text>
-              <Text style={{color: 'white', fontSize: 20}}>{canShared}</Text>
+              <Text style={{color: 'white', fontSize: 20}} allowFontScaling={false}>{startDate}</Text>
+              <Text style={{color: 'white', fontSize: 20}} allowFontScaling={false}>{canShared}</Text>
             </View>
           </View>
           <View style={styles.titleName}>
@@ -84,10 +84,10 @@ function Item({data, navigation}) {
                 }}
               />
               <View style={{flexDirection: 'column',justifyContent:'center'}}>
-                <Text style={{color: 'white', fontSize: 18}}>
+                <Text allowFontScaling={false} style={{color: 'white', fontSize: 18}}>
                   {data.DespatchDetails[0].OrderDetails.SOrderNo}
                 </Text>
-                <Text style={{color: 'white', fontSize: 24}}>
+                <Text allowFontScaling={false} style={{color: 'white', fontSize: 24}}>
                   {'個案' + data.DespatchDetails.length + '/' + '陪同' + 0}
                 </Text>
               </View>
@@ -102,7 +102,7 @@ function Item({data, navigation}) {
             color="orange"
             style={{paddingLeft: 30}}
           />
-          <Text style={styles.addrText}>
+          <Text allowFontScaling={false} style={styles.addrText}>
             {data.DespatchDetails[0].OrderDetails.FromAddr}
           </Text>
         </View>
@@ -121,7 +121,7 @@ function Item({data, navigation}) {
             color="orange"
             style={{paddingLeft: 30}}
           />
-          <Text style={styles.addrText}>
+          <Text allowFontScaling={false} style={styles.addrText}>
             {data.DespatchDetails[0].OrderDetails.ToAddr}
           </Text>
         </View>
@@ -134,13 +134,14 @@ const TodayTaskList = props => {
   const [data, setdata] = useState({});
   const [isLoading, setLoading] = useState(true);
   const [url, seturl] = useState();
+  const [userLoginInfo,setuserLoginInfo]=useState();
 
   async function fetchData() {
     try {
       const value = await AsyncStorage.getItem('userLoginInfo');
       if (value !== null) {
         var obj_value = JSON.parse(value);
-        console.log('GET FROM ASYN IS', obj_value);
+        setuserLoginInfo(obj_value);
         var url2 =
           'http://wheathwaapi.vielife.com.tw/api/DriverInfo/GetAllGroupDriverSide/' +
           obj_value.response.Cars.DriverId;
@@ -203,14 +204,34 @@ const TodayTaskList = props => {
     console.log('TASKS screen is loading...');
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text>TASKS LOADING.............</Text>
+        <Text allowFontScaling={false} style={{fontSize:50,fontWeight:'bold'}}>{'載入中...'}</Text>
       </View>
     );
   } else {
     const list = data.response;
-    console.log('TASKS PROPS IS', list);
     return (
       <SafeAreaView style={styles.container}>
+      <View style={{flexDirection:'row',alignItems:'center',backgroundColor:'#ACB3EC',justifyContent:'space-between'}}>
+        <Text style={{fontSize:24,padding:10,fontWeight:'bold'}}>{userLoginInfo.response.Cars.CarNo + " | "+ userLoginInfo.response.DriverName}</Text>
+
+       
+        <Button
+            title="打卡"
+            titleStyle={{fontSize:20,fontWeight:'bold',paddingHorizontal:20,padding:0,margin:0}}
+            buttonStyle={{
+          
+              alignSelf: 'center',
+              backgroundColor: 'orange',
+              borderRadius: 50,
+              padding:5,
+              marginEnd:10,
+            
+            }}
+
+            type="solid"
+            onPress={() => {props.navigation.navigate('HitCard');}}
+          />
+      </View>
         <FlatList
           data={list}
           renderItem={({item}) => (

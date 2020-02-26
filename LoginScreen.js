@@ -16,6 +16,7 @@ import {
   Button,
   ThemeProvider,
 } from 'react-native-elements';
+import {request, PERMISSIONS} from 'react-native-permissions';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
@@ -34,6 +35,21 @@ class LoginScreen extends Component {
 
     this.state = {res: {}};
     this.handleLogin = this.handleLogin.bind(this);
+    request(PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE)
+      .then(result => {
+        console.log('PERMISSION?', result);
+      })
+      .then(() => {
+        request(PERMISSIONS.ANDROID.ACCESS_COARSE_LOCATION)
+          .then(result => {
+            console.log('PERMISSION2?', result);
+          })
+          .then(() => {
+            request(PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE).then(result => {
+              console.log('PERMISSION3?', result);
+            });
+          });
+      });
   }
 
   handleLogin = async () => {
@@ -128,7 +144,7 @@ class LoginScreen extends Component {
                     backgroundColor: 'white',
                     marginBottom: 10,
                   }}
-                  underlineColorAndroid='gray'
+                  underlineColorAndroid="gray"
                   containerStyle={{paddingHorizontal: 0}}
                   placeholder="請輸入帳號 (預設為手機號碼)"
                   placeholderTextColor="gray"
@@ -164,7 +180,7 @@ class LoginScreen extends Component {
                   }}
                   containerStyle={{paddingHorizontal: 0}}
                   placeholder="請輸入密碼 (預設為身分證後4碼)"
-                  underlineColorAndroid='gray'
+                  underlineColorAndroid="gray"
                   placeholderTextColor="gray"
                   autoCapitalize="none"
                   keyboardAppearance="light"
@@ -192,11 +208,13 @@ class LoginScreen extends Component {
               width: '70%',
               alignSelf: 'center',
               backgroundColor: 'orange',
-              borderRadius:50,
-              marginBottom:20,
+              borderRadius: 50,
+              marginBottom: 20,
             }}
             type="solid"
-            onPress={() => {this.handleLogin()}}
+            onPress={() => {
+              this.handleLogin();
+            }}
           />
         </ScrollView>
       </KeyboardAvoidingView>

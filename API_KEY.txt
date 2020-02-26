@@ -58,3 +58,4 @@ http://wheathwaapi.vielife.com.tw/api/OrderDetails/PutDetailStatus?OrderDetailId
 *字大
 *檢查結果勿跳
 *打卡只在今日任務
+DONE BUG

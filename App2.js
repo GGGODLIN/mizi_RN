@@ -6,6 +6,7 @@ import {
 	View,
 	Text,
 	StatusBar,
+	Platform,
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import {
@@ -19,6 +20,23 @@ import {NavigationContainer} from '@react-navigation/native';
 import {Header} from 'react-native-elements';
 import RootNavigator from './src/Main';
 import LoginScreen from './LoginScreen';
+
+import {
+
+  setCustomText,
+
+} from 'react-native-global-props';
+
+const customTextProps = {
+	allowFontScaling:false,
+  style: {
+    fontSize: 16,
+    fontFamily: Platform.OS === 'ios' ? 'HelveticaNeue' : 'Roboto',
+    color: 'black'
+  }
+};
+
+setCustomText(customTextProps);
 
 const App = () => {
 	const [logged, setlogged] = useState(false);

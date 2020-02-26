@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   TextInput,
   Image,
+  Alert,
 } from 'react-native';
 
 import {
@@ -42,13 +43,17 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 const TodayTaskOpen = props => {
   const GOOGLE_MAPS_APIKEY = 'AIzaSyCUaMOOcU7-pH99LS6ajo_s1WkDua92H08';
   const [data, setdata] = useState({});
+  const [finish, setfinish] = useState(false);
   const [doneCase, setdoneCase] = useState(
     props.route.params.data.DespatchDetails.map((e, index) => {
       return e.OrderDetails.Status >= 6 ? index : null;
     }),
   );
-  const [ps, setps] = useState(null);
-  const [picPath, setpicPath] = useState("/storage/emulated/0/saved_signature/signature.png");
+  const [ps, setps] = useState('...');
+  const [picPath, setpicPath] = useState(
+    '/storage/emulated/0/saved_signature/signature.png',
+  );
+  const [picPathOnServer, setpicPathOnServer] = useState();
   const [money, setmoney] = useState('0');
   const [realMoney, setrealMoney] = useState('0');
   const [cashSteps, setcashSteps] = useState(0);
@@ -96,7 +101,26 @@ const TodayTaskOpen = props => {
     let tempStatus = caseStatus;
     tempStatus[detailIndex] = caseStatus[detailIndex] + 1;
     setcaseStatus(tempStatus);
+    if (tempStatus[detailIndex] == 6) {
+      updateStatusToSix();
+      setoverlay(true);
+      setLoading(true);
+    } else {
+      updateStatus();
+      setoverlay(true);
+      setLoading(true);
+    }
+  };
+
+  const handleMiss = async () => {
+    let tempStatus = caseStatus;
+    tempStatus[detailIndex] = 10;
+    setcaseStatus(tempStatus);
+
+    setcashSteps(0);
+    setdoneCase(detailIndex);
     updateStatus();
+    await checkDone();
     setoverlay(true);
     setLoading(true);
   };
@@ -104,7 +128,9 @@ const TodayTaskOpen = props => {
   const handleCashNext = async () => {
     const res = await askCash();
     setmoney(res.response);
-    setrealMoney(res.response);
+    if(cashSteps==0){
+      setrealMoney(res.response);
+    }
     setcashSteps(cashSteps + 1);
   };
 
@@ -134,14 +160,14 @@ const TodayTaskOpen = props => {
   };
 
   const postPic = async () => {
-    let urii= `file://${picPath}`
-    console.log("PICPATH?????????",urii);
+    let urii = `file://${picPath}`;
+    console.log('PICPATH?????????', urii);
     let form = new FormData();
     form.append('image', {
-      uri:urii,
-      type:'image/jpg',
-      name:'signature.jpg',
-      filename:'signature.jpg',
+      uri: urii,
+      type: 'image/jpg',
+      name: 'signature.jpg',
+      filename: 'signature.jpg',
     });
     let url = `http://wheathwaapi.vielife.com.tw/api/Img/Pic`;
 
@@ -151,16 +177,18 @@ const TodayTaskOpen = props => {
     const data = await fetch(url, {
       method: 'POST',
       headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'multipart/form-data',
-        },
-      body:form,
+        Accept: 'application/json',
+        'Content-Type': 'multipart/form-data',
+      },
+      body: form,
     })
       .then(response => response.json())
       .then(res => {
         console.log('postPic AJAX', res);
+        setpicPathOnServer(res.response);
         return res;
-      }).catch(err=>console.log("WTF",err));
+      })
+      .catch(err => console.log('WTF', err));
     return data;
   };
 
@@ -183,49 +211,104 @@ const TodayTaskOpen = props => {
       });
   };
 
+  const updateStatusToSix = async () => {
+    let url = `http://wheathwaapi.vielife.com.tw/api/OrderDetails/PutDetailStatus?OrderDetailId=${
+      taskData[detailIndex].OrderDetails.Id
+    }&StatusInt=${
+      caseStatus[detailIndex]
+    }&receiveAmt=${realMoney}&signPic=${picPathOnServer}&remark=${ps}`;
+
+    console.log(`Making Status6 request to: ${url}`);
+
+    const data = await fetch(url, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(response => response.json())
+      .then(res => {
+        console.log('updateStatus AJAX', res);
+      });
+  };
+
   const handleSavePic = async res => {
-    console.log('RES????????????',res.pathName);
+    console.log('RES????????????', res.pathName);
     setcashSteps(0);
     await setpicPath(res.pathName);
-    console.log("SETPATH?????????",picPath);
+    console.log('SETPATH?????????', picPath);
     await postPic();
     setdoneCase(detailIndex);
     handleNextStep();
-    checkDone();
+    await checkDone();
   };
 
   const checkDone = async () => {
-    caseStatus.forEach(async (item, index, array) => {
+    setdetailIndex(0);
+    await caseStatus.forEach(async (item, index, array) => {
       if (item < 6) {
         console.log('INDEX???????????', index);
-        console.log('DONE????????', doneCase);
-        setdetailIndex(index);
+        console.log('DONE????????', doneCase, doneCase.length);
+        setpeople(0);
+        setforeignPeople(0);
+        if (caseStatus[0] >= 6) {
+          setdetailIndex(index);
+        }
       } else {
         let temp = doneCase;
-        temp[index] = index ;
+        temp[index] = index;
         await setdoneCase(temp);
-        console.log("done!!!!!!",doneCase);
+        console.log('done!!!!!!', doneCase, doneCase.length);
       }
     });
+    setfinish(
+      doneCase.every((item, index, array) => {
+        return item != null;
+      }),
+    );
+    console.log('FINISHED???????????????????', finish);
   };
 
   useEffect(() => {
     checkDone();
   }, []);
 
-  if (isLoading) {
-    setLoading(false);
-    console.log('info screen is loading...');
-    return (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text>LOADING.............</Text>
-      </View>
-    );
+  if (isLoading || finish) {
+    if (finish) {
+      console.log('info screen is FINISH...');
+      return (
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+          <Text>FINISHED!</Text>
+          <Button
+            style={{
+              alignSelf: 'center',
+              justifyContent: 'center',
+              alignContent: 'center',
+              borderRadius: 50,
+              backgroundColor: 'orange',
+              margin: 10,
+            }}
+            labelStyle={{color: 'white', fontSize: 20}}
+            contentStyle={{width: '100%', paddingHorizontal: 50}}
+            mode="outlined"
+            onPress={() => props.navigation.navigate('TodayTaskList')}>
+            {'典籍這裡返回上一夜'}
+          </Button>
+        </View>
+      );
+    } else {
+      setLoading(false);
+      console.log('info screen is loading...');
+      return (
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+          <Text>LOADING.............</Text>
+        </View>
+      );
+    }
   } else {
     console.log('DONE????????', doneCase);
     return (
       <ScrollView style={{flex: 1}}>
-      <Image source={{uri: 'file:///storage/emulated/0/saved_signature/signature.png'}} style={{height:100,width:100}} ></Image>
         <Overlay
           isVisible={caseStatus[detailIndex] == 3 && overlay ? true : false}
           windowBackgroundColor="rgba(255, 255, 255, .5)"
@@ -528,7 +611,7 @@ const TodayTaskOpen = props => {
                     justifyContent: 'center',
                     alignContent: 'center',
                     borderRadius: 50,
-                    backgroundColor: 'orange',
+                    backgroundColor: 'gray',
                     margin: 10,
                   }
                 : {display: 'none'}
@@ -536,7 +619,21 @@ const TodayTaskOpen = props => {
             labelStyle={{color: 'white', fontSize: 20}}
             contentStyle={{width: '100%', paddingHorizontal: 50}}
             mode="outlined"
-            onPress={() => handleNextStep()}>
+            onPress={() => {
+              Alert.alert(
+                '司機端小助手問你:',
+                '確定空趟?',
+                [
+                  {
+                    text: '取消',
+                    onPress: () => console.log('Cancel Pressed'),
+                    style: 'cancel',
+                  },
+                  {text: '確定', onPress: () => {handleMiss()}},
+                ],
+             
+              );
+            }}>
             {'空趟'}
           </Button>
           <View

@@ -8,6 +8,8 @@ import BodyCheckScreen from '../BodyCheckScreen';
 import HistoryTaskOpen from '../HistoryTaskOpen';
 import TodayTaskList from '../TodayTaskList';
 import TodayTaskOpen from '../TodayTaskOpen';
+import HitCard from '../HitCard';
+
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Stack = createStackNavigator();
@@ -42,8 +44,8 @@ export default function TodayTasksStackScreen(props) {
         }}
       />
       <Stack.Screen
-        name="BodyCheckScreen"
-        component={BodyCheckScreen}
+        name="HitCard"
+        component={HitCard}
         options={{
           
         }}

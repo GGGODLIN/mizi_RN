@@ -279,11 +279,7 @@ const HistoryTaskOpen = props => {
             </Text>
           </View>
           <View
-            style={
-              caseStatus[detailIndex] >= 5
-                ? {height: 1, position: 'relative'}
-                : {height: 250, position: 'relative', backgroundColor: 'pink'}
-            }
+            style={{height: 250, position: 'relative', backgroundColor: 'pink'}}
             contentContainerStyle={StyleSheet.absoluteFillObject}>
             <MapView
               style={styles.map}
@@ -334,7 +330,6 @@ const HistoryTaskOpen = props => {
           <ButtonGroup
             onPress={setdetailIndex}
             selectedIndex={detailIndex}
-            disabled={doneCase}
             buttons={caseNames}
             containerStyle={{
               margin: 0,
@@ -405,6 +400,21 @@ const HistoryTaskOpen = props => {
               {taskData[detailIndex].OrderDetails.ReceivedAmt}
             </Text>
           </View>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <Text
+              style={{
+                fontSize: 20,
+                fontWeight: 'bold',
+                marginStart: 30,
+                marginEnd: 40,
+              }}>
+              備註:
+            </Text>
+            <Text style={{fontSize: 20, color: 'black', width: '50%'}}>
+              {taskData[detailIndex].DespatchDetail.Remark}
+            </Text>
+          </View>
+
           <Button
             style={{
               alignSelf: 'center',
@@ -417,7 +427,9 @@ const HistoryTaskOpen = props => {
             labelStyle={{color: 'white', fontSize: 20}}
             contentStyle={{width: '100%', paddingHorizontal: 50}}
             mode="outlined"
-            onPress={() => {}}>
+            onPress={() => {
+              props.navigation.navigate('HistoryTaskList');
+            }}>
             {'返回任務列表'}
           </Button>
         </View>
