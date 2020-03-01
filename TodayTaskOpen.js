@@ -278,7 +278,11 @@ const TodayTaskOpen = props => {
       console.log('info screen is FINISH...');
       return (
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          <Text>FINISHED!</Text>
+          <Image
+        resizeMode='center'
+          style={{flex:1}}
+          source={require('./img/Frame_1.png')}
+        />
           <Button
             style={{
               alignSelf: 'center',
@@ -292,7 +296,7 @@ const TodayTaskOpen = props => {
             contentStyle={{width: '100%', paddingHorizontal: 50}}
             mode="outlined"
             onPress={() => props.navigation.navigate('TodayTaskList')}>
-            {'典籍這裡返回上一夜'}
+            {'開啟下一趟任務'}
           </Button>
         </View>
       );
@@ -621,8 +625,8 @@ const TodayTaskOpen = props => {
             mode="outlined"
             onPress={() => {
               Alert.alert(
-                '司機端小助手問你:',
                 '確定空趟?',
+                ' ',
                 [
                   {
                     text: '取消',

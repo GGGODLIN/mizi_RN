@@ -24,6 +24,7 @@ import LoginScreen from './LoginScreen';
 import {
 
   setCustomText,
+  setCustomTextInput,
 
 } from 'react-native-global-props';
 
@@ -36,7 +37,12 @@ const customTextProps = {
   }
 };
 
+const customTextInputProps = {
+  allowFontScaling:false,
+};
+
 setCustomText(customTextProps);
+setCustomTextInput(customTextInputProps);
 
 const App = () => {
 	const [logged, setlogged] = useState(false);

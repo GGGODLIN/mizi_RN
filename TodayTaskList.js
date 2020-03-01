@@ -33,7 +33,7 @@ function Item({data, navigation}) {
   var pos = startTime.indexOf('T');
   if (pos != -1) {
     startDate = startTime.substring(0, pos);
-    startTime = startTime.substring(pos + 1);
+    startTime = startTime.substring(pos + 1,pos+6);
   }
   var canShared = data.DespatchDetails[0].OrderDetails.CanShared
     ? '可以共乘'

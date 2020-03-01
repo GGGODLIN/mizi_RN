@@ -1,52 +1,53 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
+import {NavigationContainer,useFocusEffect,StackActions} from '@react-navigation/native';
 import InfoScreen  from '../InfoScreen';
 import CheckMainScreen  from '../CheckMainScreen';
 import HistoryTaskList from '../HistoryTaskList';
 import CarCheckScreen from '../CarCheckScreen';
 import BodyCheckScreen from '../BodyCheckScreen';
 import HistoryTaskOpen from '../HistoryTaskOpen';
+import PastReceive from '../PastReceive';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Stack = createStackNavigator();
 
 export default function HistoryTasksStackScreen(props) {
+
+  const pushAction = StackActions.push('TodayTaskList');
+  useFocusEffect(
+    React.useCallback(() => {
+      //alert('Screen was focused');
+    
+      
+      return () => {
+
+        props.navigation.dispatch(pushAction);
+        //alert('Screen was unfocused');
+        // Do something when the screen is unfocused
+        // Useful for cleanup functions
+      };
+    }, [])
+  );
+
   return (
     <Stack.Navigator
       initialRouteName="HistoryTaskList"
-      headerMode="float"
-      screenOptions={{
-        headerTintColor: 'black',
-        headerStyle: { backgroundColor: 'white' },
-        headerLeft:({color, size}) => (
-            <Icon name="bars" color={color} size={20} onPress={() => props.navigation.openDrawer()}/>
-          ),
-        headerLeftContainerStyle:{padding:20},
-        title: 'Donkey Move 司機端',
-      }}
+      headerMode="none"
+      
     >
       <Stack.Screen
         name="HistoryTaskList"
         component={HistoryTaskList}
-        options={{
-
-        }}
+        
       />
       <Stack.Screen
         name="HistoryTaskOpen"
         component={HistoryTaskOpen}
-        options={{
-
-        }}
+        
       />
-      <Stack.Screen
-        name="BodyCheckScreen"
-        component={BodyCheckScreen}
-        options={{
-          
-        }}
-      />
+      
     </Stack.Navigator>
   );
 }

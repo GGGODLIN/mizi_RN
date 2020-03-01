@@ -57,5 +57,5 @@ http://wheathwaapi.vielife.com.tw/api/OrderDetails/PutDetailStatus?OrderDetailId
 
 *字大
 *檢查結果勿跳
-*打卡只在今日任務
-DONE BUG
+*實收金額 游標上去清空 下畫線
+單子結束的圖

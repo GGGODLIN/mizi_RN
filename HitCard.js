@@ -7,6 +7,7 @@ import {
   Text,
   StatusBar,
   TouchableOpacity,
+  Image,
 } from 'react-native';
 
 import {
@@ -21,31 +22,189 @@ import AsyncStorage from '@react-native-community/async-storage';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-import {ThemeProvider, Avatar} from 'react-native-elements';
-import {Button, Card, Title, Paragraph, Divider} from 'react-native-paper';
+import {ThemeProvider, Avatar, Button, Overlay} from 'react-native-elements';
+import {Card, Title, Paragraph, Divider} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import RNSignatureExample from './Sign';
 
 const HitCard = props => {
-  console.log('CHECK CAR?');
+  console.log('HitCard?');
   const [data, setdata] = useState({});
+  const [user, setuser] = useState({});
   const [isLoading, setLoading] = useState(true);
-  const [carChecked, setcarChecked] = useState(false);
-  const [bodyChecked, setbodyChecked] = useState(false);
+  const [isOn, setOn] = useState(false);
+  const [isOff, setOff] = useState(false);
+  const [shouldReceiveAmt, setshouldReceiveAmt] = useState(0.0);
+  const [realReceiveAmt, setrealReceiveAmt] = useState(0.0);
+  const [status, setstatus] = useState(1);
+  const [showOverlay, setshowOverlay] = useState(false);
+  const [myIcon1, setmyIcon1] = useState();
+  const [myIcon2, setmyIcon2] = useState();
+  const [date, setDate] = useState(new Date());
+  const [picPathOnServer, setpicPathOnServer] = useState();
+  const [picPath, setpicPath] = useState(
+    '/storage/emulated/0/saved_signature/signature.png',
+  );
 
   async function fetchData() {
     try {
       const value = await AsyncStorage.getItem('userLoginInfo');
       if (value !== null) {
         var obj_value = JSON.parse(value);
-        console.log(obj_value);
-        setdata(obj_value);
-        setLoading(false);
+        setuser(obj_value);
+        console.log('GET FROM ASYN IS', obj_value);
+        var url2 =
+          'http://wheathwaapi.vielife.com.tw/api/DriverInfo/GetAllPunchByDriver/' +
+          obj_value.response.Cars.DriverId;
+
+        const data = await fetch(url2, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .then(response => response.json())
+          .then(res => {
+            console.log('TASK AJAX', res.response.OnTime !== null);
+            setdata(res);
+            setOn(res.response.OnTime !== null);
+            setOff(res.response.OffTime !== null);
+            if (res.response.DriverSign !== null) {
+              setstatus(4);
+            } else if (
+              res.response.OnTime !== null &&
+              res.response.OffTime !== null
+            ) {
+              setstatus(3);
+            } else if (res.response.OnTime !== null) {
+              setstatus(2);
+            } else {
+              setstatus(1);
+            }
+            setLoading(false);
+          })
+          .catch(err => {
+            console.log('TASKS ERROR!', err);
+          });
+
+        var url3 =
+          'http://wheathwaapi.vielife.com.tw/api/DriverInfo/GetDriverReceive/' +
+          obj_value.response.Cars.DriverId;
+
+        const data2 = await fetch(url3, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .then(response => response.json())
+          .then(res => {
+            console.log('TASK AJAX', res);
+            setshouldReceiveAmt(res.response.ShouldReceiveAmt);
+            setrealReceiveAmt(res.response.RealReceiveAmt);
+          })
+          .catch(err => {
+            console.log('TASKS ERROR!', err);
+          });
       }
     } catch (error) {
       console.log('cannot get ITEM');
       // Error retrieving data
     }
   }
+
+  async function handleSubmitHitCard() {
+    var url2 = `http://wheathwaapi.vielife.com.tw/api/DriverInfo/SetPunchTime/${
+      user.response.Cars.DriverId
+    }?status=${status}`;
+
+    const data = await fetch(url2, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(response => response.json())
+      .then(res => {
+        console.log('TASK AJAX', res.response.OnTime !== null);
+        setOn(res.response.OnTime !== null);
+        setOff(res.response.OffTime !== null);
+        fetchData();
+
+        //1:上班 2:下班 3:已下班&簽名 4:簽完名
+        setLoading(false);
+      })
+      .catch(err => {
+        console.log('HITCARD ERROR!', err);
+      });
+  }
+
+  const handleSavePic = async res => {
+    console.log('RES????????????', res.pathName);
+    //setcashSteps(0);
+    await setpicPath(res.pathName);
+    console.log('SETPATH?????????', picPath);
+    await postPic();
+    //setdoneCase(detailIndex);
+    //handleNextStep();
+    setshowOverlay(false);
+    setstatus(status + 1);
+    //await checkDone();
+  };
+
+  const postPic = async () => {
+    let urii = `file://${picPath}`;
+    console.log('PICPATH?????????', urii);
+    let form = new FormData();
+    form.append('image', {
+      uri: urii,
+      type: 'image/jpg',
+      name: 'signature.jpg',
+      filename: 'signature.jpg',
+    });
+    let url = `http://wheathwaapi.vielife.com.tw/api/Img/Pic`;
+
+    console.log(`Making POST PIC request to: ${url}`);
+    console.log(form);
+
+    const data = await fetch(url, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'multipart/form-data',
+      },
+      body: form,
+    })
+      .then(response => response.json())
+      .then(async res => {
+        console.log('postPic AJAX', res);
+        setpicPathOnServer(res.response);
+
+        let url2 =
+          'http://wheathwaapi.vielife.com.tw/api/DriverInfo/PutDriverReceiveSign';
+        const data2 = await fetch(url2, {
+          method: 'PUT',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            DriverId: user.response.Cars.DriverId,
+
+            DriverSign: res.response,
+          }),
+        })
+          .then(response2 => response2.json())
+          .then(res2 => {
+            console.log('PUTSIGN AJAX', res2);
+          })
+          .catch(err2 => console.log('WTF2', err2));
+
+        return res;
+      })
+      .catch(err => console.log('WTF', err));
+    return data;
+  };
 
   useEffect(() => {
     fetchData();
@@ -59,15 +218,182 @@ const HitCard = props => {
       </View>
     );
   } else {
+    console.log('STATUS?', status);
     return (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center',width:'100%'}}>
-        <View style={{flex: 2, justifyContent: 'center', alignItems: 'center',flexDirection: 'row',}}>
-          <Icon name="close" size={30} color="#900" style={{flex:0.2}}/>
-          <Text>to do 打卡</Text>
-          <Button title="Go back" onPress={() => props.navigation.goBack()} >GO BACK!!</Button>
+      <View
+        style={{
+          width: '95%',
+          alignItems: 'center',
+          backgroundColor: 'white',
+          alignSelf: 'center',
+          marginTop: 10,
+        }}>
+        <Overlay
+          isVisible={status == 3 && showOverlay ? true : false}
+          windowBackgroundColor="rgba(255, 255, 255, .5)"
+          overlayBackgroundColor="white"
+          width="90%"
+          height="80%">
+          <RNSignatureExample handleSavePic={handleSavePic} />
+        </Overlay>
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <Image style={{}} source={require('./img/icons8-clock_8.png')} />
+          <View style={{flexDirection: 'column', margin: 15}}>
+            <Text>上班時間</Text>
+            <Text
+              style={
+                status === 1
+                  ? {fontSize: 35, fontWeight: 'bold', color: 'white'}
+                  : {fontSize: 35, fontWeight: 'bold'}
+              }>
+              {status === 1 ? '77:77' : data.response.OnTime.slice(11, 16)}
+            </Text>
+          </View>
+          <Button
+            disabled={!isOn}
+            title={isOn ? '已打卡' : '未打卡'}
+            containerStyle={{
+              alignItems: 'center',
+              justifyContent: 'center',
+              alignContent: 'center',
+              alignSelf: 'center',
+              height: 80,
+              width: 80,
+            }}
+            buttonStyle={{
+              height: 80,
+              width: 80,
+              borderRadius: 160,
+              borderWidth: 5,
+              borderColor: 'orange',
+            }}
+            titleStyle={{
+              color: 'orange',
+              fontWeight: 'bold',
+            }}
+            type="outline"
+            onPress={() => {}}
+          />
         </View>
-        
-        
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            borderTopColor: 'gray',
+            borderTopWidth: 0.5,
+          }}>
+          <Image style={{}} source={require('./img/icons8-watch.png')} />
+          <View style={{flexDirection: 'column', margin: 15}}>
+            <Text>下班時間</Text>
+            <Text
+              style={
+                status >= 3
+                  ? {fontSize: 35, fontWeight: 'bold'}
+                  : {fontSize: 35, fontWeight: 'bold', color: 'white'}
+              }>
+              {status >= 3 ? data.response.OffTime.slice(11, 16) : '88:88'}
+            </Text>
+          </View>
+          <Button
+            disabled={!isOff}
+            title={isOff ? '已打卡' : '未打卡'}
+            containerStyle={{
+              alignItems: 'center',
+              justifyContent: 'center',
+              alignContent: 'center',
+              alignSelf: 'center',
+              height: 80,
+              width: 80,
+            }}
+            buttonStyle={{
+              height: 80,
+              width: 80,
+              borderRadius: 160,
+              borderWidth: 5,
+              borderColor: 'orange',
+            }}
+            titleStyle={{
+              color: 'orange',
+              fontWeight: 'bold',
+            }}
+            type="outline"
+            onPress={() => {}}
+          />
+        </View>
+        <Button
+          disabled={status >= 3 ? true : false}
+          title={status===1 ? '上班打卡' : status===2 ? '下班打卡' : '已下班'}
+          containerStyle={{
+            alignItems: 'center',
+            justifyContent: 'center',
+            alignContent: 'center',
+            alignSelf: 'center',
+            width: '70%',
+          }}
+          buttonStyle={{
+            width: '90%',
+            alignSelf: 'center',
+            backgroundColor: 'orange',
+            borderRadius: 50,
+            marginBottom: 20,
+            marginTop: 20,
+          }}
+          type="solid"
+          onPress={() => {
+            handleSubmitHitCard();
+          }}
+        />
+        <View style={{alignSelf: 'center', width: '90%', paddingBottom: 10}}>
+          <Text
+            style={{
+              borderBottomWidth: 1,
+              fontSize: 20,
+              color: 'orange',
+              fontWeight: 'bold',
+            }}>
+            本日收入
+          </Text>
+          <Text style={{fontSize: 20}}>
+            {'應收金額:                       $' + shouldReceiveAmt}
+          </Text>
+          <Text style={{fontSize: 20}}>
+            {'實收金額:                       $' + realReceiveAmt}
+          </Text>
+        </View>
+        <Button
+          disabled={status >= 4 ? true : false}
+          title={status >= 4 ? '已簽名' : '司機簽名'}
+          containerStyle={
+            status >= 3
+              ? {
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  alignContent: 'center',
+                  alignSelf: 'center',
+                  width: '70%',
+                }
+              : {
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  alignContent: 'center',
+                  alignSelf: 'center',
+                  width: '70%',
+                  display: 'none',
+                }
+          }
+          buttonStyle={{
+            width: '90%',
+            alignSelf: 'center',
+            backgroundColor: 'orange',
+            borderRadius: 50,
+            marginBottom: 20,
+            marginTop: 10,
+          }}
+          type="solid"
+          onPress={() => {
+            setshowOverlay(true);
+          }}
+        />
       </View>
     );
   }

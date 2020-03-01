@@ -19,7 +19,11 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import AsyncStorage from '@react-native-community/async-storage';
 
-import {NavigationContainer} from '@react-navigation/native';
+import {
+  NavigationContainer,
+  useFocusEffect,
+  StackActions,
+} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import {ThemeProvider, Avatar} from 'react-native-elements';
@@ -36,7 +40,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import ToggleSwitch from 'toggle-switch-react-native';
 
 const BodyCheckScreen = props => {
-  console.log('CHECK CAR?');
+  console.log('CHECK BODY?');
+  const pushAction = StackActions.push('CheckMainScreen');
   const [data, setdata] = useState({});
   const [input1, setinput1] = useState(0);
   const [input2, setinput2] = useState(0);
@@ -78,14 +83,22 @@ const BodyCheckScreen = props => {
     let queryHasSituationNoChecked = '';
     let pleaseBack = false;
 
-    checkedItem.forEach(function(item, index, array){
-      console.log(item, index, array,checkDataModal.response.data[index].DriverCheckName);
+    checkedItem.forEach(function(item, index, array) {
+      console.log(
+        item,
+        index,
+        array,
+        checkDataModal.response.data[index].DriverCheckName,
+      );
       if (item === 1) {
-        queryNoSituation +=   `${checkDataModal.response.data[index].DriverCheckName}` + ',';
+        queryNoSituation +=
+          `${checkDataModal.response.data[index].DriverCheckName}` + ',';
       } else if (item === 3) {
-        queryHasSituationAndChecked += `${checkDataModal.response.data[index].DriverCheckName}` + ',';
+        queryHasSituationAndChecked +=
+          `${checkDataModal.response.data[index].DriverCheckName}` + ',';
       } else if (item === 2) {
-        queryHasSituationNoChecked += `${checkDataModal.response.data[index].DriverCheckName}` + ',';
+        queryHasSituationNoChecked +=
+          `${checkDataModal.response.data[index].DriverCheckName}` + ',';
       } else {
         pleaseBack = true;
         console.log(`PLEASE CHECK ${index}`);
@@ -97,15 +110,9 @@ const BodyCheckScreen = props => {
     console.log('queryHasSituationNoChecked', queryHasSituationNoChecked);
 
     if (pleaseBack) {
-      Alert.alert(
-                '司機端小助手:',
-                '請回答所有問題',
-                [
-                  
-                  {text: '確定', onPress: () => {}},
-                ],
-             
-              );
+      Alert.alert('請回答所有問題', '', [
+        {text: '確定', onPress: () => {}},
+      ]);
       return;
     }
     let url =
@@ -129,7 +136,7 @@ const BodyCheckScreen = props => {
         HasSituationAndChecked: queryHasSituationAndChecked,
         HasSituationNoChecked: queryHasSituationNoChecked,
       }),
-    }).then((res) => {
+    }).then(res => {
       console.log('POST RES', res.json());
       console.log('SUBMIT', data.response.Cars.Id);
       props.navigation.navigate('CheckMainScreen');
@@ -208,6 +215,20 @@ const BodyCheckScreen = props => {
     fetchDataModal().then(() => setLoading(false));
   }, []);
 
+  useFocusEffect(
+    React.useCallback(() => {
+      //alert('Screen was focused');
+      fetchData().then(() => setLoading(false));
+      return () => {
+        setLoading(true);
+        props.navigation.dispatch(pushAction);
+        //alert('Screen was unfocused');
+        // Do something when the screen is unfocused
+        // Useful for cleanup functions
+      };
+    }, []),
+  );
+
   if (isLoading) {
     console.log('info screen is loading...');
     return (
@@ -216,7 +237,7 @@ const BodyCheckScreen = props => {
       </View>
     );
   } else {
-    console.log("RENDER",checkedItem);
+    console.log('RENDER', checkedItem);
     return (
       <ScrollView>
         <View
@@ -276,7 +297,7 @@ const BodyCheckScreen = props => {
               血壓值:
             </Text>
             <TextInput
-            keyboardType='decimal-pad'
+              keyboardType="decimal-pad"
               mode="outlined"
               dense={true}
               error={input1 === 0 ? true : false}
@@ -299,7 +320,7 @@ const BodyCheckScreen = props => {
               血壓值:
             </Text>
             <TextInput
-            keyboardType='decimal-pad'
+              keyboardType="decimal-pad"
               mode="outlined"
               dense={true}
               error={input2 === 0 ? true : false}
@@ -322,7 +343,7 @@ const BodyCheckScreen = props => {
               額溫值:
             </Text>
             <TextInput
-            keyboardType='decimal-pad'
+              keyboardType="decimal-pad"
               mode="outlined"
               dense={true}
               error={input3 === 0 ? true : false}
@@ -345,7 +366,7 @@ const BodyCheckScreen = props => {
               心率值:
             </Text>
             <TextInput
-            keyboardType='decimal-pad'
+              keyboardType="decimal-pad"
               mode="outlined"
               dense={true}
               error={input4 === 0 ? true : false}
@@ -356,7 +377,6 @@ const BodyCheckScreen = props => {
               }}
             />
           </View>
-          
         </View>
 
         <View style={styles.switchBox}>
@@ -1097,7 +1117,9 @@ const BodyCheckScreen = props => {
           labelStyle={{color: 'black'}}
           contentStyle={{width: '100%'}}
           mode="outlined"
-          onPress={() => {handleSubmit()}}>
+          onPress={() => {
+            handleSubmit();
+          }}>
           提交
         </Button>
       </ScrollView>

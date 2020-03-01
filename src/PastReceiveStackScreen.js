@@ -6,21 +6,16 @@ import HistoryTaskList from '../HistoryTaskList';
 import CarCheckScreen from '../CarCheckScreen';
 import BodyCheckScreen from '../BodyCheckScreen';
 import HistoryTaskOpen from '../HistoryTaskOpen';
-import TodayTaskList from '../TodayTaskList';
-import TodayTaskOpen from '../TodayTaskOpen';
-import HitCard from '../HitCard';
-import PastReceiveStackScreen from './PastReceiveStackScreen';
 import PastReceive from '../PastReceive';
-import HistoryTasksStackScreen from './HistoryTasksStackScreen';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Stack = createStackNavigator();
 
-export default function TodayTasksStackScreen(props) {
+export default function PastReceiveStackScreen(props) {
   return (
     <Stack.Navigator
-      initialRouteName="TodayTaskList"
+      initialRouteName="PastReceive"
       headerMode="float"
       screenOptions={{
         headerTintColor: 'black',
@@ -32,37 +27,10 @@ export default function TodayTasksStackScreen(props) {
         title: 'Donkey Move 司機端',
       }}
     >
-      <Stack.Screen
-        name="TodayTaskList"
-        component={TodayTaskList}
-        options={{
-
-        }}
-      />
-      <Stack.Screen
-        name="TodayTaskOpen"
-        component={TodayTaskOpen}
-        options={{
-
-        }}
-      />
-      <Stack.Screen
-        name="HitCard"
-        component={HitCard}
-        options={{
-          
-        }}
-      />
+      
       <Stack.Screen
         name="PastReceive"
         component={PastReceive}
-        options={{
-          
-        }}
-      />
-      <Stack.Screen
-        name="HistoryTasksStackScreen"
-        component={HistoryTasksStackScreen}
         options={{
           
         }}

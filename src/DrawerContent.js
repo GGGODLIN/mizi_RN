@@ -30,25 +30,12 @@ export default function DrawerContent(props) {
               source={{
                 uri: data.response.Pic,
               }}
-              size={64}
+              size={80}
             />
             <View style={styles.userInfoText}>
               <View style={styles.row}>
                 <Title style={styles.title}>{data.response.DriverName}</Title>
-                <Button
-                  color="red"
-                  labelStyle={{color: 'orange'}}
-                  mode="text"
-                  onPress={() =>
-                    props.navigation.navigate('Home', {
-                      screen: '基本資料',
-                      params: {
-                        screen: 'EditInfoScreen',
-                      },
-                    })
-                  }>
-                  編輯
-                </Button>
+                
               </View>
               <Title style={styles.title}>{data.response.Cars.CarNo}</Title>
               <Title style={styles.subtitle}>{data.response.CompanyName}</Title>
@@ -101,25 +88,16 @@ export default function DrawerContent(props) {
             mode="text"
             onPress={() =>
               props.navigation.navigate('Home', {
-                screen: '首頁',
+                screen: '今日任務',
                 params: {
-                  screen: 'HistoryTaskList',
+                  screen: 'HistoryTasksStackScreen',
                 },
               })
             }>
-            接送任務清單
+            {"任務歷程       "}
           </Button>
         </Drawer.Section>
-        <Drawer.Section style={styles.drawerSection}>
-          <Button
-            color="red"
-            labelStyle={{color: 'black'}}
-            contentStyle={{width: '100%', padding: 10}}
-            mode="text"
-            onPress={() => console.log('Pressed')}>
-            司機教育學院
-          </Button>
-        </Drawer.Section>
+        
         <Drawer.Section style={styles.drawerSection}>
           <Button
             color="red"
@@ -152,6 +130,23 @@ export default function DrawerContent(props) {
               })
             }>
             身心狀況檢查
+          </Button>
+        </Drawer.Section>
+        <Drawer.Section style={styles.drawerSection}>
+          <Button
+            color="red"
+            labelStyle={{color: 'black'}}
+            contentStyle={{width: '100%', padding: 10}}
+            mode="text"
+            onPress={() =>
+              props.navigation.navigate('Home', {
+                screen: '今日任務',
+                params: {
+                  screen: 'PastReceive',
+                },
+              })
+            }>
+            {"過去營收       "}
           </Button>
         </Drawer.Section>
       </View>
@@ -212,7 +207,7 @@ const styles = StyleSheet.create({
     marginTop: 0,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
+   
   },
 
   paragraph: {

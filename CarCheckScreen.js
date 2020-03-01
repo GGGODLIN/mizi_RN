@@ -47,7 +47,6 @@ const CarCheckScreen = props => {
     },
   });
   const [checkDataModal, setcheckDataModal] = useState({});
-  const pushAction = StackActions.push('CheckMainScreen');
 
   async function fetchData() {
     try {
@@ -167,10 +166,12 @@ const CarCheckScreen = props => {
     fetchDataModal().then(() => setLoading(false));
   }, []);
 
+  const pushAction = StackActions.push('CheckMainScreen');
   useFocusEffect(
     React.useCallback(() => {
       //alert('Screen was focused');
       fetchData().then(()=>setLoading(false));
+      
       return () => {
         setLoading(true);
         props.navigation.dispatch(pushAction);

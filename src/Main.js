@@ -6,6 +6,10 @@ import BottomTab from './BottomTab';
 import DrawerContent from './DrawerContent';
 import CarCheckScreen from '../CarCheckScreen';
 import BodyCheckScreen from '../BodyCheckScreen';
+import PastReceive from '../PastReceive';
+import HistoryTasksStackScreen from './HistoryTasksStackScreen';
+import PastReceiveStackScreen from './PastReceiveStackScreen';
+
 
 const Drawer = createDrawerNavigator();
 
@@ -38,8 +42,11 @@ export default function RootNavigator(props) {
         borderWidth: 0,
         top: 0,
       }}
-      drawerContent={props => <DrawerContent {...props} logindata={data} handleLogout={handleLogout}/>}>
+      drawerContent={props => <DrawerContent {...props} logindata={data} handleLogout={handleLogout}/>}
+      >
       <Drawer.Screen name="Home" component={BottomTab} />
+      <Drawer.Screen name="過去營收" component={PastReceiveStackScreen} />
+      <Drawer.Screen name="任務歷程" component={HistoryTasksStackScreen} />
     </Drawer.Navigator>
   );
 }
