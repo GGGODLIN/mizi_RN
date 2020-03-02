@@ -37,7 +37,14 @@ import {
   Overlay,
   Input,
 } from 'react-native-elements';
-import {Button, Card, Title, Paragraph, Divider,ActivityIndicator} from 'react-native-paper';
+import {
+  Button,
+  Card,
+  Title,
+  Paragraph,
+  Divider,
+  ActivityIndicator,
+} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const TodayTaskOpen = props => {
@@ -64,6 +71,8 @@ const TodayTaskOpen = props => {
   const [carChecked, setcarChecked] = useState(false);
   const [bodyChecked, setbodyChecked] = useState(false);
   const [overlay, setoverlay] = useState(true);
+  const [delayForMap, setdelayForMap] = useState(false);
+
   const taskData = props.route.params.data.DespatchDetails.map(e => e);
   const caseNames = props.route.params.data.DespatchDetails.map(
     e => e.OrderDetails.CaseUserName,
@@ -97,6 +106,19 @@ const TodayTaskOpen = props => {
       ) * 2.2,
   };
 
+  const [latitudeDelta, setlatitudeDelta] = useState(
+    Math.abs(
+      taskData[detailIndex].OrderDetails.FromLat -
+        taskData[detailIndex].OrderDetails.ToLat,
+    ) * 2.2,
+  );
+  const [longitudeDelta, setlongitudeDelta] = useState(
+    Math.abs(
+      taskData[detailIndex].OrderDetails.FromLon -
+        taskData[detailIndex].OrderDetails.ToLon,
+    ) * 2.2,
+  );
+
   const handleNextStep = async () => {
     let tempStatus = caseStatus;
     tempStatus[detailIndex] = caseStatus[detailIndex] + 1;
@@ -105,6 +127,7 @@ const TodayTaskOpen = props => {
       updateStatusToSix();
       setoverlay(true);
       setLoading(true);
+      setdelayForMap(true);
     } else {
       updateStatus();
       setoverlay(true);
@@ -128,7 +151,7 @@ const TodayTaskOpen = props => {
   const handleCashNext = async () => {
     const res = await askCash();
     setmoney(res.response);
-    if(cashSteps==0){
+    if (cashSteps == 0) {
       setrealMoney(res.response);
     }
     setcashSteps(cashSteps + 1);
@@ -244,15 +267,28 @@ const TodayTaskOpen = props => {
   };
 
   const checkDone = async () => {
+    setLoading(true);
     setdetailIndex(0);
     await caseStatus.forEach(async (item, index, array) => {
       if (item < 6) {
-        console.log('INDEX???????????', index);
+        console.log('INDEX????', index);
         console.log('DONE????????', doneCase, doneCase.length);
         setpeople(0);
         setforeignPeople(0);
         if (caseStatus[0] >= 6) {
           setdetailIndex(index);
+          setlongitudeDelta(
+            Math.abs(
+              taskData[index].OrderDetails.FromLon -
+                taskData[index].OrderDetails.ToLon,
+            ) * 2.2,
+          );
+          setlatitudeDelta(
+            Math.abs(
+              taskData[index].OrderDetails.FromLat -
+                taskData[index].OrderDetails.ToLat,
+            ) * 2.2,
+          );
         }
       } else {
         let temp = doneCase;
@@ -267,6 +303,7 @@ const TodayTaskOpen = props => {
       }),
     );
     console.log('FINISHED???????????????????', finish);
+    setLoading(true);
   };
 
   useEffect(() => {
@@ -279,10 +316,10 @@ const TodayTaskOpen = props => {
       return (
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
           <Image
-        resizeMode='center'
-          style={{flex:1}}
-          source={require('./img/Frame_1.png')}
-        />
+            resizeMode="center"
+            style={{flex: 1}}
+            source={require('./img/Frame_1.png')}
+          />
           <Button
             style={{
               alignSelf: 'center',
@@ -300,17 +337,31 @@ const TodayTaskOpen = props => {
           </Button>
         </View>
       );
-    } else {
-      setLoading(false);
+    } else if(delayForMap){
+      setTimeout(()=>{
+        setLoading(false);
+        setdelayForMap(false);
+      },1);
+    
       console.log('info screen is loading...');
       return (
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          <ActivityIndicator animating={true} size='large' />
+          <ActivityIndicator animating={true} size="large" />
+        </View>
+      );
+    }else{
+        setLoading(false);
+        setdelayForMap(false);
+    
+      console.log('info screen is loading...22222222');
+      return (
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+          <ActivityIndicator animating={true} size="large" />
         </View>
       );
     }
   } else {
-    console.log('DONE????????', doneCase);
+    console.log('DELTA', latitudeDelta,longitudeDelta);
     return (
       <ScrollView style={{flex: 1}}>
         <Overlay
@@ -389,7 +440,6 @@ const TodayTaskOpen = props => {
           <Button
             onPress={() => setoverlay(false)}
             color="black"
-       
             mode="contained"
             labelStyle={{color: 'white', fontSize: 20, fontWeight: 'bold'}}
             style={{marginBottom: 10}}>
@@ -398,7 +448,6 @@ const TodayTaskOpen = props => {
           <Button
             onPress={() => setoverlay(false)}
             color="black"
-    
             mode="contained"
             labelStyle={{color: 'white', fontSize: 20, fontWeight: 'bold'}}
             style={{marginBottom: 10}}>
@@ -412,7 +461,6 @@ const TodayTaskOpen = props => {
           overlayBackgroundColor="white"
           width="90%"
           height="80%">
-          
           <RNSignatureExample handleSavePic={handleSavePic} />
         </Overlay>
 
@@ -481,28 +529,26 @@ const TodayTaskOpen = props => {
             <MapView
               style={styles.map}
               onKmlReady={e => console.log('HAHA', e.nativeEvent)}
-              initialRegion={{
+              region={{
                 latitude: taskData[detailIndex].OrderDetails.FromLat,
                 longitude: taskData[detailIndex].OrderDetails.FromLon,
-                latitudeDelta:
-                  Math.abs(
-                    taskData[detailIndex].OrderDetails.FromLat -
-                      taskData[detailIndex].OrderDetails.ToLat,
-                  ) * 2.2,
-                longitudeDelta:
-                  Math.abs(
-                    taskData[detailIndex].OrderDetails.FromLon -
-                      taskData[detailIndex].OrderDetails.ToLon,
-                  ) * 2.2,
+                latitudeDelta:latitudeDelta,
+                longitudeDelta:longitudeDelta,
               }}>
               <Marker
-                coordinate={origin}
+                coordinate={{
+                  latitude: taskData[detailIndex].OrderDetails.FromLat,
+                  longitude: taskData[detailIndex].OrderDetails.FromLon,
+                }}
                 icon="write"
                 pinColor="blue"
                 title={taskData[detailIndex].OrderDetails.FromAddr}
               />
               <Marker
-                coordinate={destination}
+                coordinate={{
+                  latitude: taskData[detailIndex].OrderDetails.ToLat,
+                  longitude: taskData[detailIndex].OrderDetails.ToLon,
+                }}
                 icon="write"
                 title={taskData[detailIndex].OrderDetails.ToAddr}
               />
@@ -624,19 +670,19 @@ const TodayTaskOpen = props => {
             contentStyle={{width: '100%', paddingHorizontal: 50}}
             mode="outlined"
             onPress={() => {
-              Alert.alert(
-                '確定空趟?',
-                ' ',
-                [
-                  {
-                    text: '取消',
-                    onPress: () => console.log('Cancel Pressed'),
-                    style: 'cancel',
+              Alert.alert('確定空趟?', ' ', [
+                {
+                  text: '取消',
+                  onPress: () => console.log('Cancel Pressed'),
+                  style: 'cancel',
+                },
+                {
+                  text: '確定',
+                  onPress: () => {
+                    handleMiss();
                   },
-                  {text: '確定', onPress: () => {handleMiss()}},
-                ],
-             
-              );
+                },
+              ]);
             }}>
             {'空趟'}
           </Button>
@@ -737,11 +783,16 @@ const TodayTaskOpen = props => {
               實收車資:
             </Text>
             <TextInput
-              keyboardType='number-pad'
+              keyboardType="number-pad"
               defaultValue={realMoney}
               underlineColorAndroid="white"
               placeholderTextColor="orange"
-              style={{fontSize: 30, fontWeight: 'bold', width: '100%'}}
+              style={{
+                fontSize: 30,
+                fontWeight: 'bold',
+                width: '100%',
+                color: 'orange',
+              }}
               onEndEditing={input => {
                 input.nativeEvent.text == ''
                   ? setrealMoney(money)
