@@ -37,7 +37,7 @@ import {
   Overlay,
   Input,
 } from 'react-native-elements';
-import {Button, Card, Title, Paragraph, Divider} from 'react-native-paper';
+import {Button, Card, Title, Paragraph, Divider,ActivityIndicator} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const TodayTaskOpen = props => {
@@ -49,7 +49,7 @@ const TodayTaskOpen = props => {
       return e.OrderDetails.Status >= 6 ? index : null;
     }),
   );
-  const [ps, setps] = useState('...');
+  const [ps, setps] = useState(' ');
   const [picPath, setpicPath] = useState(
     '/storage/emulated/0/saved_signature/signature.png',
   );
@@ -305,7 +305,7 @@ const TodayTaskOpen = props => {
       console.log('info screen is loading...');
       return (
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          <Text>LOADING.............</Text>
+          <ActivityIndicator animating={true} size='large' />
         </View>
       );
     }
@@ -389,7 +389,7 @@ const TodayTaskOpen = props => {
           <Button
             onPress={() => setoverlay(false)}
             color="black"
-            disabled={true}
+       
             mode="contained"
             labelStyle={{color: 'white', fontSize: 20, fontWeight: 'bold'}}
             style={{marginBottom: 10}}>
@@ -398,7 +398,7 @@ const TodayTaskOpen = props => {
           <Button
             onPress={() => setoverlay(false)}
             color="black"
-            disabled={true}
+    
             mode="contained"
             labelStyle={{color: 'white', fontSize: 20, fontWeight: 'bold'}}
             style={{marginBottom: 10}}>
@@ -412,7 +412,7 @@ const TodayTaskOpen = props => {
           overlayBackgroundColor="white"
           width="90%"
           height="80%">
-          <Text>HAHA</Text>
+          
           <RNSignatureExample handleSavePic={handleSavePic} />
         </Overlay>
 
@@ -658,7 +658,7 @@ const TodayTaskOpen = props => {
             <Picker
               enabled={cashSteps == 0 ? true : false}
               selectedValue={foreignPeople}
-              style={{height: 50, width: 100}}
+              style={{height: 50, width: 150}}
               onValueChange={(itemValue, itemIndex) =>
                 setforeignPeople(itemValue)
               }>
@@ -690,7 +690,7 @@ const TodayTaskOpen = props => {
             <Picker
               enabled={cashSteps == 0 ? true : false}
               selectedValue={people}
-              style={{height: 50, width: 100}}
+              style={{height: 50, width: 150}}
               onValueChange={(itemValue, itemIndex) => setpeople(itemValue)}>
               <Picker.Item label="0人" value={0} />
               <Picker.Item label="1人" value={1} />
@@ -737,7 +737,8 @@ const TodayTaskOpen = props => {
               實收車資:
             </Text>
             <TextInput
-              placeholder={realMoney}
+              keyboardType='number-pad'
+              defaultValue={realMoney}
               underlineColorAndroid="white"
               placeholderTextColor="orange"
               style={{fontSize: 30, fontWeight: 'bold', width: '100%'}}
@@ -760,7 +761,7 @@ const TodayTaskOpen = props => {
               備註:
             </Text>
             <TextInput
-              placeholder={'...'}
+              placeholder={'請輸入備註'}
               underlineColorAndroid="white"
               placeholderTextColor="gray"
               style={{fontSize: 20, width: '80%', alignSelf: 'center'}}

@@ -35,7 +35,6 @@ export default function DrawerContent(props) {
             <View style={styles.userInfoText}>
               <View style={styles.row}>
                 <Title style={styles.title}>{data.response.DriverName}</Title>
-                
               </View>
               <Title style={styles.title}>{data.response.Cars.CarNo}</Title>
               <Title style={styles.subtitle}>{data.response.CompanyName}</Title>
@@ -91,13 +90,16 @@ export default function DrawerContent(props) {
                 screen: '今日任務',
                 params: {
                   screen: 'HistoryTasksStackScreen',
+                  params: {
+                    screen: 'HistoryTaskList',
+                  },
                 },
               })
             }>
-            {"任務歷程       "}
+            {'任務歷程       '}
           </Button>
         </Drawer.Section>
-        
+
         <Drawer.Section style={styles.drawerSection}>
           <Button
             color="red"
@@ -142,11 +144,14 @@ export default function DrawerContent(props) {
               props.navigation.navigate('Home', {
                 screen: '今日任務',
                 params: {
-                  screen: 'PastReceive',
+                  screen: 'HistoryTasksStackScreen',
+                  params: {
+                    screen: 'PastReceive',
+                  },
                 },
               })
             }>
-            {"過去營收       "}
+            {'過去營收       '}
           </Button>
         </Drawer.Section>
       </View>
@@ -207,7 +212,6 @@ const styles = StyleSheet.create({
     marginTop: 0,
     flexDirection: 'row',
     alignItems: 'center',
-   
   },
 
   paragraph: {

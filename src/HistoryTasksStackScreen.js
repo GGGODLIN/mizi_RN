@@ -47,6 +47,11 @@ export default function HistoryTasksStackScreen(props) {
         component={HistoryTaskOpen}
         
       />
+      <Stack.Screen
+        name="PastReceive"
+        component={PastReceive}
+        
+      />
       
     </Stack.Navigator>
   );

@@ -21,6 +21,7 @@ import {Header} from 'react-native-elements';
 import RootNavigator from './src/Main';
 import LoginScreen from './LoginScreen';
 
+
 import {
 
   setCustomText,
@@ -43,6 +44,7 @@ const customTextInputProps = {
 
 setCustomText(customTextProps);
 setCustomTextInput(customTextInputProps);
+
 
 const App = () => {
 	const [logged, setlogged] = useState(false);

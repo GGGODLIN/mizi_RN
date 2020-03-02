@@ -23,7 +23,7 @@ import {NavigationContainer, useFocusEffect} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import {Button,ThemeProvider, Avatar, ListItem} from 'react-native-elements';
-import { Card, Title, Paragraph, Divider} from 'react-native-paper';
+import { Card, Title, Paragraph, Divider,ActivityIndicator} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 function Item({data, navigation}) {
@@ -204,11 +204,12 @@ const TodayTaskList = props => {
     console.log('TASKS screen is loading...');
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text allowFontScaling={false} style={{fontSize:50,fontWeight:'bold'}}>{'載入中...'}</Text>
+        <ActivityIndicator animating={true} size='large' />
       </View>
     );
   } else {
     const list = data.response;
+    console.log(list.length);
     return (
       <SafeAreaView style={styles.container}>
       <View style={{flexDirection:'row',alignItems:'center',backgroundColor:'#ACB3EC',justifyContent:'space-between'}}>
@@ -243,6 +244,7 @@ const TodayTaskList = props => {
           )}
           keyExtractor={item => item.DespatchId}
         />
+        <Text style={list.length===0?{flex:20,alignSelf:'center',fontSize:36,fontWeight:'bold',}:{display:'none'}}>尚無任務</Text>
       </SafeAreaView>
     );
   }

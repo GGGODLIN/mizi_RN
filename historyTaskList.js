@@ -23,7 +23,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import {ThemeProvider, Avatar, ListItem} from 'react-native-elements';
-import {Button, Card, Title, Paragraph, Divider} from 'react-native-paper';
+import {Button, Card, Title, Paragraph, Divider,ActivityIndicator} from 'react-native-paper';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -153,22 +153,35 @@ const HistoryTaskList = props => {
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
     setShow(false);
-    setDate(currentDate);
+    if(event.type === 'neutralButtonPressed'){
+      setDate(new Date());
+      setgoPicked(false);
+    }
+    else{
+      setDate(currentDate);
+      setgoPicked(true);
+    }
+   
   };
 
   const onChange2 = (event, selectedDate) => {
     const currentDate = selectedDate || date2;
     setShow2(false);
-    setDate2(currentDate);
+    if(event.type === 'neutralButtonPressed'){
+      setDate2(new Date());
+      setgoPicked2(false);
+    }
+    else{
+      setDate2(currentDate);
+      setgoPicked2(true);
+    }
   };
 
   const showDatepicker = () => {
     setShow(true);
-    setgoPicked(true);
   };
   const showDatepicker2 = () => {
     setShow2(true);
-    setgoPicked2(true);
   };
 
   async function fetchData() {
@@ -242,7 +255,7 @@ const HistoryTaskList = props => {
     console.log('TASKS screen is loading...');
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text>TASKS LOADING.............</Text>
+        <ActivityIndicator animating={true} size='large' />
       </View>
     );
   } else {
@@ -291,16 +304,18 @@ const HistoryTaskList = props => {
           {show ? (
             <DateTimePicker
               value={date}
-              mode={date}
+              mode="date"
               display="default"
               onChange={onChange}
+              neutralButtonLabel="清除"
             />
           ) : show2 ? (
             <DateTimePicker
-              value={date}
-              mode={date}
+              value={date2}
+              mode="date"
               display="default"
               onChange={onChange2}
+              neutralButtonLabel="清除"
             />
           ) : null}
         </View>

@@ -29,6 +29,7 @@ import {
   Paragraph,
   Divider,
   TextInput,
+  ActivityIndicator,
 } from 'react-native-paper';
 
 const InfoScreen = props => {
@@ -106,7 +107,7 @@ const InfoScreen = props => {
     console.log('info screen is loading...');
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text>LOADING.............</Text>
+        <ActivityIndicator animating={true} size='large' />
       </View>
     );
   } else {
@@ -135,7 +136,7 @@ const InfoScreen = props => {
             修改密碼
           </Text>
           <TextInput
-            keyboardType="decimal-pad"
+          
             mode="outlined"
             dense={true}
             error={input1 === 0 ? true : false}
@@ -146,7 +147,7 @@ const InfoScreen = props => {
             }}
           />
           <TextInput
-            keyboardType="decimal-pad"
+          
             mode="outlined"
             dense={true}
             error={input1 === 0 ? true : false}
@@ -177,7 +178,6 @@ const InfoScreen = props => {
           <Card.Content>
             <Title>{'司機:' + infoData.StatusChinese}</Title>
             <Title>{'車輛:' + infoData.StatusChinese}</Title>
-            <Paragraph>{'車輛:' + infoData.StatusChinese}</Paragraph>
           </Card.Content>
 
           <Card.Actions>
@@ -207,7 +207,7 @@ const InfoScreen = props => {
                 `  (${infoData.DriverLicense[0].ExDate})`}
             </Title>
             <Divider />
-            <Title>{'保險: ' + infoData.DriverSecure[0]}</Title>
+            <Title>{'保險: ' + (infoData.DriverSecure[0]===undefined?' ':infoData.DriverSecure[0])}</Title>
             <Divider />
             <Title>{'服務單位: ' + infoData.CompanyName}</Title>
             <Divider />

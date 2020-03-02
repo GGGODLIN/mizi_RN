@@ -23,7 +23,7 @@ import {NavigationContainer,useFocusEffect,StackActions} from '@react-navigation
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import {ThemeProvider, Avatar} from 'react-native-elements';
-import {Button, Card, Title, Paragraph, Divider} from 'react-native-paper';
+import {Button, Card, Title, Paragraph, Divider,ActivityIndicator} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 function Item ({data, navigation}) {
@@ -105,28 +105,14 @@ const PastReceive = props => {
     fetchData();
   }, []);
 
-  const pushAction = StackActions.push('TodayTaskList');
-  useFocusEffect(
-    React.useCallback(() => {
-      //alert('Screen was focused');
-    
-      
-      return () => {
-
-        props.navigation.dispatch(pushAction);
-        //alert('Screen was unfocused');
-        // Do something when the screen is unfocused
-        // Useful for cleanup functions
-      };
-    }, [])
-  );
+  
   
 
   if (isLoading) {
     console.log('info screen is loading...');
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text>LOADING.............</Text>
+        <ActivityIndicator animating={true} size='large' />
       </View>
     );
   } else {

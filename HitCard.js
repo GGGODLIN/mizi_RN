@@ -23,7 +23,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import {ThemeProvider, Avatar, Button, Overlay} from 'react-native-elements';
-import {Card, Title, Paragraph, Divider} from 'react-native-paper';
+import {Card, Title, Paragraph, Divider,ActivityIndicator} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import RNSignatureExample from './Sign';
 
@@ -214,7 +214,7 @@ const HitCard = props => {
     console.log('info screen is loading...');
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text>LOADING.............</Text>
+        <ActivityIndicator animating={true} size='large' />
       </View>
     );
   } else {

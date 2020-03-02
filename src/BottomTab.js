@@ -11,7 +11,8 @@ import TodayTasksStackScreen from './TodayTasksStackScreen';
 import HistoryTasksStackScreen from './HistoryTasksStackScreen';
 
 import call from 'react-native-phone-call';
-import Icon from 'react-native-vector-icons/FontAwesome5';
+
+import  MaterialCommunityIcons  from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Linking} from 'react-native';
 import {
   useTheme,
@@ -53,9 +54,7 @@ export default function BottomTab(props) {
         name="基本資料"
         component={InfoStackScreen}
         options={{
-          tabBarIcon: ({color, size}) => (
-            <Icon name="user-check" color={color} size={size} />
-          ),
+          tabBarIcon: 'account-check',
         }}
         listeners={{
           tabPress: e => {
@@ -69,7 +68,7 @@ export default function BottomTab(props) {
         name="每日檢查"
         component={CheckStackScreen}
         options={{
-          tabBarIcon: 'message-text-outline',
+          tabBarIcon: 'format-list-checks',
         }}
         listeners={{
           tabPress: e => {
@@ -83,7 +82,7 @@ export default function BottomTab(props) {
         name="今日任務"
         component={TodayTasksStackScreen}
         options={{
-          tabBarIcon: 'home-account',
+          tabBarIcon: 'car-multiple',
         }}
         listeners={{ tabPress: e => {e.preventDefault();} }}
       />
@@ -92,7 +91,7 @@ export default function BottomTab(props) {
         name="聯繫行控"
         component={callOut}
         options={{
-          tabBarIcon: 'message-text-outline',
+          tabBarIcon: 'cellphone-sound',
           tabBarButton: props => <callOut {...props} />,
         }}
         listeners={{ tabPress: e => console.log('Tab press', e.target), }}

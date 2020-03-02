@@ -29,7 +29,7 @@ class RNSignatureExample extends Component {
     return (
       <View style={{flex: 1, flexDirection: 'column'}}>
         <Text style={{alignItems: 'center', justifyContent: 'center'}}>
-          Signature Capture Extended{' '}
+          請在此處簽名
         </Text>
         <SignatureCapture
           style={[{flex: 1}, styles.signature]}
@@ -43,20 +43,21 @@ class RNSignatureExample extends Component {
         />
 
         <View style={{flex: 1, flexDirection: 'row'}}>
-          <TouchableHighlight
-            style={styles.buttonStyle}
-            onPress={() => {
-              this.saveSign();
-            }}>
-            <Text>Save</Text>
-          </TouchableHighlight>
+          
 
           <TouchableHighlight
             style={styles.buttonStyle}
             onPress={() => {
               this.resetSign();
             }}>
-            <Text>Reset</Text>
+            <Text>清除</Text>
+          </TouchableHighlight>
+          <TouchableHighlight
+            style={styles.buttonStyle}
+            onPress={() => {
+              this.saveSign();
+            }}>
+            <Text>完成</Text>
           </TouchableHighlight>
         </View>
       </View>

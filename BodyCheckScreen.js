@@ -35,6 +35,7 @@ import {
   Divider,
   Switch,
   TextInput,
+  ActivityIndicator,
 } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ToggleSwitch from 'toggle-switch-react-native';
@@ -233,7 +234,7 @@ const BodyCheckScreen = props => {
     console.log('info screen is loading...');
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text>LOADING.............</Text>
+        <ActivityIndicator animating={true} size='large' />
       </View>
     );
   } else {
