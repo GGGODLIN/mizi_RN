@@ -58,7 +58,7 @@ const TodayTaskOpen = props => {
   );
   const [ps, setps] = useState(' ');
   const [picPath, setpicPath] = useState(
-    '/storage/emulated/0/saved_signature/signature.png',
+    '/storage/emulated/0/saved_signature/signature.png'
   );
   const [picPathOnServer, setpicPathOnServer] = useState();
   const [money, setmoney] = useState('0');
@@ -182,15 +182,16 @@ const TodayTaskOpen = props => {
     return data;
   };
 
-  const postPic = async () => {
-    let urii = `file://${picPath}`;
-    console.log('PICPATH?????????', urii);
+  const postPic = async (props) => {
+    let urii = `file://${props}`;
+    console.log('SETPATH?????????', urii);
+    console.log('PICPATH?????????', props);
     let form = new FormData();
     form.append('image', {
       uri: urii,
       type: 'image/jpg',
-      name: 'signature.jpg',
-      filename: 'signature.jpg',
+      name: `${taskData[detailIndex].OrderDetails.SOrderNo}.jpg`,
+      filename: `${taskData[detailIndex].OrderDetails.SOrderNo}.jpg`,
     });
     let url = `http://wheathwaapi.vielife.com.tw/api/Img/Pic`;
 
@@ -259,8 +260,7 @@ const TodayTaskOpen = props => {
     console.log('RES????????????', res.pathName);
     setcashSteps(0);
     await setpicPath(res.pathName);
-    console.log('SETPATH?????????', picPath);
-    await postPic();
+    await postPic(res.pathName);
     setdoneCase(detailIndex);
     handleNextStep();
     await checkDone();
@@ -461,7 +461,7 @@ const TodayTaskOpen = props => {
           overlayBackgroundColor="white"
           width="90%"
           height="80%">
-          <RNSignatureExample handleSavePic={handleSavePic} />
+          <RNSignatureExample handleSavePic={handleSavePic} name={taskData[detailIndex].OrderDetails.SOrderNo}/>
         </Overlay>
 
         <View

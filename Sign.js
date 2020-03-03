@@ -36,10 +36,11 @@ class RNSignatureExample extends Component {
           ref="sign"
           onSaveEvent={this._onSaveEvent}
           onDragEvent={this._onDragEvent}
-          saveImageFileInExtStorage={true}
+          saveImageFileInExtStorage={false}
           showNativeButtons={false}
           showTitleLabel={false}
           viewMode={'portrait'}
+          fileName={`${this.props.name}.png`}
         />
 
         <View style={{flex: 1, flexDirection: 'row'}}>

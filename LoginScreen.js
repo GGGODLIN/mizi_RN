@@ -24,6 +24,8 @@ import {request, PERMISSIONS} from 'react-native-permissions';
 import CountdownCircle from 'react-native-countdown-circle';
 import codePush from 'react-native-code-push';
 
+
+
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
 const dummySearchBarProps = {

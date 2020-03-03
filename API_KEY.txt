@@ -59,3 +59,7 @@ http://wheathwaapi.vielife.com.tw/api/OrderDetails/PutDetailStatus?OrderDetailId
 *檢查結果勿跳
 *實收金額 游標上去清空 下畫線
 單子結束的圖
+
+
+/二為馬->客戶端手機上瀏覽器簽名->司機reload
+/簽名->不傳圖->存手機TS4156461656.PNG (SorderNo)->下班打卡一次上傳

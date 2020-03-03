@@ -20,40 +20,35 @@ import {NavigationContainer} from '@react-navigation/native';
 import {Header} from 'react-native-elements';
 import RootNavigator from './src/Main';
 import LoginScreen from './LoginScreen';
-import codePush from "react-native-code-push";
+import codePush from 'react-native-code-push';
+import BgTracking from './BgTracking';
 
-import {
-
-  setCustomText,
-  setCustomTextInput,
-
-} from 'react-native-global-props';
+import {setCustomText, setCustomTextInput} from 'react-native-global-props';
 
 const customTextProps = {
-	allowFontScaling:false,
-  style: {
-    fontSize: 16,
-    fontFamily: Platform.OS === 'ios' ? 'HelveticaNeue' : 'Roboto',
-    color: 'black'
-  }
+	allowFontScaling: false,
+	style: {
+		fontSize: 16,
+		fontFamily: Platform.OS === 'ios' ? 'HelveticaNeue' : 'Roboto',
+		color: 'black',
+	},
 };
 
 const customTextInputProps = {
-  allowFontScaling:false,
+	allowFontScaling: false,
 };
 
 setCustomText(customTextProps);
 setCustomTextInput(customTextInputProps);
-
 
 const App = () => {
 	const [logged, setlogged] = useState(false);
 	const [logindata, setdata] = useState();
 	const _goBack = () => console.log('Went back');
 
-  const _handleSearch = () => console.log('Searching');
+	const _handleSearch = () => console.log('Searching');
 
-  const _handleMore = () => console.log('Shown more');
+	const _handleMore = () => console.log('Shown more');
 
 	async function handleLogin(res) {
 		try {
@@ -71,29 +66,26 @@ const App = () => {
 	function handleLogout(res) {
 		setlogged(res);
 	}
-	if(logged){
-		return(
-			<PaperProvider>
-			<NavigationContainer>
-
-				<RootNavigator
-					switchOn={logged}
-					logindata={logindata}
-					handleLogout={handleLogout}
-				/>
-				
-			</NavigationContainer>
-		</PaperProvider>
-
-		);
-	}
-	else{
+	if (logged) {
 		return (
-		<PaperProvider>
-			<LoginScreen handleLogin={handleLogin} switchOn={!logged} />
+			<PaperProvider>
+				<NavigationContainer>
+				<BgTracking  />
+					<RootNavigator
+						switchOn={logged}
+						logindata={logindata}
+						handleLogout={handleLogout}
+					/>
+				</NavigationContainer>
+			</PaperProvider>
+		);
+	} else {
+		return (
+			<PaperProvider>
 			
-		</PaperProvider>
-	);
+				<LoginScreen handleLogin={handleLogin} switchOn={!logged} />
+			</PaperProvider>
+		);
 	}
 };
 
