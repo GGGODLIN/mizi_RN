@@ -111,6 +111,12 @@ const CheckMainScreen = props => {
             color="#900"
             style={carChecked && bodyChecked ? {display: 'none'} : {flex: 0.2}}
           />
+          <Icon
+            name="check"
+            size={30}
+            color="#900"
+            style={carChecked && bodyChecked ? {flex: 0.2}:{display: 'none'}}
+          />
           <Text>
             {carChecked && bodyChecked
               ? '您今日已完成每日檢查'
@@ -206,11 +212,13 @@ const CheckMainScreen = props => {
               進行身心檢查
             </Button>
         </View>
+        <View style={{flex:1}}></View>
         <Image
           resizeMode='center'
-          style={(carChecked&&bodyChecked)?{flex:8}:{display:'none'}}
+          style={(carChecked&&bodyChecked)?{flex:6}:{display:'none'}}
           source={require('./img/ok.png')}
         />
+        <View style={{flex:1}}></View>
       </View>
     );
   }

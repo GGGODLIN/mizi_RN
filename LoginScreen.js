@@ -22,6 +22,7 @@ import {
 import {Divider, TextInput} from 'react-native-paper';
 import {request, PERMISSIONS} from 'react-native-permissions';
 import CountdownCircle from 'react-native-countdown-circle';
+import codePush from 'react-native-code-push';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
@@ -117,7 +118,7 @@ class LoginScreen extends Component {
             countDownTime: prevState.countDownTime + 1,
           }));
         } else {
-          Alert.alert(res.msg, " ", [
+          Alert.alert(res.msg, ' ', [
             {
               text: '確定',
               onPress: () => {},
@@ -151,7 +152,7 @@ class LoginScreen extends Component {
             showOverlay3: true,
           });
         } else {
-          Alert.alert( res.msg, "  ", [
+          Alert.alert(res.msg, '  ', [
             {
               text: '確定',
               onPress: () => {},
@@ -191,7 +192,7 @@ class LoginScreen extends Component {
             },
           ]);
         } else {
-          Alert.alert(res.msg, "  ", [
+          Alert.alert(res.msg, '  ', [
             {
               text: '確定',
               onPress: () => {},
@@ -272,7 +273,7 @@ class LoginScreen extends Component {
           />
         </Overlay>
         <Overlay
-        onBackdropPress={() => {
+          onBackdropPress={() => {
             this.setState({
               showOverlay1: false,
               showOverlay2: false,
@@ -360,7 +361,7 @@ class LoginScreen extends Component {
         </Overlay>
 
         <Overlay
-        onBackdropPress={() => {
+          onBackdropPress={() => {
             this.setState({
               showOverlay1: false,
               showOverlay2: false,
@@ -426,12 +427,11 @@ class LoginScreen extends Component {
               top: -width * 0.3,
               left: -width * 0.1,
               borderRadius: 500,
-             
             }}
             source={require('./img/dweffcopy1.png')}
           />
         </View>
-        
+
         <ScrollView
           style={styles.container}
           keyboardShouldPersistTaps="handled">
@@ -460,7 +460,7 @@ class LoginScreen extends Component {
                   marginBottom: 10,
                   fontWeight: 'bold',
 
-                  color: '#F57A00',
+                  color: 'orange',
                   borderRadius: 20,
                 }}>
                 司機登入
@@ -514,7 +514,6 @@ class LoginScreen extends Component {
                     backgroundColor: 'white',
                   }}
                   containerStyle={{paddingHorizontal: 0}}
-
                   placeholder="請輸入密碼(預設為身分證後4碼)"
                   underlineColorAndroid="gray"
                   placeholderTextColor="gray"
@@ -568,16 +567,19 @@ class LoginScreen extends Component {
             }}
           />
         </ScrollView>
-        <View style={{flex: 0, backgroundColor: 'transparent',alignItems:'center'}}>
+        <View
+          style={{
+            flex: 0,
+            backgroundColor: 'transparent',
+            alignItems: 'center',
+          }}>
           <Image
             style={{
-              
               position: 'absolute',
-              top: -width * 1.65,
-              borderColor:"white",
+              top: -height * 0.9,
+              borderColor: 'white',
               borderRadius: 500,
-              borderWidth:10,
-             
+              borderWidth: 10,
             }}
             source={require('./img/Logo.png')}
           />
@@ -595,7 +597,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     borderRadius: 20,
     marginBottom: '10%',
- 
   },
   headerContainer: {
     justifyContent: 'center',
@@ -655,5 +656,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#E5E5E5',
   },
 });
-
+LoginScreen = codePush({
+  updateDialog: {
+    title: '版本更新!',
+    descriptionPrefix: '版本號',
+    optionalUpdateMessage: 'APP有新版本，是否更新?',
+    optionalIgnoreButtonLabel: '下次再說',
+    optionalInstallButtonLabel: '立馬安裝',
+  },
+  installMode: codePush.InstallMode.IMMEDIATE,
+})(LoginScreen);
 export default LoginScreen;
