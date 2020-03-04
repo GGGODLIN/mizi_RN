@@ -142,7 +142,14 @@ class LoginScreen extends Component {
           ]);
         }
       })
-      .catch(err => console.log('ERROR?0', err));
+      .catch(err =>
+        Alert.alert('網路異常，請稍後再試...', ' ', [
+          {
+            text: '確定',
+            onPress: () => {},
+          },
+        ]),
+      );
   };
 
   handleSendVCode = async () => {
@@ -176,7 +183,14 @@ class LoginScreen extends Component {
           ]);
         }
       })
-      .catch(err => console.log('ERROR?1', err));
+      .catch(err =>
+        Alert.alert('網路異常，請稍後再試...', ' ', [
+          {
+            text: '確定',
+            onPress: () => {},
+          },
+        ]),
+      );
   };
 
   handleSendNewPwd = async () => {
@@ -216,7 +230,14 @@ class LoginScreen extends Component {
           ]);
         }
       })
-      .catch(err => console.log('ERROR?2', err));
+      .catch(err =>
+        Alert.alert('網路異常，請稍後再試...', ' ', [
+          {
+            text: '確定',
+            onPress: () => {},
+          },
+        ]),
+      );
   };
 
   render() {

@@ -7,6 +7,7 @@ import {
   Text,
   StatusBar,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 
 import {
@@ -92,7 +93,14 @@ const CarCheckScreen = props => {
       .then(res => {
         console.log('Modal AJAX', res);
         setcheckDataModal(res);
-      });
+      }).catch(err =>
+        Alert.alert('網路異常，請稍後再試...', ' ', [
+          {
+            text: '確定',
+            onPress: () => {},
+          },
+        ]),
+      );
   };
 
   const handleCheckAll = async () => {
@@ -155,7 +163,14 @@ const CarCheckScreen = props => {
         HasChecked: queryHasChecked,
         NoChecked: queryNoChecked,
       }),
-    });
+    }).catch(err =>
+        Alert.alert('網路異常，請稍後再試...', ' ', [
+          {
+            text: '確定',
+            onPress: () => {},
+          },
+        ]),
+      );
     console.log('POST RES', postRes);
     console.log('SUBMIT', data.response.Cars.Id);
     props.navigation.navigate('CheckMainScreen');

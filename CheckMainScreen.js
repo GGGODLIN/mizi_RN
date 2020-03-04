@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   Image,
   ImageBackground,
+  Alert,
 } from 'react-native';
 
 import {
@@ -55,7 +56,14 @@ const CheckMainScreen = props => {
             console.log('FETCH CHECKED??????', res.response.CarCheck);
             setcarChecked(res.response.CarCheck);
             setbodyChecked(res.response.DriverCheck);
-          });
+          }).catch(err =>
+        Alert.alert('網路異常，請稍後再試...', ' ', [
+          {
+            text: '確定',
+            onPress: () => {},
+          },
+        ]),
+      );
         setdata(obj_value);
         setLoading(false);
       }
