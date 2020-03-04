@@ -83,6 +83,18 @@ project.ext.react = [
     enableHermes: false,  // clean and rebuild if changing
 ]
 
+subprojects {
+    afterEvaluate {project ->
+    // force libs to use recent buildtools
+        if (project.hasProperty("android")) {
+            android {
+                compileSdkVersion = 28  // change to match your desired version
+                buildToolsVersion = "28.0.3" // ....
+            }
+        }
+    }
+}
+
 apply from: "../../node_modules/react-native/react.gradle"
 
 /**
@@ -135,7 +147,7 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
-        versionName "1.3"
+        versionName "1.4"
     }
     splits {
         abi {

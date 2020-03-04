@@ -8,6 +8,7 @@ import {
   StatusBar,
   TouchableOpacity,
   Image,
+  Alert,
 } from 'react-native';
 
 import {
@@ -23,9 +24,16 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import {ThemeProvider, Avatar, Button, Overlay} from 'react-native-elements';
-import {Card, Title, Paragraph, Divider,ActivityIndicator} from 'react-native-paper';
+import {
+  Card,
+  Title,
+  Paragraph,
+  Divider,
+  ActivityIndicator,
+} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import RNSignatureExample from './Sign';
+import FileUtil from './FileUtil';
 
 const HitCard = props => {
   console.log('HitCard?');
@@ -47,6 +55,8 @@ const HitCard = props => {
   );
 
   async function fetchData() {
+    const resFs = FileUtil.readDir1();
+    console.log('FS???????????????????', resFs);
     try {
       const value = await AsyncStorage.getItem('userLoginInfo');
       if (value !== null) {
@@ -144,7 +154,22 @@ const HitCard = props => {
     //setcashSteps(0);
     await setpicPath(res.pathName);
     console.log('SETPATH?????????', picPath);
-    await postPic();
+
+    const res2 = await FileUtil.readDir();
+    res2.forEach(async function(item, index, array) {
+      await postPic(item)
+        .then(() => FileUtil.deleteFile(`file://${item}`))
+        .catch(err => {
+          Alert.alert('網路異常，請稍後再試...', ' ', [
+            {
+              text: '確定',
+              onPress: () => {},
+            },
+          ]);
+        });
+      // forEach 就如同 for，不過寫法更容易
+    });
+
     //setdoneCase(detailIndex);
     //handleNextStep();
     setshowOverlay(false);
@@ -152,15 +177,23 @@ const HitCard = props => {
     //await checkDone();
   };
 
-  const postPic = async () => {
-    let urii = `file://${picPath}`;
+  const postPic = async picPath2 => {
+    let indexTS = picPath2.indexOf('TS');
+
+    let fname = picPath2.substr(indexTS);
+
+    if (fname == 'g') {
+      fname = 'sign.png';
+    }
+    console.log('FNAME?', fname == 'g');
+    let urii = `file://${picPath2}`;
     console.log('PICPATH?????????', urii);
     let form = new FormData();
     form.append('image', {
       uri: urii,
-      type: 'image/jpg',
-      name: 'signature.jpg',
-      filename: 'signature.jpg',
+      type: 'image/png',
+      name: fname,
+      filename: fname,
     });
     let url = `http://wheathwaapi.vielife.com.tw/api/Img/Pic`;
 
@@ -214,7 +247,7 @@ const HitCard = props => {
     console.log('info screen is loading...');
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <ActivityIndicator animating={true} size='large' />
+        <ActivityIndicator animating={true} size="large" />
       </View>
     );
   } else {
@@ -230,11 +263,12 @@ const HitCard = props => {
         }}>
         <Overlay
           isVisible={status == 3 && showOverlay ? true : false}
+          //isVisible={showOverlay ? true : false}
           windowBackgroundColor="rgba(255, 255, 255, .5)"
           overlayBackgroundColor="white"
           width="90%"
           height="80%">
-          <RNSignatureExample handleSavePic={handleSavePic} />
+          <RNSignatureExample handleSavePic={handleSavePic} name={'sign'} />
         </Overlay>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <Image style={{}} source={require('./img/icons8-clock_8.png')} />
@@ -320,9 +354,12 @@ const HitCard = props => {
             onPress={() => {}}
           />
         </View>
+
         <Button
           disabled={status >= 3 ? true : false}
-          title={status===1 ? '上班打卡' : status===2 ? '下班打卡' : '已下班'}
+          title={
+            status === 1 ? '上班打卡' : status === 2 ? '下班打卡' : '已下班'
+          }
           containerStyle={{
             alignItems: 'center',
             justifyContent: 'center',
@@ -340,7 +377,19 @@ const HitCard = props => {
           }}
           type="solid"
           onPress={() => {
-            handleSubmitHitCard();
+            Alert.alert('確定打卡?', ' ', [
+              {
+                text: '取消',
+                onPress: () => console.log('Cancel Pressed'),
+                style: 'cancel',
+              },
+              {
+                text: '確定',
+                onPress: () => {
+                  handleSubmitHitCard();
+                },
+              },
+            ]);
           }}
         />
         <View style={{alignSelf: 'center', width: '90%', paddingBottom: 10}}>

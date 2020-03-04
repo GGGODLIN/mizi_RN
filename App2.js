@@ -80,6 +80,7 @@ const App = () => {
 			</PaperProvider>
 		);
 	} else {
+		console.log("OPEN!",logindata);
 		return (
 			<PaperProvider>
 			

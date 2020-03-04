@@ -24,8 +24,6 @@ import {request, PERMISSIONS} from 'react-native-permissions';
 import CountdownCircle from 'react-native-countdown-circle';
 import codePush from 'react-native-code-push';
 
-
-
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
 const dummySearchBarProps = {
@@ -91,8 +89,24 @@ class LoginScreen extends Component {
       .then(response => response.json())
       .then(res => {
         console.log('LOGGING AJAX', res.success);
+        if(!res.success){
+          Alert.alert(res.msg, ' ', [
+          {
+            text: '確定',
+            onPress: () => {},
+          },
+        ]);
+        }
         this.props.handleLogin(res);
-      });
+      })
+      .catch(err =>
+        Alert.alert('網路異常，請稍後再試...', ' ', [
+          {
+            text: '確定',
+            onPress: () => {},
+          },
+        ]),
+      );
   };
 
   handleSendAcc = async () => {

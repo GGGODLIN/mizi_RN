@@ -8,6 +8,7 @@ import {
   StatusBar,
   FlatList,
   TouchableOpacity,
+  RefreshControl,
 } from 'react-native';
 
 import {
@@ -132,6 +133,7 @@ function Item({data, navigation}) {
 
 const TodayTaskList = props => {
   const [data, setdata] = useState({});
+  const [isRefreshing, setisRefreshing] = useState(false);
   const [isLoading, setLoading] = useState(true);
   const [url, seturl] = useState();
   const [userLoginInfo,setuserLoginInfo]=useState();
@@ -187,6 +189,14 @@ const TodayTaskList = props => {
       });
   }
 
+  async function _onRefresh() {
+    setisRefreshing(true);
+    fetchData().then(() => {
+      setLoading(false);
+      setisRefreshing(false);
+      });
+  }
+
   useFocusEffect(
     React.useCallback(() => {
       //alert('Screen was focused');
@@ -235,6 +245,18 @@ const TodayTaskList = props => {
       </View>
         <FlatList
           data={list}
+          refreshControl={
+          <RefreshControl
+            refreshing={isRefreshing}
+            onRefresh={_onRefresh}
+            tintColor="#ff0000"
+            title="Loading..."
+            size='large'
+            titleColor="#00ff00"
+            colors={['#ff0000', '#00ff00', '#0000ff']}
+            progressBackgroundColor="#ffff00"
+          />
+        }
           renderItem={({item}) => (
             <Item
               title={item.DespatchDetails[0].CaseUser.Name}

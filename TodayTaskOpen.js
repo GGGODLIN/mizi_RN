@@ -72,6 +72,8 @@ const TodayTaskOpen = props => {
   const [bodyChecked, setbodyChecked] = useState(false);
   const [overlay, setoverlay] = useState(true);
   const [delayForMap, setdelayForMap] = useState(false);
+  const [fixbottom, setfixbottom] = useState(-1);
+
 
   const taskData = props.route.params.data.DespatchDetails.map(e => e);
   const caseNames = props.route.params.data.DespatchDetails.map(
@@ -236,11 +238,12 @@ const TodayTaskOpen = props => {
   };
 
   const updateStatusToSix = async () => {
+    console.log("???????",taskData[detailIndex].OrderDetails.SOrderNo);
     let url = `http://wheathwaapi.vielife.com.tw/api/OrderDetails/PutDetailStatus?OrderDetailId=${
       taskData[detailIndex].OrderDetails.Id
     }&StatusInt=${
       caseStatus[detailIndex]
-    }&receiveAmt=${realMoney}&signPic=${picPathOnServer}&remark=${ps}`;
+    }&receiveAmt=${realMoney}&signPic=${taskData[detailIndex].OrderDetails.SOrderNo}.png&remark=${ps}`;
 
     console.log(`Making Status6 request to: ${url}`);
 
@@ -260,7 +263,7 @@ const TodayTaskOpen = props => {
     console.log('RES????????????', res.pathName);
     setcashSteps(0);
     await setpicPath(res.pathName);
-    await postPic(res.pathName);
+    //await postPic(res.pathName);
     setdoneCase(detailIndex);
     handleNextStep();
     await checkDone();
@@ -527,7 +530,7 @@ const TodayTaskOpen = props => {
             }
             contentContainerStyle={StyleSheet.absoluteFillObject}>
             <MapView
-              style={styles.map}
+              style={[styles.map, { bottom:fixbottom}]}
               onKmlReady={e => console.log('HAHA', e.nativeEvent)}
               region={{
                 latitude: taskData[detailIndex].OrderDetails.FromLat,
@@ -542,6 +545,7 @@ const TodayTaskOpen = props => {
                 }}
                 icon="write"
                 pinColor="blue"
+                onPress={() => setfixbottom(0)}
                 title={taskData[detailIndex].OrderDetails.FromAddr}
               />
               <Marker
@@ -550,6 +554,7 @@ const TodayTaskOpen = props => {
                   longitude: taskData[detailIndex].OrderDetails.ToLon,
                 }}
                 icon="write"
+                onPress={() => setfixbottom(0)}
                 title={taskData[detailIndex].OrderDetails.ToAddr}
               />
 
