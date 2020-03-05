@@ -9,7 +9,6 @@ import {
   TouchableOpacity,
   TextInput,
   Image,
-  Alert,
 } from 'react-native';
 
 import {
@@ -132,14 +131,7 @@ const HistoryTaskOpen = props => {
       .then(res => {
         console.log('updateStatus AJAX', res);
         return res;
-      }).catch(err =>
-        Alert.alert('網路異常，請稍後再試...', ' ', [
-          {
-            text: '確定',
-            onPress: () => {},
-          },
-        ]),
-      );
+      });
     return data;
   };
 
@@ -170,14 +162,7 @@ const HistoryTaskOpen = props => {
         console.log('postPic AJAX', res);
         return res;
       })
-      .catch(err =>
-        Alert.alert('網路異常，請稍後再試...', ' ', [
-          {
-            text: '確定',
-            onPress: () => {},
-          },
-        ]),
-      );
+      .catch(err => console.log('WTF', err));
     return data;
   };
 
@@ -197,14 +182,7 @@ const HistoryTaskOpen = props => {
       .then(response => response.json())
       .then(res => {
         console.log('updateStatus AJAX', res);
-      }).catch(err =>
-        Alert.alert('網路異常，請稍後再試...', ' ', [
-          {
-            text: '確定',
-            onPress: () => {},
-          },
-        ]),
-      );
+      });
   };
 
   const handleSavePic = async res => {

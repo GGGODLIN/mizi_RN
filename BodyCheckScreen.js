@@ -141,14 +141,7 @@ const BodyCheckScreen = props => {
       console.log('POST RES', res.json());
       console.log('SUBMIT', data.response.Cars.Id);
       props.navigation.navigate('CheckMainScreen');
-    }).catch(err =>
-        Alert.alert('網路異常，請稍後再試...', ' ', [
-          {
-            text: '確定',
-            onPress: () => {},
-          },
-        ]),
-      );
+    });
   };
 
   async function fetchData() {
@@ -195,14 +188,7 @@ const BodyCheckScreen = props => {
       .then(res => {
         console.log('Modal AJAX', res);
         setcheckDataModal(res);
-      }).catch(err =>
-        Alert.alert('網路異常，請稍後再試...', ' ', [
-          {
-            text: '確定',
-            onPress: () => {},
-          },
-        ]),
-      );
+      });
   };
 
   const handleSwitch = (index, change) => {

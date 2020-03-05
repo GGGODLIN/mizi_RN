@@ -8,7 +8,6 @@ import {
   StatusBar,
   FlatList,
   TouchableOpacity,
-  Alert,
 } from 'react-native';
 
 import {
@@ -213,14 +212,9 @@ const HistoryTaskList = props => {
             setdata(res);
             setLoading(false);
           })
-          .catch(err =>
-        Alert.alert('網路異常，請稍後再試...', ' ', [
-          {
-            text: '確定',
-            onPress: () => {},
-          },
-        ]),
-      );
+          .catch(err => {
+            console.log('TASKS ERROR!');
+          });
       }
     } catch (error) {
       console.log('cannot get ITEM');
@@ -248,14 +242,9 @@ const HistoryTaskList = props => {
         setdata(res);
             setLoading(false);
       })
-      .catch(err =>
-        Alert.alert('網路異常，請稍後再試...', ' ', [
-          {
-            text: '確定',
-            onPress: () => {},
-          },
-        ]),
-      );
+      .catch(err => {
+        console.log('TASKS ERROR!');
+      });
   }
 
   useEffect(() => {

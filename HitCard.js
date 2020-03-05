@@ -93,14 +93,9 @@ const HitCard = props => {
             }
             setLoading(false);
           })
-          .catch(err =>
-        Alert.alert('網路異常，請稍後再試...', ' ', [
-          {
-            text: '確定',
-            onPress: () => {},
-          },
-        ]),
-      );
+          .catch(err => {
+            console.log('TASKS ERROR!', err);
+          });
 
         var url3 =
           'http://wheathwaapi.vielife.com.tw/api/DriverInfo/GetDriverReceive/' +
@@ -118,14 +113,9 @@ const HitCard = props => {
             setshouldReceiveAmt(res.response.ShouldReceiveAmt);
             setrealReceiveAmt(res.response.RealReceiveAmt);
           })
-          .catch(err =>
-        Alert.alert('網路異常，請稍後再試...', ' ', [
-          {
-            text: '確定',
-            onPress: () => {},
-          },
-        ]),
-      );
+          .catch(err => {
+            console.log('TASKS ERROR!', err);
+          });
       }
     } catch (error) {
       console.log('cannot get ITEM');
@@ -154,14 +144,9 @@ const HitCard = props => {
         //1:上班 2:下班 3:已下班&簽名 4:簽完名
         setLoading(false);
       })
-      .catch(err =>
-        Alert.alert('網路異常，請稍後再試...', ' ', [
-          {
-            text: '確定',
-            onPress: () => {},
-          },
-        ]),
-      );
+      .catch(err => {
+        console.log('HITCARD ERROR!', err);
+      });
   }
 
   const handleSavePic = async res => {
@@ -246,25 +231,11 @@ const HitCard = props => {
           .then(res2 => {
             console.log('PUTSIGN AJAX', res2);
           })
-          .catch(err2 =>
-        Alert.alert('網路異常，請稍後再試...', ' ', [
-          {
-            text: '確定',
-            onPress: () => {},
-          },
-        ]),
-      );
+          .catch(err2 => console.log('WTF2', err2));
 
         return res;
       })
-      .catch(err =>
-        Alert.alert('網路異常，請稍後再試...', ' ', [
-          {
-            text: '確定',
-            onPress: () => {},
-          },
-        ]),
-      );
+      .catch(err => console.log('WTF', err));
     return data;
   };
 

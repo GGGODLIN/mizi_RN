@@ -8,7 +8,6 @@ import {
   StatusBar,
   FlatList,
   TouchableOpacity,
-  Alert,
 } from 'react-native';
 
 import {
@@ -90,14 +89,9 @@ const PastReceive = props => {
             console.log('TASK AJAX', res);
             setbox(res);
           })
-          .catch(err =>
-        Alert.alert('網路異常，請稍後再試...', ' ', [
-          {
-            text: '確定',
-            onPress: () => {},
-          },
-        ]),
-      );
+          .catch(err => {
+            console.log('TASKS ERROR!', err);
+          });
 
         setLoading(false);
       }

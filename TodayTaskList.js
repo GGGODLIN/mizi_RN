@@ -9,7 +9,6 @@ import {
   FlatList,
   TouchableOpacity,
   RefreshControl,
-  Alert,
 } from 'react-native';
 
 import {
@@ -161,14 +160,9 @@ const TodayTaskList = props => {
             setdata(res);
             setLoading(false);
           })
-          .catch(err =>
-        Alert.alert('網路異常，請稍後再試...', ' ', [
-          {
-            text: '確定',
-            onPress: () => {},
-          },
-        ]),
-      );
+          .catch(err => {
+            console.log('TASKS ERROR!');
+          });
       }
     } catch (error) {
       console.log('cannot get ITEM');
@@ -190,14 +184,9 @@ const TodayTaskList = props => {
       .then(res => {
         console.log('TASK AJAX', res);
       })
-      .catch(err =>
-        Alert.alert('網路異常，請稍後再試...', ' ', [
-          {
-            text: '確定',
-            onPress: () => {},
-          },
-        ]),
-      );
+      .catch(err => {
+        console.log('TASKS ERROR!');
+      });
   }
 
   async function _onRefresh() {
