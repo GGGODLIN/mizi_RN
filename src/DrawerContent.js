@@ -81,8 +81,10 @@ export default function DrawerContent(props) {
         </View>
         <Drawer.Section style={styles.drawerSection}>
           <Button
-            color="red"
-            labelStyle={{color: 'black'}}
+            icon="format-list-numbered"
+          
+            color="orange"
+            labelStyle={{color: 'black',fontSize:20}}
             contentStyle={{width: '100%', padding: 10}}
             mode="text"
             onPress={() =>
@@ -96,11 +98,12 @@ export default function DrawerContent(props) {
                 },
               })
             }>
-            {'任務歷程       '}
+            {'任務歷程'}
           </Button>
         </Drawer.Section>
+        <Text style={{width:'90%',alignSelf:'center',color:'gray'}}>開車前請確認車輛狀況及自我健康狀況，若有任何異常或不適，請即時向行控中心反應</Text>
 
-        <Drawer.Section style={styles.drawerSection}>
+        {/*<Drawer.Section style={styles.drawerSection}>
           <Button
             color="red"
             labelStyle={{color: 'black'}}
@@ -134,6 +137,7 @@ export default function DrawerContent(props) {
             身心狀況檢查
           </Button>
         </Drawer.Section>
+
         <Drawer.Section style={styles.drawerSection}>
           <Button
             color="red"
@@ -153,7 +157,8 @@ export default function DrawerContent(props) {
             }>
             {'過去營收       '}
           </Button>
-        </Drawer.Section>
+        </Drawer.Section>*/}
+
       </View>
     );
   }

@@ -24,8 +24,14 @@ import AsyncStorage from '@react-native-community/async-storage';
 import {NavigationContainer, useFocusEffect} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-import {Button,ThemeProvider, Avatar, ListItem} from 'react-native-elements';
-import { Card, Title, Paragraph, Divider,ActivityIndicator} from 'react-native-paper';
+import {Button, ThemeProvider, Avatar, ListItem} from 'react-native-elements';
+import {
+  Card,
+  Title,
+  Paragraph,
+  Divider,
+  ActivityIndicator,
+} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 function Item({data, navigation}) {
@@ -35,7 +41,7 @@ function Item({data, navigation}) {
   var pos = startTime.indexOf('T');
   if (pos != -1) {
     startDate = startTime.substring(0, pos);
-    startTime = startTime.substring(pos + 1,pos+6);
+    startTime = startTime.substring(pos + 1, pos + 6);
   }
   var canShared = data.DespatchDetails[0].OrderDetails.CanShared
     ? '可以共乘'
@@ -45,6 +51,10 @@ function Item({data, navigation}) {
     data.DespatchDetails[0].OrderDetails.ForeignFamilyWith;
   var FromAddr = data.DespatchDetails[0].OrderDetails.FromAddr;
   var ToAddr = data.DespatchDetails[0].OrderDetails.ToAddr;
+  var startOrNot = data.DespatchDetails.every(function(item, index, array){
+    return item.OrderDetails.Status <= 1;
+  });
+   console.log("startOrNot",startOrNot);
   return (
     <TouchableOpacity
       style={styles.button}
@@ -68,29 +78,50 @@ function Item({data, navigation}) {
         <View style={styles.titleBox}>
           <View style={styles.titleTime}>
             <View style={styles.titleLeft}>
-              <Text style={{color: 'white', fontSize: 20}} allowFontScaling={false}>{startTime}</Text>
+              <Text
+                style={{color: 'white', fontSize: 20}}
+                allowFontScaling={false}>
+                {startTime}
+              </Text>
             </View>
             <View style={styles.titleDate}>
-              <Text style={{color: 'white', fontSize: 20}} allowFontScaling={false}>{startDate}</Text>
-              <Text style={{color: 'white', fontSize: 20}} allowFontScaling={false}>{canShared}</Text>
+              <Text
+                style={{color: 'white', fontSize: 20}}
+                allowFontScaling={false}>
+                {startDate}
+              </Text>
+              <Text
+                style={{color: 'white', fontSize: 20}}
+                allowFontScaling={false}>
+                {canShared}
+              </Text>
             </View>
           </View>
           <View style={styles.titleName}>
             <View style={{flexDirection: 'row'}}>
               <Avatar
                 size="large"
-                containerStyle={{margin:10}}
+                containerStyle={{margin: 10}}
                 rounded
                 source={{
                   uri: `${data.DespatchDetails[0].OrderDetails.CaseUserPic}`,
                 }}
               />
-              <View style={{flexDirection: 'column',justifyContent:'center'}}>
-                <Text allowFontScaling={false} style={{color: 'white', fontSize: 18}}>
+              <View style={{flexDirection: 'column', justifyContent: 'center'}}>
+                <Text
+                  allowFontScaling={false}
+                  style={{color: 'white', fontSize: 18}}>
                   {data.DespatchDetails[0].OrderDetails.SOrderNo}
                 </Text>
-                <Text allowFontScaling={false} style={{color: 'white', fontSize: 24}}>
+                <Text
+                  allowFontScaling={false}
+                  style={{color: 'white', fontSize: 24}}>
                   {'個案' + data.DespatchDetails.length + '/' + '陪同' + 0}
+                </Text>
+                <Text
+                  allowFontScaling={false}
+                  style={startOrNot?{display:'none'}:{color: 'red', fontSize: 30,alignSelf:'flex-end',fontWeight:'bold'}}>
+                  執行中
                 </Text>
               </View>
             </View>
@@ -137,7 +168,7 @@ const TodayTaskList = props => {
   const [isRefreshing, setisRefreshing] = useState(false);
   const [isLoading, setLoading] = useState(true);
   const [url, seturl] = useState();
-  const [userLoginInfo,setuserLoginInfo]=useState();
+  const [userLoginInfo, setuserLoginInfo] = useState();
 
   async function fetchData() {
     try {
@@ -146,9 +177,9 @@ const TodayTaskList = props => {
         var obj_value = JSON.parse(value);
         setuserLoginInfo(obj_value);
         var url2 =
-          'http://wheathwaapi.vielife.com.tw/api/DriverInfo/GetAllGroupDriverSide/' +
+          'https://api.donkeymove.com/api/DriverInfo/GetAllGroupDriverSide/' +
           obj_value.response.Cars.DriverId;
-        //let url = `http://wheathwaapi.vielife.com.tw/api/DriverInfo/GetAllGroup/${obj_value.Cars.DriverId}`;
+        //let url = `https://api.donkeymove.com/api/DriverInfo/GetAllGroup/${obj_value.Cars.DriverId}`;
         const data = await fetch(url2, {
           method: 'GET',
           headers: {
@@ -162,13 +193,13 @@ const TodayTaskList = props => {
             setLoading(false);
           })
           .catch(err =>
-        Alert.alert('網路異常，請稍後再試...', ' ', [
-          {
-            text: '確定',
-            onPress: () => {},
-          },
-        ]),
-      );
+            Alert.alert('網路異常，請稍後再試...', ' ', [
+              {
+                text: '確定',
+                onPress: () => {},
+              },
+            ]),
+          );
       }
     } catch (error) {
       console.log('cannot get ITEM');
@@ -178,7 +209,7 @@ const TodayTaskList = props => {
 
   async function fetchData_test() {
     const data = await fetch(
-      'http://wheathwaapi.vielife.com.tw/api/DriverInfo/GetAllPassGroup/15',
+      'https://api.donkeymove.com/api/DriverInfo/GetAllPassGroup/15',
       {
         method: 'GET',
         headers: {
@@ -205,7 +236,7 @@ const TodayTaskList = props => {
     fetchData().then(() => {
       setLoading(false);
       setisRefreshing(false);
-      });
+    });
   }
 
   useFocusEffect(
@@ -225,7 +256,7 @@ const TodayTaskList = props => {
     console.log('TASKS screen is loading...');
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <ActivityIndicator animating={true} size='large' />
+        <ActivityIndicator animating={true} size="large" />
       </View>
     );
   } else {
@@ -233,41 +264,55 @@ const TodayTaskList = props => {
     console.log(list.length);
     return (
       <SafeAreaView style={styles.container}>
-      <View style={{flexDirection:'row',alignItems:'center',backgroundColor:'#ACB3EC',justifyContent:'space-between'}}>
-        <Text style={{fontSize:24,padding:10,fontWeight:'bold'}}>{userLoginInfo.response.Cars.CarNo + " | "+ userLoginInfo.response.DriverName}</Text>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            backgroundColor: '#ACB3EC',
+            justifyContent: 'space-between',
+          }}>
+          <Text style={{fontSize: 24, padding: 10, fontWeight: 'bold'}}>
+            {userLoginInfo.response.Cars.CarNo +
+              ' | ' +
+              userLoginInfo.response.DriverName}
+          </Text>
 
-       
-        <Button
+          <Button
             title="打卡"
-            titleStyle={{fontSize:20,fontWeight:'bold',paddingHorizontal:20,padding:0,margin:0}}
+            titleStyle={{
+              fontSize: 20,
+              fontWeight: 'bold',
+              paddingHorizontal: 20,
+              padding: 0,
+              margin: 0,
+            }}
             buttonStyle={{
-          
               alignSelf: 'center',
               backgroundColor: 'orange',
               borderRadius: 50,
-              padding:5,
-              marginEnd:10,
-            
+              padding: 5,
+              marginEnd: 10,
             }}
-
             type="solid"
-            onPress={() => {props.navigation.navigate('HitCard');}}
+            onPress={() => {
+              props.navigation.navigate('HitCard');
+            }}
           />
-      </View>
+        </View>
         <FlatList
           data={list}
           refreshControl={
-          <RefreshControl
-            refreshing={isRefreshing}
-            onRefresh={_onRefresh}
-            tintColor="#ff0000"
-            title="Loading..."
-            size='large'
-            titleColor="#00ff00"
-            colors={['#ff0000', '#00ff00', '#0000ff']}
-            progressBackgroundColor="#ffff00"
-          />
-        }
+            <RefreshControl
+              refreshing={isRefreshing}
+              onRefresh={_onRefresh}
+              tintColor="#ff0000"
+              title="Loading..."
+              size="large"
+              titleColor="#00ff00"
+              colors={['#ff0000', '#00ff00', '#0000ff']}
+              progressBackgroundColor="#ffff00"
+            />
+          }
           renderItem={({item}) => (
             <Item
               title={item.DespatchDetails[0].CaseUser.Name}
@@ -277,7 +322,19 @@ const TodayTaskList = props => {
           )}
           keyExtractor={item => item.DespatchId}
         />
-        <Text style={list.length===0?{flex:20,alignSelf:'center',fontSize:36,fontWeight:'bold',}:{display:'none'}}>尚無任務</Text>
+        <Text
+          style={
+            list.length === 0
+              ? {
+                  flex: 20,
+                  alignSelf: 'center',
+                  fontSize: 36,
+                  fontWeight: 'bold',
+                }
+              : {display: 'none'}
+          }>
+          尚無任務
+        </Text>
       </SafeAreaView>
     );
   }
@@ -354,13 +411,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    paddingTop:10,
+    paddingTop: 10,
   },
   addrText: {
     fontSize: 20,
     paddingLeft: 20,
     flexWrap: 'wrap',
-    marginEnd: 40,
+    width:'80%'
   },
   addr2: {
     flexDirection: 'row',

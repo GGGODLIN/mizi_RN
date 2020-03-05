@@ -1,4 +1,5 @@
 import React from 'react';
+import {Image} from 'react-native';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import {useIsFocused} from '@react-navigation/native';
 
@@ -9,6 +10,8 @@ import CheckStackScreen from './CheckStackScreen';
 import InfoStackScreen from './InfoStackScreen';
 import TodayTasksStackScreen from './TodayTasksStackScreen';
 import HistoryTasksStackScreen from './HistoryTasksStackScreen';
+import PastReceiveStackScreen from './PastReceiveStackScreen';
+
 
 import call from 'react-native-phone-call';
 
@@ -27,7 +30,7 @@ import {
   Button,
 } from 'react-native-paper';
 const args = {
-  number: '038705115', // String value with the number to call
+  number: ' ', // String value with the number to call
   prompt: false, // Optional boolean property. Determines if the user should be prompt prior to the call
 };
 const Tab = createMaterialBottomTabNavigator();
@@ -64,7 +67,8 @@ export default function BottomTab(props) {
           },
         }}
       />
-      <Tab.Screen
+
+      {/*<Tab.Screen
         name="每日檢查"
         component={CheckStackScreen}
         options={{
@@ -72,12 +76,18 @@ export default function BottomTab(props) {
         }}
         listeners={{
           tabPress: e => {
-            // Prevent default action
-            //e.preventDefault();
             console.log('HAHA56974957912779455712945957462416119457------------------------------');
           },
+        }}/>*/}
+        <Tab.Screen
+        name="收入列表"
+        component={PastReceiveStackScreen}
+        options={{
+          tabBarIcon: 'format-list-checks',
         }}
+        listeners={{ tabPress: e => {e.preventDefault();} }}
       />
+
       <Tab.Screen
         name="今日任務"
         component={TodayTasksStackScreen}

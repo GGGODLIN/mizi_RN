@@ -15,8 +15,8 @@ class BgTracking extends Component {
       desiredAccuracy: BackgroundGeolocation.HIGH_ACCURACY,
       stationaryRadius: 50,
       distanceFilter: 50,
-      notificationTitle: 'Background tracking',
-      notificationText: 'enabled',
+      notificationTitle: 'GPS位置回報中',
+      notificationText: ' ',
       debug: false,
       startOnBoot: false,
       stopOnTerminate: true,
@@ -26,7 +26,7 @@ class BgTracking extends Component {
       activitiesInterval: 30000,
       stopOnStillActivity: false,
       maxLocations: 10000,
-      url: 'http://wheathwaapi.vielife.com.tw/api/DriverInfo/PostDeviceGPS',
+      url: 'https://api.donkeymove.com/api/DriverInfo/PostDeviceGPS',
       httpHeaders: {
         'Content-Type': 'application/json',
       },
@@ -52,7 +52,7 @@ class BgTracking extends Component {
         // IMPORTANT: task has to be ended by endTask
 
         let url =
-          'http://wheathwaapi.vielife.com.tw/api/DriverInfo/PostDeviceGPS';
+          'https://api.donkeymove.com/api/DriverInfo/PostDeviceGPS';
 
         console.log(`Making GPS request to: ${url}`);
 

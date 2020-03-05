@@ -6,7 +6,7 @@ export const FetchApi = () => {
 
   async function fetchData() {
     const res = await fetch(
-      'http://wheathwaapi.vielife.com.tw/api/DriverInfo/Get/15',
+      'https://api.donkeymove.com/api/DriverInfo/Get/15',
     );
     res
       .json()

@@ -57,7 +57,7 @@ const InfoScreen = props => {
 
   const handleSubmit = async () => {
     var url3 =
-      'http://wheathwaapi.vielife.com.tw/api/DriverInfo/PutDriverPwd?DriverId=' +
+      'https://api.donkeymove.com/api/DriverInfo/PutDriverPwd?DriverId=' +
       data.response.Cars.DriverId +
       '&oldPwd=' +
       input1 +

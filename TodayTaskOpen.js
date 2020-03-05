@@ -61,8 +61,8 @@ const TodayTaskOpen = props => {
     '/storage/emulated/0/saved_signature/signature.png'
   );
   const [picPathOnServer, setpicPathOnServer] = useState();
-  const [money, setmoney] = useState('0');
-  const [realMoney, setrealMoney] = useState('0');
+  const [money, setmoney] = useState("0");
+  const [realMoney, setrealMoney] = useState("0");
   const [cashSteps, setcashSteps] = useState(0);
   const [foreignPeople, setforeignPeople] = useState(0);
   const [people, setpeople] = useState(0);
@@ -134,6 +134,14 @@ const TodayTaskOpen = props => {
       updateStatus();
       setoverlay(true);
       setLoading(true);
+      if(tempStatus[detailIndex]==3){
+        Alert.alert(' ', '請與個案核對身分及目的地，若有問題請聯繫行控中心', [
+          {
+            text: '確定',
+            onPress: () => {},
+          },
+        ])
+      }
     }
   };
 
@@ -164,9 +172,9 @@ const TodayTaskOpen = props => {
   };
 
   const askCash = async () => {
-    let url = `http://wheathwaapi.vielife.com.tw/api/OrderDetails/PutDetailRealWith?OrderDetailId=${
+    let url = `https://api.donkeymove.com/api/OrderDetails/PutDetailRealWith?OrderDetailId=${
       taskData[detailIndex].OrderDetails.Id
-    }&RealFamily=${people}&RealForeign=${foreignPeople}`;
+    }&RealFamily=${people}`;
 
     console.log(`Making Cash request to: ${url}`);
 
@@ -178,6 +186,10 @@ const TodayTaskOpen = props => {
     })
       .then(response => response.json())
       .then(res => {
+        setmoney(res.response);
+        if (cashSteps == 0) {
+      setrealMoney(res.response);
+    }
         console.log('updateStatus AJAX', res);
         return res;
       }).catch(err =>
@@ -202,7 +214,7 @@ const TodayTaskOpen = props => {
       name: `${taskData[detailIndex].OrderDetails.SOrderNo}.jpg`,
       filename: `${taskData[detailIndex].OrderDetails.SOrderNo}.jpg`,
     });
-    let url = `http://wheathwaapi.vielife.com.tw/api/Img/Pic`;
+    let url = `https://api.donkeymove.com/api/Img/Pic`;
 
     console.log(`Making POST PIC request to: ${url}`);
     console.log(form);
@@ -233,7 +245,7 @@ const TodayTaskOpen = props => {
   };
 
   const updateStatus = async () => {
-    let url = `http://wheathwaapi.vielife.com.tw/api/OrderDetails/PutDetailStatus?OrderDetailId=${
+    let url = `https://api.donkeymove.com/api/OrderDetails/PutDetailStatus?OrderDetailId=${
       taskData[detailIndex].OrderDetails.Id
     }&StatusInt=${caseStatus[detailIndex]}`;
 
@@ -260,7 +272,7 @@ const TodayTaskOpen = props => {
 
   const updateStatusToSix = async () => {
     console.log("???????",taskData[detailIndex].OrderDetails.SOrderNo);
-    let url = `http://wheathwaapi.vielife.com.tw/api/OrderDetails/PutDetailStatus?OrderDetailId=${
+    let url = `https://api.donkeymove.com/api/OrderDetails/PutDetailStatus?OrderDetailId=${
       taskData[detailIndex].OrderDetails.Id
     }&StatusInt=${
       caseStatus[detailIndex]
@@ -373,7 +385,7 @@ const TodayTaskOpen = props => {
         setLoading(false);
         setdelayForMap(false);
       },1);
-    
+
       console.log('info screen is loading...');
       return (
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
@@ -383,7 +395,7 @@ const TodayTaskOpen = props => {
     }else{
         setLoading(false);
         setdelayForMap(false);
-    
+
       console.log('info screen is loading...22222222');
       return (
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
@@ -396,7 +408,7 @@ const TodayTaskOpen = props => {
     return (
       <ScrollView style={{flex: 1}}>
         <Overlay
-          isVisible={caseStatus[detailIndex] == 3 && overlay ? true : false}
+          isVisible={caseStatus[detailIndex] == 3 && overlay ? false : false}
           windowBackgroundColor="rgba(255, 255, 255, .5)"
           overlayBackgroundColor="white"
           width="auto"
@@ -722,7 +734,7 @@ const TodayTaskOpen = props => {
           <View
             style={
               caseStatus[detailIndex] == 5
-                ? {flexDirection: 'row', alignItems: 'center'}
+                ? {flexDirection: 'row', alignItems: 'center',display: 'none'}
                 : {display: 'none'}
             }>
             <Text
@@ -764,7 +776,7 @@ const TodayTaskOpen = props => {
                 marginStart: 30,
                 marginEnd: 60,
               }}>
-              陪同家屬:
+              陪同人數:
             </Text>
             <Picker
               enabled={cashSteps == 0 ? true : false}

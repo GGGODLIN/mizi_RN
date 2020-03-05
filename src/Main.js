@@ -35,6 +35,7 @@ export default function RootNavigator(props) {
   return (
     <Drawer.Navigator
       initialRouteName="Home"
+      drawerPosition='right'
       drawerStyle={{
         backgroundColor: 'white',
         margin: 0,

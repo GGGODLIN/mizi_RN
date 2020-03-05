@@ -1,4 +1,5 @@
 import React from 'react';
+import {Image,Text} from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import {NavigationContainer,useFocusEffect,StackActions} from '@react-navigation/native';
 import InfoScreen  from '../InfoScreen';

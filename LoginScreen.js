@@ -73,7 +73,7 @@ class LoginScreen extends Component {
   }
 
   handleLogin = async () => {
-    let url = `http://wheathwaapi.vielife.com.tw/api/DriverInfo/DriverLogin?`;
+    let url = `https://api.donkeymove.com/api/DriverInfo/DriverLogin?`;
     let query = `acc=${this.emailInput.input._lastNativeText}`;
     let query2 = `pwd=${this.passwordInput.input._lastNativeText}`;
     url += query + '&' + query2;
@@ -88,7 +88,7 @@ class LoginScreen extends Component {
     })
       .then(response => response.json())
       .then(res => {
-        console.log('LOGGING AJAX', res.success);
+        console.log('LOGGING AJAX', res);
         if(!res.success){
           Alert.alert(res.msg, ' ', [
           {
@@ -110,7 +110,7 @@ class LoginScreen extends Component {
   };
 
   handleSendAcc = async () => {
-    let url = `http://wheathwaapi.vielife.com.tw/api/DriverInfo/PushPhoneMessage?phoneNum=${
+    let url = `https://api.donkeymove.com/api/DriverInfo/PushPhoneMessage?phoneNum=${
       this.state.input1
     }`;
 
@@ -153,7 +153,7 @@ class LoginScreen extends Component {
   };
 
   handleSendVCode = async () => {
-    let url = `http://wheathwaapi.vielife.com.tw/api/DriverInfo/CheckPhoneCode?phoneNum=${
+    let url = `https://api.donkeymove.com/api/DriverInfo/CheckPhoneCode?phoneNum=${
       this.state.input1
     }&vCode=${this.state.input2}`;
 
@@ -194,7 +194,7 @@ class LoginScreen extends Component {
   };
 
   handleSendNewPwd = async () => {
-    let url = `http://wheathwaapi.vielife.com.tw/api/DriverInfo/PutForgetPassword?cAccount=${
+    let url = `https://api.donkeymove.com/api/DriverInfo/PutForgetPassword?cAccount=${
       this.state.input1
     }&cPassword=${this.state.input3}`;
 
@@ -574,7 +574,7 @@ class LoginScreen extends Component {
                   title="忘記密碼?"
                   buttonStyle={{
                     width: '50%',
-                    alignSelf: 'flex-end',
+                    alignSelf: 'flex-start',
 
                     borderRadius: 50,
                   }}
@@ -613,12 +613,11 @@ class LoginScreen extends Component {
           <Image
             style={{
               position: 'absolute',
-              top: -height * 0.9,
-              borderColor: 'white',
-              borderRadius: 500,
-              borderWidth: 10,
+              top: -height * 0.91,
+              
+              
             }}
-            source={require('./img/Logo.png')}
+            source={require('./img/Bitmap2.png')}
           />
         </View>
       </KeyboardAvoidingView>

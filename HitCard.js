@@ -64,7 +64,7 @@ const HitCard = props => {
         setuser(obj_value);
         console.log('GET FROM ASYN IS', obj_value);
         var url2 =
-          'http://wheathwaapi.vielife.com.tw/api/DriverInfo/GetAllPunchByDriver/' +
+          'https://api.donkeymove.com/api/DriverInfo/GetAllPunchByDriver/' +
           obj_value.response.Cars.DriverId;
 
         const data = await fetch(url2, {
@@ -103,7 +103,7 @@ const HitCard = props => {
       );
 
         var url3 =
-          'http://wheathwaapi.vielife.com.tw/api/DriverInfo/GetDriverReceive/' +
+          'https://api.donkeymove.com/api/DriverInfo/GetDriverReceive/' +
           obj_value.response.Cars.DriverId;
 
         const data2 = await fetch(url3, {
@@ -134,7 +134,7 @@ const HitCard = props => {
   }
 
   async function handleSubmitHitCard() {
-    var url2 = `http://wheathwaapi.vielife.com.tw/api/DriverInfo/SetPunchTime/${
+    var url2 = `https://api.donkeymove.com/api/DriverInfo/SetPunchTime/${
       user.response.Cars.DriverId
     }?status=${status}`;
 
@@ -210,7 +210,7 @@ const HitCard = props => {
       name: fname,
       filename: fname,
     });
-    let url = `http://wheathwaapi.vielife.com.tw/api/Img/Pic`;
+    let url = `https://api.donkeymove.com/api/Img/Pic`;
 
     console.log(`Making POST PIC request to: ${url}`);
     console.log(form);
@@ -229,7 +229,7 @@ const HitCard = props => {
         setpicPathOnServer(res.response);
 
         let url2 =
-          'http://wheathwaapi.vielife.com.tw/api/DriverInfo/PutDriverReceiveSign';
+          'https://api.donkeymove.com/api/DriverInfo/PutDriverReceiveSign';
         const data2 = await fetch(url2, {
           method: 'PUT',
           headers: {
