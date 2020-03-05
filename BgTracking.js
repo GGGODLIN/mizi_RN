@@ -17,7 +17,7 @@ class BgTracking extends Component {
       distanceFilter: 50,
       notificationTitle: 'Background tracking',
       notificationText: 'enabled',
-      debug: true,
+      debug: false,
       startOnBoot: false,
       stopOnTerminate: true,
       locationProvider: BackgroundGeolocation.ACTIVITY_PROVIDER,
@@ -74,7 +74,14 @@ class BgTracking extends Component {
             console.log('GPS AJAX', res);
             
           })
-          .catch(err => console.log('ERROR?GPS', err));
+          .catch(err =>
+        Alert.alert('網路異常，請稍後再試...', ' ', [
+          {
+            text: '確定',
+            onPress: () => {},
+          },
+        ]),
+      );
 
         BackgroundGeolocation.endTask(taskKey);
       });

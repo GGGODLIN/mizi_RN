@@ -180,7 +180,14 @@ const TodayTaskOpen = props => {
       .then(res => {
         console.log('updateStatus AJAX', res);
         return res;
-      });
+      }).catch(err =>
+        Alert.alert('網路異常，請稍後再試...', ' ', [
+          {
+            text: '確定',
+            onPress: () => {},
+          },
+        ]),
+      );
     return data;
   };
 
@@ -214,7 +221,14 @@ const TodayTaskOpen = props => {
         setpicPathOnServer(res.response);
         return res;
       })
-      .catch(err => console.log('WTF', err));
+      .catch(err =>
+        Alert.alert('網路異常，請稍後再試...', ' ', [
+          {
+            text: '確定',
+            onPress: () => {},
+          },
+        ]),
+      );
     return data;
   };
 
@@ -234,7 +248,14 @@ const TodayTaskOpen = props => {
       .then(response => response.json())
       .then(res => {
         console.log('updateStatus AJAX', res);
-      });
+      }).catch(err =>
+        Alert.alert('網路異常，請稍後再試...', ' ', [
+          {
+            text: '確定',
+            onPress: () => {},
+          },
+        ]),
+      );
   };
 
   const updateStatusToSix = async () => {
@@ -256,7 +277,14 @@ const TodayTaskOpen = props => {
       .then(response => response.json())
       .then(res => {
         console.log('updateStatus AJAX', res);
-      });
+      }).catch(err =>
+        Alert.alert('網路異常，請稍後再試...', ' ', [
+          {
+            text: '確定',
+            onPress: () => {},
+          },
+        ]),
+      );
   };
 
   const handleSavePic = async res => {
