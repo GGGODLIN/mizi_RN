@@ -63,14 +63,37 @@ const App = () => {
 		//console.log("handel",res);
 	}
 
-	function handleLogout(res) {
-		setlogged(res);
+	async function autoLogging() {
+		try {
+			const value = await AsyncStorage.getItem('userLoginInfo');
+			if (value !== null) {
+				var obj_value = JSON.parse(value);
+				console.log('BEFORE LOGGING', obj_value);
+				setlogged(obj_value.success);
+			} else {
+				console.log('NOTHING HEHEXD');
+			}
+		} catch (error) {
+			console.log('cannot get ITEM BEFORE LOGGING');
+			// Error retrieving data
+		}
+	}
+
+	async function handleLogout(res) {
+		try {
+			await AsyncStorage.removeItem('userLoginInfo');
+			setlogged(res);
+		} catch (error) {
+			console.log('cannot get ITEM BEFORE LOGGING');
+			// Error retrieving data
+		}
+		
 	}
 	if (logged) {
 		return (
 			<PaperProvider>
 				<NavigationContainer>
-				<BgTracking  />
+					<BgTracking />
 					<RootNavigator
 						switchOn={logged}
 						logindata={logindata}
@@ -80,10 +103,9 @@ const App = () => {
 			</PaperProvider>
 		);
 	} else {
-		console.log("OPEN!",logindata);
+		console.log('OPEN!', logindata);
 		return (
 			<PaperProvider>
-			
 				<LoginScreen handleLogin={handleLogin} switchOn={!logged} />
 			</PaperProvider>
 		);

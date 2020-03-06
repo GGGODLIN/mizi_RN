@@ -18,6 +18,7 @@ import {
   Overlay,
   Button,
 } from 'react-native-elements';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import {Divider, TextInput} from 'react-native-paper';
 import {request, PERMISSIONS} from 'react-native-permissions';
@@ -54,6 +55,7 @@ class LoginScreen extends Component {
     this.handleSendAcc = this.handleSendAcc.bind(this);
     this.handleSendVCode = this.handleSendVCode.bind(this);
     this.handleSendNewPwd = this.handleSendNewPwd.bind(this);
+    this._test_setItem = this._test_setItem.bind(this);
 
     request(PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE)
       .then(result => {
@@ -70,7 +72,26 @@ class LoginScreen extends Component {
             });
           });
       });
+      this._test_setItem();
   }
+
+  _test_setItem = async () => {
+    try {
+      const value = await AsyncStorage.getItem('userLoginInfo');
+      if (value !== null) {
+        var obj_value = JSON.parse(value);
+        console.log("BEFORE LOGGING",obj_value);
+        if (obj_value.success){
+          this.props.handleLogin(obj_value);
+        }
+      } else {
+        console.log('NOTHING HEHEXD');
+      }
+    } catch (error) {
+      console.log('cannot get ITEM BEFORE LOGGING');
+      // Error retrieving data
+    }
+  };
 
   handleLogin = async () => {
     let url = `https://api.donkeymove.com/api/DriverInfo/DriverLogin?`;
@@ -89,13 +110,13 @@ class LoginScreen extends Component {
       .then(response => response.json())
       .then(res => {
         console.log('LOGGING AJAX', res);
-        if(!res.success){
+        if (!res.success) {
           Alert.alert(res.msg, ' ', [
-          {
-            text: '確定',
-            onPress: () => {},
-          },
-        ]);
+            {
+              text: '確定',
+              onPress: () => {},
+            },
+          ]);
         }
         this.props.handleLogin(res);
       })
@@ -246,6 +267,7 @@ class LoginScreen extends Component {
     }
     let width = Dimensions.get('window').width;
     let height = Dimensions.get('window').height;
+    let useless = this._test_setItem();
     return (
       <KeyboardAvoidingView
         style={styles.keyboardAvoidingView}
@@ -489,19 +511,9 @@ class LoginScreen extends Component {
                   color: '#F57A00',
                   borderRadius: 20,
                 }}>
-                Login
-              </Text>
-              <Text
-                style={{
-                  fontSize: 20,
-                  marginBottom: 10,
-                  fontWeight: 'bold',
-
-                  color: 'orange',
-                  borderRadius: 20,
-                }}>
                 司機登入
               </Text>
+              
 
               <View style={styles.overlay}>
                 <View style={styles.triangleLeft} />
@@ -591,6 +603,7 @@ class LoginScreen extends Component {
 
           <Button
             title="司機端登入  LOGIN"
+            titleStyle={{fontSize:20,fontWeight:'bold'}}
             buttonStyle={{
               width: '70%',
               alignSelf: 'center',
@@ -614,8 +627,6 @@ class LoginScreen extends Component {
             style={{
               position: 'absolute',
               top: -height * 0.91,
-              
-              
             }}
             source={require('./img/Bitmap2.png')}
           />
@@ -694,11 +705,11 @@ const styles = StyleSheet.create({
 });
 LoginScreen = codePush({
   updateDialog: {
-    title: '版本更新!',
+    title: 'APP有新版本，是否更新?',
     descriptionPrefix: '版本號',
-    optionalUpdateMessage: 'APP有新版本，是否更新?',
+    optionalUpdateMessage: '更新：自動登入功能',
     optionalIgnoreButtonLabel: '下次再說',
-    optionalInstallButtonLabel: '立馬安裝',
+    optionalInstallButtonLabel: '立即安裝並重啟',
   },
   installMode: codePush.InstallMode.IMMEDIATE,
 })(LoginScreen);

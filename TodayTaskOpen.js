@@ -575,8 +575,8 @@ const TodayTaskOpen = props => {
               region={{
                 latitude: taskData[detailIndex].OrderDetails.FromLat,
                 longitude: taskData[detailIndex].OrderDetails.FromLon,
-                latitudeDelta:latitudeDelta,
-                longitudeDelta:longitudeDelta,
+                latitudeDelta:latitudeDelta*1.1,
+                longitudeDelta:longitudeDelta*1.1,
               }}>
               <Marker
                 coordinate={{
@@ -608,7 +608,7 @@ const TodayTaskOpen = props => {
                   longitude: taskData[detailIndex].OrderDetails.ToLon,
                 }}
                 apikey={GOOGLE_MAPS_APIKEY}
-                strokeWidth={3}
+                strokeWidth={5}
                 strokeColor="#6495ED"
                 lineCap="round"
                 lineJoin="bevel"

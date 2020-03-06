@@ -51,6 +51,8 @@ export default function BottomTab(props) {
     <Tab.Navigator
       initialRouteName="今日任務"
       shifting={false}
+
+      barStyle={{ backgroundColor: '#694fad',}}
       lazy={false}
       unmountOnBlur={true}>
       <Tab.Screen
