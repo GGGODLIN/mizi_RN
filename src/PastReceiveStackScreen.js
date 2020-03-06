@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import {Image,Text} from 'react-native';
 import InfoScreen  from '../InfoScreen';
 import CheckMainScreen  from '../CheckMainScreen';
-import HistoryTaskList from '../HistoryTaskList';
+import HistoryTaskList from '../historyTaskList';
 import CarCheckScreen from '../CarCheckScreen';
 import BodyCheckScreen from '../BodyCheckScreen';
 import HistoryTaskOpen from '../HistoryTaskOpen';

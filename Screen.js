@@ -31,7 +31,7 @@ import {ThemeProvider, Avatar} from 'react-native-elements';
 import {Header} from 'react-native-elements';
 import {Button, Card, Title, Paragraph} from 'react-native-paper';
 import InfoScreen from './InfoScreen';
-import HistoryTaskList from './HistoryTaskList';
+import HistoryTaskList from './historyTaskList';
 import CheckMainScreen from './CheckMainScreen';
 
 export default class Screen extends Component {

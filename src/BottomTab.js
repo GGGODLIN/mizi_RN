@@ -5,7 +5,7 @@ import {useIsFocused} from '@react-navigation/native';
 
 import InfoScreen from '../InfoScreen';
 import CheckMainScreen from '../CheckMainScreen';
-import HistoryTaskList from '../HistoryTaskList';
+import HistoryTaskList from '../historyTaskList';
 import CheckStackScreen from './CheckStackScreen';
 import InfoStackScreen from './InfoStackScreen';
 import TodayTasksStackScreen from './TodayTasksStackScreen';
