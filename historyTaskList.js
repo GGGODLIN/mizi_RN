@@ -420,10 +420,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   addrText: {
+    width:'80%',
     fontSize: 15,
     color: 'white',
     paddingLeft: 0,
-    marginEnd: '25%',
+    marginTop:5,
     flexWrap: 'wrap',
   },
   addr2: {

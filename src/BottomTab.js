@@ -12,10 +12,9 @@ import TodayTasksStackScreen from './TodayTasksStackScreen';
 import HistoryTasksStackScreen from './HistoryTasksStackScreen';
 import PastReceiveStackScreen from './PastReceiveStackScreen';
 
-
 import call from 'react-native-phone-call';
 
-import  MaterialCommunityIcons  from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Linking} from 'react-native';
 import {
   useTheme,
@@ -47,12 +46,14 @@ const callOut = ({navigation}) => {
 };
 
 export default function BottomTab(props) {
+  console.log("-----------------------------------------------------------------------");
   return (
     <Tab.Navigator
       initialRouteName="今日任務"
       shifting={false}
-
-      barStyle={{ backgroundColor: '#694fad',}}
+      activeColor="#f0edf6"
+      inactiveColor="black"
+      
       lazy={false}
       unmountOnBlur={true}>
       <Tab.Screen
@@ -65,7 +66,9 @@ export default function BottomTab(props) {
           tabPress: e => {
             // Prevent default action
             //e.preventDefault();
-            console.log('HAHA56974957912779455712945957462416119457------------------------------');
+            console.log(
+              'HAHA56974957912779455712945957462416119457------------------------------',
+            );
           },
         }}
       />
@@ -81,13 +84,17 @@ export default function BottomTab(props) {
             console.log('HAHA56974957912779455712945957462416119457------------------------------');
           },
         }}/>*/}
-        <Tab.Screen
+      <Tab.Screen
         name="收入列表"
         component={PastReceiveStackScreen}
         options={{
           tabBarIcon: 'format-list-checks',
         }}
-        listeners={{ tabPress: e => {e.preventDefault();} }}
+        listeners={{
+          tabPress: e => {
+            e.preventDefault();
+          },
+        }}
       />
 
       <Tab.Screen
@@ -96,7 +103,11 @@ export default function BottomTab(props) {
         options={{
           tabBarIcon: 'car-multiple',
         }}
-        listeners={{ tabPress: e => {e.preventDefault();} }}
+        listeners={{
+          tabPress: e => {
+            e.preventDefault();
+          },
+        }}
       />
 
       <Tab.Screen
@@ -106,7 +117,7 @@ export default function BottomTab(props) {
           tabBarIcon: 'cellphone-sound',
           tabBarButton: props => <callOut {...props} />,
         }}
-        listeners={{ tabPress: e => console.log('Tab press', e.target), }}
+        listeners={{tabPress: e => console.log('Tab press', e.target)}}
       />
     </Tab.Navigator>
   );

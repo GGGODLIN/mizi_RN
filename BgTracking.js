@@ -43,6 +43,7 @@ class BgTracking extends Component {
     });
 
     BackgroundGeolocation.on('location', location => {
+      console.log("GEO?");
       // handle your locations here
       // to perform long running operation on iOS
       // you need to create background task
@@ -55,6 +56,7 @@ class BgTracking extends Component {
           'https://api.donkeymove.com/api/DriverInfo/PostDeviceGPS';
 
         console.log(`Making GPS request to: ${url}`);
+        console.log(deviceId,location.longitude,location.latitude);
 
         const data = fetch(url, {
           method: 'POST',

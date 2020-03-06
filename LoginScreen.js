@@ -57,7 +57,7 @@ class LoginScreen extends Component {
     this.handleSendNewPwd = this.handleSendNewPwd.bind(this);
     this._test_setItem = this._test_setItem.bind(this);
 
-    request(PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE)
+    request(PERMISSIONS.ANDROID.ACTIVITY_RECOGNITION)
       .then(result => {
         console.log('PERMISSION?', result);
       })
@@ -67,7 +67,7 @@ class LoginScreen extends Component {
             console.log('PERMISSION2?', result);
           })
           .then(() => {
-            request(PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE).then(result => {
+            request(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION).then(result => {
               console.log('PERMISSION3?', result);
             });
           });
@@ -707,7 +707,7 @@ LoginScreen = codePush({
   updateDialog: {
     title: 'APP有新版本，是否更新?',
     descriptionPrefix: '版本號',
-    optionalUpdateMessage: '更新：自動登入功能',
+    optionalUpdateMessage: ' ',
     optionalIgnoreButtonLabel: '下次再說',
     optionalInstallButtonLabel: '立即安裝並重啟',
   },

@@ -127,7 +127,7 @@ function Item({data, navigation}) {
             </View>
           </View>
         </View>
-
+        <View>
         <View style={styles.addr}>
           <Icon
             name="circle-o"
@@ -158,6 +158,7 @@ function Item({data, navigation}) {
             {data.DespatchDetails[0].OrderDetails.ToAddr}
           </Text>
         </View>
+      </View>
       </View>
     </TouchableOpacity>
   );
@@ -241,6 +242,7 @@ const TodayTaskList = props => {
 
   useFocusEffect(
     React.useCallback(() => {
+      setLoading(true);
       //alert('Screen was focused');
       fetchData().then(() => setLoading(false));
       return () => {
@@ -252,7 +254,7 @@ const TodayTaskList = props => {
     }, []),
   );
 
-  if (isLoading) {
+  if (isLoading || data.response===undefined) {
     console.log('TASKS screen is loading...');
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
@@ -261,7 +263,6 @@ const TodayTaskList = props => {
     );
   } else {
     const list = data.response;
-    console.log(list.length);
     return (
       <SafeAreaView style={styles.container}>
         <View
@@ -410,8 +411,9 @@ const styles = StyleSheet.create({
   addr: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     paddingTop: 10,
+    height:50,
   },
   addrText: {
     fontSize: 20,
