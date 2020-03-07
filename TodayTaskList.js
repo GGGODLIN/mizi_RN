@@ -178,9 +178,9 @@ const TodayTaskList = props => {
         var obj_value = JSON.parse(value);
         setuserLoginInfo(obj_value);
         var url2 =
-          'http://wheathwaapi.vielife.com.tw/api/DriverInfo/GetAllGroupDriverSide/' +
+          'http://www.e9life.com/api/DriverInfo/GetAllGroupDriverSide/' +
           obj_value.response.Cars.DriverId;
-        //let url = `http://wheathwaapi.vielife.com.tw/api/DriverInfo/GetAllGroup/${obj_value.Cars.DriverId}`;
+        //let url = `http://www.e9life.com/api/DriverInfo/GetAllGroup/${obj_value.Cars.DriverId}`;
         const data = await fetch(url2, {
           method: 'GET',
           headers: {
@@ -210,7 +210,7 @@ const TodayTaskList = props => {
 
   async function fetchData_test() {
     const data = await fetch(
-      'http://wheathwaapi.vielife.com.tw/api/DriverInfo/GetAllPassGroup/15',
+      'http://www.e9life.com/api/DriverInfo/GetAllPassGroup/15',
       {
         method: 'GET',
         headers: {

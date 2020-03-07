@@ -26,7 +26,7 @@ class BgTracking extends Component {
       activitiesInterval: 30000,
       stopOnStillActivity: false,
       maxLocations: 10000,
-      url: 'http://wheathwaapi.vielife.com.tw/api/DriverInfo/PostDeviceGPS',
+      url: 'http://www.e9life.com/api/DriverInfo/PostDeviceGPS',
       httpHeaders: {
         'Content-Type': 'application/json',
       },
@@ -53,7 +53,7 @@ class BgTracking extends Component {
         // IMPORTANT: task has to be ended by endTask
 
         let url =
-          'http://wheathwaapi.vielife.com.tw/api/DriverInfo/PostDeviceGPS';
+          'http://www.e9life.com/api/DriverInfo/PostDeviceGPS';
 
         console.log(`Making GPS request to: ${url}`);
         console.log(deviceId,location.longitude,location.latitude);

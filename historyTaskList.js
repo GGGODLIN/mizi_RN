@@ -193,14 +193,14 @@ const HistoryTaskList = props => {
         setuser(obj_value);
         console.log('GET FROM ASYN IS', obj_value);
         var url2 =
-          'http://wheathwaapi.vielife.com.tw/api/DriverInfo/GetAllPassGroup/' +
+          'http://www.e9life.com/api/DriverInfo/GetAllPassGroup/' +
           obj_value.response.Cars.DriverId;
         seturl(
-          `http://wheathwaapi.vielife.com.tw/api/DriverInfo/GetAllPassGroup/${
+          `http://www.e9life.com/api/DriverInfo/GetAllPassGroup/${
             obj_value.response.Cars.DriverId
           }`,
         );
-        //let url = `http://wheathwaapi.vielife.com.tw/api/DriverInfo/GetAllGroup/${obj_value.Cars.DriverId}`;
+        //let url = `http://www.e9life.com/api/DriverInfo/GetAllGroup/${obj_value.Cars.DriverId}`;
         const data = await fetch(url2, {
           method: 'GET',
           headers: {
@@ -231,7 +231,7 @@ const HistoryTaskList = props => {
   async function fetchDataDate(sDate,eDate) {
     await setLoading(true);
     var url2 =
-      'http://wheathwaapi.vielife.com.tw/api/DriverInfo/GetAllPassGroup/' +
+      'http://www.e9life.com/api/DriverInfo/GetAllPassGroup/' +
       user.response.Cars.DriverId + '?sDate=' + sDate + '&eDate=' + eDate;
     const data = await fetch(
       url2,
