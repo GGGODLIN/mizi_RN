@@ -96,14 +96,14 @@ const HistoryTaskList = props => {
         var obj_value = JSON.parse(value);
         console.log('GET FROM ASYN IS', obj_value);
         var url2 =
-          'http://tccapi.1966.org.tw/api/DriverInfo/GetAllPassGroup/' +
+          'http://ttsdapi.1966.org.tw/api/DriverInfo/GetAllPassGroup/' +
           obj_value.response.Cars.DriverId;
         seturl(
-          `http://tccapi.1966.org.tw/api/DriverInfo/GetAllPassGroup/${
+          `http://ttsdapi.1966.org.tw/api/DriverInfo/GetAllPassGroup/${
             obj_value.response.Cars.DriverId
           }`,
         );
-        //let url = `http://tccapi.1966.org.tw/api/DriverInfo/GetAllGroup/${obj_value.Cars.DriverId}`;
+        //let url = `http://ttsdapi.1966.org.tw/api/DriverInfo/GetAllGroup/${obj_value.Cars.DriverId}`;
         const data = await fetch(url2, {
           method: 'GET',
           headers: {
@@ -128,7 +128,7 @@ const HistoryTaskList = props => {
 
   async function fetchData_test() {
     const data = await fetch(
-      'http://tccapi.1966.org.tw/api/DriverInfo/GetAllPassGroup/15',
+      'http://ttsdapi.1966.org.tw/api/DriverInfo/GetAllPassGroup/15',
       {
         method: 'GET',
         headers: {

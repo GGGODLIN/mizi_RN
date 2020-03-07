@@ -117,7 +117,7 @@ const BodyCheckScreen = props => {
       return;
     }
     let url =
-      'http://tccapi.1966.org.tw/api/CheckResult/PostCheckDriverMapping';
+      'http://ttsdapi.1966.org.tw/api/CheckResult/PostCheckDriverMapping';
     const driverId = data.response.Id;
     const carId = data.response.Cars.Id;
     const postRes = await fetch(url, {
@@ -156,7 +156,7 @@ const BodyCheckScreen = props => {
       const value = await AsyncStorage.getItem('userLoginInfo');
       if (value !== null) {
         var obj_value = JSON.parse(value);
-        let url = `http://tccapi.1966.org.tw/api/DriverInfo/GetDriverCheck/${
+        let url = `http://ttsdapi.1966.org.tw/api/DriverInfo/GetDriverCheck/${
           obj_value.response.Id
         }`;
         const res = await fetch(url, {
@@ -181,7 +181,7 @@ const BodyCheckScreen = props => {
   }
 
   const fetchDataModal = async () => {
-    let url = `http://tccapi.1966.org.tw/api/CheckItem/GetCheckDriver`;
+    let url = `http://ttsdapi.1966.org.tw/api/CheckItem/GetCheckDriver`;
 
     console.log(`Making Modal request to: ${url}`);
 
