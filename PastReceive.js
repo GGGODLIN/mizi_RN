@@ -134,7 +134,7 @@ const PastReceive = props => {
   async function fetchDataDate(sDate, eDate) {
     await setLoading(true);
     var url2 =
-      'http://tccapi.1966.org.tw/api/DriverInfo/GetDriverReceiveListDate/' +
+      'http://ttsdapi.1966.org.tw/api/DriverInfo/GetDriverReceiveListDate/' +
       user.response.Cars.DriverId +
       '?StartDate=' +
       sDate +
@@ -172,7 +172,7 @@ const PastReceive = props => {
         setuser(obj_value);
 
         var url3 =
-          'http://tccapi.1966.org.tw/api/DriverInfo/GetDriverReceiveListDate/' +
+          'http://ttsdapi.1966.org.tw/api/DriverInfo/GetDriverReceiveListDate/' +
           obj_value.response.Cars.DriverId +
           '?StartDate=' +
           '&EndDate=';
