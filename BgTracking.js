@@ -26,7 +26,7 @@ class BgTracking extends Component {
       activitiesInterval: 30000,
       stopOnStillActivity: false,
       maxLocations: 10000,
-      url: 'https://api.donkeymove.com/api/DriverInfo/PostDeviceGPS',
+      url: 'http://wheathwaapi.vielife.com.tw/api/DriverInfo/PostDeviceGPS',
       httpHeaders: {
         'Content-Type': 'application/json',
       },
@@ -53,7 +53,7 @@ class BgTracking extends Component {
         // IMPORTANT: task has to be ended by endTask
 
         let url =
-          'https://api.donkeymove.com/api/DriverInfo/PostDeviceGPS';
+          'http://wheathwaapi.vielife.com.tw/api/DriverInfo/PostDeviceGPS';
 
         console.log(`Making GPS request to: ${url}`);
         console.log(deviceId,location.longitude,location.latitude);
@@ -64,7 +64,7 @@ class BgTracking extends Component {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-     
+
 
             DeviceID: deviceId,
             Lon: location.longitude,
@@ -74,7 +74,7 @@ class BgTracking extends Component {
           .then(response => response.json())
           .then(res => {
             console.log('GPS AJAX', res);
-            
+
           })
           .catch(err =>
         Alert.alert('網路異常，請稍後再試...', ' ', [

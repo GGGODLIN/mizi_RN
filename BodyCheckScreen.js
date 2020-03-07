@@ -117,7 +117,7 @@ const BodyCheckScreen = props => {
       return;
     }
     let url =
-      'https://api.donkeymove.com/api/CheckResult/PostCheckDriverMapping';
+      'http://wheathwaapi.vielife.com.tw/api/CheckResult/PostCheckDriverMapping';
     const driverId = data.response.Id;
     const carId = data.response.Cars.Id;
     const postRes = await fetch(url, {
@@ -156,7 +156,7 @@ const BodyCheckScreen = props => {
       const value = await AsyncStorage.getItem('userLoginInfo');
       if (value !== null) {
         var obj_value = JSON.parse(value);
-        let url = `https://api.donkeymove.com/api/DriverInfo/GetDriverCheck/${
+        let url = `http://wheathwaapi.vielife.com.tw/api/DriverInfo/GetDriverCheck/${
           obj_value.response.Id
         }`;
         const res = await fetch(url, {
@@ -181,7 +181,7 @@ const BodyCheckScreen = props => {
   }
 
   const fetchDataModal = async () => {
-    let url = `https://api.donkeymove.com/api/CheckItem/GetCheckDriver`;
+    let url = `http://wheathwaapi.vielife.com.tw/api/CheckItem/GetCheckDriver`;
 
     console.log(`Making Modal request to: ${url}`);
 

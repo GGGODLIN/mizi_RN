@@ -17,15 +17,16 @@ export default function CheckStackScreen(props) {
       headerMode="float"
       screenOptions={{
         headerTintColor: 'black',
-        headerStyle: { backgroundColor: '#f6a91e' },
+        headerStyle: { backgroundColor: '#f6a91e'},
         headerRight:({color, size}) => (
             <Icon name="bars" color='white' size={20} onPress={() => props.navigation.openDrawer()}/>
 
           ),
        headerLeft:({color, size}) => (
             <Image
-          style={{width:'100%', height:'100%',padding:20,paddingStart:'500%'}}
-          source={require('../img/driver_logo.png')}
+          style={{width:'100%', height:'100%',padding:25,paddingStart:'350%'}}
+          source={require('../img/logo-light.png')}
+
         />
 
           ),
