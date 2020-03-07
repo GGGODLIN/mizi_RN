@@ -94,7 +94,7 @@ class LoginScreen extends Component {
   };
 
   handleLogin = async () => {
-    let url = `http://ttsdapi.1966.org.tw/api/DriverInfo/DriverLogin?`;
+    let url = `http://tccapi.1966.org.tw/api/DriverInfo/DriverLogin?`;
     let query = `acc=${this.emailInput.input._lastNativeText}`;
     let query2 = `pwd=${this.passwordInput.input._lastNativeText}`;
     url += query + '&' + query2;
@@ -131,7 +131,7 @@ class LoginScreen extends Component {
   };
 
   handleSendAcc = async () => {
-    let url = `http://ttsdapi.1966.org.tw/api/DriverInfo/PushPhoneMessage?phoneNum=${
+    let url = `http://tccapi.1966.org.tw/api/DriverInfo/PushPhoneMessage?phoneNum=${
       this.state.input1
     }`;
 
@@ -174,7 +174,7 @@ class LoginScreen extends Component {
   };
 
   handleSendVCode = async () => {
-    let url = `http://ttsdapi.1966.org.tw/api/DriverInfo/CheckPhoneCode?phoneNum=${
+    let url = `http://tccapi.1966.org.tw/api/DriverInfo/CheckPhoneCode?phoneNum=${
       this.state.input1
     }&vCode=${this.state.input2}`;
 
@@ -215,7 +215,7 @@ class LoginScreen extends Component {
   };
 
   handleSendNewPwd = async () => {
-    let url = `http://ttsdapi.1966.org.tw/api/DriverInfo/PutForgetPassword?cAccount=${
+    let url = `http://tccapi.1966.org.tw/api/DriverInfo/PutForgetPassword?cAccount=${
       this.state.input1
     }&cPassword=${this.state.input3}`;
 

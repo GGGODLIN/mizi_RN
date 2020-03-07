@@ -172,7 +172,7 @@ const TodayTaskOpen = props => {
   };
 
   const askCash = async () => {
-    let url = `http://ttsdapi.1966.org.tw/api/OrderDetails/PutDetailRealWith?OrderDetailId=${
+    let url = `http://tccapi.1966.org.tw/api/OrderDetails/PutDetailRealWith?OrderDetailId=${
       taskData[detailIndex].OrderDetails.Id
     }&RealFamily=${people}`;
 
@@ -214,7 +214,7 @@ const TodayTaskOpen = props => {
       name: `${taskData[detailIndex].OrderDetails.SOrderNo}.jpg`,
       filename: `${taskData[detailIndex].OrderDetails.SOrderNo}.jpg`,
     });
-    let url = `http://ttsdapi.1966.org.tw/api/Img/Pic`;
+    let url = `http://tccapi.1966.org.tw/api/Img/Pic`;
 
     console.log(`Making POST PIC request to: ${url}`);
     console.log(form);
@@ -245,7 +245,7 @@ const TodayTaskOpen = props => {
   };
 
   const updateStatus = async () => {
-    let url = `http://ttsdapi.1966.org.tw/api/OrderDetails/PutDetailStatus?OrderDetailId=${
+    let url = `http://tccapi.1966.org.tw/api/OrderDetails/PutDetailStatus?OrderDetailId=${
       taskData[detailIndex].OrderDetails.Id
     }&StatusInt=${caseStatus[detailIndex]}`;
 
@@ -272,7 +272,7 @@ const TodayTaskOpen = props => {
 
   const updateStatusToSix = async () => {
     console.log("???????",taskData[detailIndex].OrderDetails.SOrderNo);
-    let url = `http://ttsdapi.1966.org.tw/api/OrderDetails/PutDetailStatus?OrderDetailId=${
+    let url = `http://tccapi.1966.org.tw/api/OrderDetails/PutDetailStatus?OrderDetailId=${
       taskData[detailIndex].OrderDetails.Id
     }&StatusInt=${
       caseStatus[detailIndex]

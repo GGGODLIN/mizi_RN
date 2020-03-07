@@ -1,4 +1,4 @@
-package com.Taidon1966;
+package com.Taichon1966;
 
 import com.facebook.react.ReactActivity;
 
@@ -10,6 +10,6 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "Taidon1966";
+    return "Taichon1966";
   }
 }

@@ -35,12 +35,12 @@ android_library(
 
 android_build_config(
     name = "build_config",
-    package = "com.Taidon1966",
+    package = "com.Taichon1966",
 )
 
 android_resource(
     name = "res",
-    package = "com.Taidon1966",
+    package = "com.Taichon1966",
     res = "src/main/res",
 )
 
