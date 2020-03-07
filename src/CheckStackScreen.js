@@ -24,7 +24,7 @@ export default function CheckStackScreen(props) {
           ),
        headerLeft:({color, size}) => (
             <Image
-          style={{width:'100%', height:'100%',padding:25,paddingStart:'350%'}}
+          style={{width:'100%', height:'100%',padding:20,paddingStart:'500%'}}
           source={require('../img/logo-light.png')}
 
         />
@@ -53,7 +53,7 @@ export default function CheckStackScreen(props) {
         name="BodyCheckScreen"
         component={BodyCheckScreen}
         options={{
-          
+
         }}
       />
     </Stack.Navigator>
