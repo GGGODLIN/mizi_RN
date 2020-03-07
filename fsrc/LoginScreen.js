@@ -36,7 +36,7 @@ class LoginScreen extends Component {
   }
 
   handleLogin = async () => {
-    let url = `http://www.e9life.com/api/DriverInfo/DriverLogin?`;
+    let url = `http://tccapi.1966.org.tw/api/DriverInfo/DriverLogin?`;
     let query = `acc=${this.emailInput.input._lastNativeText}`;
     let query2 = `pwd=${this.passwordInput.input._lastNativeText}`;
     url += query + '&' + query2;

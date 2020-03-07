@@ -1,4 +1,4 @@
-package com.miziYeelan;
+package com.miziTaidon;
 
 import android.app.Application;
 import android.content.Context;

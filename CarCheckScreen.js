@@ -54,7 +54,7 @@ const CarCheckScreen = props => {
       const value = await AsyncStorage.getItem('userLoginInfo');
       if (value !== null) {
         var obj_value = JSON.parse(value);
-        let url = `http://www.e9life.com/api/DriverInfo/GetDriverCheck/${
+        let url = `http://tccapi.1966.org.tw/api/DriverInfo/GetDriverCheck/${
           obj_value.response.Id
         }`;
         const res = await fetch(url, {
@@ -79,7 +79,7 @@ const CarCheckScreen = props => {
   }
 
   const fetchDataModal = async () => {
-    let url = `http://www.e9life.com/api/CheckItem/GetCheckCarViewModel`;
+    let url = `http://tccapi.1966.org.tw/api/CheckItem/GetCheckCarViewModel`;
 
     console.log(`Making Modal request to: ${url}`);
 
@@ -116,7 +116,7 @@ const CarCheckScreen = props => {
   };
 
   const checkCarChecked = async () => {
-    let url = `http://www.e9life.com/api/DriverInfo/GetDriverCheck/${
+    let url = `http://tccapi.1966.org.tw/api/DriverInfo/GetDriverCheck/${
       data.response.Id
     }`;
     const res = await fetch(url, {
@@ -148,7 +148,7 @@ const CarCheckScreen = props => {
     console.log('queryNoChecked', queryNoChecked);
 
     let url =
-      'http://www.e9life.com/api/CheckResult/PostCheckCarMapping';
+      'http://tccapi.1966.org.tw/api/CheckResult/PostCheckCarMapping';
     const driverId = data.response.Id;
     const carId = data.response.Cars.Id;
     const postRes = await fetch(url, {

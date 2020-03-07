@@ -1,8 +1,8 @@
 platform :ios, '9.0'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
-target 'miziYeelan' do
-  # Pods for miziYeelan
+target 'miziTaidon' do
+  # Pods for miziTaidon
   pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
   pod 'FBReactNativeSpec', :path => "../node_modules/react-native/Libraries/FBReactNativeSpec"
   pod 'RCTRequired', :path => "../node_modules/react-native/Libraries/RCTRequired"
@@ -35,7 +35,7 @@ target 'miziYeelan' do
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
 
-  target 'miziYeelanTests' do
+  target 'miziTaidonTests' do
     inherit! :search_paths
     # Pods for testing
   end
@@ -43,10 +43,10 @@ target 'miziYeelan' do
   use_native_modules!
 end
 
-target 'miziYeelan-tvOS' do
-  # Pods for miziYeelan-tvOS
+target 'miziTaidon-tvOS' do
+  # Pods for miziTaidon-tvOS
 
-  target 'miziYeelan-tvOSTests' do
+  target 'miziTaidon-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end
