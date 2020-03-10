@@ -4,14 +4,50 @@ import RNFS from 'react-native-fs';
 import {Platform} from 'react-native';
 
 // 文件路径
-//const defaultPath =(Platform.OS === 'ios' ? RNFS.MainBundlePath : RNFS.DocumentDirectoryPath) ;
-const defaultPath ='file:///storage/emulated/0/Android/data/com.test0214/files/Pictures/saved_signature/';
+const defaultPath =(Platform.OS === 'ios' ? RNFS.MainBundlePath : RNFS.DocumentDirectoryPath) ;
+//const defaultPath ='file:///storage/emulated/0/Android/data/com.test0214/files/Pictures/saved_signature/';
 //const destPath = defaultPath + '/Pictures/saved_signature';
-const destPath = 'file:///storage/emulated/0/Android/data/com.test0214/files/Pictures/saved_signature/';
+const destPath = defaultPath + '/test';
+const splitStr = '20191115###';
 const testPath =
   'file:///storage/emulated/0/Android/data/com.test0214/files/Pictures/saved_signature/';
 
 class FileUtil {
+    
+    async writeFile(data, filename) {
+        const isDir = await this.mkDir();
+        // console.log(isDir, 'dir')
+        if (!isDir) {
+            return false;
+        }
+
+        // data.createTime = +new Date();
+        const jsonStr = JSON.stringify(Object.assign({}, data.slice(), { createTime: +new Date() }));
+        // const today = moment().startOf('day').valueOf();
+        let filePath = defaultPath + '/';
+        if (filename) {
+            filePath += filename;
+        } else {
+            const today = moment().valueOf();
+            filePath += today + '.txt';
+        }
+        console.log('DEFPATH',defaultPath);
+        console.log('PATH',filePath);
+        // 判断文件是否存在
+        const isExists = await this.isExistFile(filePath);
+        if (isExists) {
+            return await RNFS.writeFile(filePath, data, 'base64')
+            .then((success) => {
+                console.log('FILE WRITTEN!',data);
+                return filePath;
+            })
+            .catch((err) => {
+                console.log(err.message);
+            })
+        } else {
+            return await this.appendFile(jsonStr, filePath);
+        }
+    }
   // 向文件中添加内容
   async appendFile(data, path) {
     const jsonStr = JSON.stringify(data);

@@ -20,7 +20,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {Header} from 'react-native-elements';
 import RootNavigator from './src/Main';
 import LoginScreen from './LoginScreen';
-import codePush from 'react-native-code-push';
+
 import BgTracking from './BgTracking';
 
 import {setCustomText, setCustomTextInput} from 'react-native-global-props';

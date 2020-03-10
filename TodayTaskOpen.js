@@ -22,7 +22,7 @@ import {
 import AsyncStorage from '@react-native-community/async-storage';
 import MapView, {PROVIDER_GOOGLE, Marker, Polyline} from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
-
+import SignatureScreen from './SignatureScreen';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Picker} from '@react-native-community/picker';
@@ -504,7 +504,7 @@ const TodayTaskOpen = props => {
           overlayBackgroundColor="white"
           width="90%"
           height="80%">
-          <RNSignatureExample handleSavePic={handleSavePic} name={taskData[detailIndex].OrderDetails.SOrderNo}/>
+          <SignatureScreen name={taskData[detailIndex].OrderDetails.SOrderNo}/>
         </Overlay>
 
         <View
