@@ -395,11 +395,13 @@ const HitCard = props => {
             justifyContent: 'center',
             alignContent: 'center',
             alignSelf: 'center',
-            width: '70%',
+            width: '100%',
           }}
           buttonStyle={{
-            width: '90%',
+            width: '100%',
             alignSelf: 'center',
+            alignItems:'center',
+            justifyContent:'flex-start',
             backgroundColor: 'orange',
             borderRadius: 50,
             marginBottom: 20,
@@ -467,6 +469,7 @@ const HitCard = props => {
             borderRadius: 50,
             marginBottom: 20,
             marginTop: 10,
+            justifyContent:'flex-start',
           }}
           type="solid"
           onPress={() => {

@@ -30,6 +30,7 @@ import Signature from 'react-native-signature-canvas';
 import SignatureCapture from 'react-native-signature-capture';
 import RNSignatureExample from './Sign';
 
+
 import {
   ThemeProvider,
   Avatar,
@@ -46,6 +47,7 @@ import {
   ActivityIndicator,
 } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import RNPickerSelect from 'react-native-picker-select';
 
 const TodayTaskOpen = props => {
   const GOOGLE_MAPS_APIKEY = 'AIzaSyCUaMOOcU7-pH99LS6ajo_s1WkDua92H08';
@@ -778,20 +780,22 @@ const TodayTaskOpen = props => {
               }}>
               陪同人數:
             </Text>
-            <Picker
-              enabled={cashSteps == 0 ? true : false}
-              selectedValue={people}
-              style={{height: 50, width: 150}}
-              onValueChange={(itemValue, itemIndex) => setpeople(itemValue)}>
-              <Picker.Item label="0人" value={0} />
-              <Picker.Item label="1人" value={1} />
-              <Picker.Item label="2人" value={2} />
-              <Picker.Item label="3人" value={3} />
-              <Picker.Item label="4人" value={4} />
-              <Picker.Item label="5人" value={5} />
-              <Picker.Item label="6人" value={6} />
-              <Picker.Item label="7人" value={7} />
-            </Picker>
+            <RNPickerSelect
+                onValueChange={(value) => setpeople(value)}
+            disabled={cashSteps == 0 ? false : true}
+            
+                items={[
+                    { label: "0人", value: 0 },
+                    { label: "1人", value: 1 },
+                        { label: "2人", value: 2 },
+                        { label: "3人", value: 3 },
+                        { label: "4人", value: 4 },
+                        { label: "5人", value: 5 },
+                        { label: "6人", value: 6 },
+                        { label: "7人", value: 7 },
+                ]}
+            />
+            
           </View>
           <View
             style={
