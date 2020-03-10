@@ -15,6 +15,7 @@ export default class SignatureScreen extends React.Component {
     this.state = {
         signature: null,
         signpath: null,
+        number:0,
         
     };
   }
@@ -24,8 +25,11 @@ export default class SignatureScreen extends React.Component {
       await FileUtil.writeFile(signature,`${this.props.name}.png`).then((res)=>{
                                                                         console.log('DONE?',res);
                                                                         this.setState({ signpath: res, });
+                                                                        this.props.handleSavePic(res);
                                                                         });
     this.setState({ signature });
+      this.setState({ number:this.state.number+1, });
+      
   };
 
   handleEmpty = () => {
@@ -40,21 +44,13 @@ export default class SignatureScreen extends React.Component {
     }`;
     return (
       <View style={{ flex: 1 }}>
-        <View style={styles.preview}>
-          {this.state.signature ? (
-            <Image
-              resizeMode={"contain"}
-              style={{ width: 335, height: 114 }}
-              source={{ uri: this.state.signpath }}
-            />
-          ) : null}
-        </View>
+        
         <Signature
           onOK={this.handleSignature}
           onEmpty={this.handleEmpty}
-          descriptionText="簽名板"
+          descriptionText='請在此簽名'
           clearText="清除"
-          confirmText="保存"
+          confirmText="完成"
           webStyle={style}
           
         />

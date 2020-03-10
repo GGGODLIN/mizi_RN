@@ -300,9 +300,9 @@ const TodayTaskOpen = props => {
   };
 
   const handleSavePic = async res => {
-    console.log('RES????????????', res.pathName);
+    console.log('RES????????????', res);
     setcashSteps(0);
-    await setpicPath(res.pathName);
+    await setpicPath(res);
     //await postPic(res.pathName);
     setdoneCase(detailIndex);
     handleNextStep();
@@ -504,7 +504,7 @@ const TodayTaskOpen = props => {
           overlayBackgroundColor="white"
           width="90%"
           height="80%">
-          <SignatureScreen name={taskData[detailIndex].OrderDetails.SOrderNo}/>
+          <SignatureScreen handleSavePic={handleSavePic} name={taskData[detailIndex].OrderDetails.SOrderNo}/>
         </Overlay>
 
         <View

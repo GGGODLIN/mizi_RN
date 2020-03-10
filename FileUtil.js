@@ -4,7 +4,7 @@ import RNFS from 'react-native-fs';
 import {Platform} from 'react-native';
 
 // 文件路径
-const defaultPath =(Platform.OS === 'ios' ? RNFS.MainBundlePath : RNFS.DocumentDirectoryPath) ;
+const defaultPath =(Platform.OS === 'ios' ? RNFS.MainBundlePath : RNFS.DocumentDirectoryPath) + '/saved_signature' ;
 //const defaultPath ='file:///storage/emulated/0/Android/data/com.test0214/files/Pictures/saved_signature/';
 //const destPath = defaultPath + '/Pictures/saved_signature';
 const destPath = defaultPath + '/test';
@@ -36,7 +36,8 @@ class FileUtil {
         // 判断文件是否存在
         const isExists = await this.isExistFile(filePath);
         if (isExists) {
-            return await RNFS.writeFile(filePath, data, 'base64')
+            await this.deleteFile(filePath);
+            return await RNFS.writeFile(filePath, data.slice(22), 'base64')
             .then((success) => {
                 console.log('FILE WRITTEN!',data);
                 return filePath;
@@ -45,7 +46,14 @@ class FileUtil {
                 console.log(err.message);
             })
         } else {
-            return await this.appendFile(jsonStr, filePath);
+            return await RNFS.writeFile(filePath, data.slice(22), 'base64')
+            .then((success) => {
+                console.log('FILE WRITTEN!',data);
+                return filePath;
+            })
+            .catch((err) => {
+                console.log(err.message);
+            })
         }
     }
   // 向文件中添加内容

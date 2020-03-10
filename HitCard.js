@@ -34,6 +34,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import RNSignatureExample from './Sign';
 import FileUtil from './FileUtil';
+import SignatureScreen from './SignatureScreen';
 
 const HitCard = props => {
   console.log('HitCard?');
@@ -165,9 +166,9 @@ const HitCard = props => {
   }
 
   const handleSavePic = async res => {
-    console.log('RES????????????', res.pathName);
+    console.log('RES????????????', res);
     //setcashSteps(0);
-    await setpicPath(res.pathName);
+    await setpicPath(res);
     console.log('SETPATH?????????', picPath);
 
     const res2 = await FileUtil.readDir();
@@ -297,7 +298,7 @@ const HitCard = props => {
           overlayBackgroundColor="white"
           width="90%"
           height="80%">
-          <RNSignatureExample handleSavePic={handleSavePic} name={'sign'} />
+          <SignatureScreen handleSavePic={handleSavePic} name={'sign'} />
         </Overlay>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <Image style={{}} source={require('./img/icons8-clock_8.png')} />
