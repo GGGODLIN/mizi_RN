@@ -17,6 +17,9 @@
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* TEST0214Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* TEST0214Tests.m */; };
+		3A56036D241899A100CBBF8F /* bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3A56036B241899A000CBBF8F /* bundle */; };
+		3A56036F241899B700CBBF8F /* bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3A56036E241899B600CBBF8F /* bundle */; };
+		3A560371241899CE00CBBF8F /* bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3A560370241899CE00CBBF8F /* bundle */; };
 		3A608C672417331B00AD3647 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3A608C612417331B00AD3647 /* MaterialCommunityIcons.ttf */; };
 		3A608C682417331B00AD3647 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3A608C612417331B00AD3647 /* MaterialCommunityIcons.ttf */; };
 		3A608C692417331B00AD3647 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3A608C612417331B00AD3647 /* MaterialCommunityIcons.ttf */; };
@@ -85,6 +88,13 @@
 			remoteGlobalIDString = 2D02E47A1E0B4A5D006451C7;
 			remoteInfo = "TEST0214-tvOS";
 		};
+		3A5603782418B4E100CBBF8F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3A5603732418B4E000CBBF8F /* RCTBackgroundGeolocation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 418F75461D02DC3D0045FEA0;
+			remoteInfo = RCTBackgroundGeolocation;
+		};
 		3A608CBF2417377100AD3647 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3A608CBB2417377100AD3647 /* RSSignatureCapture.xcodeproj */;
@@ -109,6 +119,11 @@
 		1C6BB395FF23E15D46C97986 /* Pods-TEST0214-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TEST0214-tvOS.release.xcconfig"; path = "Target Support Files/Pods-TEST0214-tvOS/Pods-TEST0214-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* TEST0214-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TEST0214-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* TEST0214-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TEST0214-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A56036B241899A000CBBF8F /* bundle */ = {isa = PBXFileReference; lastKnownFileType = folder; path = bundle; sourceTree = "<group>"; };
+		3A56036E241899B600CBBF8F /* bundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bundle; sourceTree = SOURCE_ROOT; };
+		3A560370241899CE00CBBF8F /* bundle */ = {isa = PBXFileReference; lastKnownFileType = folder; path = bundle; sourceTree = "<group>"; };
+		3A5603732418B4E000CBBF8F /* RCTBackgroundGeolocation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBackgroundGeolocation.xcodeproj; path = "../node_modules/@mauron85/react-native-background-geolocation/ios/RCTBackgroundGeolocation.xcodeproj"; sourceTree = "<group>"; };
+		3A56037D2418B85F00CBBF8F /* libBackgroundGeolocation.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libBackgroundGeolocation.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A608C602417331B00AD3647 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		3A608C612417331B00AD3647 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MaterialCommunityIcons.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		3A608C6B2417337C00AD3647 /* Fontisto.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Fontisto.ttf; sourceTree = "<group>"; };
@@ -199,6 +214,7 @@
 		13B07FAE1A68108700A75B9A /* TEST0214 */ = {
 			isa = PBXGroup;
 			children = (
+				3A560370241899CE00CBBF8F /* bundle */,
 				3A608C6A2417337C00AD3647 /* Fonts */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -214,6 +230,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3A56037D2418B85F00CBBF8F /* libBackgroundGeolocation.a */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
 				527AB24E23AE71EB1D6E03E4 /* libPods-TEST0214.a */,
@@ -222,6 +239,14 @@
 				7E8D3880115CAEA844889DE1 /* libPods-TEST0214Tests.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3A5603742418B4E000CBBF8F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3A5603792418B4E100CBBF8F /* libRCTBackgroundGeolocation.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		3A608C5F2417330200AD3647 /* Fonts */ = {
@@ -236,6 +261,7 @@
 		3A608C6A2417337C00AD3647 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				3A56036E241899B600CBBF8F /* bundle */,
 				3A608C6B2417337C00AD3647 /* Fontisto.ttf */,
 				3A608C6C2417337C00AD3647 /* Octicons.ttf */,
 				3A608C6D2417337C00AD3647 /* Feather.ttf */,
@@ -268,6 +294,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				3A5603732418B4E000CBBF8F /* RCTBackgroundGeolocation.xcodeproj */,
 				3A608CBB2417377100AD3647 /* RSSignatureCapture.xcodeproj */,
 			);
 			name = Libraries;
@@ -276,6 +303,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				3A56036B241899A000CBBF8F /* bundle */,
 				3A608C5F2417330200AD3647 /* Fonts */,
 				13B07FAE1A68108700A75B9A /* TEST0214 */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -418,6 +446,9 @@
 						CreatedOnToolsVersion = 6.2;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
+					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = V5ZUWPFB7D;
+					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
 						ProvisioningStyle = Automatic;
@@ -442,6 +473,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 3A5603742418B4E000CBBF8F /* Products */;
+					ProjectRef = 3A5603732418B4E000CBBF8F /* RCTBackgroundGeolocation.xcodeproj */;
+				},
+				{
 					ProductGroup = 3A608CBC2417377100AD3647 /* Products */;
 					ProjectRef = 3A608CBB2417377100AD3647 /* RSSignatureCapture.xcodeproj */;
 				},
@@ -457,6 +492,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		3A5603792418B4E100CBBF8F /* libRCTBackgroundGeolocation.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTBackgroundGeolocation.a;
+			remoteRef = 3A5603782418B4E100CBBF8F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		3A608CC02417377100AD3647 /* libRSSignatureCapture.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -494,7 +536,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A560371241899CE00CBBF8F /* bundle in Resources */,
+				3A56036F241899B700CBBF8F /* bundle in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				3A56036D241899A100CBBF8F /* bundle in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -844,7 +889,9 @@
 			baseConfigurationReference = CCEE9154CD54B144D351C866 /* Pods-TEST0214Tests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = V5ZUWPFB7D;
 				INFOPLIST_FILE = TEST0214Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -866,6 +913,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
+				DEVELOPMENT_TEAM = V5ZUWPFB7D;
 				INFOPLIST_FILE = TEST0214/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -884,7 +932,10 @@
 			baseConfigurationReference = 8309B13C5AA4D515F06BD98D /* Pods-TEST0214.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = V5ZUWPFB7D;
 				INFOPLIST_FILE = TEST0214/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -894,6 +945,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = TEST0214;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -1011,7 +1063,7 @@
 		83CBBA201A601CBA00E9B192 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -1036,7 +1088,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -1065,7 +1118,7 @@
 		83CBBA211A601CBA00E9B192 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -1090,7 +1143,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;

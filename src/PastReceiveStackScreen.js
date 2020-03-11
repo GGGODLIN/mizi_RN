@@ -22,9 +22,9 @@ export default function PastReceiveStackScreen(props) {
         headerTintColor: 'black',
         headerStyle: { backgroundColor: '#f6a91e' },
         headerRight:({color, size}) => (
-            <Icon name="bars" color='white' size={20} onPress={() => props.navigation.openDrawer()}/>
+                                      <Icon name="bars" color='white' size={20} style={{paddingBottom:20}} onPress={() => props.navigation.openDrawer()}/>
 
-          ),
+        ),
        headerLeft:({color, size}) => (
             <Image
           style={{width:'100%', height:'100%',padding:20,paddingStart:'500%'}}

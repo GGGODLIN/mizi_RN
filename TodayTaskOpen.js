@@ -567,7 +567,7 @@ const TodayTaskOpen = props => {
           <View
             style={
               caseStatus[detailIndex] >= 5
-                ? {height: 1, position: 'relative'}
+                ? {height: 0.001, position: 'relative'}
                 : {height: 250, position: 'relative', backgroundColor: 'pink'}
             }
             contentContainerStyle={StyleSheet.absoluteFillObject}>
@@ -768,7 +768,7 @@ const TodayTaskOpen = props => {
           <View
             style={
               caseStatus[detailIndex] == 5
-                ? {flexDirection: 'row', alignItems: 'center'}
+                ? {flexDirection: 'row', alignItems: 'center',padding:10}
                 : {display: 'none'}
             }>
             <Text
@@ -780,10 +780,10 @@ const TodayTaskOpen = props => {
               }}>
               陪同人數:
             </Text>
+            <View style={{transform: [{scale:1.2}]}}>
             <RNPickerSelect
                 onValueChange={(value) => setpeople(value)}
             disabled={cashSteps == 0 ? false : true}
-            
                 items={[
                     { label: "0人", value: 0 },
                     { label: "1人", value: 1 },
@@ -794,7 +794,9 @@ const TodayTaskOpen = props => {
                         { label: "6人", value: 6 },
                         { label: "7人", value: 7 },
                 ]}
+            placeholder={{}}
             />
+            </View>
             
           </View>
           <View

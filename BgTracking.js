@@ -20,7 +20,7 @@ class BgTracking extends Component {
       debug: false,
       startOnBoot: false,
       stopOnTerminate: true,
-      locationProvider: BackgroundGeolocation.ACTIVITY_PROVIDER,
+      locationProvider: BackgroundGeolocation.DISTANCE_FILTER_PROVIDER,
       interval: 30000,
       fastestInterval: 15000,
       activitiesInterval: 30000,
@@ -74,6 +74,12 @@ class BgTracking extends Component {
           .then(response => response.json())
           .then(res => {
             console.log('GPS AJAX', res);
+            Alert.alert('成功上傳', ' ', [
+              {
+                text: '確定',
+                onPress: () => {},
+              },
+            ])
             
           })
           .catch(err =>

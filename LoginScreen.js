@@ -520,8 +520,8 @@ class LoginScreen extends Component {
                 <Input
                   label="User"
                   inputContainerStyle={{
-                    borderWidth: 1,
-                    borderColor: 'white',
+                    borderBottomWidth: 1,
+                    borderColor: 'gray',
                     borderLeftWidth: 0,
                     height: 50,
                     width: '85%',
@@ -555,14 +555,14 @@ class LoginScreen extends Component {
                 <Input
                   label="Password"
                   inputContainerStyle={{
-                    borderWidth: 1,
-                    borderColor: 'white',
+                    borderBottomWidth: 1,
+                    borderColor: 'gray',
                     borderLeftWidth: 0,
                     height: 50,
                     width: '85%',
                     backgroundColor: 'white',
                   }}
-                  containerStyle={{paddingHorizontal: 0}}
+                  containerStyle={{paddingHorizontal: 0,paddingBottom:10}}
                   placeholder="請輸入密碼(預設為身分證後4碼)"
                   underlineColorAndroid="gray"
                   placeholderTextColor="gray"

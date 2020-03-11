@@ -32,7 +32,7 @@ import {
   ActivityIndicator,
 } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import RNSignatureExample from './Sign';
+
 import FileUtil from './FileUtil';
 import SignatureScreen from './SignatureScreen';
 
