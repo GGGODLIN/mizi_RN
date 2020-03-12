@@ -116,7 +116,7 @@ function Item({data, navigation}) {
                 <Text
                   allowFontScaling={false}
                   style={{color: 'white', fontSize: 24}}>
-                  {'個案' + data.DespatchDetails.length + '/' + '陪同' + 0}
+                  {'個案' + data.DespatchDetails.length + '/' + '陪同' + (FamilyWith+ForeignFamilyWith)}
                 </Text>
                 <Text
                   allowFontScaling={false}
