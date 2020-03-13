@@ -179,8 +179,9 @@ const TodayTaskList = props => {
         setuserLoginInfo(obj_value);
         var url2 =
           'https://api.donkeymove.com/api/DriverInfo/GetAllGroupDriverSide/' +
-          obj_value.response.Cars.DriverId;
+          obj_value.response.Id;
         //let url = `https://api.donkeymove.com/api/DriverInfo/GetAllGroup/${obj_value.Cars.DriverId}`;
+        console.log("MAKE TODAYLIST REQUEST TO",url2);
         const data = await fetch(url2, {
           method: 'GET',
           headers: {
