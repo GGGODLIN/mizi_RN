@@ -189,7 +189,7 @@ const TodayTaskList = props => {
         setuserLoginInfo(obj_value);
         var url2 =
           'http://wheathwaapi.vielife.com.tw/api/DriverInfo/GetAllGroupDriverSide/' +
-          obj_value.response.Cars.DriverId;
+          obj_value.response.Id;
         //let url = `http://wheathwaapi.vielife.com.tw/api/DriverInfo/GetAllGroup/${obj_value.Cars.DriverId}`;
         const data = await fetch(url2, {
           method: 'GET',
