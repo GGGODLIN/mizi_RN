@@ -97,13 +97,13 @@ const HistoryTaskList = props => {
         console.log('GET FROM ASYN IS', obj_value);
         var url2 =
           'http://wheathwaapi.vielife.com.tw/api/DriverInfo/GetAllPassGroup/' +
-          obj_value.response.Cars.DriverId;
+          obj_value.response.Id;
         seturl(
           `http://wheathwaapi.vielife.com.tw/api/DriverInfo/GetAllPassGroup/${
-            obj_value.response.Cars.DriverId
+            obj_value.response.Id
           }`,
         );
-        //let url = `http://wheathwaapi.vielife.com.tw/api/DriverInfo/GetAllGroup/${obj_value.Cars.DriverId}`;
+        //let url = `http://wheathwaapi.vielife.com.tw/api/DriverInfo/GetAllGroup/${obj_value.Id}`;
         const data = await fetch(url2, {
           method: 'GET',
           headers: {

@@ -212,7 +212,7 @@ const HistoryTaskList = props => {
             obj_value.response.Id
           }`,
         );
-        //let url = `http://wheathwaapi.vielife.com.tw/api/DriverInfo/GetAllGroup/${obj_value.Cars.DriverId}`;
+        //let url = `http://wheathwaapi.vielife.com.tw/api/DriverInfo/GetAllGroup/${obj_value.Id}`;
         const data = await fetch(url2, {
           method: 'GET',
           headers: {
@@ -244,7 +244,7 @@ const HistoryTaskList = props => {
     await setLoading(true);
     var url2 =
       'http://wheathwaapi.vielife.com.tw/api/DriverInfo/GetAllPassGroup/' +
-      user.response.Cars.DriverId + '?sDate=' + sDate + '&eDate=' + eDate;
+      user.response.Id + '?sDate=' + sDate + '&eDate=' + eDate;
       console.log(url2);
     const data = await fetch(
       url2,
