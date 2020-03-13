@@ -97,13 +97,13 @@ const HistoryTaskList = props => {
         console.log('GET FROM ASYN IS', obj_value);
         var url2 =
           'https://api.donkeymove.com/api/DriverInfo/GetAllPassGroup/' +
-          obj_value.response.Cars.DriverId;
+          obj_value.response.Id;
         seturl(
           `https://api.donkeymove.com/api/DriverInfo/GetAllPassGroup/${
-            obj_value.response.Cars.DriverId
+            obj_value.response.Id
           }`,
         );
-        //let url = `https://api.donkeymove.com/api/DriverInfo/GetAllGroup/${obj_value.Cars.DriverId}`;
+        //let url = `https://api.donkeymove.com/api/DriverInfo/GetAllGroup/${obj_value.Id}`;
         const data = await fetch(url2, {
           method: 'GET',
           headers: {
