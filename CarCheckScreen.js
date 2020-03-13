@@ -19,16 +19,28 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import AsyncStorage from '@react-native-community/async-storage';
 
-import {NavigationContainer,useFocusEffect,StackActions} from '@react-navigation/native';
+import {
+  NavigationContainer,
+  useFocusEffect,
+  StackActions,
+} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import {ThemeProvider, Avatar, CheckBox} from 'react-native-elements';
-import {Button, Card, Title, Paragraph, Divider,ActivityIndicator} from 'react-native-paper';
+import {
+  Button,
+  Card,
+  Title,
+  Paragraph,
+  Divider,
+  ActivityIndicator,
+} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ToggleSwitch from 'toggle-switch-react-native';
 
 const CarCheckScreen = props => {
   const [data, setdata] = useState({});
+  const [date, setDate] = useState(new Date());
   const [isLoading, setLoading] = useState(true);
   const [carChecked, setcarChecked] = useState(false);
   const [bodyChecked, setbodyChecked] = useState(false);
@@ -66,8 +78,14 @@ const CarCheckScreen = props => {
           .then(response => response.json())
           .then(res => {
             console.log('FETCH CHECKED?', res.response.CarCheck);
-            if(res.response.CarCheck){
-              props.navigation.navigate('CheckMainScreen');
+            if (res.response.CarCheck) {
+              var nowDate = `${date.getFullYear()}-${date.getMonth() +
+                1}-${date.getDate()}`;
+              let url = `http://wheathwaapi.vielife.com.tw/api/CheckResult/GetCheckCarMapping?CarId=${
+                obj_value.response.Cars.Id
+              }&date=${nowDate}`;
+
+              fetchDataChecked(url);
             }
           });
         setdata(obj_value);
@@ -77,6 +95,45 @@ const CarCheckScreen = props => {
       // Error retrieving data
     }
   }
+
+  const fetchDataChecked = async url => {
+    console.log(`Making CheckedList request to: ${url}`);
+
+    const data = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(response => response.json())
+      .then(res => {
+        console.log('CheckedList AJAX', res);
+        Alert.alert(
+          '今日車況已檢查完畢',
+          `合格項目:
+          ${res.response.data[0].HasChecked}
+
+不合格項目:
+          ${res.response.data[0].NoChecked}`,
+          [
+            {
+              text: '確定',
+              onPress: () => {
+                props.navigation.navigate('CheckMainScreen');
+              },
+            },
+          ],
+        );
+      })
+      .catch(err =>
+        Alert.alert('網路異常，請稍後再試...', ' ', [
+          {
+            text: '確定',
+            onPress: () => {},
+          },
+        ]),
+      );
+  };
 
   const fetchDataModal = async () => {
     let url = `http://wheathwaapi.vielife.com.tw/api/CheckItem/GetCheckCarViewModel`;
@@ -93,7 +150,8 @@ const CarCheckScreen = props => {
       .then(res => {
         console.log('Modal AJAX', res);
         setcheckDataModal(res);
-      }).catch(err =>
+      })
+      .catch(err =>
         Alert.alert('網路異常，請稍後再試...', ' ', [
           {
             text: '確定',
@@ -164,13 +222,13 @@ const CarCheckScreen = props => {
         NoChecked: queryNoChecked,
       }),
     }).catch(err =>
-        Alert.alert('網路異常，請稍後再試...', ' ', [
-          {
-            text: '確定',
-            onPress: () => {},
-          },
-        ]),
-      );
+      Alert.alert('網路異常，請稍後再試...', ' ', [
+        {
+          text: '確定',
+          onPress: () => {},
+        },
+      ]),
+    );
     console.log('POST RES', postRes);
     console.log('SUBMIT', data.response.Cars.Id);
     props.navigation.navigate('CheckMainScreen');
@@ -185,8 +243,8 @@ const CarCheckScreen = props => {
   useFocusEffect(
     React.useCallback(() => {
       //alert('Screen was focused');
-      fetchData().then(()=>setLoading(false));
-      
+      fetchData().then(() => setLoading(false));
+
       return () => {
         setLoading(true);
         props.navigation.dispatch(pushAction);
@@ -194,14 +252,14 @@ const CarCheckScreen = props => {
         // Do something when the screen is unfocused
         // Useful for cleanup functions
       };
-    }, [])
+    }, []),
   );
 
   if (isLoading) {
     console.log('CHECKCAR screen is loading...');
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <ActivityIndicator animating={true} size='large' />
+        <ActivityIndicator animating={true} size="large" />
       </View>
     );
   } else {

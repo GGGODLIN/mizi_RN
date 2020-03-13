@@ -64,6 +64,7 @@ function Item({data, navigation}) {
           data: data,
           startTime: startTime,
           startDate: startDate,
+          withPeople: FamilyWith+ForeignFamilyWith,
         })
       }>
       <View
@@ -91,23 +92,32 @@ function Item({data, navigation}) {
                 {startDate}
               </Text>
               <Text
-                style={{color: 'white', fontSize: 20}}
+                style={{color: 'white', fontSize: 20,marginStart:20}}
                 allowFontScaling={false}>
-                {canShared}
+                {data.DespatchDetails.length>=2?'有共乘':'無共乘'}
               </Text>
             </View>
           </View>
           <View style={styles.titleName}>
             <View style={{flexDirection: 'row'}}>
-              <Avatar
-                size="large"
-                containerStyle={{margin: 10}}
-                rounded
-                source={{
-                  uri: `${data.DespatchDetails[0].OrderDetails.CaseUserPic}`,
-                }}
-              />
-              <View style={{flexDirection: 'column', justifyContent: 'center'}}>
+            <View style={{flexDirection: 'column', justifyContent: 'center',flex:1.2}}>
+             
+              {data.DespatchDetails.map((val, index)=>{
+                return (
+                  <Text
+                style={{
+                  color: 'white',
+                  fontSize: 24,
+                  fontWeight: 'bold',
+                  paddingEnd:10,
+                }}>
+                {val.CaseUser.Name}
+              </Text>
+                  );
+              })}
+              
+              </View>
+              <View style={{flexDirection: 'column', justifyContent: 'center',flex:2}}>
                 <Text
                   allowFontScaling={false}
                   style={{color: 'white', fontSize: 18}}>

@@ -97,21 +97,33 @@ function Item({data, navigation}) {
             </View>
             <View style={styles.titleDate}>
               <Text style={{color: 'white', fontSize: 20}}>{startDate}</Text>
-              <Text style={{color: 'white', fontSize: 20}}>{canShared}</Text>
+              <Text
+                style={{color: 'white', fontSize: 20,marginStart:20}}
+                allowFontScaling={false}>
+                {data.DespatchDetails.length>=2?'有共乘':'無共乘'}
+              </Text>
             </View>
           </View>
           <View style={styles.titleName}>
             <View style={{flexDirection: 'row'}}>
-              <Text
+              <View style={{flexDirection: 'column', justifyContent: 'center',flex:1.2}}>
+             
+              {data.DespatchDetails.map((val, index)=>{
+                return (
+                  <Text
                 style={{
                   color: 'white',
                   fontSize: 24,
                   fontWeight: 'bold',
-                  width: '30%',
+                  paddingEnd:10,
                 }}>
-                {data.DespatchDetails[0].CaseUser.Name}
+                {val.CaseUser.Name}
               </Text>
-              <View style={{flexDirection: 'column', justifyContent: 'center'}}>
+                  );
+              })}
+              
+              </View>
+              <View style={{flexDirection: 'column', justifyContent: 'center',flex:2}}>
                 <Text
                   style={{color: 'white', fontSize: 18, fontWeight: 'bold'}}>
                   {data.DespatchDetails[0].OrderDetails.SOrderNo}
@@ -233,6 +245,7 @@ const HistoryTaskList = props => {
     var url2 =
       'http://wheathwaapi.vielife.com.tw/api/DriverInfo/GetAllPassGroup/' +
       user.response.Cars.DriverId + '?sDate=' + sDate + '&eDate=' + eDate;
+      console.log(url2);
     const data = await fetch(
       url2,
       {
