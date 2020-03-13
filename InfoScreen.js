@@ -117,6 +117,7 @@ const InfoScreen = props => {
   } else {
     const infoData = data.response;
     const sex = infoData.Sex == '1' ? '男' : '女';
+    const pi= infoData.Cars.Status===1?'可派發':'不可派發';
     console.log('INFO PROPS IS', infoData.Sex);
     const licenceNum = infoData.DriverLicense.length;
     var licence = [];
@@ -188,7 +189,7 @@ const InfoScreen = props => {
           />
           <Card.Content>
             <Title>{'司機:' + infoData.StatusChinese}</Title>
-            <Title>{'車輛:' + infoData.StatusChinese}</Title>
+            <Title>{'車輛:' + pi}</Title>
           </Card.Content>
 
           <Card.Actions>
