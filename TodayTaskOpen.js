@@ -65,8 +65,9 @@ const TodayTaskOpen = props => {
   const [realMoney, setrealMoney] = useState('0');
   const [cashSteps, setcashSteps] = useState(0);
   const [foreignPeople, setforeignPeople] = useState(0);
-  const [people, setpeople] = useState(0);
   const [detailIndex, setdetailIndex] = useState(0);
+  const [askingMoney, setaskingMoney] = useState(false);
+  
   const [isLoading, setLoading] = useState(true);
   const [carChecked, setcarChecked] = useState(false);
   const [bodyChecked, setbodyChecked] = useState(false);
@@ -83,6 +84,9 @@ const TodayTaskOpen = props => {
   );
   console.log('STATUS', caseStatus);
   console.log('Done', doneCase);
+  console.log('index', detailIndex);
+  const [people, setpeople] = useState(taskData[detailIndex].OrderDetails.FamilyWith+taskData[detailIndex].OrderDetails.ForeignFamilyWith);
+  console.log('陪同', taskData[detailIndex].OrderDetails.FamilyWith+taskData[detailIndex].OrderDetails.ForeignFamilyWith);
 
   const origin = {
     latitude: taskData[detailIndex].OrderDetails.FromLat,
@@ -172,6 +176,7 @@ const TodayTaskOpen = props => {
   };
 
   const askCash = async () => {
+    setaskingMoney(true);
     let url = `http://wheathwaapi.vielife.com.tw/api/OrderDetails/PutDetailRealWith?OrderDetailId=${
       taskData[detailIndex].OrderDetails.Id
     }&RealFamily=${people}`;
@@ -191,6 +196,7 @@ const TodayTaskOpen = props => {
           setLoading(false);
         }
         console.log('updateStatus AJAX', res);
+        setaskingMoney(false);
         return res;
       })
       .catch(err =>
@@ -555,7 +561,7 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
             </View>
             <View style={styles.titleRight}>
               <Text style={{color: 'white', fontSize: 20}}>
-                {'個案' + 1 + '/' + '陪同' + (foreignPeople + people)}
+                {'個案' + 1 + '/' + '陪同' + (taskData[detailIndex].OrderDetails.FamilyWith+taskData[detailIndex].OrderDetails.ForeignFamilyWith)}
               </Text>
             </View>
           </View>
@@ -919,8 +925,9 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
             labelStyle={{color: 'white', fontSize: 20}}
             contentStyle={{width: '100%', paddingHorizontal: 50}}
             mode="outlined"
+            disabled={askingMoney}
             onPress={() => handleCashNext()}>
-            {cashSteps == 0 ? '現金' : '確認收款'}
+            {cashSteps == 0 ? (askingMoney ?'金額計算中...':'現金') : '確認收款'}
           </Button>
           <Button
             style={

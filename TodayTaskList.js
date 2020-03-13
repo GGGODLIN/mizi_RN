@@ -207,7 +207,7 @@ const TodayTaskList = props => {
             Alert.alert('網路異常，請稍後再試...', ' ', [
               {
                 text: '確定',
-                onPress: () => {},
+                onPress: () => {fetchData()},
               },
             ]),
           );
