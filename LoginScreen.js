@@ -19,6 +19,7 @@ import {
   Button,
 } from 'react-native-elements';
 import AsyncStorage from '@react-native-community/async-storage';
+import DeviceInfo from 'react-native-device-info';
 
 import {Divider, TextInput} from 'react-native-paper';
 import {request, PERMISSIONS} from 'react-native-permissions';
@@ -73,6 +74,8 @@ class LoginScreen extends Component {
           });
       });
       this._test_setItem();
+      
+
   }
 
   _test_setItem = async () => {
@@ -94,10 +97,12 @@ class LoginScreen extends Component {
   };
 
   handleLogin = async () => {
+    let deviceId = DeviceInfo.getUniqueId();
     let url = `http://wheathwaapi.vielife.com.tw/api/DriverInfo/DriverLogin?`;
     let query = `acc=${this.emailInput.input._lastNativeText}`;
     let query2 = `pwd=${this.passwordInput.input._lastNativeText}`;
-    url += query + '&' + query2;
+    let query3 = `mDevice=${deviceId}`;
+    url += query + '&' + query2 + '&' + query3;
 
     console.log(`Making LOGGING request to: ${url}`);
 

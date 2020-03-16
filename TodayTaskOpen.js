@@ -128,6 +128,7 @@ const TodayTaskOpen = props => {
     let tempStatus = caseStatus;
     tempStatus[detailIndex] = caseStatus[detailIndex] + 1;
     setcaseStatus(tempStatus);
+    setpeople(taskData[detailIndex].OrderDetails.FamilyWith+taskData[detailIndex].OrderDetails.ForeignFamilyWith);
     if (tempStatus[detailIndex] == 6) {
       updateStatusToSix();
       setoverlay(true);
@@ -159,6 +160,11 @@ const TodayTaskOpen = props => {
     await checkDone();
     setoverlay(true);
     setLoading(true);
+  };
+
+  const handleChangeIndex = async (index) => {
+    setdetailIndex(index);
+    setpeople(taskData[index].OrderDetails.FamilyWith+taskData[index].OrderDetails.ForeignFamilyWith);
   };
 
   const handleCashNext = async () => {
@@ -545,9 +551,7 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
                   {props.route.params.startDate}
                 </Text>
                 <Text style={{color: 'white', fontSize: 20}}>
-                  {taskData[detailIndex].OrderDetails.CanShared
-                    ? ' 可共乘'
-                    : ' 不可共乘'}
+                  {props.route.params.canShared}
                 </Text>
               </View>
             </View>
@@ -633,7 +637,7 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
             </MapView>
           </View>
           <ButtonGroup
-            onPress={setdetailIndex}
+            onPress={handleChangeIndex}
             selectedIndex={detailIndex}
             disabled={doneCase}
             buttons={caseNames}
@@ -821,7 +825,7 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
               陪同人數:
             </Text>
             <Picker
-              enabled={cashSteps == 0 ? true : false}
+              enabled={(cashSteps == 0 && !askingMoney) ? true : false}
               selectedValue={people}
               style={{flex: 1}}
               onValueChange={(itemValue, itemIndex) => setpeople(itemValue)}>

@@ -90,10 +90,11 @@ const App = () => {
 		
 	}
 	if (logged) {
+		console.log('data?', logindata);
 		return (
 			<PaperProvider>
 				<NavigationContainer>
-					<BgTracking />
+					<BgTracking DriverId={logindata.response.Cars.DriverId}/>
 					<RootNavigator
 						switchOn={logged}
 						logindata={logindata}

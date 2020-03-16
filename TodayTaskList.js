@@ -43,10 +43,11 @@ function Item({data, navigation}) {
     startDate = startTime.substring(0, pos);
     startTime = startTime.substring(pos + 1, pos + 6);
   }
-  var canShared = data.DespatchDetails[0].OrderDetails.CanShared
-    ? '可以共乘'
-    : '不可共乘';
+  var canShared = data.DespatchDetails.length>=2?'有共乘':'無共乘';
   var FamilyWith = data.DespatchDetails[0].OrderDetails.FamilyWith;
+  const sum = (data.DespatchDetails.length===1)?data.DespatchDetails[0].OrderDetails.FamilyWith+data.DespatchDetails[0].OrderDetails.ForeignFamilyWith:data.DespatchDetails.reduce(function (accumulator, currentValue, currentIndex, array) {
+  return accumulator.OrderDetails.FamilyWith+currentValue.OrderDetails.FamilyWith+accumulator.OrderDetails.ForeignFamilyWith+currentValue.OrderDetails.ForeignFamilyWith;
+});
   var ForeignFamilyWith =
     data.DespatchDetails[0].OrderDetails.ForeignFamilyWith;
   var FromAddr = data.DespatchDetails[0].OrderDetails.FromAddr;
@@ -65,6 +66,7 @@ function Item({data, navigation}) {
           startTime: startTime,
           startDate: startDate,
           withPeople: FamilyWith+ForeignFamilyWith,
+          canShared:canShared,
         })
       }>
       <View
@@ -126,7 +128,7 @@ function Item({data, navigation}) {
                 <Text
                   allowFontScaling={false}
                   style={{color: 'white', fontSize: 24}}>
-                  {'個案' + data.DespatchDetails.length + '/' + '陪同' + (FamilyWith+ForeignFamilyWith)}
+                  {'個案' + data.DespatchDetails.length + '/' + '陪同' + sum}
                 </Text>
                 <Text
                   allowFontScaling={false}
