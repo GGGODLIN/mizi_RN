@@ -44,6 +44,8 @@ const BodyCheckScreen = props => {
   console.log('CHECK BODY?');
   const pushAction = StackActions.push('CheckMainScreen');
   const [data, setdata] = useState({});
+  const [date, setDate] = useState(new Date());
+
   const [input1, setinput1] = useState(0);
   const [input2, setinput2] = useState(0);
   const [input3, setinput3] = useState(0);
@@ -169,7 +171,13 @@ const BodyCheckScreen = props => {
           .then(res => {
             console.log('FETCH BODY CHECKED?', res.response.DriverCheck);
             if (res.response.DriverCheck) {
-              props.navigation.navigate('CheckMainScreen');
+              var nowDate = `${date.getFullYear()}-${date.getMonth() +
+                1}-${date.getDate()}`;
+              let url = `http://wheathwaapi.vielife.com.tw/api/CheckResult/GetCheckDriverMappingSingle?DriverId=${
+                obj_value.response.Id
+              }&date=${nowDate}`;
+
+              fetchDataChecked(url);
             }
           });
         setdata(obj_value);
@@ -179,6 +187,56 @@ const BodyCheckScreen = props => {
       // Error retrieving data
     }
   }
+
+  const fetchDataChecked = async url => {
+    
+
+    console.log(`Making CheckedList request to: ${url}`);
+
+    const data = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(response => response.json())
+      .then(res => {
+        console.log('CheckedList AJAX', res);
+        Alert.alert(
+          '今日身心已檢查完畢',
+          `收縮壓:${res.response.SystolicBlood}
+舒張壓:${res.response.DiastolicBlood}
+額溫值:${res.response.TemperatureValue}
+心率值:${res.response.HeartRate}
+
+沒有:
+          ${res.response.NoSituation}
+          
+有、但沒去看醫生:
+          ${res.response.HasSituationNoChecked}
+
+有、已經看過醫生:
+          ${res.response.HasSituationAndChecked}`,
+          [
+            {
+              text: '確定',
+              onPress: () => {
+                props.navigation.navigate('CheckMainScreen');
+              },
+            },
+          ],
+        );
+      })
+      .catch(err =>
+        {console.log(err);
+                Alert.alert('網路異常，請稍後再試...', ' ', [
+                  {
+                    text: '確定',
+                    onPress: () => {},
+                  },
+                ]);}
+      );
+  };
 
   const fetchDataModal = async () => {
     let url = `http://tccapi.1966.org.tw/api/CheckItem/GetCheckDriver`;

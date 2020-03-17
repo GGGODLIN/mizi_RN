@@ -135,7 +135,7 @@ const PastReceive = props => {
     await setLoading(true);
     var url2 =
       'http://tccapi.1966.org.tw/api/DriverInfo/GetDriverReceiveListDate/' +
-      user.response.Cars.DriverId +
+      user.response.Id +
       '?StartDate=' +
       sDate +
       '&EndDate=' +
@@ -173,7 +173,7 @@ const PastReceive = props => {
 
         var url3 =
           'http://tccapi.1966.org.tw/api/DriverInfo/GetDriverReceiveListDate/' +
-          obj_value.response.Cars.DriverId +
+          obj_value.response.Id +
           '?StartDate=' +
           '&EndDate=';
 

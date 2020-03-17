@@ -285,7 +285,7 @@ const HistoryTaskOpen = props => {
             </View>
             <View style={styles.titleRight}>
               <Text style={{color: 'white', fontSize: 20}}>
-                {'個案' + 1 + '/' + '陪同' + (foreignPeople + people)}
+                {'個案' + 1 + '/' + '陪同' + (taskData[detailIndex].OrderDetails.RealFamilyWith + taskData[detailIndex].OrderDetails.RealForeignFamilyWith)}
               </Text>
             </View>
           </View>
@@ -405,7 +405,7 @@ const HistoryTaskOpen = props => {
               應收車資:
             </Text>
             <Text style={{fontSize: 30, fontWeight: 'bold', color: 'orange'}}>
-              {taskData[detailIndex].OrderDetails.TotalAmt}
+              {caseStatus[detailIndex]===6? taskData[detailIndex].OrderDetails.RealTotalAmt : (taskData[detailIndex].OrderDetails.SelfPayAmt+taskData[detailIndex].OrderDetails.OtherAmt)}
             </Text>
           </View>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>

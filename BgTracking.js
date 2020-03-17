@@ -26,20 +26,7 @@ class BgTracking extends Component {
       activitiesInterval: 30000,
       stopOnStillActivity: false,
       maxLocations: 10000,
-      url: 'http://tccapi.1966.org.tw/api/DriverInfo/PostDeviceGPS',
-      httpHeaders: {
-        'Content-Type': 'application/json',
-      },
-      // customize post properties
-      postTemplate: {
-        Id: 15,
 
-        DeviceID: deviceId,
-        Lon: '@longitude',
-        Lat: '@latitude',
-
-        // you can also add your own properties
-      },
     });
 
     BackgroundGeolocation.on('location', location => {
@@ -56,7 +43,7 @@ class BgTracking extends Component {
           'http://tccapi.1966.org.tw/api/DriverInfo/PostDeviceGPS';
 
         console.log(`Making GPS request to: ${url}`);
-        console.log(deviceId,location.longitude,location.latitude);
+        console.log(deviceId,location.longitude,location.latitude,this.props.DriverId);
 
         const data = fetch(url, {
           method: 'POST',
@@ -65,7 +52,7 @@ class BgTracking extends Component {
           },
           body: JSON.stringify({
 
-
+            DriverId:this.props.DriverId,
             DeviceID: deviceId,
             Lon: location.longitude,
             Lat: location.latitude,
