@@ -4,9 +4,9 @@ status:
 2.以出發(顯示 抵達上車地點)->按下->跳Overlay核對身分(沒有用)
 3.顯示課上/空趟
 4.顯示克夏
-5.表單:外籍&家屬 現今按鈕->按下http://tccapi.1966.org.tw/api/OrderDetails/PutDetailRealWith?OrderDetailId=448&RealFamily=0&RealForeign=1
-http://tccapi.1966.org.tw/api/OrderDetails/PutDetailStatus?OrderDetailId=448&StatusInt=5
-5.2.可以改的實收車資 備註->確認收款->OVERLAY請付款人簽名http://tccapi.1966.org.tw/api/Img/Pic
+5.表單:外籍&家屬 現今按鈕->按下http://ttcapi.1966.org.tw/api/OrderDetails/PutDetailRealWith?OrderDetailId=448&RealFamily=0&RealForeign=1
+http://ttcapi.1966.org.tw/api/OrderDetails/PutDetailStatus?OrderDetailId=448&StatusInt=5
+5.2.可以改的實收車資 備註->確認收款->OVERLAY請付款人簽名http://ttcapi.1966.org.tw/api/Img/Pic
 6.YA!
 
 <MapView

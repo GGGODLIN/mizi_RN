@@ -74,7 +74,7 @@ class LoginScreen extends Component {
           });
       });
       this._test_setItem();
-      
+
 
   }
 
@@ -98,7 +98,7 @@ class LoginScreen extends Component {
 
   handleLogin = async () => {
     let deviceId = DeviceInfo.getUniqueId();
-    let url = `http://tccapi.1966.org.tw/api/DriverInfo/DriverLogin?`;
+    let url = `http://ttcapi.1966.org.tw/api/DriverInfo/DriverLogin?`;
     let query = `acc=${this.emailInput.input._lastNativeText}`;
     let query2 = `pwd=${this.passwordInput.input._lastNativeText}`;
     let query3 = `mDevice=${deviceId}`;
@@ -136,7 +136,7 @@ class LoginScreen extends Component {
   };
 
   handleSendAcc = async () => {
-    let url = `http://tccapi.1966.org.tw/api/DriverInfo/PushPhoneMessage?phoneNum=${
+    let url = `http://ttcapi.1966.org.tw/api/DriverInfo/PushPhoneMessage?phoneNum=${
       this.state.input1
     }`;
 
@@ -179,7 +179,7 @@ class LoginScreen extends Component {
   };
 
   handleSendVCode = async () => {
-    let url = `http://tccapi.1966.org.tw/api/DriverInfo/CheckPhoneCode?phoneNum=${
+    let url = `http://ttcapi.1966.org.tw/api/DriverInfo/CheckPhoneCode?phoneNum=${
       this.state.input1
     }&vCode=${this.state.input2}`;
 
@@ -220,7 +220,7 @@ class LoginScreen extends Component {
   };
 
   handleSendNewPwd = async () => {
-    let url = `http://tccapi.1966.org.tw/api/DriverInfo/PutForgetPassword?cAccount=${
+    let url = `http://ttcapi.1966.org.tw/api/DriverInfo/PutForgetPassword?cAccount=${
       this.state.input1
     }&cPassword=${this.state.input3}`;
 
@@ -518,7 +518,7 @@ class LoginScreen extends Component {
                 }}>
                 司機登入
               </Text>
-              
+
 
               <View style={styles.overlay}>
                 <View style={styles.triangleLeft} />
