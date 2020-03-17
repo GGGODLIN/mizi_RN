@@ -205,14 +205,14 @@ const HistoryTaskList = props => {
         setuser(obj_value);
         console.log('GET FROM ASYN IS', obj_value);
         var url2 =
-          'http://ttcapi.1966.org.tw/api/DriverInfo/GetAllPassGroup/' +
+          'http://www.e9life.com/api/DriverInfo/GetAllPassGroup/' +
           obj_value.response.Id;
         seturl(
-          `http://ttcapi.1966.org.tw/api/DriverInfo/GetAllPassGroup/${
+          `http://www.e9life.com/api/DriverInfo/GetAllPassGroup/${
             obj_value.response.Id
           }`,
         );
-        //let url = `http://ttcapi.1966.org.tw/api/DriverInfo/GetAllGroup/${obj_value.Cars.DriverId}`;
+        //let url = `http://www.e9life.com/api/DriverInfo/GetAllGroup/${obj_value.Cars.DriverId}`;
 
         const data = await fetch(url2, {
           method: 'GET',
@@ -244,7 +244,7 @@ const HistoryTaskList = props => {
   async function fetchDataDate(sDate,eDate) {
     await setLoading(true);
     var url2 =
-      'http://ttcapi.1966.org.tw/api/DriverInfo/GetAllPassGroup/' +
+      'http://www.e9life.com/api/DriverInfo/GetAllPassGroup/' +
       user.response.Id + '?sDate=' + sDate + '&eDate=' + eDate;
 
     const data = await fetch(

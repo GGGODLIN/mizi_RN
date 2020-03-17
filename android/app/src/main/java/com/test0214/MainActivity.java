@@ -1,4 +1,4 @@
-package com.miziTaidon;
+package com.miziYeelan;
 
 import com.facebook.react.ReactActivity;
 
@@ -10,6 +10,6 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "miziTaidon";
+    return "miziYeelan";
   }
 }
