@@ -93,7 +93,7 @@ const App = () => {
 		return (
 			<PaperProvider>
 				<NavigationContainer>
-					<BgTracking />
+					<BgTracking DriverId={logindata.response.Cars.DriverId}/>
 					<RootNavigator
 						switchOn={logged}
 						logindata={logindata}
