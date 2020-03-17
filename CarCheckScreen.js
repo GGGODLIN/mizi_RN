@@ -81,7 +81,7 @@ const CarCheckScreen = props => {
             if (res.response.CarCheck) {
               var nowDate = `${date.getFullYear()}-${date.getMonth() +
                 1}-${date.getDate()}`;
-              let url = `http://wheathwaapi.vielife.com.tw/api/CheckResult/GetCheckCarMapping?CarId=${
+              let url = `http://tccapi.1966.org.tw/api/CheckResult/GetCheckCarMapping?CarId=${
                 obj_value.response.Cars.Id
               }&date=${nowDate}`;
 

@@ -173,7 +173,7 @@ const BodyCheckScreen = props => {
             if (res.response.DriverCheck) {
               var nowDate = `${date.getFullYear()}-${date.getMonth() +
                 1}-${date.getDate()}`;
-              let url = `http://wheathwaapi.vielife.com.tw/api/CheckResult/GetCheckDriverMappingSingle?DriverId=${
+              let url = `http://tccapi.1966.org.tw/api/CheckResult/GetCheckDriverMappingSingle?DriverId=${
                 obj_value.response.Id
               }&date=${nowDate}`;
 
