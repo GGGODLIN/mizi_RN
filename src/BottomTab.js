@@ -29,7 +29,7 @@ import {
   Button,
 } from 'react-native-paper';
 const args = {
-  number: '089357328', // String value with the number to call
+  number: '089855003', // String value with the number to call
   prompt: false, // Optional boolean property. Determines if the user should be prompt prior to the call
 };
 const Tab = createMaterialBottomTabNavigator();
@@ -53,7 +53,7 @@ export default function BottomTab(props) {
       shifting={false}
       activeColor="#f0edf6"
       inactiveColor="black"
-      
+
       lazy={false}
       unmountOnBlur={true}>
       <Tab.Screen

@@ -57,7 +57,7 @@ const InfoScreen = props => {
 
   const handleSubmit = async () => {
     var url3 =
-      'http://ttcapi.1966.org.tw/api/DriverInfo/PutDriverPwd?DriverId=' +
+      'http://ttsdapi.1966.org.tw/api/DriverInfo/PutDriverPwd?DriverId=' +
       data.response.Id +
       '&oldPwd=' +
       input1 +
