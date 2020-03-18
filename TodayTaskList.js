@@ -46,8 +46,9 @@ function Item({data, navigation}) {
   var canShared = data.DespatchDetails.length>=2?'有共乘':'無共乘';
   var FamilyWith = data.DespatchDetails[0].OrderDetails.FamilyWith;
   const sum = (data.DespatchDetails.length===1)?data.DespatchDetails[0].OrderDetails.FamilyWith+data.DespatchDetails[0].OrderDetails.ForeignFamilyWith:data.DespatchDetails.reduce(function (accumulator, currentValue, currentIndex, array) {
-  return accumulator.OrderDetails.FamilyWith+currentValue.OrderDetails.FamilyWith+accumulator.OrderDetails.ForeignFamilyWith+currentValue.OrderDetails.ForeignFamilyWith;
-});
+  console.log("font",accumulator);
+  return currentValue.OrderDetails.FamilyWith+currentValue.OrderDetails.ForeignFamilyWith+accumulator;
+},0);
   var ForeignFamilyWith =
     data.DespatchDetails[0].OrderDetails.ForeignFamilyWith;
   var FromAddr = data.DespatchDetails[0].OrderDetails.FromAddr;

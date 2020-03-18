@@ -37,9 +37,7 @@ function Item({data, navigation}) {
     startDate = startTime.substring(0, pos);
     startTime = startTime.substring(pos + 1,pos+6);
   }
-  var canShared = data.DespatchDetails[0].OrderDetails.CanShared
-    ? '可以共乘'
-    : '不可共乘';
+ var canShared = data.DespatchDetails.length>=2?'有共乘':'無共乘';
   var statusString =
     data.DespatchDetails[0].OrderDetails.Status == 0
       ? '新訂單'
@@ -81,6 +79,7 @@ function Item({data, navigation}) {
           data: data,
           startTime: startTime,
           startDate: startDate,
+          canShared:canShared,
         })
       }>
       <View
