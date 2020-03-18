@@ -42,8 +42,8 @@ const HitCard = props => {
   const [isLoading, setLoading] = useState(true);
   const [isOn, setOn] = useState(false);
   const [isOff, setOff] = useState(false);
-  const [shouldReceiveAmt, setshouldReceiveAmt] = useState(0.0);
-  const [realReceiveAmt, setrealReceiveAmt] = useState(0.0);
+  const [shouldReceiveAmt, setshouldReceiveAmt] = useState(' 讀取中...');
+  const [realReceiveAmt, setrealReceiveAmt] = useState(' 讀取中...');
   const [status, setstatus] = useState(1);
   const [showOverlay, setshowOverlay] = useState(false);
   const [myIcon1, setmyIcon1] = useState();
