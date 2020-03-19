@@ -811,7 +811,7 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
           <View
             style={
               caseStatus[detailIndex] == 5
-                ? {flexDirection: 'row', alignItems: 'center',padding:10}
+                ? {flexDirection: 'row', alignItems: 'center',justifyContent:'center',alignContent:'center',padding:10}
                 : {display: 'none'}
             }>
             <Text
@@ -819,14 +819,16 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
                 fontSize: 20,
                 fontWeight: 'bold',
                 paddingStart: 30,
-                flex: 1,
+                flex: 0.9,
               }}>
               陪同人數:
             </Text>
-            <View style={{transform: [{scale:1.2}]}}>
+            <View style={{transform: [{scale:1.5}]}}>
             <RNPickerSelect
                 onValueChange={(value) => setpeople(value)}
             disabled={(cashSteps == 0 && !askingMoney)? false : true}
+            value={people}
+            textInputProps={{borderBottomWidth:0.5,borderColor:'black'}}
                 items={[
                     { label: "0人", value: 0 },
                     { label: "1人", value: 1 },
