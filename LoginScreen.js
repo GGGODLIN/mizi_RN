@@ -19,7 +19,7 @@ import {
   Button,
 } from 'react-native-elements';
 import AsyncStorage from '@react-native-community/async-storage';
-
+import DeviceInfo from 'react-native-device-info';
 import {Divider, TextInput} from 'react-native-paper';
 import {request, PERMISSIONS} from 'react-native-permissions';
 import CountdownCircle from 'react-native-countdown-circle';
@@ -94,11 +94,12 @@ class LoginScreen extends Component {
   };
 
   handleLogin = async () => {
+    let deviceId = DeviceInfo.getUniqueId();
     let url = `https://api.donkeymove.com/api/DriverInfo/DriverLogin?`;
     let query = `acc=${this.emailInput.input._lastNativeText}`;
     let query2 = `pwd=${this.passwordInput.input._lastNativeText}`;
-    url += query + '&' + query2;
-
+    let query3 = `mDevice=${deviceId}`;
+    url += query + '&' + query2 + '&' + query3;
     console.log(`Making LOGGING request to: ${url}`);
 
     const data = await fetch(url, {

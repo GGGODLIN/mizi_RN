@@ -43,8 +43,8 @@ const HitCard = props => {
   const [isLoading, setLoading] = useState(true);
   const [isOn, setOn] = useState(false);
   const [isOff, setOff] = useState(false);
-  const [shouldReceiveAmt, setshouldReceiveAmt] = useState(0.0);
-  const [realReceiveAmt, setrealReceiveAmt] = useState(0.0);
+  const [shouldReceiveAmt, setshouldReceiveAmt] = useState(' 讀取中...');
+  const [realReceiveAmt, setrealReceiveAmt] = useState(' 讀取中...');
   const [status, setstatus] = useState(1);
   const [showOverlay, setshowOverlay] = useState(false);
   const [myIcon1, setmyIcon1] = useState();
@@ -66,7 +66,7 @@ const HitCard = props => {
         console.log('GET FROM ASYN IS', obj_value);
         var url2 =
           'https://api.donkeymove.com/api/DriverInfo/GetAllPunchByDriver/' +
-          obj_value.response.Cars.DriverId;
+          obj_value.response.Id;
 
         const data = await fetch(url2, {
           method: 'GET',
@@ -105,7 +105,7 @@ const HitCard = props => {
 
         var url3 =
           'https://api.donkeymove.com/api/DriverInfo/GetDriverReceive/' +
-          obj_value.response.Cars.DriverId;
+          obj_value.response.Id;
 
         const data2 = await fetch(url3, {
           method: 'GET',
@@ -136,7 +136,7 @@ const HitCard = props => {
 
   async function handleSubmitHitCard() {
     var url2 = `https://api.donkeymove.com/api/DriverInfo/SetPunchTime/${
-      user.response.Cars.DriverId
+      user.response.Id
     }?status=${status}`;
 
     const data = await fetch(url2, {
@@ -238,7 +238,7 @@ const HitCard = props => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            DriverId: user.response.Cars.DriverId,
+            DriverId: user.response.Id,
 
             DriverSign: res.response,
           }),

@@ -269,9 +269,7 @@ const HistoryTaskOpen = props => {
                   {props.route.params.startDate}
                 </Text>
                 <Text style={{color: 'white', fontSize: 20}}>
-                  {taskData[detailIndex].OrderDetails.CanShared
-                    ? ' 可共乘'
-                    : ' 不可共乘'}
+                  {props.route.params.canShared}
                 </Text>
               </View>
             </View>
@@ -285,7 +283,7 @@ const HistoryTaskOpen = props => {
             </View>
             <View style={styles.titleRight}>
               <Text style={{color: 'white', fontSize: 20}}>
-                {'個案' + 1 + '/' + '陪同' + (foreignPeople + people)}
+                {'個案' + 1 + '/' + '陪同' + (taskData[detailIndex].OrderDetails.RealFamilyWith + taskData[detailIndex].OrderDetails.RealForeignFamilyWith)}
               </Text>
             </View>
           </View>
@@ -405,7 +403,7 @@ const HistoryTaskOpen = props => {
               應收車資:
             </Text>
             <Text style={{fontSize: 30, fontWeight: 'bold', color: 'orange'}}>
-              {taskData[detailIndex].OrderDetails.TotalAmt}
+              {caseStatus[detailIndex]===6? taskData[detailIndex].OrderDetails.RealTotalAmt : (taskData[detailIndex].OrderDetails.SelfPayAmt+taskData[detailIndex].OrderDetails.OtherAmt)}
             </Text>
           </View>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -433,7 +431,7 @@ const HistoryTaskOpen = props => {
               備註:
             </Text>
             <Text style={{fontSize: 20, color: 'black', width: '50%'}}>
-              {taskData[detailIndex].DespatchDetail.Remark}
+              {taskData[detailIndex].DespatchDetail.Remark==='null'?' ':taskData[detailIndex].DespatchDetail.Remark}
             </Text>
           </View>
 

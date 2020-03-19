@@ -58,7 +58,7 @@ const InfoScreen = props => {
   const handleSubmit = async () => {
     var url3 =
       'https://api.donkeymove.com/api/DriverInfo/PutDriverPwd?DriverId=' +
-      data.response.Cars.DriverId +
+      data.response.Id +
       '&oldPwd=' +
       input1 +
       '&newPwd=' +
@@ -111,17 +111,27 @@ const InfoScreen = props => {
     console.log('info screen is loading...');
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <ActivityIndicator animating={true} size='large' />
+        <ActivityIndicator animating={true} size="large" />
       </View>
     );
   } else {
     const infoData = data.response;
     const sex = infoData.Sex == '1' ? '男' : '女';
+    const pi= infoData.Cars.Status===1?'可派發':'不可派發';
     console.log('INFO PROPS IS', infoData.Sex);
+    const licenceNum = infoData.DriverLicense.length;
+    var licence = [];
+    for (var i=0;i<licenceNum;i++){
+      licence[i]  =  '駕照: ' +
+                infoData.DriverLicense[i].CarTypeName +
+                `  (${infoData.DriverLicense[i].ExDate})`;
+    }
+    
+
     return (
       <ScrollView style={{flex: 1, flexDirection: 'column'}}>
         <Overlay
-        onBackdropPress={()=>setshowOverlay(false)}
+          onBackdropPress={() => setshowOverlay(false)}
           isVisible={showOverlay}
           windowBackgroundColor="rgba(255, 255, 255, .5)"
           overlayBackgroundColor="white"
@@ -140,7 +150,6 @@ const InfoScreen = props => {
             修改密碼
           </Text>
           <TextInput
-          
             mode="outlined"
             dense={true}
             error={input1 === 0 ? true : false}
@@ -151,7 +160,6 @@ const InfoScreen = props => {
             }}
           />
           <TextInput
-          
             mode="outlined"
             dense={true}
             error={input1 === 0 ? true : false}
@@ -181,7 +189,7 @@ const InfoScreen = props => {
           />
           <Card.Content>
             <Title>{'司機:' + infoData.StatusChinese}</Title>
-            <Title>{'車輛:' + infoData.StatusChinese}</Title>
+            <Title>{'車輛:' + pi}</Title>
           </Card.Content>
 
           <Card.Actions>
@@ -205,13 +213,25 @@ const InfoScreen = props => {
             <Divider />
             <Title>{'電子郵件: ' + infoData.Email}</Title>
             <Divider />
-            <Title>
-              {'駕照: ' +
-                infoData.DriverLicense[0].CarTypeName +
-                `  (${infoData.DriverLicense[0].ExDate})`}
+            <Title style={licenceNum>=1?{}:{display:'none'}}>
+              {licenceNum>=1 &&licence[0]}
+            </Title>
+            <Title style={licenceNum>=2?{}:{display:'none'}}>
+              {licenceNum>=2 &&licence[1]}
+            </Title>
+            <Title style={licenceNum>=3?{}:{display:'none'}}>
+              {licenceNum>=3 &&licence[2]}
+            </Title>
+            <Title style={licenceNum>=4?{}:{display:'none'}}>
+              {licenceNum>=4 &&licence[3]}
             </Title>
             <Divider />
-            <Title>{'保險: ' + (infoData.DriverSecure[0]===undefined?' ':infoData.DriverSecure[0])}</Title>
+            <Title>
+              {'保險: ' +
+                (infoData.DriverSecure[0] === undefined
+                  ? ' '
+                  : infoData.DriverSecure[0])}
+            </Title>
             <Divider />
             <Title>{'服務單位: ' + infoData.CompanyName}</Title>
             <Divider />

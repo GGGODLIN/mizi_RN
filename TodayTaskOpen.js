@@ -60,22 +60,22 @@ const TodayTaskOpen = props => {
   );
   const [ps, setps] = useState(' ');
   const [picPath, setpicPath] = useState(
-    '/storage/emulated/0/saved_signature/signature.png'
+    '/storage/emulated/0/saved_signature/signature.png',
   );
   const [picPathOnServer, setpicPathOnServer] = useState();
-  const [money, setmoney] = useState("0");
-  const [realMoney, setrealMoney] = useState("0");
+  const [money, setmoney] = useState('0');
+  const [realMoney, setrealMoney] = useState('0');
   const [cashSteps, setcashSteps] = useState(0);
   const [foreignPeople, setforeignPeople] = useState(0);
-  const [people, setpeople] = useState(0);
   const [detailIndex, setdetailIndex] = useState(0);
+  const [askingMoney, setaskingMoney] = useState(false);
+
   const [isLoading, setLoading] = useState(true);
   const [carChecked, setcarChecked] = useState(false);
   const [bodyChecked, setbodyChecked] = useState(false);
   const [overlay, setoverlay] = useState(true);
   const [delayForMap, setdelayForMap] = useState(false);
   const [fixbottom, setfixbottom] = useState(-1);
-
 
   const taskData = props.route.params.data.DespatchDetails.map(e => e);
   const caseNames = props.route.params.data.DespatchDetails.map(
@@ -86,6 +86,9 @@ const TodayTaskOpen = props => {
   );
   console.log('STATUS', caseStatus);
   console.log('Done', doneCase);
+  console.log('index', detailIndex);
+  const [people, setpeople] = useState(taskData[detailIndex].OrderDetails.FamilyWith+taskData[detailIndex].OrderDetails.ForeignFamilyWith);
+  console.log('陪同', taskData[detailIndex].OrderDetails.FamilyWith+taskData[detailIndex].OrderDetails.ForeignFamilyWith);
 
   const origin = {
     latitude: taskData[detailIndex].OrderDetails.FromLat,
@@ -127,6 +130,7 @@ const TodayTaskOpen = props => {
     let tempStatus = caseStatus;
     tempStatus[detailIndex] = caseStatus[detailIndex] + 1;
     setcaseStatus(tempStatus);
+    setpeople(taskData[detailIndex].OrderDetails.FamilyWith+taskData[detailIndex].OrderDetails.ForeignFamilyWith);
     if (tempStatus[detailIndex] == 6) {
       updateStatusToSix();
       setoverlay(true);
@@ -136,13 +140,13 @@ const TodayTaskOpen = props => {
       updateStatus();
       setoverlay(true);
       setLoading(true);
-      if(tempStatus[detailIndex]==3){
+      if (tempStatus[detailIndex] == 3) {
         Alert.alert(' ', '請與個案核對身分及目的地，若有問題請聯繫行控中心', [
           {
             text: '確定',
             onPress: () => {},
           },
-        ])
+        ]);
       }
     }
   };
@@ -160,7 +164,13 @@ const TodayTaskOpen = props => {
     setLoading(true);
   };
 
+  const handleChangeIndex = async (index) => {
+    setdetailIndex(index);
+    setpeople(taskData[index].OrderDetails.FamilyWith+taskData[index].OrderDetails.ForeignFamilyWith);
+  };
+
   const handleCashNext = async () => {
+    setLoading(true);
     const res = await askCash();
     setmoney(res.response);
     if (cashSteps == 0) {
@@ -174,12 +184,12 @@ const TodayTaskOpen = props => {
   };
 
   const askCash = async () => {
+    setaskingMoney(true);
     let url = `https://api.donkeymove.com/api/OrderDetails/PutDetailRealWith?OrderDetailId=${
       taskData[detailIndex].OrderDetails.Id
     }&RealFamily=${people}`;
 
     console.log(`Making Cash request to: ${url}`);
-
     const data = await fetch(url, {
       method: 'PUT',
       headers: {
@@ -190,22 +200,25 @@ const TodayTaskOpen = props => {
       .then(res => {
         setmoney(res.response);
         if (cashSteps == 0) {
-      setrealMoney(res.response);
-    }
+          setrealMoney(res.response);
+          setLoading(false);
+        }
         console.log('updateStatus AJAX', res);
+        setaskingMoney(false);
         return res;
-      }).catch(err =>
+      })
+      .catch(err =>
         Alert.alert('網路異常，請稍後再試...', ' ', [
           {
             text: '確定',
-            onPress: () => {},
+            onPress: () => {setLoading(false);},
           },
         ]),
       );
     return data;
   };
 
-  const postPic = async (props) => {
+  const postPic = async props => {
     let urii = `file://${props}`;
     console.log('SETPATH?????????', urii);
     console.log('PICPATH?????????', props);
@@ -262,7 +275,8 @@ const TodayTaskOpen = props => {
       .then(response => response.json())
       .then(res => {
         console.log('updateStatus AJAX', res);
-      }).catch(err =>
+      })
+      .catch(err =>
         Alert.alert('網路異常，請稍後再試...', ' ', [
           {
             text: '確定',
@@ -273,12 +287,12 @@ const TodayTaskOpen = props => {
   };
 
   const updateStatusToSix = async () => {
-    console.log("???????",taskData[detailIndex].OrderDetails.SOrderNo);
+    console.log('???????', taskData[detailIndex].OrderDetails.SOrderNo);
     let url = `https://api.donkeymove.com/api/OrderDetails/PutDetailStatus?OrderDetailId=${
       taskData[detailIndex].OrderDetails.Id
-    }&StatusInt=${
-      caseStatus[detailIndex]
-    }&receiveAmt=${realMoney}&signPic=${taskData[detailIndex].OrderDetails.SOrderNo}.png&remark=${ps}`;
+    }&StatusInt=${caseStatus[detailIndex]}&receiveAmt=${realMoney}&signPic=${
+      taskData[detailIndex].OrderDetails.SOrderNo
+    }.png&remark=${ps}`;
 
     console.log(`Making Status6 request to: ${url}`);
 
@@ -291,7 +305,8 @@ const TodayTaskOpen = props => {
       .then(response => response.json())
       .then(res => {
         console.log('updateStatus AJAX', res);
-      }).catch(err =>
+      })
+      .catch(err =>
         Alert.alert('網路異常，請稍後再試...', ' ', [
           {
             text: '確定',
@@ -318,10 +333,12 @@ const TodayTaskOpen = props => {
       if (item < 6) {
         console.log('INDEX????', index);
         console.log('DONE????????', doneCase, doneCase.length);
-        setpeople(0);
-        setforeignPeople(0);
+
         if (caseStatus[0] >= 6) {
           setdetailIndex(index);
+          setpeople(taskData[index].OrderDetails.FamilyWith+taskData[index].OrderDetails.ForeignFamilyWith);
+          console.log("with?????????",taskData[index].OrderDetails.FamilyWith+taskData[index].OrderDetails.ForeignFamilyWith)
+        setforeignPeople(taskData[index].OrderDetails.ForeignFamilyWith);
           setlongitudeDelta(
             Math.abs(
               taskData[index].OrderDetails.FromLon -
@@ -353,6 +370,7 @@ const TodayTaskOpen = props => {
 
   useEffect(() => {
     checkDone();
+    console.log("CHECKDONE????!?!?!?!?!?");
   }, []);
 
   if (isLoading || finish) {
@@ -382,11 +400,11 @@ const TodayTaskOpen = props => {
           </Button>
         </View>
       );
-    } else if(delayForMap){
-      setTimeout(()=>{
+    } else if (delayForMap) {
+      setTimeout(() => {
         setLoading(false);
         setdelayForMap(false);
-      },1);
+      }, 1);
 
       console.log('info screen is loading...');
       return (
@@ -394,9 +412,9 @@ const TodayTaskOpen = props => {
           <ActivityIndicator animating={true} size="large" />
         </View>
       );
-    }else{
-        setLoading(false);
-        setdelayForMap(false);
+    } else {
+      setLoading(false);
+      setdelayForMap(false);
 
       console.log('info screen is loading...22222222');
       return (
@@ -406,7 +424,7 @@ const TodayTaskOpen = props => {
       );
     }
   } else {
-    console.log('DELTA', latitudeDelta,longitudeDelta);
+    console.log('DELTA', latitudeDelta, longitudeDelta);
     return (
       <ScrollView style={{flex: 1}}>
         <Overlay
@@ -451,7 +469,8 @@ const TodayTaskOpen = props => {
                 style={{paddingLeft: 10}}
               />
               <Text style={styles.addrText2}>
-                {taskData[detailIndex].OrderDetails.FromAddr}
+                {`<${taskData[detailIndex].OrderDetails.FromAddrRemark}>
+${taskData[detailIndex].OrderDetails.FromAddr}`}
               </Text>
             </View>
             <View style={styles.addr2}>
@@ -470,7 +489,8 @@ const TodayTaskOpen = props => {
                 style={{paddingLeft: 10}}
               />
               <Text style={styles.addrText2}>
-                {taskData[detailIndex].OrderDetails.ToAddr}
+                {`<${taskData[detailIndex].OrderDetails.ToAddrRemark}>
+${taskData[detailIndex].OrderDetails.ToAddr}`}
               </Text>
             </View>
           </View>
@@ -530,9 +550,7 @@ const TodayTaskOpen = props => {
                   {props.route.params.startDate}
                 </Text>
                 <Text style={{color: 'white', fontSize: 20}}>
-                  {taskData[detailIndex].OrderDetails.CanShared
-                    ? ' 可共乘'
-                    : ' 不可共乘'}
+                  {props.route.params.canShared}
                 </Text>
               </View>
             </View>
@@ -546,7 +564,7 @@ const TodayTaskOpen = props => {
             </View>
             <View style={styles.titleRight}>
               <Text style={{color: 'white', fontSize: 20}}>
-                {'個案' + 1 + '/' + '陪同' + (foreignPeople + people)}
+                {'個案' + 1 + '/' + '陪同' + (taskData[detailIndex].OrderDetails.FamilyWith+taskData[detailIndex].OrderDetails.ForeignFamilyWith)}
               </Text>
             </View>
           </View>
@@ -567,18 +585,18 @@ const TodayTaskOpen = props => {
           <View
             style={
               caseStatus[detailIndex] >= 5
-                ? {height: 0.001, position: 'relative'}
+                ? {height: 0.1, position: 'relative'}
                 : {height: 250, position: 'relative', backgroundColor: 'pink'}
             }
             contentContainerStyle={StyleSheet.absoluteFillObject}>
             <MapView
-              style={[styles.map, { bottom:fixbottom}]}
+              style={[styles.map, {bottom: fixbottom}]}
               onKmlReady={e => console.log('HAHA', e.nativeEvent)}
               region={{
                 latitude: taskData[detailIndex].OrderDetails.FromLat,
                 longitude: taskData[detailIndex].OrderDetails.FromLon,
-                latitudeDelta:latitudeDelta*1.1,
-                longitudeDelta:longitudeDelta*1.1,
+                latitudeDelta: latitudeDelta * 1.1,
+                longitudeDelta: longitudeDelta * 1.1,
               }}>
               <Marker
                 coordinate={{
@@ -618,7 +636,7 @@ const TodayTaskOpen = props => {
             </MapView>
           </View>
           <ButtonGroup
-            onPress={setdetailIndex}
+            onPress={handleChangeIndex}
             selectedIndex={detailIndex}
             disabled={doneCase}
             buttons={caseNames}
@@ -647,7 +665,8 @@ const TodayTaskOpen = props => {
               style={{paddingLeft: 30}}
             />
             <Text style={styles.addrText}>
-              {taskData[detailIndex].OrderDetails.FromAddr}
+              {`<${taskData[detailIndex].OrderDetails.FromAddrRemark}>
+${taskData[detailIndex].OrderDetails.FromAddr}`}
             </Text>
           </View>
           <View
@@ -672,7 +691,8 @@ const TodayTaskOpen = props => {
               style={{paddingLeft: 30}}
             />
             <Text style={styles.addrText}>
-              {taskData[detailIndex].OrderDetails.ToAddr}
+              {`<${taskData[detailIndex].OrderDetails.ToAddrRemark}>
+${taskData[detailIndex].OrderDetails.ToAddr}`}
             </Text>
           </View>
           <Button
@@ -691,7 +711,25 @@ const TodayTaskOpen = props => {
             labelStyle={{color: 'white', fontSize: 20}}
             contentStyle={{width: '100%', paddingHorizontal: 50}}
             mode="outlined"
-            onPress={() => handleNextStep()}>
+            onPress={() => {
+              if (caseStatus[detailIndex] >= 4) {
+                Alert.alert('確定客下?', ' ', [
+                  {
+                    text: '取消',
+                    onPress: () => console.log('Cancel Pressed'),
+                    style: 'cancel',
+                  },
+                  {
+                    text: '確定',
+                    onPress: () => {
+                      handleNextStep();
+                    },
+                  },
+                ]);
+              } else {
+                handleNextStep();
+              }
+            }}>
             {caseStatus[detailIndex] == 1
               ? '出發前往'
               : caseStatus[detailIndex] == 2
@@ -700,6 +738,11 @@ const TodayTaskOpen = props => {
               ? '客上'
               : '客下'}
           </Button>
+          <View style={
+              caseStatus[detailIndex] >= 5 ? {display: 'none'} : {width:'80%',alignItems:'flex-start',alignSelf:'center'}
+            }>
+          <Text style={{fontSize:20}}>{`備註:${taskData[detailIndex].CaseUser.Remark}`}</Text>
+            </View>
           <Button
             style={
               caseStatus[detailIndex] == 3
@@ -736,7 +779,7 @@ const TodayTaskOpen = props => {
           <View
             style={
               caseStatus[detailIndex] == 5
-                ? {flexDirection: 'row', alignItems: 'center',display: 'none'}
+                ? {flexDirection: 'row', alignItems: 'center', display: 'none'}
                 : {display: 'none'}
             }>
             <Text
@@ -775,15 +818,15 @@ const TodayTaskOpen = props => {
               style={{
                 fontSize: 20,
                 fontWeight: 'bold',
-                marginStart: 30,
-                marginEnd: 60,
+                paddingStart: 30,
+                flex: 1,
               }}>
               陪同人數:
             </Text>
             <View style={{transform: [{scale:1.2}]}}>
             <RNPickerSelect
                 onValueChange={(value) => setpeople(value)}
-            disabled={cashSteps == 0 ? false : true}
+            disabled={(cashSteps == 0 && !askingMoney)? false : true}
                 items={[
                     { label: "0人", value: 0 },
                     { label: "1人", value: 1 },
@@ -797,7 +840,7 @@ const TodayTaskOpen = props => {
             placeholder={{}}
             />
             </View>
-            
+
           </View>
           <View
             style={
@@ -889,8 +932,9 @@ const TodayTaskOpen = props => {
             labelStyle={{color: 'white', fontSize: 20}}
             contentStyle={{width: '100%', paddingHorizontal: 50}}
             mode="outlined"
+            disabled={askingMoney}
             onPress={() => handleCashNext()}>
-            {cashSteps == 0 ? '現金' : '確認收款'}
+            {cashSteps == 0 ? (askingMoney ?'金額計算中...':'現金') : '確認收款'}
           </Button>
           <Button
             style={

@@ -135,7 +135,7 @@ const PastReceive = props => {
     await setLoading(true);
     var url2 =
       'https://api.donkeymove.com/api/DriverInfo/GetDriverReceiveListDate/' +
-      user.response.Cars.DriverId +
+      user.response.Id +
       '?StartDate=' +
       sDate +
       '&EndDate=' +
@@ -173,7 +173,7 @@ const PastReceive = props => {
 
         var url3 =
           'https://api.donkeymove.com/api/DriverInfo/GetDriverReceiveListDate/' +
-          obj_value.response.Cars.DriverId +
+          obj_value.response.Id +
           '?StartDate=' +
           '&EndDate=';
 

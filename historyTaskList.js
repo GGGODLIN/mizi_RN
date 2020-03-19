@@ -37,9 +37,7 @@ function Item({data, navigation}) {
     startDate = startTime.substring(0, pos);
     startTime = startTime.substring(pos + 1,pos+6);
   }
-  var canShared = data.DespatchDetails[0].OrderDetails.CanShared
-    ? '可以共乘'
-    : '不可共乘';
+ var canShared = data.DespatchDetails.length>=2?'有共乘':'無共乘';
   var statusString =
     data.DespatchDetails[0].OrderDetails.Status == 0
       ? '新訂單'
@@ -81,6 +79,7 @@ function Item({data, navigation}) {
           data: data,
           startTime: startTime,
           startDate: startDate,
+          canShared:canShared,
         })
       }>
       <View
@@ -97,21 +96,33 @@ function Item({data, navigation}) {
             </View>
             <View style={styles.titleDate}>
               <Text style={{color: 'white', fontSize: 20}}>{startDate}</Text>
-              <Text style={{color: 'white', fontSize: 20}}>{canShared}</Text>
+              <Text
+                style={{color: 'white', fontSize: 20,marginStart:20}}
+                allowFontScaling={false}>
+                {data.DespatchDetails.length>=2?'有共乘':'無共乘'}
+              </Text>
             </View>
           </View>
           <View style={styles.titleName}>
             <View style={{flexDirection: 'row'}}>
-              <Text
+              <View style={{flexDirection: 'column', justifyContent: 'center',flex:1.2}}>
+             
+              {data.DespatchDetails.map((val, index)=>{
+                return (
+                  <Text
                 style={{
                   color: 'white',
                   fontSize: 24,
                   fontWeight: 'bold',
-                  width: '30%',
+                  paddingEnd:10,
                 }}>
-                {data.DespatchDetails[0].CaseUser.Name}
+                {val.CaseUser.Name}
               </Text>
-              <View style={{flexDirection: 'column', justifyContent: 'center'}}>
+                  );
+              })}
+              
+              </View>
+              <View style={{flexDirection: 'column', justifyContent: 'center',flex:2}}>
                 <Text
                   style={{color: 'white', fontSize: 18, fontWeight: 'bold'}}>
                   {data.DespatchDetails[0].OrderDetails.SOrderNo}
@@ -194,13 +205,13 @@ const HistoryTaskList = props => {
         console.log('GET FROM ASYN IS', obj_value);
         var url2 =
           'https://api.donkeymove.com/api/DriverInfo/GetAllPassGroup/' +
-          obj_value.response.Cars.DriverId;
+          obj_value.response.Id;
         seturl(
           `https://api.donkeymove.com/api/DriverInfo/GetAllPassGroup/${
-            obj_value.response.Cars.DriverId
+            obj_value.response.Id
           }`,
         );
-        //let url = `https://api.donkeymove.com/api/DriverInfo/GetAllGroup/${obj_value.Cars.DriverId}`;
+        //let url = `https://api.donkeymove.com/api/DriverInfo/GetAllGroup/${obj_value.Id}`;
         const data = await fetch(url2, {
           method: 'GET',
           headers: {
@@ -232,7 +243,8 @@ const HistoryTaskList = props => {
     await setLoading(true);
     var url2 =
       'https://api.donkeymove.com/api/DriverInfo/GetAllPassGroup/' +
-      user.response.Cars.DriverId + '?sDate=' + sDate + '&eDate=' + eDate;
+      user.response.Id + '?sDate=' + sDate + '&eDate=' + eDate;
+      console.log(url2);
     const data = await fetch(
       url2,
       {

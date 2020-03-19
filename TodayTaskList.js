@@ -43,10 +43,12 @@ function Item({data, navigation}) {
     startDate = startTime.substring(0, pos);
     startTime = startTime.substring(pos + 1, pos + 6);
   }
-  var canShared = data.DespatchDetails[0].OrderDetails.CanShared
-    ? '可以共乘'
-    : '不可共乘';
+  var canShared = data.DespatchDetails.length>=2?'有共乘':'無共乘';
   var FamilyWith = data.DespatchDetails[0].OrderDetails.FamilyWith;
+  const sum = (data.DespatchDetails.length===1)?data.DespatchDetails[0].OrderDetails.FamilyWith+data.DespatchDetails[0].OrderDetails.ForeignFamilyWith:data.DespatchDetails.reduce(function (accumulator, currentValue, currentIndex, array) {
+  console.log("font",accumulator);
+  return currentValue.OrderDetails.FamilyWith+currentValue.OrderDetails.ForeignFamilyWith+accumulator;
+},0);
   var ForeignFamilyWith =
     data.DespatchDetails[0].OrderDetails.ForeignFamilyWith;
   var FromAddr = data.DespatchDetails[0].OrderDetails.FromAddr;
@@ -64,6 +66,8 @@ function Item({data, navigation}) {
           data: data,
           startTime: startTime,
           startDate: startDate,
+          withPeople: FamilyWith+ForeignFamilyWith,
+          canShared:canShared,
         })
       }>
       <View
@@ -91,23 +95,32 @@ function Item({data, navigation}) {
                 {startDate}
               </Text>
               <Text
-                style={{color: 'white', fontSize: 20}}
+                style={{color: 'white', fontSize: 20,marginStart:20}}
                 allowFontScaling={false}>
-                {canShared}
+                {data.DespatchDetails.length>=2?'有共乘':'無共乘'}
               </Text>
             </View>
           </View>
           <View style={styles.titleName}>
             <View style={{flexDirection: 'row'}}>
-              <Avatar
-                size="large"
-                containerStyle={{margin: 10}}
-                rounded
-                source={{
-                  uri: `${data.DespatchDetails[0].OrderDetails.CaseUserPic}`,
-                }}
-              />
-              <View style={{flexDirection: 'column', justifyContent: 'center'}}>
+            <View style={{flexDirection: 'column', justifyContent: 'center',flex:1.2}}>
+             
+              {data.DespatchDetails.map((val, index)=>{
+                return (
+                  <Text
+                style={{
+                  color: 'white',
+                  fontSize: 24,
+                  fontWeight: 'bold',
+                  paddingEnd:10,
+                }}>
+                {val.CaseUser.Name}
+              </Text>
+                  );
+              })}
+              
+              </View>
+              <View style={{flexDirection: 'column', justifyContent: 'center',flex:2}}>
                 <Text
                   allowFontScaling={false}
                   style={{color: 'white', fontSize: 18}}>
@@ -116,7 +129,7 @@ function Item({data, navigation}) {
                 <Text
                   allowFontScaling={false}
                   style={{color: 'white', fontSize: 24}}>
-                  {'個案' + data.DespatchDetails.length + '/' + '陪同' + 0}
+                  {'個案' + data.DespatchDetails.length + '/' + '陪同' + sum}
                 </Text>
                 <Text
                   allowFontScaling={false}
@@ -179,8 +192,8 @@ const TodayTaskList = props => {
         setuserLoginInfo(obj_value);
         var url2 =
           'https://api.donkeymove.com/api/DriverInfo/GetAllGroupDriverSide/' +
-          obj_value.response.Cars.DriverId;
-        //let url = `https://api.donkeymove.com/api/DriverInfo/GetAllGroup/${obj_value.Cars.DriverId}`;
+          obj_value.response.Id;
+        //let url = `https://api.donkeymove.com/api/DriverInfo/GetAllGroup/${obj_value.Id}`;
         const data = await fetch(url2, {
           method: 'GET',
           headers: {
@@ -197,7 +210,7 @@ const TodayTaskList = props => {
             Alert.alert('網路異常，請稍後再試...', ' ', [
               {
                 text: '確定',
-                onPress: () => {},
+                onPress: () => {fetchData()},
               },
             ]),
           );
