@@ -269,9 +269,7 @@ const HistoryTaskOpen = props => {
                   {props.route.params.startDate}
                 </Text>
                 <Text style={{color: 'white', fontSize: 20}}>
-                  {taskData[detailIndex].OrderDetails.CanShared
-                    ? ' 可共乘'
-                    : ' 不可共乘'}
+                  {props.route.params.canShared}
                 </Text>
               </View>
             </View>
