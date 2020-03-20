@@ -26,8 +26,8 @@ class BgTracking extends Component {
       activitiesInterval: 30000,
       stopOnStillActivity: false,
       maxLocations: 10000,
-      
-      
+
+
     });
 
     BackgroundGeolocation.on('location', location => {
@@ -52,7 +52,7 @@ class BgTracking extends Component {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-     
+
             DriverId:this.props.DriverId,
             DeviceID: deviceId,
             Lon: location.longitude,
@@ -62,16 +62,11 @@ class BgTracking extends Component {
           .then(response => response.json())
           .then(res => {
             console.log('GPS AJAX', res);
-            Alert.alert('成功上傳', ' ', [
-              {
-                text: '確定',
-                onPress: () => {},
-              },
-            ])
-            
+
+
           })
           .catch(err =>
-        Alert.alert('網路異常，請稍後再試...', ' ', [
+        Alert.alert('GPS異常，請稍後再試...', ' ', [
           {
             text: '確定',
             onPress: () => {},
