@@ -66,3 +66,6 @@ http://tccapi.1966.org.tw/api/OrderDetails/PutDetailStatus?OrderDetailId=448&Sta
 /storage/emulated/0/Android/data/com.Taichon1966/files/Pictures/saved_signature/TS158329008271346.png
 file:///storage/emulated/0/Android/data/com.Taichon1966/files/Pictures/saved_signature/TS158329003689543.png
 /data/user/0/com.Taichon1966/files
+
+npx code-push deployment ls Taichon1966 -k
+code-push release-react Taichon1966 android
