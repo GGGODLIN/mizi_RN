@@ -67,7 +67,7 @@ const TodayTaskOpen = props => {
   const [foreignPeople, setforeignPeople] = useState(0);
   const [detailIndex, setdetailIndex] = useState(0);
   const [askingMoney, setaskingMoney] = useState(false);
-  
+
   const [isLoading, setLoading] = useState(true);
   const [carChecked, setcarChecked] = useState(false);
   const [bodyChecked, setbodyChecked] = useState(false);
@@ -331,7 +331,7 @@ const TodayTaskOpen = props => {
       if (item < 6) {
         console.log('INDEX????', index);
         console.log('DONE????????', doneCase, doneCase.length);
-        
+
         if (caseStatus[0] >= 6) {
           setdetailIndex(index);
           setpeople(taskData[index].OrderDetails.FamilyWith+taskData[index].OrderDetails.ForeignFamilyWith);
@@ -742,7 +742,7 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
           <View style={
               caseStatus[detailIndex] >= 5 ? {display: 'none'} : {width:'80%',alignItems:'flex-start',alignSelf:'center'}
             }>
-          <Text style={{fontSize:20}}>{`備註:${taskData[detailIndex].CaseUser.Remark}`}</Text>
+          <Text style={{fontSize:20}}>{`備註:${taskData[detailIndex].CaseUser.Remark===null?'':taskData[detailIndex].CaseUser.Remark}`}</Text>
             </View>
           <Button
             style={
