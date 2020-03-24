@@ -63,6 +63,9 @@ http://ttsdapi.1966.org.tw/api/OrderDetails/PutDetailStatus?OrderDetailId=448&St
 
 /二為馬->客戶端手機上瀏覽器簽名->司機reload
 /簽名->不傳圖->存手機TS4156461656.PNG (SorderNo)->下班打卡一次上傳
-/storage/emulated/0/Android/data/com.Taidon1966/files/Pictures/saved_signature/TS158329008271346.png
-file:///storage/emulated/0/Android/data/com.Taidon1966/files/Pictures/saved_signature/TS158329003689543.png
-/data/user/0/com.Taidon1966/files
+/storage/emulated/0/Android/data/com.Taichon1966/files/Pictures/saved_signature/TS158329008271346.png
+file:///storage/emulated/0/Android/data/com.Taichon1966/files/Pictures/saved_signature/TS158329003689543.png
+/data/user/0/com.Taichon1966/files
+
+npx code-push deployment ls Taichon1966 -k
+code-push release-react Taichon1966 android

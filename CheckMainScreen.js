@@ -53,22 +53,22 @@ const CheckMainScreen = props => {
         })
           .then(response => response.json())
           .then(res => {
-            console.log('FETCH CHECKED??????', res.response.CarCheck);
+            console.log('FETCH CHECKED??????ALL', res);
             setcarChecked(res.response.CarCheck);
             setbodyChecked(res.response.DriverCheck);
-          }).catch(err =>
-        Alert.alert('網路異常，請稍後再試...', ' ', [
-          {
-            text: '確定',
-            onPress: () => {},
-          },
-        ]),
+          }).catch(err =>console.log(err)
+        // Alert.alert('網路異常，請稍後再試...', '每日檢查all', [
+        //   {
+        //     text: '確定',
+        //     onPress: () => {console.log(err)},
+        //   },
+        // ]),
       );
         setdata(obj_value);
         setLoading(false);
       }
     } catch (error) {
-      console.log('cannot get ITEM');
+      console.log('cannot get ITEM ALL');
       // Error retrieving data
     }
   }
@@ -166,9 +166,9 @@ const CheckMainScreen = props => {
             justifyContent: 'flex-start',
             flexDirection: 'column',
             width: '100%',
-           
+
           }}>
-         
+
             <Button
               color="orange"
               style={
