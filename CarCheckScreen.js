@@ -69,6 +69,7 @@ const CarCheckScreen = props => {
         let url = `http://tccapi.1966.org.tw/api/DriverInfo/GetDriverCheck/${
           obj_value.response.Id
         }`;
+        console.log(`Making CheckedList1 request to: ${url}`);
         const res = await fetch(url, {
           method: 'GET',
           headers: {
@@ -77,7 +78,7 @@ const CarCheckScreen = props => {
         })
           .then(response => response.json())
           .then(res => {
-            console.log('FETCH CHECKED?', res.response.CarCheck);
+            console.log('FETCH CHECKED?WRONG HERE?', res);
             if (res.response.CarCheck) {
               var nowDate = `${date.getFullYear()}-${date.getMonth() +
                 1}-${date.getDate()}`;
@@ -91,7 +92,7 @@ const CarCheckScreen = props => {
         setdata(obj_value);
       }
     } catch (error) {
-      console.log('cannot get ITEM1');
+      console.log('cannot get ITEM1',error);
       // Error retrieving data
     }
   }
@@ -243,6 +244,7 @@ const CarCheckScreen = props => {
   useFocusEffect(
     React.useCallback(() => {
       //alert('Screen was focused');
+      fetchDataModal();
       fetchData().then(() => setLoading(false));
 
       return () => {

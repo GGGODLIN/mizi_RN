@@ -57,7 +57,7 @@ const CheckMainScreen = props => {
             setcarChecked(res.response.CarCheck);
             setbodyChecked(res.response.DriverCheck);
           }).catch(err =>
-        Alert.alert('網路異常，請稍後再試...', ' ', [
+        Alert.alert('網路異常，請稍後再試...', '每日檢查all', [
           {
             text: '確定',
             onPress: () => {},
@@ -166,9 +166,9 @@ const CheckMainScreen = props => {
             justifyContent: 'flex-start',
             flexDirection: 'column',
             width: '100%',
-           
+
           }}>
-         
+
             <Button
               color="orange"
               style={
