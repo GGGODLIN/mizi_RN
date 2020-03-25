@@ -104,7 +104,7 @@ function Item({data, navigation}) {
           <View style={styles.titleName}>
             <View style={{flexDirection: 'row'}}>
             <View style={{flexDirection: 'column', justifyContent: 'center',flex:1.2}}>
-             
+
               {data.DespatchDetails.map((val, index)=>{
                 return (
                   <Text
@@ -118,7 +118,7 @@ function Item({data, navigation}) {
               </Text>
                   );
               })}
-              
+
               </View>
               <View style={{flexDirection: 'column', justifyContent: 'center',flex:2}}>
                 <Text
