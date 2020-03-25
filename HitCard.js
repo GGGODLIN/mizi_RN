@@ -64,7 +64,7 @@ const HitCard = props => {
         setuser(obj_value);
         console.log('GET FROM ASYN IS', obj_value);
         var url2 =
-          'http://tccapi.1966.org.tw/api/DriverInfo/GetAllPunchByDriver/' +
+          'http://slllcapi.1966.org.tw/api/DriverInfo/GetAllPunchByDriver/' +
           obj_value.response.Id;
 
 
@@ -104,7 +104,7 @@ const HitCard = props => {
       );
 
         var url3 =
-          'http://tccapi.1966.org.tw/api/DriverInfo/GetDriverReceive/' +
+          'http://slllcapi.1966.org.tw/api/DriverInfo/GetDriverReceive/' +
           obj_value.response.Id;
 
 
@@ -136,7 +136,7 @@ const HitCard = props => {
   }
 
   async function handleSubmitHitCard() {
-    var url2 = `http://tccapi.1966.org.tw/api/DriverInfo/SetPunchTime/${
+    var url2 = `http://slllcapi.1966.org.tw/api/DriverInfo/SetPunchTime/${
       user.response.Id
     }?status=${status}`;
 
@@ -212,7 +212,7 @@ const HitCard = props => {
       name: fname,
       filename: fname,
     });
-    let url = `http://tccapi.1966.org.tw/api/Img/Pic`;
+    let url = `http://slllcapi.1966.org.tw/api/Img/Pic`;
 
     console.log(`Making POST PIC request to: ${url}`);
     console.log(form);
@@ -231,7 +231,7 @@ const HitCard = props => {
         setpicPathOnServer(res.response);
 
         let url2 =
-          'http://tccapi.1966.org.tw/api/DriverInfo/PutDriverReceiveSign';
+          'http://slllcapi.1966.org.tw/api/DriverInfo/PutDriverReceiveSign';
         const data2 = await fetch(url2, {
           method: 'PUT',
           headers: {

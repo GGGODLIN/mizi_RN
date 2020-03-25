@@ -119,7 +119,7 @@ const BodyCheckScreen = props => {
       return;
     }
     let url =
-      'http://tccapi.1966.org.tw/api/CheckResult/PostCheckDriverMapping';
+      'http://slllcapi.1966.org.tw/api/CheckResult/PostCheckDriverMapping';
     const driverId = data.response.Id;
     const carId = data.response.Cars.Id;
     const postRes = await fetch(url, {
@@ -158,7 +158,7 @@ const BodyCheckScreen = props => {
       const value = await AsyncStorage.getItem('userLoginInfo');
       if (value !== null) {
         var obj_value = JSON.parse(value);
-        let url = `http://tccapi.1966.org.tw/api/DriverInfo/GetDriverCheck/${
+        let url = `http://slllcapi.1966.org.tw/api/DriverInfo/GetDriverCheck/${
           obj_value.response.Id
         }`;
         const res = await fetch(url, {
@@ -173,7 +173,7 @@ const BodyCheckScreen = props => {
             if (res.response.DriverCheck) {
               var nowDate = `${date.getFullYear()}-${date.getMonth() +
                 1}-${date.getDate()}`;
-              let url = `http://tccapi.1966.org.tw/api/CheckResult/GetCheckDriverMappingSingle?DriverId=${
+              let url = `http://slllcapi.1966.org.tw/api/CheckResult/GetCheckDriverMappingSingle?DriverId=${
                 obj_value.response.Id
               }&date=${nowDate}`;
 
@@ -189,7 +189,7 @@ const BodyCheckScreen = props => {
   }
 
   const fetchDataChecked = async url => {
-    
+
 
     console.log(`Making CheckedList request to: ${url}`);
 
@@ -211,7 +211,7 @@ const BodyCheckScreen = props => {
 
 沒有:
           ${res.response.NoSituation}
-          
+
 有、但沒去看醫生:
           ${res.response.HasSituationNoChecked}
 
@@ -239,7 +239,7 @@ const BodyCheckScreen = props => {
   };
 
   const fetchDataModal = async () => {
-    let url = `http://tccapi.1966.org.tw/api/CheckItem/GetCheckDriver`;
+    let url = `http://slllcapi.1966.org.tw/api/CheckItem/GetCheckDriver`;
 
     console.log(`Making Modal request to: ${url}`);
 

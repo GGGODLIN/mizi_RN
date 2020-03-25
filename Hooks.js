@@ -6,7 +6,7 @@ export const FetchApi = () => {
 
   async function fetchData() {
     const res = await fetch(
-      'http://tccapi.1966.org.tw/api/DriverInfo/Get/15',
+      'http://slllcapi.1966.org.tw/api/DriverInfo/Get/15',
     );
     res
       .json()
