@@ -87,11 +87,14 @@ const CarCheckScreen = props => {
 
               fetchDataChecked(url);
             }
+          }).catch(err=>{
+            console.log(err);
+            fetchData();
           });
         setdata(obj_value);
       }
     } catch (error) {
-      console.log('cannot get ITEM1');
+      console.log('cannot get ITEM1',error);
       // Error retrieving data
     }
   }

@@ -67,5 +67,5 @@ http://ttsdapi.1966.org.tw/api/OrderDetails/PutDetailStatus?OrderDetailId=448&St
 file:///storage/emulated/0/Android/data/com.Taichon1966/files/Pictures/saved_signature/TS158329003689543.png
 /data/user/0/com.Taichon1966/files
 
-npx code-push deployment ls Taichon1966 -k
-code-push release-react Taichon1966 android
+npx code-push deployment ls Taidon1966 -k
+code-push release-react Taidon1966 android
