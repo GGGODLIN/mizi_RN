@@ -28,6 +28,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Picker} from '@react-native-community/picker';
 import Signature from 'react-native-signature-canvas';
 import SignatureCapture from 'react-native-signature-capture';
+import LaunchNavigator from 'react-native-launch-navigator';
 import RNSignatureExample from './Sign';
 
 import {
@@ -67,7 +68,7 @@ const TodayTaskOpen = props => {
   const [foreignPeople, setforeignPeople] = useState(0);
   const [detailIndex, setdetailIndex] = useState(0);
   const [askingMoney, setaskingMoney] = useState(false);
-  
+
   const [isLoading, setLoading] = useState(true);
   const [carChecked, setcarChecked] = useState(false);
   const [bodyChecked, setbodyChecked] = useState(false);
@@ -85,8 +86,15 @@ const TodayTaskOpen = props => {
   console.log('STATUS', caseStatus);
   console.log('Done', doneCase);
   console.log('index', detailIndex);
-  const [people, setpeople] = useState(taskData[detailIndex].OrderDetails.FamilyWith+taskData[detailIndex].OrderDetails.ForeignFamilyWith);
-  console.log('陪同', taskData[detailIndex].OrderDetails.FamilyWith+taskData[detailIndex].OrderDetails.ForeignFamilyWith);
+  const [people, setpeople] = useState(
+    taskData[detailIndex].OrderDetails.FamilyWith +
+      taskData[detailIndex].OrderDetails.ForeignFamilyWith,
+  );
+  console.log(
+    '陪同',
+    taskData[detailIndex].OrderDetails.FamilyWith +
+      taskData[detailIndex].OrderDetails.ForeignFamilyWith,
+  );
 
   const origin = {
     latitude: taskData[detailIndex].OrderDetails.FromLat,
@@ -124,21 +132,21 @@ const TodayTaskOpen = props => {
     ) * 2.2,
   );
 
-  const handleNextStep = async () => {
+  const handleNextStep = async (input, index) => {
     let tempStatus = caseStatus;
-    tempStatus[detailIndex] = caseStatus[detailIndex] + 1;
+    tempStatus[index] = input === 6 ? 6 : caseStatus[index] + 1;
     setcaseStatus(tempStatus);
-    setpeople(taskData[detailIndex].OrderDetails.FamilyWith+taskData[detailIndex].OrderDetails.ForeignFamilyWith);
-    if (tempStatus[detailIndex] == 6) {
-      updateStatusToSix();
-      setoverlay(true);
+    setpeople(
+      taskData[index].OrderDetails.FamilyWith +
+        taskData[index].OrderDetails.ForeignFamilyWith,
+    );
+    if (tempStatus[index] == 6) {
+      updateStatusToSix(index);
       setLoading(true);
-      setdelayForMap(true);
     } else {
-      updateStatus();
-      setoverlay(true);
+      updateStatus(index);
       setLoading(true);
-      if (tempStatus[detailIndex] == 3) {
+      if (tempStatus[index] == 3) {
         Alert.alert(' ', '請與個案核對身分及目的地，若有問題請聯繫行控中心', [
           {
             text: '確定',
@@ -149,25 +157,26 @@ const TodayTaskOpen = props => {
     }
   };
 
-  const handleMiss = async () => {
+  const handleMiss = async index => {
     let tempStatus = caseStatus;
-    tempStatus[detailIndex] = 10;
+    tempStatus[index] = 10;
     setcaseStatus(tempStatus);
 
-    setcashSteps(0);
-    setdoneCase(detailIndex);
-    updateStatus();
+    setdoneCase(index);
+    updateStatus(index);
     await checkDone();
-    setoverlay(true);
     setLoading(true);
   };
 
-  const handleChangeIndex = async (index) => {
+  const handleChangeIndex = async index => {
     setdetailIndex(index);
-    setpeople(taskData[index].OrderDetails.FamilyWith+taskData[index].OrderDetails.ForeignFamilyWith);
+    setpeople(
+      taskData[index].OrderDetails.FamilyWith +
+        taskData[index].OrderDetails.ForeignFamilyWith,
+    );
   };
 
-  const handleCashNext = async () => {
+  const handleCashNext = async index => {
     setLoading(true);
     const res = await askCash();
     setmoney(res.response);
@@ -177,11 +186,11 @@ const TodayTaskOpen = props => {
     setcashSteps(cashSteps + 1);
   };
 
-  const handleCashPrev = async () => {
+  const handleCashPrev = async index => {
     setcashSteps(0);
   };
 
-  const askCash = async () => {
+  const askCash = async index => {
     setaskingMoney(true);
     let url = `http://slllcapi.1966.org.tw/api/OrderDetails/PutDetailRealWith?OrderDetailId=${
       taskData[detailIndex].OrderDetails.Id
@@ -209,7 +218,9 @@ const TodayTaskOpen = props => {
         Alert.alert('網路異常，請稍後再試...', ' ', [
           {
             text: '確定',
-            onPress: () => {setLoading(false);},
+            onPress: () => {
+              setLoading(false);
+            },
           },
         ]),
       );
@@ -257,10 +268,10 @@ const TodayTaskOpen = props => {
     return data;
   };
 
-  const updateStatus = async () => {
+  const updateStatus = async index => {
     let url = `http://slllcapi.1966.org.tw/api/OrderDetails/PutDetailStatus?OrderDetailId=${
-      taskData[detailIndex].OrderDetails.Id
-    }&StatusInt=${caseStatus[detailIndex]}`;
+      taskData[index].OrderDetails.Id
+    }&StatusInt=${caseStatus[index]}`;
 
     console.log(`Making Status request to: ${url}`);
 
@@ -284,31 +295,63 @@ const TodayTaskOpen = props => {
       );
   };
 
-  const updateStatusToSix = async () => {
-    console.log('???????', taskData[detailIndex].OrderDetails.SOrderNo);
-    let url = `http://slllcapi.1966.org.tw/api/OrderDetails/PutDetailStatus?OrderDetailId=${
-      taskData[detailIndex].OrderDetails.Id
-    }&StatusInt=${caseStatus[detailIndex]}&receiveAmt=${realMoney}&signPic=${
-      taskData[detailIndex].OrderDetails.SOrderNo
-    }.png&remark=${ps}`;
+  const updateStatusToSix = async index => {
+    let url2 = `http://slllcapi.1966.org.tw/api/OrderDetails/PutDetailStatus?OrderDetailId=${
+      taskData[index].OrderDetails.Id
+    }&StatusInt=5`;
 
-    console.log(`Making Status6 request to: ${url}`);
+    console.log(`Making Status request to: ${url2}`);
 
-    const data = await fetch(url, {
+    const data2 = await fetch(url2, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
     })
-      .then(response => response.json())
-      .then(res => {
-        console.log('updateStatus AJAX', res);
+      .then(response2 => response2.json())
+      .then(res2 => {
+        console.log('updateStatus5 AJAX', res2);
       })
-      .catch(err =>
+      .then(async () => {
+        console.log('???????', taskData[index].OrderDetails.SOrderNo);
+        let url = `http://slllcapi.1966.org.tw/api/OrderDetails/PutDetailStatus?OrderDetailId=${
+          taskData[index].OrderDetails.Id
+        }&StatusInt=6&receiveAmt=0&signPic=${
+          taskData[index].OrderDetails.SOrderNo
+        }.png&remark=${ps}`;
+
+        console.log(`Making Status6 request to: ${url}`);
+
+        const data = await fetch(url, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .then(response => response.json())
+          .then(res => {
+            console.log('updateStatus6 AJAX', res);
+            setdoneCase(index);
+            checkDone();
+          })
+          .catch(err =>
+            Alert.alert('網路異常，請稍後再試...', ' ', [
+              {
+                text: '確定',
+                onPress: () => {
+                  console.log(err);
+                },
+              },
+            ]),
+          );
+      })
+      .catch(err2 =>
         Alert.alert('網路異常，請稍後再試...', ' ', [
           {
             text: '確定',
-            onPress: () => {},
+            onPress: () => {
+              console.log(err2);
+            },
           },
         ]),
       );
@@ -331,12 +374,19 @@ const TodayTaskOpen = props => {
       if (item < 6) {
         console.log('INDEX????', index);
         console.log('DONE????????', doneCase, doneCase.length);
-        
+
         if (caseStatus[0] >= 6) {
           setdetailIndex(index);
-          setpeople(taskData[index].OrderDetails.FamilyWith+taskData[index].OrderDetails.ForeignFamilyWith);
-          console.log("with?????????",taskData[index].OrderDetails.FamilyWith+taskData[index].OrderDetails.ForeignFamilyWith)
-        setforeignPeople(taskData[index].OrderDetails.ForeignFamilyWith);
+          setpeople(
+            taskData[index].OrderDetails.FamilyWith +
+              taskData[index].OrderDetails.ForeignFamilyWith,
+          );
+          console.log(
+            'with?????????',
+            taskData[index].OrderDetails.FamilyWith +
+              taskData[index].OrderDetails.ForeignFamilyWith,
+          );
+          setforeignPeople(taskData[index].OrderDetails.ForeignFamilyWith);
           setlongitudeDelta(
             Math.abs(
               taskData[index].OrderDetails.FromLon -
@@ -368,7 +418,7 @@ const TodayTaskOpen = props => {
 
   useEffect(() => {
     checkDone();
-    console.log("CHECKDONE????!?!?!?!?!?");
+    console.log('CHECKDONE????!?!?!?!?!?');
   }, []);
 
   if (isLoading || finish) {
@@ -402,7 +452,7 @@ const TodayTaskOpen = props => {
       setTimeout(() => {
         setLoading(false);
         setdelayForMap(false);
-      }, 1);
+      }, 0);
 
       console.log('info screen is loading...');
       return (
@@ -422,537 +472,381 @@ const TodayTaskOpen = props => {
       );
     }
   } else {
-    console.log('DELTA', latitudeDelta, longitudeDelta);
     return (
       <ScrollView style={{flex: 1}}>
-        <Overlay
-          isVisible={caseStatus[detailIndex] == 3 && overlay ? false : false}
-          windowBackgroundColor="rgba(255, 255, 255, .5)"
-          overlayBackgroundColor="white"
-          width="auto"
-          height="auto">
-          <View style={{margin: 0, padding: 0}}>
-            <Text
-              style={{alignSelf: 'center', fontWeight: 'bold', fontSize: 20}}>
-              核對身分
-            </Text>
-            <Divider />
+        {taskData.map((item, index) => {
+          return (
             <View
-              style={{flexDirection: 'row', alignItems: 'center', margin: 10}}>
-              <Avatar
-                size="large"
-                rounded
-                source={{
-                  uri: `${taskData[detailIndex].OrderDetails.CaseUserPic}`,
-                }}
-              />
-              <Text
-                style={{
-                  alignSelf: 'center',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  alignContent: 'center',
-                  marginStart: 20,
-                  fontSize: 25,
-                  fontWeight: 'bold',
-                }}>
-                {taskData[detailIndex].OrderDetails.CaseUserName}
-              </Text>
-            </View>
-            <View style={styles.addr2}>
-              <Icon
-                name="circle-o"
-                size={30}
-                color="orange"
-                style={{paddingLeft: 10}}
-              />
-              <Text style={styles.addrText2}>
-                {`<${taskData[detailIndex].OrderDetails.FromAddrRemark}>
-${taskData[detailIndex].OrderDetails.FromAddr}`}
-              </Text>
-            </View>
-            <View style={styles.addr2}>
-              <Icon
-                name="angle-double-down"
-                size={30}
-                color="orange"
-                style={{paddingLeft: 12}}
-              />
-            </View>
-            <View style={styles.addr2}>
-              <Icon
-                name="circle-o"
-                size={30}
-                color="orange"
-                style={{paddingLeft: 10}}
-              />
-              <Text style={styles.addrText2}>
-                {`<${taskData[detailIndex].OrderDetails.ToAddrRemark}>
-${taskData[detailIndex].OrderDetails.ToAddr}`}
-              </Text>
-            </View>
-          </View>
-          <Button
-            onPress={() => setoverlay(false)}
-            color="orange"
-            mode="contained"
-            labelStyle={{color: 'white', fontSize: 20, fontWeight: 'bold'}}
-            style={{marginBottom: 10}}>
-            確認身分及目的地無誤
-          </Button>
-          <Button
-            onPress={() => setoverlay(false)}
-            color="black"
-            mode="contained"
-            labelStyle={{color: 'white', fontSize: 20, fontWeight: 'bold'}}
-            style={{marginBottom: 10}}>
-            身分不符
-          </Button>
-          <Button
-            onPress={() => setoverlay(false)}
-            color="black"
-            mode="contained"
-            labelStyle={{color: 'white', fontSize: 20, fontWeight: 'bold'}}
-            style={{marginBottom: 10}}>
-            更換地點
-          </Button>
-        </Overlay>
-
-        <Overlay
-          isVisible={cashSteps == 2 ? true : false}
-          windowBackgroundColor="rgba(255, 255, 255, .5)"
-          overlayBackgroundColor="white"
-          width="90%"
-          height="80%">
-          <RNSignatureExample
-            handleSavePic={handleSavePic}
-            name={taskData[detailIndex].OrderDetails.SOrderNo}
-          />
-        </Overlay>
-
-        <View
-          style={{
-            margin: '5%',
-            paddingBottom: 20,
-            width: '95%',
-            alignSelf: 'center',
-            backgroundColor: 'white',
-          }}
-          elevation={5}>
-          <View style={styles.titleBox}>
-            <View style={styles.titleTime}>
-              <View style={styles.titleLeft}>
-                <Text style={{color: 'white', fontSize: 20}}>
-                  {props.route.params.startTime}
-                </Text>
-              </View>
-              <View style={styles.titleDate}>
-                <Text style={{color: 'white', fontSize: 20}}>
-                  {props.route.params.startDate}
-                </Text>
-                <Text style={{color: 'white', fontSize: 20}}>
-                  {props.route.params.canShared}
-                </Text>
-              </View>
-            </View>
-            <View style={styles.titleName}>
-              <Text style={styles.titleNameText}>
-                {taskData[detailIndex].OrderDetails.CaseUserName}
-              </Text>
-              <Text style={styles.titleNameText2}>
-                {taskData[detailIndex].OrderDetails.SOrderNo}
-              </Text>
-            </View>
-            <View style={styles.titleRight}>
-              <Text style={{color: 'white', fontSize: 20}}>
-                {'個案' + 1 + '/' + '陪同' + (taskData[detailIndex].OrderDetails.FamilyWith+taskData[detailIndex].OrderDetails.ForeignFamilyWith)}
-              </Text>
-            </View>
-          </View>
-          <View
-            style={
-              caseStatus[detailIndex] >= 5 ? {display: 'none'} : styles.predict
-            }>
-            <Text>預估里程</Text>
-            <Text style={{fontSize: 20, fontWeight: 'bold'}}>
-              {taskData[detailIndex].OrderDetails.TotalMileage / 1000 + 'km'}
-            </Text>
-            <Divider />
-            <Text>預估時間</Text>
-            <Text style={{fontSize: 20, fontWeight: 'bold'}}>
-              {taskData[detailIndex].OrderDetails.ExpectedMinute + '分鐘'}
-            </Text>
-          </View>
-          <View
-            style={
-              caseStatus[detailIndex] >= 5
-                ? {height: 0.1, position: 'relative'}
-                : {height: 250, position: 'relative', backgroundColor: 'pink'}
-            }
-            contentContainerStyle={StyleSheet.absoluteFillObject}>
-            <MapView
-              style={[styles.map, {bottom: fixbottom}]}
-              onKmlReady={e => console.log('HAHA', e.nativeEvent)}
-              region={{
-                latitude: taskData[detailIndex].OrderDetails.FromLat,
-                longitude: taskData[detailIndex].OrderDetails.FromLon,
-                latitudeDelta: latitudeDelta * 1.1,
-                longitudeDelta: longitudeDelta * 1.1,
-              }}>
-              <Marker
-                coordinate={{
-                  latitude: taskData[detailIndex].OrderDetails.FromLat,
-                  longitude: taskData[detailIndex].OrderDetails.FromLon,
-                }}
-                icon="write"
-                pinColor="blue"
-                onPress={() => setfixbottom(0)}
-                title={taskData[detailIndex].OrderDetails.FromAddr}
-              />
-              <Marker
-                coordinate={{
-                  latitude: taskData[detailIndex].OrderDetails.ToLat,
-                  longitude: taskData[detailIndex].OrderDetails.ToLon,
-                }}
-                icon="write"
-                onPress={() => setfixbottom(0)}
-                title={taskData[detailIndex].OrderDetails.ToAddr}
-              />
-
-              <MapViewDirections
-                origin={{
-                  latitude: taskData[detailIndex].OrderDetails.FromLat,
-                  longitude: taskData[detailIndex].OrderDetails.FromLon,
-                }}
-                destination={{
-                  latitude: taskData[detailIndex].OrderDetails.ToLat,
-                  longitude: taskData[detailIndex].OrderDetails.ToLon,
-                }}
-                apikey={GOOGLE_MAPS_APIKEY}
-                strokeWidth={5}
-                strokeColor="#6495ED"
-                lineCap="round"
-                lineJoin="bevel"
-              />
-            </MapView>
-          </View>
-          <ButtonGroup
-            onPress={handleChangeIndex}
-            selectedIndex={detailIndex}
-            disabled={doneCase}
-            buttons={caseNames}
-            containerStyle={
-              caseStatus[detailIndex] >= 5
-                ? {display: 'none'}
-                : {
-                    margin: 0,
-                    padding: 0,
-                    alignItems: 'flex-start',
-                    justifyContent: 'flex-start',
-                    alignSelf: 'flex-start',
-                  }
-            }
-            buttonStyle={{margin: 0, padding: 0, alignItems: 'center'}}
-            textStyle={{margin: 0, padding: 0}}
-          />
-          <View
-            style={
-              caseStatus[detailIndex] >= 5 ? {display: 'none'} : styles.addr
-            }>
-            <Icon
-              name="circle-o"
-              size={30}
-              color="orange"
-              style={{paddingLeft: 30}}
-            />
-            <Text style={styles.addrText}>
-              {`<${taskData[detailIndex].OrderDetails.FromAddrRemark}>
-${taskData[detailIndex].OrderDetails.FromAddr}`}
-            </Text>
-          </View>
-          <View
-            style={
-              caseStatus[detailIndex] >= 5 ? {display: 'none'} : styles.addr
-            }>
-            <Icon
-              name="angle-double-down"
-              size={30}
-              color="orange"
-              style={{paddingLeft: 32}}
-            />
-          </View>
-          <View
-            style={
-              caseStatus[detailIndex] >= 5 ? {display: 'none'} : styles.addr
-            }>
-            <Icon
-              name="circle-o"
-              size={30}
-              color="orange"
-              style={{paddingLeft: 30}}
-            />
-            <Text style={styles.addrText}>
-              {`<${taskData[detailIndex].OrderDetails.ToAddrRemark}>
-${taskData[detailIndex].OrderDetails.ToAddr}`}
-            </Text>
-          </View>
-          <Button
-            style={
-              caseStatus[detailIndex] < 5
-                ? {
-                    alignSelf: 'center',
-                    justifyContent: 'center',
-                    alignContent: 'center',
-                    borderRadius: 50,
-                    backgroundColor: 'orange',
-                    margin: 10,
-                  }
-                : {display: 'none'}
-            }
-            labelStyle={{color: 'white', fontSize: 20}}
-            contentStyle={{width: '100%', paddingHorizontal: 50}}
-            mode="outlined"
-            onPress={() => {
-              if (caseStatus[detailIndex] >= 4) {
-                Alert.alert('確定客下?', ' ', [
-                  {
-                    text: '取消',
-                    onPress: () => console.log('Cancel Pressed'),
-                    style: 'cancel',
-                  },
-                  {
-                    text: '確定',
-                    onPress: () => {
-                      handleNextStep();
-                    },
-                  },
-                ]);
-              } else {
-                handleNextStep();
+              style={
+                caseStatus[index] >= 6
+                  ? {display: 'none'}
+                  : {
+                      margin: '5%',
+                      paddingBottom: 20,
+                      width: '95%',
+                      alignSelf: 'center',
+                      backgroundColor: 'white',
+                    }
               }
-            }}>
-            {caseStatus[detailIndex] == 1
-              ? '出發前往'
-              : caseStatus[detailIndex] == 2
-              ? '抵達上車地點'
-              : caseStatus[detailIndex] == 3
-              ? '客上'
-              : '客下'}
-          </Button>
-          <View style={
-              caseStatus[detailIndex] >= 5 ? {display: 'none'} : {width:'80%',alignItems:'flex-start',alignSelf:'center'}
-            }>
-          <Text style={{fontSize:20}}>{`備註:${taskData[detailIndex].CaseUser.Remark}`}</Text>
+              elevation={5}>
+              <View style={styles.titleBox}>
+                <Avatar
+                  size={100}
+                  rounded
+                  containerStyle={{margin: 10, alignSelf: 'center'}}
+                  source={{
+                    uri: `${item.OrderDetails.CaseUserPic}`,
+                  }}
+                />
+                
+                <View
+                  style={(styles.titleName, {flex: 2, alignSelf: 'center'})}>
+                  <Text style={styles.titleNameText}>
+                    {item.OrderDetails.CaseUserName}
+                  </Text>
+                  <View style={{flexDirection:'row'}}>
+                  <Button
+                    style={{
+                      alignSelf: 'flex-start',
+                      justifyContent: 'center',
+                      alignContent: 'center',
+                      borderRadius: 50,
+                      backgroundColor: 'salmon',
+                      borderColor: 'white',
+                      borderWidth: 1,
+                      margin: 10,
+                      flex:1,
+                    }}
+                    labelStyle={{color: 'white', fontSize: 20}}
+                    containerStyle={{width: '100%'}}
+                    mode="solid"
+                    loading={caseStatus[index] >= 5 ? true : false}
+                    onPress={() => {
+                      if (caseStatus[index] >= 4) {
+                        Alert.alert('確定客下?', ' ', [
+                          {
+                            text: '取消',
+                            onPress: () => console.log('Cancel Pressed'),
+                            style: 'cancel',
+                          },
+                          {
+                            text: '確定',
+                            onPress: () => {
+                              handleNextStep(6, index);
+                            },
+                          },
+                        ]);
+                      } else {
+                        handleNextStep(0, index);
+                      }
+                    }}>
+                    {caseStatus[index] == 1
+                      ? '出發前往'
+                      : caseStatus[index] == 2
+                      ? '抵達上車地點'
+                      : caseStatus[index] == 3
+                      ? '客上'
+                      : caseStatus[index] == 4
+                      ? '客下'
+                      : '讀取中...'}
+                  </Button>
+                  <Button
+                    style={
+                      caseStatus[index] == 3
+                        ? {
+                            alignSelf: 'flex-start',
+                      justifyContent: 'center',
+                      alignContent: 'center',
+                      borderRadius: 50,
+                      backgroundColor: 'gray',
+                      borderColor: 'white',
+                      borderWidth: 1,
+                      margin: 10,
+                      flex:1,
+                          }
+                        : {display: 'none'}
+                    }
+                    labelStyle={{color: 'white', fontSize: 20}}
+                    mode="outlined"
+                    onPress={() => {
+                      Alert.alert('確定空趟?', ' ', [
+                        {
+                          text: '取消',
+                          onPress: () => console.log('Cancel Pressed'),
+                          style: 'cancel',
+                        },
+                        {
+                          text: '確定',
+                          onPress: () => {
+                            handleMiss(index);
+                          },
+                        },
+                      ]);
+                    }}>
+                    {'空趟'}
+                  </Button>
+                  </View>
+                </View>
+              </View>
+
+              <View
+                style={
+                  caseStatus[index] >= 4 ? {display: 'none'} : styles.addr
+                }>
+                <Button
+                  style={{
+                    alignSelf: 'center',
+                    justifyContent: 'center',
+                    alignContent: 'center',
+                    marginStart: 10,
+                  }}
+                  contentStyle={{height: 60}}
+                  mode="contained"
+                  onPress={() => {
+                    LaunchNavigator.navigate(item.OrderDetails.FromAddr)
+                      .then(() => console.log('Launched navigator'))
+                      .catch(err =>
+                        console.error('Error launching navigator: ' + err),
+                      );
+                  }}>
+                  {'導航'}
+                </Button>
+                <Text style={styles.addrText}>
+                  {`<${item.OrderDetails.FromAddrRemark}>
+${item.OrderDetails.FromAddr}`}
+                </Text>
+              </View>
+
+              <View
+                style={caseStatus[index] < 4 ? {display: 'none'} : styles.addr}>
+                <Button
+                  style={{
+                    alignSelf: 'center',
+                    justifyContent: 'center',
+                    alignContent: 'center',
+                    marginStart: 10,
+                  }}
+                  contentStyle={{height: 60}}
+                  mode="contained"
+                  onPress={() => {
+                    LaunchNavigator.navigate(item.OrderDetails.ToAddr)
+                      .then(() => console.log('Launched navigator'))
+                      .catch(err =>
+                        console.error('Error launching navigator: ' + err),
+                      );
+                  }}>
+                  {'導航'}
+                </Button>
+                <Text style={styles.addrText}>
+                  {`<${item.OrderDetails.ToAddrRemark}>
+${item.OrderDetails.ToAddr}`}
+                </Text>
+              </View>
+
+              <View
+                style={
+                  caseStatus[index] >= 5
+                    ? {display: 'none'}
+                    : {
+                        width: '80%',
+                        alignItems: 'flex-start',
+                        alignSelf: 'center',
+                      }
+                }>
+                <Text style={{fontSize: 20}}>{`備註:${
+                  item.CaseUser.Remark
+                }`}</Text>
+              </View>
+
+              <View
+                style={
+                  caseStatus[index] == 5
+                    ? {
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        display: 'none',
+                      }
+                    : {display: 'none'}
+                }>
+                <Text
+                  style={{
+                    fontSize: 20,
+                    fontWeight: 'bold',
+                    marginStart: 30,
+                    marginEnd: 60,
+                  }}>
+                  陪同外籍:
+                </Text>
+                <Picker
+                  enabled={cashSteps == 0 ? true : false}
+                  selectedValue={foreignPeople}
+                  style={{height: 50, width: 150}}
+                  onValueChange={(itemValue, itemIndex) =>
+                    setforeignPeople(itemValue)
+                  }>
+                  <Picker.Item label="0人" value={0} />
+                  <Picker.Item label="1人" value={1} />
+                  <Picker.Item label="2人" value={2} />
+                  <Picker.Item label="3人" value={3} />
+                  <Picker.Item label="4人" value={4} />
+                  <Picker.Item label="5人" value={5} />
+                  <Picker.Item label="6人" value={6} />
+                  <Picker.Item label="7人" value={7} />
+                </Picker>
+              </View>
+              <View
+                style={
+                  caseStatus[index] == 5
+                    ? {flexDirection: 'row', alignItems: 'center'}
+                    : {display: 'none'}
+                }>
+                <Text
+                  style={{
+                    fontSize: 20,
+                    fontWeight: 'bold',
+                    paddingStart: 30,
+                    flex: 1,
+                  }}>
+                  陪同人數:
+                </Text>
+                <Picker
+                  enabled={cashSteps == 0 && !askingMoney ? true : false}
+                  selectedValue={people}
+                  style={{flex: 1}}
+                  onValueChange={(itemValue, itemIndex) =>
+                    setpeople(itemValue)
+                  }>
+                  <Picker.Item label="0人" value={0} />
+                  <Picker.Item label="1人" value={1} />
+                  <Picker.Item label="2人" value={2} />
+                  <Picker.Item label="3人" value={3} />
+                  <Picker.Item label="4人" value={4} />
+                  <Picker.Item label="5人" value={5} />
+                  <Picker.Item label="6人" value={6} />
+                  <Picker.Item label="7人" value={7} />
+                </Picker>
+              </View>
+              <View
+                style={
+                  cashSteps == 1
+                    ? {flexDirection: 'row', alignItems: 'center'}
+                    : {display: 'none'}
+                }>
+                <Text
+                  style={{
+                    fontSize: 20,
+                    fontWeight: 'bold',
+                    marginStart: 30,
+                    marginEnd: 100,
+                  }}>
+                  應收車資:
+                </Text>
+                <Text
+                  style={{fontSize: 30, fontWeight: 'bold', color: 'orange'}}>
+                  {money}
+                </Text>
+              </View>
+              <View
+                style={
+                  cashSteps == 1
+                    ? {flexDirection: 'row', alignItems: 'center'}
+                    : {display: 'none'}
+                }>
+                <Text
+                  style={{
+                    fontSize: 20,
+                    fontWeight: 'bold',
+                    marginStart: 30,
+                    marginEnd: 99,
+                  }}>
+                  實收車資:
+                </Text>
+                <TextInput
+                  keyboardType="number-pad"
+                  defaultValue={realMoney}
+                  underlineColorAndroid="white"
+                  placeholderTextColor="orange"
+                  style={{
+                    fontSize: 30,
+                    fontWeight: 'bold',
+                    width: '100%',
+                    color: 'orange',
+                  }}
+                  onEndEditing={input => {
+                    input.nativeEvent.text == ''
+                      ? setrealMoney(money)
+                      : setrealMoney(input.nativeEvent.text);
+                  }}
+                  clearTextOnFocus={true}
+                />
+              </View>
+              <View style={cashSteps == 1 ? {} : {display: 'none'}}>
+                <Text
+                  style={{
+                    fontSize: 20,
+                    fontWeight: 'bold',
+                    marginStart: 30,
+                    marginEnd: 99,
+                  }}>
+                  備註:
+                </Text>
+                <TextInput
+                  placeholder={'請輸入備註'}
+                  underlineColorAndroid="white"
+                  placeholderTextColor="gray"
+                  style={{fontSize: 20, width: '80%', alignSelf: 'center'}}
+                  onEndEditing={input => {
+                    setps(input.nativeEvent.text);
+                  }}
+                  clearTextOnFocus={true}
+                />
+              </View>
+              <Button
+                style={
+                  caseStatus[index] == 5
+                    ? {
+                        alignSelf: 'center',
+                        justifyContent: 'center',
+                        alignContent: 'center',
+                        borderRadius: 50,
+                        backgroundColor: 'orange',
+                        margin: 10,
+                      }
+                    : {display: 'none'}
+                }
+                labelStyle={{color: 'white', fontSize: 20}}
+                contentStyle={{width: '100%', paddingHorizontal: 50}}
+                mode="outlined"
+                disabled={askingMoney}
+                onPress={() => handleCashNext()}>
+                {cashSteps == 0
+                  ? askingMoney
+                    ? '金額計算中...'
+                    : '現金'
+                  : '確認收款'}
+              </Button>
+              <Button
+                style={
+                  caseStatus[index] == 5 && cashSteps == 1
+                    ? {
+                        alignSelf: 'center',
+                        justifyContent: 'center',
+                        alignContent: 'center',
+                        borderRadius: 50,
+                        backgroundColor: 'orange',
+                        margin: 10,
+                      }
+                    : {display: 'none'}
+                }
+                labelStyle={{color: 'white', fontSize: 20}}
+                contentStyle={{width: '100%', paddingHorizontal: 50}}
+                mode="outlined"
+                onPress={() => handleCashPrev()}>
+                {'回上一步'}
+              </Button>
             </View>
-          <Button
-            style={
-              caseStatus[detailIndex] == 3
-                ? {
-                    alignSelf: 'center',
-                    justifyContent: 'center',
-                    alignContent: 'center',
-                    borderRadius: 50,
-                    backgroundColor: 'gray',
-                    margin: 10,
-                  }
-                : {display: 'none'}
-            }
-            labelStyle={{color: 'white', fontSize: 20}}
-            contentStyle={{width: '100%', paddingHorizontal: 50}}
-            mode="outlined"
-            onPress={() => {
-              Alert.alert('確定空趟?', ' ', [
-                {
-                  text: '取消',
-                  onPress: () => console.log('Cancel Pressed'),
-                  style: 'cancel',
-                },
-                {
-                  text: '確定',
-                  onPress: () => {
-                    handleMiss();
-                  },
-                },
-              ]);
-            }}>
-            {'空趟'}
-          </Button>
-          <View
-            style={
-              caseStatus[detailIndex] == 5
-                ? {flexDirection: 'row', alignItems: 'center', display: 'none'}
-                : {display: 'none'}
-            }>
-            <Text
-              style={{
-                fontSize: 20,
-                fontWeight: 'bold',
-                marginStart: 30,
-                marginEnd: 60,
-              }}>
-              陪同外籍:
-            </Text>
-            <Picker
-              enabled={cashSteps == 0 ? true : false}
-              selectedValue={foreignPeople}
-              style={{height: 50, width: 150}}
-              onValueChange={(itemValue, itemIndex) =>
-                setforeignPeople(itemValue)
-              }>
-              <Picker.Item label="0人" value={0} />
-              <Picker.Item label="1人" value={1} />
-              <Picker.Item label="2人" value={2} />
-              <Picker.Item label="3人" value={3} />
-              <Picker.Item label="4人" value={4} />
-              <Picker.Item label="5人" value={5} />
-              <Picker.Item label="6人" value={6} />
-              <Picker.Item label="7人" value={7} />
-            </Picker>
-          </View>
-          <View
-            style={
-              caseStatus[detailIndex] == 5
-                ? {flexDirection: 'row', alignItems: 'center'}
-                : {display: 'none'}
-            }>
-            <Text
-              style={{
-                fontSize: 20,
-                fontWeight: 'bold',
-                paddingStart: 30,
-                flex: 1,
-              }}>
-              陪同人數:
-            </Text>
-            <Picker
-              enabled={(cashSteps == 0 && !askingMoney) ? true : false}
-              selectedValue={people}
-              style={{flex: 1}}
-              onValueChange={(itemValue, itemIndex) => setpeople(itemValue)}>
-              <Picker.Item label="0人" value={0} />
-              <Picker.Item label="1人" value={1} />
-              <Picker.Item label="2人" value={2} />
-              <Picker.Item label="3人" value={3} />
-              <Picker.Item label="4人" value={4} />
-              <Picker.Item label="5人" value={5} />
-              <Picker.Item label="6人" value={6} />
-              <Picker.Item label="7人" value={7} />
-            </Picker>
-          </View>
-          <View
-            style={
-              cashSteps == 1
-                ? {flexDirection: 'row', alignItems: 'center'}
-                : {display: 'none'}
-            }>
-            <Text
-              style={{
-                fontSize: 20,
-                fontWeight: 'bold',
-                marginStart: 30,
-                marginEnd: 100,
-              }}>
-              應收車資:
-            </Text>
-            <Text style={{fontSize: 30, fontWeight: 'bold', color: 'orange'}}>
-              {money}
-            </Text>
-          </View>
-          <View
-            style={
-              cashSteps == 1
-                ? {flexDirection: 'row', alignItems: 'center'}
-                : {display: 'none'}
-            }>
-            <Text
-              style={{
-                fontSize: 20,
-                fontWeight: 'bold',
-                marginStart: 30,
-                marginEnd: 99,
-              }}>
-              實收車資:
-            </Text>
-            <TextInput
-              keyboardType="number-pad"
-              defaultValue={realMoney}
-              underlineColorAndroid="white"
-              placeholderTextColor="orange"
-              style={{
-                fontSize: 30,
-                fontWeight: 'bold',
-                width: '100%',
-                color: 'orange',
-              }}
-              onEndEditing={input => {
-                input.nativeEvent.text == ''
-                  ? setrealMoney(money)
-                  : setrealMoney(input.nativeEvent.text);
-              }}
-              clearTextOnFocus={true}
-            />
-          </View>
-          <View style={cashSteps == 1 ? {} : {display: 'none'}}>
-            <Text
-              style={{
-                fontSize: 20,
-                fontWeight: 'bold',
-                marginStart: 30,
-                marginEnd: 99,
-              }}>
-              備註:
-            </Text>
-            <TextInput
-              placeholder={'請輸入備註'}
-              underlineColorAndroid="white"
-              placeholderTextColor="gray"
-              style={{fontSize: 20, width: '80%', alignSelf: 'center'}}
-              onEndEditing={input => {
-                setps(input.nativeEvent.text);
-              }}
-              clearTextOnFocus={true}
-            />
-          </View>
-          <Button
-            style={
-              caseStatus[detailIndex] == 5
-                ? {
-                    alignSelf: 'center',
-                    justifyContent: 'center',
-                    alignContent: 'center',
-                    borderRadius: 50,
-                    backgroundColor: 'orange',
-                    margin: 10,
-                  }
-                : {display: 'none'}
-            }
-            labelStyle={{color: 'white', fontSize: 20}}
-            contentStyle={{width: '100%', paddingHorizontal: 50}}
-            mode="outlined"
-            disabled={askingMoney}
-            onPress={() => handleCashNext()}>
-            {cashSteps == 0 ? (askingMoney ?'金額計算中...':'現金') : '確認收款'}
-          </Button>
-          <Button
-            style={
-              caseStatus[detailIndex] == 5 && cashSteps == 1
-                ? {
-                    alignSelf: 'center',
-                    justifyContent: 'center',
-                    alignContent: 'center',
-                    borderRadius: 50,
-                    backgroundColor: 'orange',
-                    margin: 10,
-                  }
-                : {display: 'none'}
-            }
-            labelStyle={{color: 'white', fontSize: 20}}
-            contentStyle={{width: '100%', paddingHorizontal: 50}}
-            mode="outlined"
-            onPress={() => handleCashPrev()}>
-            {'回上一步'}
-          </Button>
-        </View>
+          );
+        })}
       </ScrollView>
     );
   }
@@ -988,7 +882,8 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   titleBox: {
-    backgroundColor: 'black',
+    backgroundColor: 'orange',
+    flexDirection: 'row',
   },
   titleTime: {
     flexDirection: 'row',
@@ -1010,18 +905,20 @@ const styles = StyleSheet.create({
   },
   titleName: {
     justifyContent: 'center',
+    alignContent: 'center',
     backgroundColor: 'orange',
     padding: 10,
+    flex: 1,
   },
   titleNameText: {
-    fontSize: 30,
-    lineHeight: 50,
+    fontSize: 20,
+    lineHeight: 30,
     color: 'white',
     fontWeight: 'bold',
   },
   titleNameText2: {
-    fontSize: 15,
-    lineHeight: 15,
+    fontSize: 20,
+    lineHeight: 30,
     color: 'white',
   },
   titleRight: {

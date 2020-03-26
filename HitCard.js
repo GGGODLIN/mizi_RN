@@ -95,10 +95,10 @@ const HitCard = props => {
             setLoading(false);
           })
           .catch(err =>
-        Alert.alert('網路異常，請稍後再試...', ' ', [
+        Alert.alert('網路異常，請稍後再試...111', ' ', [
           {
             text: '確定',
-            onPress: () => {},
+            onPress: () => {console.log(err)},
           },
         ]),
       );
@@ -121,7 +121,7 @@ const HitCard = props => {
             setrealReceiveAmt(res.response.RealReceiveAmt);
           })
           .catch(err =>
-        Alert.alert('網路異常，請稍後再試...', ' ', [
+        Alert.alert('網路異常，請稍後再試...222', ' ', [
           {
             text: '確定',
             onPress: () => {},
@@ -157,7 +157,7 @@ const HitCard = props => {
         setLoading(false);
       })
       .catch(err =>
-        Alert.alert('網路異常，請稍後再試...', ' ', [
+        Alert.alert('網路異常，請稍後再試...333', ' ', [
           {
             text: '確定',
             onPress: () => {},
@@ -177,7 +177,7 @@ const HitCard = props => {
       await postPic(item)
         .then(() => FileUtil.deleteFile(`file://${item}`))
         .catch(err => {
-          Alert.alert('網路異常，請稍後再試...', ' ', [
+          Alert.alert('網路異常，請稍後再試...444', ' ', [
             {
               text: '確定',
               onPress: () => {},
@@ -249,7 +249,7 @@ const HitCard = props => {
             console.log('PUTSIGN AJAX', res2);
           })
           .catch(err2 =>
-        Alert.alert('網路異常，請稍後再試...', ' ', [
+        Alert.alert('網路異常，請稍後再試...555', ' ', [
           {
             text: '確定',
             onPress: () => {},
@@ -260,7 +260,7 @@ const HitCard = props => {
         return res;
       })
       .catch(err =>
-        Alert.alert('網路異常，請稍後再試...', ' ', [
+        Alert.alert('網路異常，請稍後再試...666', ' ', [
           {
             text: '確定',
             onPress: () => {},

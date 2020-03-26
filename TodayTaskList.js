@@ -36,188 +36,83 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 function Item({data, navigation}) {
   var caseName = data.DespatchDetails[0].CaseUser.Name;
-
-  var canShared = data.DespatchDetails.length >= 2 ? '有共乘' : '無共乘';
+  var startTime = data.DespatchDetails[0].Despatch.StartDate;
+  var startDate = data.DespatchDetails[0].Despatch.StartDate;
+  var pos = startTime.indexOf('T');
+  if (pos != -1) {
+    startDate = startTime.substring(0, pos);
+    startTime = startTime.substring(pos + 1, pos + 6);
+  }
+  var canShared = data.DespatchDetails.length>=2?'有共乘':'無共乘';
   var FamilyWith = data.DespatchDetails[0].OrderDetails.FamilyWith;
-  const sum =
-    data.DespatchDetails.length === 1
-      ? data.DespatchDetails[0].OrderDetails.FamilyWith +
-        data.DespatchDetails[0].OrderDetails.ForeignFamilyWith
-      : data.DespatchDetails.reduce(function(
-          accumulator,
-          currentValue,
-          currentIndex,
-          array,
-        ) {
-          console.log('font', accumulator);
-          return (
-            currentValue.OrderDetails.FamilyWith +
-            currentValue.OrderDetails.ForeignFamilyWith +
-            accumulator
-          );
-        },
-        0);
+  const sum = (data.DespatchDetails.length===1)?data.DespatchDetails[0].OrderDetails.FamilyWith+data.DespatchDetails[0].OrderDetails.ForeignFamilyWith:data.DespatchDetails.reduce(function (accumulator, currentValue, currentIndex, array) {
+  console.log("font",accumulator);
+  return currentValue.OrderDetails.FamilyWith+currentValue.OrderDetails.ForeignFamilyWith+accumulator;
+},0);
   var ForeignFamilyWith =
     data.DespatchDetails[0].OrderDetails.ForeignFamilyWith;
   var FromAddr = data.DespatchDetails[0].OrderDetails.FromAddr;
   var ToAddr = data.DespatchDetails[0].OrderDetails.ToAddr;
-  var startOrNot = data.DespatchDetails.every(function(item, index, array) {
+  var startOrNot = data.DespatchDetails.every(function(item, index, array){
     return item.OrderDetails.Status <= 1;
   });
-  console.log('startOrNot', startOrNot);
+   console.log("startOrNot",startOrNot);
   return (
-    <View
-      style={{
-        width: '95%',
-        alignSelf: 'center',
-        backgroundColor: 'pink',
-        margin: 10,
-        paddingVertical: 10,
-      }}>
-      {data.DespatchDetails.map((val, index) => {
-        var startTime = val.Despatch.StartDate;
-        var startDate = val.Despatch.StartDate;
-        var pos = startTime.indexOf('T');
-        if (pos != -1) {
-          startDate = startTime.substring(0, pos);
-          startTime = startTime.substring(pos + 1, pos + 6);
-        }
-        var buttonText1 =
-          val.OrderDetails.Status <= 1
-            ? '出發'
-            : val.OrderDetails.Status === 2
-            ? '抵達'
-            : val.OrderDetails.Status === 3
-            ? '客上'
-            : val.OrderDetails.Status === 4
-            ? '完成'
-            : ' ';
-        return (
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() =>
-              navigation.navigate('TodayTaskOpen', {
-                caseName: data.DespatchDetails[0].CaseUser.Name,
-                data: data,
-                startTime: startTime,
-                startDate: startDate,
-                withPeople: FamilyWith + ForeignFamilyWith,
-                canShared: canShared,
-              })
-            }>
-            <View
-              style={{
-                paddingBottom: 20,
-                width: '95%',
-                alignSelf: 'center',
-                backgroundColor: 'white',
-              }}
-              elevation={5}>
-              <View style={styles.titleBox}>
-                <View style={styles.titleTime}>
-                  <View style={styles.titleLeft}>
-                    <Text
-                      style={{color: 'white', fontSize: 20}}
-                      allowFontScaling={false}>
-                      {startTime}
-                    </Text>
-                  </View>
-                  <View style={styles.titleDate}>
-                    <Text
-                      style={{color: 'white', fontSize: 20}}
-                      allowFontScaling={false}>
-                      {startDate}
-                    </Text>
-                    <Text
-                      style={{color: 'white', fontSize: 20, marginStart: 20}}
-                      allowFontScaling={false}>
-                      {data.DespatchDetails.length >= 2 ? '有共乘' : '無共乘'}
-                    </Text>
-                  </View>
-                </View>
-                <View style={styles.titleName}>
-                  <View style={{flexDirection: 'row'}}>
-                    <View
-                      style={{
-                        flexDirection: 'column',
-                        justifyContent: 'center',
-                        flex: 1,
-                      }}>
-                      <Avatar
-                        size="xlarge"
-                        containerStyle={{margin: 10}}
-                        rounded
-                        source={{
-                          uri: `${val.OrderDetails.CaseUserPic}`,
-                        }}
-                      />
-
-                      <Text
-                        style={{
-                          color: 'white',
-                          fontSize: 24,
-                          fontWeight: 'bold',
-                          paddingEnd: 10,
-                        }}>
-                        {val.CaseUser.Name}
-                      </Text>
-
-                      <Text
-                        allowFontScaling={false}
-                        style={{color: 'white', fontSize: 24}}>
-                        {'陪同' + sum}
-                      </Text>
-                    </View>
-                    <View
-                      style={{
-                        flexDirection: 'column',
-                        justifyContent: 'center',
-                        flex: 1,
-                      }}>
-                      <Button title={buttonText1} containerStyle={{marginVertical:10}}/>
-                      <Button title='空趟' containerStyle={val.OrderDetails.Status!==3?{display:'none'}:{marginVertical:10}}/>
-                      
-                    </View>
-                  </View>
-                </View>
+    <TouchableOpacity
+      style={styles.button}
+      onPress={() =>
+        navigation.navigate('TodayTaskOpen', {
+          caseName: data.DespatchDetails[0].CaseUser.Name,
+          data: data,
+          startTime: startTime,
+          startDate: startDate,
+          withPeople: FamilyWith+ForeignFamilyWith,
+          canShared:canShared,
+        })
+      }>
+      <View
+        style={{
+          marginTop: 20,
+          paddingBottom: 0,
+          width: '95%',
+          alignSelf: 'center',
+          backgroundColor: 'white',
+        }}
+        elevation={5}>
+        <View style={styles.titleBox}>
+          
+          <View style={styles.titleName}>
+            <View style={{flexDirection: 'row'}}>
+            <View style={{flexDirection: 'column', justifyContent: 'center',flex:1}}>
+             
+               <Text
+                style={{color: 'white', fontSize: 24}}
+                allowFontScaling={false}>
+                {startTime}
+              </Text>
+              
               </View>
-              <View>
-                <View style={styles.addr}>
-                  <Icon
-                    name="circle-o"
-                    size={30}
-                    color="orange"
-                    style={{paddingLeft: 30}}
-                  />
-                  <Text allowFontScaling={false} style={styles.addrText}>
-                    {val.OrderDetails.FromAddr}
-                  </Text>
-                </View>
-                <View style={styles.addr}>
-                  <Icon
-                    name="angle-double-down"
-                    size={30}
-                    color="orange"
-                    style={{paddingLeft: 32}}
-                  />
-                </View>
-                <View style={styles.addr}>
-                  <Icon
-                    name="circle-o"
-                    size={30}
-                    color="orange"
-                    style={{paddingLeft: 30}}
-                  />
-                  <Text allowFontScaling={false} style={styles.addrText}>
-                    {val.OrderDetails.ToAddr}
-                  </Text>
-                </View>
+              <View style={{flexDirection: 'row', justifyContent: 'flex-start',flex:1}}>
+                
+                <Text
+                  allowFontScaling={false}
+                  style={{color: 'white', fontSize: 24,marginEnd:24}}>
+                  {'個案' + data.DespatchDetails.length }
+                </Text>
+                <Text
+                  allowFontScaling={false}
+                  style={startOrNot?{display:'none'}:{color: 'red', fontSize: 24,fontWeight:'bold'}}>
+                  執行中
+                </Text>
               </View>
             </View>
-          </TouchableOpacity>
-        );
-      })}
-    </View>
+          </View>
+        </View>
+        <View>
+        
+      </View>
+      </View>
+    </TouchableOpacity>
   );
 }
 
@@ -254,9 +149,7 @@ const TodayTaskList = props => {
             Alert.alert('網路異常，請稍後再試...', ' ', [
               {
                 text: '確定',
-                onPress: () => {
-                  fetchData();
-                },
+                onPress: () => {fetchData()},
               },
             ]),
           );
@@ -313,7 +206,7 @@ const TodayTaskList = props => {
     }, []),
   );
 
-  if (isLoading || data.response === undefined) {
+  if (isLoading || data.response===undefined) {
     console.log('TASKS screen is loading...');
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
@@ -328,7 +221,7 @@ const TodayTaskList = props => {
           style={{
             flexDirection: 'row',
             alignItems: 'center',
-            backgroundColor: '#ACB3EC',
+            backgroundColor: 'white',
             justifyContent: 'space-between',
           }}>
           <Text style={{fontSize: 24, padding: 10, fontWeight: 'bold'}}>
@@ -472,13 +365,13 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
     paddingTop: 10,
-    height: 50,
+    height:50,
   },
   addrText: {
     fontSize: 20,
     paddingLeft: 20,
     flexWrap: 'wrap',
-    width: '80%',
+    width:'80%'
   },
   addr2: {
     flexDirection: 'row',

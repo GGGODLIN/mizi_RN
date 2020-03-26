@@ -176,6 +176,7 @@ const PastReceive = props => {
           obj_value.response.Id +
           '?StartDate=' +
           '&EndDate=';
+          console.log(url3);
 
         const data2 = await fetch(url3, {
           method: 'GET',
@@ -193,6 +194,7 @@ const PastReceive = props => {
               {
                 text: '確定',
                 onPress: () => {
+                  console.log("ERR1",err);
                   setLoading(false);
                 },
               },
