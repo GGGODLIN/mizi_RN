@@ -137,26 +137,7 @@ export default function DrawerContent(props) {
           </Button>
         </Drawer.Section>
 
-        <Drawer.Section style={styles.drawerSection}>
-          <Button
-            color="red"
-            labelStyle={{color: 'black',fontSize:20}}
-            contentStyle={{width: '100%', padding: 10}}
-            mode="text"
-            onPress={() =>
-              props.navigation.navigate('Home', {
-                screen: '今日任務',
-                params: {
-                  screen: 'HistoryTasksStackScreen',
-                  params: {
-                    screen: 'PastReceive',
-                  },
-                },
-              })
-            }>
-            {'過去營收       '}
-          </Button>
-        </Drawer.Section>
+        
 
       </View>
     );

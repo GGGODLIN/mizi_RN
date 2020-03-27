@@ -424,21 +424,7 @@ const HitCard = props => {
           }}
         />
         <View style={{alignSelf: 'center', width: '90%', paddingBottom: 10}}>
-          <Text
-            style={{
-              borderBottomWidth: 1,
-              fontSize: 20,
-              color: 'orange',
-              fontWeight: 'bold',
-            }}>
-            本日收入
-          </Text>
-          <Text style={{fontSize: 20}}>
-            {'應收金額:                       $' + shouldReceiveAmt}
-          </Text>
-          <Text style={{fontSize: 20}}>
-            {'實收金額:                       $' + realReceiveAmt}
-          </Text>
+          
         </View>
         <Button
           disabled={status >= 4 ? true : false}
