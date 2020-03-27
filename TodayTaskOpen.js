@@ -590,8 +590,10 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
             }
             contentContainerStyle={StyleSheet.absoluteFillObject}>
             <MapView
+            provider="google"
               style={[styles.map, {bottom: fixbottom}]}
               onKmlReady={e => console.log('HAHA', e.nativeEvent)}
+              onMarkerSelect={e => console.log("PRESS!!!!",e.nativeEvent)}
               region={{
                 latitude: taskData[detailIndex].OrderDetails.FromLat,
                 longitude: taskData[detailIndex].OrderDetails.FromLon,
@@ -605,7 +607,7 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
                 }}
                 icon="write"
                 pinColor="blue"
-                onPress={() => setfixbottom(0)}
+                onPress={(e) => console.log("AAAAAAA",e.nativeEvent)}
                 title={taskData[detailIndex].OrderDetails.FromAddr}
               />
               <Marker
