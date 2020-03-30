@@ -29,7 +29,7 @@ import {
   Button,
 } from 'react-native-paper';
 const args = {
-  number: '33390', // String value with the number to call
+  number: ' ', // String value with the number to call
   prompt: false, // Optional boolean property. Determines if the user should be prompt prior to the call
 };
 const Tab = createMaterialBottomTabNavigator();
