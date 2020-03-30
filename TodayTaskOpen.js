@@ -157,9 +157,20 @@ const TodayTaskOpen = props => {
     }
   };
 
-  const handleMiss = async index => {
+  const handleMiss = async (index,status) => {
     let tempStatus = caseStatus;
-    tempStatus[index] = 10;
+    tempStatus[index] = status;
+    setcaseStatus(tempStatus);
+
+    setdoneCase(index);
+    updateStatus(index);
+    await checkDone();
+    setLoading(true);
+  };
+
+  const handleJa = async index => {
+    let tempStatus = caseStatus;
+    tempStatus[index] = 8;
     setcaseStatus(tempStatus);
 
     setdoneCase(index);
@@ -632,6 +643,7 @@ const TodayTaskOpen = props => {
                       mode="outlined"
                       onPress={() => {
                         let str = caseStatus[index] == 1 ?'確定請假?':'確定空趟?';
+                        let status = caseStatus[index] == 1 ?8:10;
                         Alert.alert(str, ' ', [
                           {
                             text: '取消',
@@ -641,7 +653,7 @@ const TodayTaskOpen = props => {
                           {
                             text: '確定',
                             onPress: () => {
-                              handleMiss(index);
+                              handleMiss(index,status);
                             },
                           },
                         ]);
