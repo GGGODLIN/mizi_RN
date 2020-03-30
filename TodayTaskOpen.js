@@ -357,6 +357,68 @@ const TodayTaskOpen = props => {
       );
   };
 
+  const updateStatusToEight = async index => {
+    let url2 = `http://slllcapi.1966.org.tw/api/OrderDetails/PutDetailStatus?OrderDetailId=${
+      taskData[index].OrderDetails.Id
+    }&StatusInt=8`;
+
+    console.log(`Making Status request to: ${url2}`);
+
+    const data2 = await fetch(url2, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(response2 => response2.json())
+      .then(res2 => {
+        console.log('updateStatus5 AJAX', res2);
+      })
+      .then(async () => {
+        console.log('???????', taskData[index].OrderDetails.SOrderNo);
+        let url = `http://slllcapi.1966.org.tw/api/OrderDetails/PutDetailStatus?OrderDetailId=${
+          taskData[index].OrderDetails.Id
+        }&StatusInt=6&receiveAmt=0&signPic=${
+          taskData[index].OrderDetails.SOrderNo
+        }.png&remark=個案取消`;
+
+        console.log(`Making Status8 request to: ${url}`);
+
+        const data = await fetch(url, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .then(response => response.json())
+          .then(res => {
+            console.log('updateStatus6 AJAX', res);
+            setdoneCase(index);
+            checkDone();
+          })
+          .catch(err =>
+            Alert.alert('網路異常，請稍後再試...', ' ', [
+              {
+                text: '確定',
+                onPress: () => {
+                  console.log(err);
+                },
+              },
+            ]),
+          );
+      })
+      .catch(err2 =>
+        Alert.alert('網路異常，請稍後再試...', ' ', [
+          {
+            text: '確定',
+            onPress: () => {
+              console.log(err2);
+            },
+          },
+        ]),
+      );
+  };
+
   const handleSavePic = async res => {
     console.log('RES????????????', res.pathName);
     setcashSteps(0);
@@ -498,32 +560,79 @@ const TodayTaskOpen = props => {
                     uri: `${item.OrderDetails.CaseUserPic}`,
                   }}
                 />
-                
+
                 <View
                   style={(styles.titleName, {flex: 2, alignSelf: 'center'})}>
                   <Text style={styles.titleNameText}>
                     {item.OrderDetails.CaseUserName}
                   </Text>
-                  <View style={{flexDirection:'row'}}>
-                  <Button
-                    style={{
-                      alignSelf: 'flex-start',
-                      justifyContent: 'center',
-                      alignContent: 'center',
-                      borderRadius: 50,
-                      backgroundColor: 'salmon',
-                      borderColor: 'white',
-                      borderWidth: 1,
-                      margin: 10,
-                      flex:1,
-                    }}
-                    labelStyle={{color: 'white', fontSize: 20}}
-                    containerStyle={{width: '100%'}}
-                    mode="solid"
-                    loading={caseStatus[index] >= 5 ? true : false}
-                    onPress={() => {
-                      if (caseStatus[index] >= 4) {
-                        Alert.alert('確定客下?', ' ', [
+                  <View style={{flexDirection: 'row'}}>
+                    <Button
+                      style={{
+                        alignSelf: 'flex-start',
+                        justifyContent: 'center',
+                        alignContent: 'center',
+                        borderRadius: 50,
+                        backgroundColor: 'salmon',
+                        borderColor: 'white',
+                        borderWidth: 1,
+                        margin: 10,
+                        flex: 1,
+                      }}
+                      labelStyle={{color: 'white', fontSize: 20}}
+                      containerStyle={{width: '100%'}}
+                      mode="solid"
+                      loading={caseStatus[index] >= 5 ? true : false}
+                      onPress={() => {
+                        if (caseStatus[index] >= 4) {
+                          Alert.alert('確定客下?', ' ', [
+                            {
+                              text: '取消',
+                              onPress: () => console.log('Cancel Pressed'),
+                              style: 'cancel',
+                            },
+                            {
+                              text: '確定',
+                              onPress: () => {
+                                handleNextStep(6, index);
+                              },
+                            },
+                          ]);
+                        } else {
+                          handleNextStep(0, index);
+                        }
+                      }}>
+                      {caseStatus[index] == 1
+                        ? '出發'
+                        : caseStatus[index] == 2
+                        ? '抵達上車地點'
+                        : caseStatus[index] == 3
+                        ? '客上'
+                        : caseStatus[index] == 4
+                        ? '客下'
+                        : '讀取中...'}
+                    </Button>
+                    <Button
+                      style={
+                        caseStatus[index] == 3 || caseStatus[index] == 1
+                          ? {
+                              alignSelf: 'flex-start',
+                              justifyContent: 'center',
+                              alignContent: 'center',
+                              borderRadius: 50,
+                              backgroundColor: 'gray',
+                              borderColor: 'white',
+                              borderWidth: 1,
+                              margin: 10,
+                              flex: 1,
+                            }
+                          : {display: 'none'}
+                      }
+                      labelStyle={{color: 'white', fontSize: 20}}
+                      mode="outlined"
+                      onPress={() => {
+                        let str = caseStatus[index] == 1 ?'確定請假?':'確定空趟?';
+                        Alert.alert(str, ' ', [
                           {
                             text: '取消',
                             onPress: () => console.log('Cancel Pressed'),
@@ -532,59 +641,13 @@ const TodayTaskOpen = props => {
                           {
                             text: '確定',
                             onPress: () => {
-                              handleNextStep(6, index);
+                              handleMiss(index);
                             },
                           },
                         ]);
-                      } else {
-                        handleNextStep(0, index);
-                      }
-                    }}>
-                    {caseStatus[index] == 1
-                      ? '出發前往'
-                      : caseStatus[index] == 2
-                      ? '抵達上車地點'
-                      : caseStatus[index] == 3
-                      ? '客上'
-                      : caseStatus[index] == 4
-                      ? '客下'
-                      : '讀取中...'}
-                  </Button>
-                  <Button
-                    style={
-                      caseStatus[index] == 3
-                        ? {
-                            alignSelf: 'flex-start',
-                      justifyContent: 'center',
-                      alignContent: 'center',
-                      borderRadius: 50,
-                      backgroundColor: 'gray',
-                      borderColor: 'white',
-                      borderWidth: 1,
-                      margin: 10,
-                      flex:1,
-                          }
-                        : {display: 'none'}
-                    }
-                    labelStyle={{color: 'white', fontSize: 20}}
-                    mode="outlined"
-                    onPress={() => {
-                      Alert.alert('確定空趟?', ' ', [
-                        {
-                          text: '取消',
-                          onPress: () => console.log('Cancel Pressed'),
-                          style: 'cancel',
-                        },
-                        {
-                          text: '確定',
-                          onPress: () => {
-                            handleMiss(index);
-                          },
-                        },
-                      ]);
-                    }}>
-                    {'空趟'}
-                  </Button>
+                      }}>
+                      {caseStatus[index] == 1 ? '請假' : '空趟'}
+                    </Button>
                   </View>
                 </View>
               </View>
