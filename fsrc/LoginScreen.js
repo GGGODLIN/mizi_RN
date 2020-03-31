@@ -36,7 +36,7 @@ class LoginScreen extends Component {
   }
 
   handleLogin = async () => {
-    let url = `https://api.donkeymove.com/api/DriverInfo/DriverLogin?`;
+    let url = `http://slllcapi.1966.org.tw/api/DriverInfo/DriverLogin?`;
     let query = `acc=${this.emailInput.input._lastNativeText}`;
     let query2 = `pwd=${this.passwordInput.input._lastNativeText}`;
     url += query + '&' + query2;

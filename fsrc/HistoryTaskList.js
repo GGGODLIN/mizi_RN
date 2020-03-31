@@ -96,14 +96,14 @@ const HistoryTaskList = props => {
         var obj_value = JSON.parse(value);
         console.log('GET FROM ASYN IS', obj_value);
         var url2 =
-          'https://api.donkeymove.com/api/DriverInfo/GetAllPassGroup/' +
+          'http://slllcapi.1966.org.tw/api/DriverInfo/GetAllPassGroup/' +
           obj_value.response.Id;
         seturl(
-          `https://api.donkeymove.com/api/DriverInfo/GetAllPassGroup/${
+          `http://slllcapi.1966.org.tw/api/DriverInfo/GetAllPassGroup/${
             obj_value.response.Id
           }`,
         );
-        //let url = `https://api.donkeymove.com/api/DriverInfo/GetAllGroup/${obj_value.Id}`;
+        //let url = `http://slllcapi.1966.org.tw/api/DriverInfo/GetAllGroup/${obj_value.Id}`;
         const data = await fetch(url2, {
           method: 'GET',
           headers: {
@@ -128,7 +128,7 @@ const HistoryTaskList = props => {
 
   async function fetchData_test() {
     const data = await fetch(
-      'https://api.donkeymove.com/api/DriverInfo/GetAllPassGroup/15',
+      'http://slllcapi.1966.org.tw/api/DriverInfo/GetAllPassGroup/15',
       {
         method: 'GET',
         headers: {

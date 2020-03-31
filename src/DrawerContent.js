@@ -81,11 +81,11 @@ export default function DrawerContent(props) {
         </View>
         <Drawer.Section style={styles.drawerSection}>
           <Button
-            icon="format-list-numbered"
+            
           
             color="orange"
-            labelStyle={{color: 'black',fontSize:20}}
-            contentStyle={{width: '100%', padding: 10}}
+            labelStyle={{color: 'black'}}
+            contentStyle={{width: '100%', padding: 10,justifyContent:'flex-start',paddingStart:'20%'}}
             mode="text"
             onPress={() =>
               props.navigation.navigate('Home', {
@@ -101,13 +101,13 @@ export default function DrawerContent(props) {
             {'任務歷程'}
           </Button>
         </Drawer.Section>
-        <Text style={{width:'90%',alignSelf:'center',color:'gray'}}>開車前請確認車輛狀況及自我健康狀況，若有任何異常或不適，請即時向行控中心反應</Text>
+        
 
-        {/*<Drawer.Section style={styles.drawerSection}>
+        <Drawer.Section style={styles.drawerSection}>
           <Button
             color="red"
             labelStyle={{color: 'black'}}
-            contentStyle={{width: '100%', padding: 10}}
+            contentStyle={{width: '100%', padding: 10,justifyContent:'flex-start',paddingStart:'20%'}}
             mode="text"
             onPress={() =>
               props.navigation.navigate('Home', {
@@ -117,14 +117,14 @@ export default function DrawerContent(props) {
                 },
               })
             }>
-            每日車況檢查
+            車況檢查
           </Button>
         </Drawer.Section>
         <Drawer.Section style={styles.drawerSection}>
           <Button
             color="red"
             labelStyle={{color: 'black'}}
-            contentStyle={{width: '100%', padding: 10}}
+            contentStyle={{width: '100%', padding: 10,justifyContent:'flex-start',paddingStart:'20%'}}
             mode="text"
             onPress={() =>
               props.navigation.navigate('Home', {
@@ -134,30 +134,11 @@ export default function DrawerContent(props) {
                 },
               })
             }>
-            身心狀況檢查
+            身心檢查
           </Button>
         </Drawer.Section>
 
-        <Drawer.Section style={styles.drawerSection}>
-          <Button
-            color="red"
-            labelStyle={{color: 'black'}}
-            contentStyle={{width: '100%', padding: 10}}
-            mode="text"
-            onPress={() =>
-              props.navigation.navigate('Home', {
-                screen: '今日任務',
-                params: {
-                  screen: 'HistoryTasksStackScreen',
-                  params: {
-                    screen: 'PastReceive',
-                  },
-                },
-              })
-            }>
-            {'過去營收       '}
-          </Button>
-        </Drawer.Section>*/}
+        
 
       </View>
     );

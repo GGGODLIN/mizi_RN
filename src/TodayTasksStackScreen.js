@@ -32,7 +32,7 @@ export default function TodayTasksStackScreen(props) {
           ),
        headerLeft:({color, size}) => (
             <Image
-          style={{width:'100%', height:'100%',padding:20,paddingStart:'500%'}}
+          style={{width:'300%', height:'100%',padding:20,paddingStart:'300%'}}
           source={require('../img/driver_logo.png')}
         />
 

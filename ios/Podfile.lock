@@ -254,6 +254,8 @@ PODS:
     - React
   - RNGestureHandler (1.6.0):
     - React
+  - RNLaunchNavigator (1.0.7):
+    - React
   - RNPermissions (2.0.9):
     - React
   - RNReanimated (1.7.0):
@@ -307,6 +309,7 @@ DEPENDENCIES:
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - RNFS (from `../node_modules/react-native-fs`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
+  - RNLaunchNavigator (from `../node_modules/react-native-launch-navigator`)
   - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
@@ -396,6 +399,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-fs"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
+  RNLaunchNavigator:
+    :path: "../node_modules/react-native-launch-navigator"
   RNPermissions:
     :path: "../node_modules/react-native-permissions"
   RNReanimated:
@@ -449,6 +454,7 @@ SPEC CHECKSUMS:
   RNDeviceInfo: 310c1f43d418d950a193c7650de2f9559c906048
   RNFS: 2bd9eb49dc82fa9676382f0585b992c424cd59df
   RNGestureHandler: dde546180bf24af0b5f737c8ad04b6f3fa51609a
+  RNLaunchNavigator: a1fd0dff8c9a26c31fd1d84b06bc8030359f16f5
   RNPermissions: 2f74237e97b08beda01e914301e12524ddddf5b8
   RNReanimated: 031fe8d9ea93c2bd689a40f05320ef9d96f74d7f
   RNScreens: 6053a007667bea81a69087caadf103bba04c032e

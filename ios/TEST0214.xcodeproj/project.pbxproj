@@ -582,6 +582,7 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = V5ZUWPFB7D;
+						ProvisioningStyle = Automatic;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -1072,6 +1073,8 @@
 			baseConfigurationReference = FDB74181DFFFDC88CAD6EAC3 /* Pods-TEST0214.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 20200320;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = V5ZUWPFB7D;
@@ -1084,6 +1087,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = TEST0214;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;

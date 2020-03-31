@@ -36,6 +36,7 @@
     "react-native-get-location": "^1.4.2",
     "react-native-global-props": "^1.1.5",
     "react-native-ios-picker": "^1.0.0",
+    "react-native-launch-navigator": "^1.0.7",
     "react-native-login-screen": "^0.3.6",
     "react-native-maps": "^0.25.0",
     "react-native-maps-directions": "^1.7.3",

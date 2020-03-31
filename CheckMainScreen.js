@@ -25,7 +25,14 @@ import {NavigationContainer, useFocusEffect} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import {ThemeProvider, Avatar} from 'react-native-elements';
-import {Button, Card, Title, Paragraph, Divider,ActivityIndicator} from 'react-native-paper';
+import {
+  Button,
+  Card,
+  Title,
+  Paragraph,
+  Divider,
+  ActivityIndicator,
+} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import CarCheckScreen from './CarCheckScreen';
@@ -42,7 +49,7 @@ const CheckMainScreen = props => {
       const value = await AsyncStorage.getItem('userLoginInfo');
       if (value !== null) {
         var obj_value = JSON.parse(value);
-        let url = `https://api.donkeymove.com/api/DriverInfo/GetDriverCheck/${
+        let url = `http://slllcapi.1966.org.tw/api/DriverInfo/GetDriverCheck/${
           obj_value.response.Id
         }`;
         const res = await fetch(url, {
@@ -56,14 +63,15 @@ const CheckMainScreen = props => {
             console.log('FETCH CHECKED??????', res.response.CarCheck);
             setcarChecked(res.response.CarCheck);
             setbodyChecked(res.response.DriverCheck);
-          }).catch(err =>
-        Alert.alert('網路異常，請稍後再試...', ' ', [
-          {
-            text: '確定',
-            onPress: () => {},
-          },
-        ]),
-      );
+          })
+          .catch(err =>
+            Alert.alert('網路異常，請稍後再試...', ' ', [
+              {
+                text: '確定',
+                onPress: () => {},
+              },
+            ]),
+          );
         setdata(obj_value);
         setLoading(false);
       }
@@ -94,7 +102,7 @@ const CheckMainScreen = props => {
     console.log('info screen is loading...');
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <ActivityIndicator animating={true} size='large' />
+        <ActivityIndicator animating={true} size="large" />
       </View>
     );
   } else {
@@ -116,14 +124,14 @@ const CheckMainScreen = props => {
           <Icon
             name="close"
             size={30}
-            color="#900"
+            color="red"
             style={carChecked && bodyChecked ? {display: 'none'} : {flex: 0.2}}
           />
           <Icon
             name="check"
             size={30}
-            color="#900"
-            style={carChecked && bodyChecked ? {flex: 0.2}:{display: 'none'}}
+            color="red"
+            style={carChecked && bodyChecked ? {flex: 0.2} : {display: 'none'}}
           />
           <Text>
             {carChecked && bodyChecked
@@ -138,95 +146,127 @@ const CheckMainScreen = props => {
             alignItems: 'center',
             flexDirection: 'row',
           }}>
-          <Button
+          <View
+            style={{
+              flex: 1,
+              justifyContent: 'center',
+              alignItems: 'center',
+              flexDirection: 'row',
+            }}>
+            <Icon
+              name="close"
+              size={30}
+              color="red"
+              style={
+                carChecked  ? {display: 'none'} : {flex: 0.2}
+              }
+            />
+            <Icon
+              name="check"
+              size={30}
+              color="red"
+              style={
+                carChecked  ? {flex: 0.2} : {display: 'none'}
+              }
+            />
+            <Text>
+              車輛
+            </Text>
+          </View>
+
+          <View
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            flexDirection: 'row',
+          }}>
+          <Icon
+            name="close"
+            size={30}
             color="red"
-            style={{flex: 1}}
-            labelStyle={{color: 'black'}}
-            contentStyle={{width: '100%', height: '100%'}}
-            icon={carChecked ? 'check' : 'close'}
-            mode="text"
-            onPress={() => console.log('Pressed')}>
-            車輛
-          </Button>
-          <Divider />
-          <Button
+            style={bodyChecked ? {display: 'none'} : {flex: 0.2}}
+          />
+          <Icon
+            name="check"
+            size={30}
             color="red"
-            style={{flex: 1}}
-            labelStyle={{color: 'black'}}
-            contentStyle={{width: '100%', height: '100%'}}
-            icon={bodyChecked ? 'check' : 'close'}
-            mode="text"
-            onPress={() => console.log('Pressed')}>
+            style={bodyChecked ? {flex: 0.2}:{display: 'none'}}
+          />
+          <Text>
             身心
-          </Button>
+          </Text>
+        </View>
         </View>
         <View
-          style={(carChecked&&bodyChecked)?{display:'none'}:{
-            flex: 8,
-            justifyContent: 'flex-start',
-            flexDirection: 'column',
-            width: '100%',
-           
-          }}>
-         
-            <Button
-              color="orange"
-              style={
-                carChecked
-                  ? {
-                      flex: 0.2,
-                      marginVertical: 8,
-                      marginHorizontal: 16,
-                      borderRadius: 50,
-                      display: 'none',
-                    }
-                  : {
-                      flex: 0.2,
-                      marginVertical: 8,
-                      marginHorizontal: 16,
-                      borderRadius: 50,
-                    }
-              }
-              labelStyle={{color: 'black'}}
-              contentStyle={{width: '100%', height: '100%'}}
-              icon="car"
-              mode="contained"
-              onPress={() => props.navigation.navigate('CarCheckScreen')}>
-              進行車輛檢查
-            </Button>
-            <Button
-              color="orange"
-              style={
-                bodyChecked
-                  ? {
-                      flex: 0.2,
-                      marginVertical: 8,
-                      marginHorizontal: 16,
-                      borderRadius: 50,
-                      display: 'none',
-                    }
-                  : {
-                      flex: 0.2,
-                      marginVertical: 8,
-                      marginHorizontal: 16,
-                      borderRadius: 50,
-                    }
-              }
-              labelStyle={{color: 'black'}}
-              contentStyle={{width: '100%', height: '100%'}}
-              icon="heart"
-              mode="contained"
-              onPress={() => props.navigation.navigate('BodyCheckScreen')}>
-              進行身心檢查
-            </Button>
+          style={
+            carChecked && bodyChecked
+              ? {display: 'none'}
+              : {
+                  flex: 8,
+                  justifyContent: 'flex-start',
+                  flexDirection: 'column',
+                  width: '100%',
+                }
+          }>
+          <Button
+            color="orange"
+            style={
+              carChecked
+                ? {
+                    flex: 0.2,
+                    marginVertical: 8,
+                    marginHorizontal: 16,
+                    borderRadius: 50,
+                    display: 'none',
+                  }
+                : {
+                    flex: 0.2,
+                    marginVertical: 8,
+                    marginHorizontal: 16,
+                    borderRadius: 50,
+                  }
+            }
+            labelStyle={{color: 'black'}}
+            contentStyle={{width: '100%', height: '100%'}}
+            icon="car"
+            mode="contained"
+            onPress={() => props.navigation.navigate('CarCheckScreen')}>
+            進行車輛檢查
+          </Button>
+          <Button
+            color="orange"
+            style={
+              bodyChecked
+                ? {
+                    flex: 0.2,
+                    marginVertical: 8,
+                    marginHorizontal: 16,
+                    borderRadius: 50,
+                    display: 'none',
+                  }
+                : {
+                    flex: 0.2,
+                    marginVertical: 8,
+                    marginHorizontal: 16,
+                    borderRadius: 50,
+                  }
+            }
+            labelStyle={{color: 'black'}}
+            contentStyle={{width: '100%', height: '100%'}}
+            icon="heart"
+            mode="contained"
+            onPress={() => props.navigation.navigate('BodyCheckScreen')}>
+            進行身心檢查
+          </Button>
         </View>
-        <View style={{flex:1}}></View>
+        <View style={{flex: 1}} />
         <Image
-          resizeMode='center'
-          style={(carChecked&&bodyChecked)?{flex:6}:{display:'none'}}
+          resizeMode="contain"
+          style={carChecked && bodyChecked ? {flex: 6} : {display: 'none'}}
           source={require('./img/ok.png')}
         />
-        <View style={{flex:1}}></View>
+        <View style={{flex: 1}} />
       </View>
     );
   }

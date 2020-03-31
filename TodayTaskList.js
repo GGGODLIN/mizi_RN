@@ -72,68 +72,36 @@ function Item({data, navigation}) {
       }>
       <View
         style={{
-          margin: '5%',
-          paddingBottom: 20,
+          marginTop: 20,
+          paddingBottom: 0,
           width: '95%',
           alignSelf: 'center',
           backgroundColor: 'white',
         }}
         elevation={5}>
         <View style={styles.titleBox}>
-          <View style={styles.titleTime}>
-            <View style={styles.titleLeft}>
-              <Text
-                style={{color: 'white', fontSize: 20}}
+          
+          <View style={styles.titleName}>
+            <View style={{flexDirection: 'row'}}>
+            <View style={{flexDirection: 'column', justifyContent: 'center',flex:1}}>
+             
+               <Text
+                style={{color: 'white', fontSize: 24}}
                 allowFontScaling={false}>
                 {startTime}
               </Text>
-            </View>
-            <View style={styles.titleDate}>
-              <Text
-                style={{color: 'white', fontSize: 20}}
-                allowFontScaling={false}>
-                {startDate}
-              </Text>
-              <Text
-                style={{color: 'white', fontSize: 20,marginStart:20}}
-                allowFontScaling={false}>
-                {data.DespatchDetails.length>=2?'有共乘':'無共乘'}
-              </Text>
-            </View>
-          </View>
-          <View style={styles.titleName}>
-            <View style={{flexDirection: 'row'}}>
-            <View style={{flexDirection: 'column', justifyContent: 'center',flex:1.2}}>
-             
-              {data.DespatchDetails.map((val, index)=>{
-                return (
-                  <Text
-                style={{
-                  color: 'white',
-                  fontSize: 24,
-                  fontWeight: 'bold',
-                  paddingEnd:10,
-                }}>
-                {val.CaseUser.Name}
-              </Text>
-                  );
-              })}
               
               </View>
-              <View style={{flexDirection: 'column', justifyContent: 'center',flex:2}}>
+              <View style={{flexDirection: 'row', justifyContent: 'flex-start',flex:1}}>
+                
                 <Text
                   allowFontScaling={false}
-                  style={{color: 'white', fontSize: 18}}>
-                  {data.DespatchDetails[0].OrderDetails.SOrderNo}
+                  style={{color: 'white', fontSize: 24,marginEnd:24}}>
+                  {'個案' + data.DespatchDetails.length }
                 </Text>
                 <Text
                   allowFontScaling={false}
-                  style={{color: 'white', fontSize: 24}}>
-                  {'個案' + data.DespatchDetails.length + '/' + '陪同' + sum}
-                </Text>
-                <Text
-                  allowFontScaling={false}
-                  style={startOrNot?{display:'none'}:{color: 'red', fontSize: 30,alignSelf:'flex-end',fontWeight:'bold'}}>
+                  style={startOrNot?{display:'none'}:{color: 'red', fontSize: 24,fontWeight:'bold'}}>
                   執行中
                 </Text>
               </View>
@@ -141,36 +109,7 @@ function Item({data, navigation}) {
           </View>
         </View>
         <View>
-        <View style={styles.addr}>
-          <Icon
-            name="circle-o"
-            size={30}
-            color="orange"
-            style={{paddingLeft: 30}}
-          />
-          <Text allowFontScaling={false} style={styles.addrText}>
-            {data.DespatchDetails[0].OrderDetails.FromAddr}
-          </Text>
-        </View>
-        <View style={styles.addr}>
-          <Icon
-            name="angle-double-down"
-            size={30}
-            color="orange"
-            style={{paddingLeft: 32}}
-          />
-        </View>
-        <View style={styles.addr}>
-          <Icon
-            name="circle-o"
-            size={30}
-            color="orange"
-            style={{paddingLeft: 30}}
-          />
-          <Text allowFontScaling={false} style={styles.addrText}>
-            {data.DespatchDetails[0].OrderDetails.ToAddr}
-          </Text>
-        </View>
+        
       </View>
       </View>
     </TouchableOpacity>
@@ -191,9 +130,9 @@ const TodayTaskList = props => {
         var obj_value = JSON.parse(value);
         setuserLoginInfo(obj_value);
         var url2 =
-          'https://api.donkeymove.com/api/DriverInfo/GetAllGroupDriverSide/' +
+          'http://slllcapi.1966.org.tw/api/DriverInfo/GetAllGroupDriverSide/' +
           obj_value.response.Id;
-        //let url = `https://api.donkeymove.com/api/DriverInfo/GetAllGroup/${obj_value.Id}`;
+        //let url = `http://slllcapi.1966.org.tw/api/DriverInfo/GetAllGroup/${obj_value.Cars.DriverId}`;
         const data = await fetch(url2, {
           method: 'GET',
           headers: {
@@ -223,7 +162,7 @@ const TodayTaskList = props => {
 
   async function fetchData_test() {
     const data = await fetch(
-      'https://api.donkeymove.com/api/DriverInfo/GetAllPassGroup/15',
+      'http://slllcapi.1966.org.tw/api/DriverInfo/GetAllPassGroup/15',
       {
         method: 'GET',
         headers: {
@@ -282,7 +221,7 @@ const TodayTaskList = props => {
           style={{
             flexDirection: 'row',
             alignItems: 'center',
-            backgroundColor: '#ACB3EC',
+            backgroundColor: 'white',
             justifyContent: 'space-between',
           }}>
           <Text style={{fontSize: 24, padding: 10, fontWeight: 'bold'}}>

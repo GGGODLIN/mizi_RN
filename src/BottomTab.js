@@ -30,14 +30,14 @@ import {
 } from 'react-native-paper';
 const args = {
   number: ' ', // String value with the number to call
-  prompt: false, // Optional boolean property. Determines if the user should be prompt prior to the call
+  prompt: true, // Optional boolean property. Determines if the user should be prompt prior to the call
 };
 const Tab = createMaterialBottomTabNavigator();
 const callOut = ({navigation}) => {
   const isFocused = useIsFocused();
 
   if (isFocused) {
-    call(args);
+    let c = Linking.openURL(`tel:0289532910`);
     navigation.goBack();
     return null;
   } else {
@@ -85,8 +85,8 @@ export default function BottomTab(props) {
           },
         }}/>*/}
       <Tab.Screen
-        name="收入列表"
-        component={PastReceiveStackScreen}
+        name="每日檢查"
+        component={CheckStackScreen}
         options={{
           tabBarIcon: 'format-list-checks',
         }}
@@ -110,15 +110,7 @@ export default function BottomTab(props) {
         }}
       />
 
-      <Tab.Screen
-        name="聯繫行控"
-        component={callOut}
-        options={{
-          tabBarIcon: 'cellphone-sound',
-          tabBarButton: props => <callOut {...props} />,
-        }}
-        listeners={{tabPress: e => console.log('Tab press', e.target)}}
-      />
+      
     </Tab.Navigator>
   );
 }
