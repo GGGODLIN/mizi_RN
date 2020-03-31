@@ -42,7 +42,7 @@ const CheckMainScreen = props => {
       const value = await AsyncStorage.getItem('userLoginInfo');
       if (value !== null) {
         var obj_value = JSON.parse(value);
-        let url = `http://tccapi.1966.org.tw/api/DriverInfo/GetDriverCheck/${
+        let url = `http://tccdonkeyapi.1966.org.tw/api/DriverInfo/GetDriverCheck/${
           obj_value.response.Id
         }`;
         const res = await fetch(url, {
@@ -56,7 +56,9 @@ const CheckMainScreen = props => {
             console.log('FETCH CHECKED??????ALL', res);
             setcarChecked(res.response.CarCheck);
             setbodyChecked(res.response.DriverCheck);
-          }).catch(err =>console.log(err)
+          }).catch(err =>{console.log(err);
+            fetchData();
+          }
         // Alert.alert('網路異常，請稍後再試...', '每日檢查all', [
         //   {
         //     text: '確定',
@@ -69,6 +71,7 @@ const CheckMainScreen = props => {
       }
     } catch (error) {
       console.log('cannot get ITEM ALL');
+      
       // Error retrieving data
     }
   }
