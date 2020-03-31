@@ -431,7 +431,7 @@ const HistoryTaskOpen = props => {
               備註:
             </Text>
             <Text style={{fontSize: 20, color: 'black', width: '50%'}}>
-              {taskData[detailIndex].DespatchDetail.Remark}
+              {taskData[detailIndex].DespatchDetail.Remark===null?' ':taskData[detailIndex].DespatchDetail.Remark}
             </Text>
           </View>
 
