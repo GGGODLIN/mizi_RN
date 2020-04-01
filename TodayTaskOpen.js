@@ -735,13 +735,7 @@ ${item.OrderDetails.ToAddr}`}
 
               <View
                 style={
-                  caseStatus[index] == 5
-                    ? {
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        display: 'none',
-                      }
-                    : {display: 'none'}
+                  {display: 'none'}
                 }>
                 <Text
                   style={{
@@ -771,9 +765,7 @@ ${item.OrderDetails.ToAddr}`}
               </View>
               <View
                 style={
-                  caseStatus[index] == 5
-                    ? {flexDirection: 'row', alignItems: 'center'}
-                    : {display: 'none'}
+                  {display: 'none'}
                 }>
                 <Text
                   style={{
@@ -878,16 +870,7 @@ ${item.OrderDetails.ToAddr}`}
               </View>
               <Button
                 style={
-                  caseStatus[index] == 5
-                    ? {
-                        alignSelf: 'center',
-                        justifyContent: 'center',
-                        alignContent: 'center',
-                        borderRadius: 50,
-                        backgroundColor: 'orange',
-                        margin: 10,
-                      }
-                    : {display: 'none'}
+                  {display: 'none'}
                 }
                 labelStyle={{color: 'white', fontSize: 20}}
                 contentStyle={{width: '100%', paddingHorizontal: 50}}
