@@ -64,12 +64,7 @@ class BgTracking extends Component {
 
           })
           .catch(err =>
-        Alert.alert('網路異常，請稍後再試...', ' ', [
-          {
-            text: '確定',
-            onPress: () => {console.log("BG",err)},
-          },
-        ]),
+        console.log("BG",err)
       );
 
         BackgroundGeolocation.endTask(taskKey);
