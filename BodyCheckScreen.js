@@ -85,6 +85,7 @@ const BodyCheckScreen = props => {
     let queryHasSituationAndChecked = '';
     let queryHasSituationNoChecked = '';
     let pleaseBack = false;
+    let WineMeasurement = checkedItem[0]===1?0:1;
 
     checkedItem.forEach(function(item, index, array) {
       console.log(
@@ -131,6 +132,7 @@ const BodyCheckScreen = props => {
       body: JSON.stringify({
         CarId: carId,
         DriverId: driverId,
+        WineMeasurement: WineMeasurement,
         SystolicBlood: input1,
         DiastolicBlood: input2,
         TemperatureValue: input3,
