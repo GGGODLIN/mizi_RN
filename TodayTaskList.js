@@ -146,7 +146,7 @@ function Item({data, navigation}) {
             name="circle-o"
             size={30}
             color="orange"
-            style={{paddingLeft: 30}}
+            style={{paddingLeft: 30,alignSelf:'center'}}
           />
           <Text allowFontScaling={false} style={styles.addrText}>
             {data.DespatchDetails[0].OrderDetails.FromAddr}
@@ -157,7 +157,7 @@ function Item({data, navigation}) {
             name="angle-double-down"
             size={30}
             color="orange"
-            style={{paddingLeft: 32}}
+            style={{paddingLeft: 32,alignSelf:'center'}}
           />
         </View>
         <View style={styles.addr}>
@@ -165,7 +165,7 @@ function Item({data, navigation}) {
             name="circle-o"
             size={30}
             color="orange"
-            style={{paddingLeft: 30}}
+            style={{paddingLeft: 30,alignSelf:'center'}}
           />
           <Text allowFontScaling={false} style={styles.addrText}>
             {data.DespatchDetails[0].OrderDetails.ToAddr}
@@ -426,7 +426,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
     paddingTop: 10,
-    height:50,
+    
   },
   addrText: {
     fontSize: 20,

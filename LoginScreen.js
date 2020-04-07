@@ -57,17 +57,17 @@ class LoginScreen extends Component {
     this.handleSendNewPwd = this.handleSendNewPwd.bind(this);
     this._test_setItem = this._test_setItem.bind(this);
 
-    request(PERMISSIONS.ANDROID.ACTIVITY_RECOGNITION)
+    request(PERMISSIONS.IOS.CAMERA)
       .then(result => {
         console.log('PERMISSION?', result);
       })
       .then(() => {
-        request(PERMISSIONS.ANDROID.ACCESS_COARSE_LOCATION)
+        request(PERMISSIONS.IOS.PHOTO_LIBRARY)
           .then(result => {
             console.log('PERMISSION2?', result);
           })
           .then(() => {
-            request(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION).then(result => {
+            request(PERMISSIONS.IOS.MEDIA_LIBRARY).then(result => {
               console.log('PERMISSION3?', result);
             });
           });

@@ -10,6 +10,7 @@ import {
   TextInput,
   Image,
   Alert,
+  Linking,
 } from 'react-native';
 
 import {
@@ -20,7 +21,13 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import AsyncStorage from '@react-native-community/async-storage';
-import MapView, {PROVIDER_GOOGLE, Marker, Polyline} from 'react-native-maps';
+import MapView, {
+  PROVIDER_GOOGLE,
+  Marker,
+  Polyline,
+  Callout,
+  CalloutSubview,
+} from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import SignatureScreen from './SignatureScreen';
 import {NavigationContainer} from '@react-navigation/native';
@@ -28,8 +35,8 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Picker} from '@react-native-community/picker';
 import Signature from 'react-native-signature-canvas';
 import SignatureCapture from 'react-native-signature-capture';
+import LaunchNavigator from 'react-native-launch-navigator';
 import RNSignatureExample from './Sign';
-
 
 import {
   ThemeProvider,
@@ -87,8 +94,15 @@ const TodayTaskOpen = props => {
   console.log('STATUS', caseStatus);
   console.log('Done', doneCase);
   console.log('index', detailIndex);
-  const [people, setpeople] = useState(taskData[detailIndex].OrderDetails.FamilyWith+taskData[detailIndex].OrderDetails.ForeignFamilyWith);
-  console.log('陪同', taskData[detailIndex].OrderDetails.FamilyWith+taskData[detailIndex].OrderDetails.ForeignFamilyWith);
+  const [people, setpeople] = useState(
+    taskData[detailIndex].OrderDetails.FamilyWith +
+      taskData[detailIndex].OrderDetails.ForeignFamilyWith,
+  );
+  console.log(
+    '陪同',
+    taskData[detailIndex].OrderDetails.FamilyWith +
+      taskData[detailIndex].OrderDetails.ForeignFamilyWith,
+  );
 
   const origin = {
     latitude: taskData[detailIndex].OrderDetails.FromLat,
@@ -130,7 +144,10 @@ const TodayTaskOpen = props => {
     let tempStatus = caseStatus;
     tempStatus[detailIndex] = caseStatus[detailIndex] + 1;
     setcaseStatus(tempStatus);
-    setpeople(taskData[detailIndex].OrderDetails.FamilyWith+taskData[detailIndex].OrderDetails.ForeignFamilyWith);
+    setpeople(
+      taskData[detailIndex].OrderDetails.FamilyWith +
+        taskData[detailIndex].OrderDetails.ForeignFamilyWith,
+    );
     if (tempStatus[detailIndex] == 6) {
       updateStatusToSix();
       setoverlay(true);
@@ -164,9 +181,12 @@ const TodayTaskOpen = props => {
     setLoading(true);
   };
 
-  const handleChangeIndex = async (index) => {
+  const handleChangeIndex = async index => {
     setdetailIndex(index);
-    setpeople(taskData[index].OrderDetails.FamilyWith+taskData[index].OrderDetails.ForeignFamilyWith);
+    setpeople(
+      taskData[index].OrderDetails.FamilyWith +
+        taskData[index].OrderDetails.ForeignFamilyWith,
+    );
   };
 
   const handleCashNext = async () => {
@@ -211,7 +231,9 @@ const TodayTaskOpen = props => {
         Alert.alert('網路異常，請稍後再試...', ' ', [
           {
             text: '確定',
-            onPress: () => {setLoading(false);},
+            onPress: () => {
+              setLoading(false);
+            },
           },
         ]),
       );
@@ -336,9 +358,16 @@ const TodayTaskOpen = props => {
 
         if (caseStatus[0] >= 6) {
           setdetailIndex(index);
-          setpeople(taskData[index].OrderDetails.FamilyWith+taskData[index].OrderDetails.ForeignFamilyWith);
-          console.log("with?????????",taskData[index].OrderDetails.FamilyWith+taskData[index].OrderDetails.ForeignFamilyWith)
-        setforeignPeople(taskData[index].OrderDetails.ForeignFamilyWith);
+          setpeople(
+            taskData[index].OrderDetails.FamilyWith +
+              taskData[index].OrderDetails.ForeignFamilyWith,
+          );
+          console.log(
+            'with?????????',
+            taskData[index].OrderDetails.FamilyWith +
+              taskData[index].OrderDetails.ForeignFamilyWith,
+          );
+          setforeignPeople(taskData[index].OrderDetails.ForeignFamilyWith);
           setlongitudeDelta(
             Math.abs(
               taskData[index].OrderDetails.FromLon -
@@ -368,9 +397,20 @@ const TodayTaskOpen = props => {
     setLoading(true);
   };
 
+  const handleNav = async (input) => {
+    var url = `https://www.google.com/maps/dir/?api=1&travelmode=driving&dir_action=navigate&destination=${input}`;
+Linking.canOpenURL(url).then(supported => {
+    if (!supported) {
+        console.log('Can\'t handle url: ' + url);
+    } else {
+        return Linking.openURL(url);
+    }
+}).catch(err => console.error('An error occurred', err)); 
+  };
+
   useEffect(() => {
     checkDone();
-    console.log("CHECKDONE????!?!?!?!?!?");
+    console.log('CHECKDONE????!?!?!?!?!?');
   }, []);
 
   if (isLoading || finish) {
@@ -526,7 +566,10 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
           overlayBackgroundColor="white"
           width="90%"
           height="80%">
-          <SignatureScreen handleSavePic={handleSavePic} name={taskData[detailIndex].OrderDetails.SOrderNo}/>
+          <SignatureScreen
+            handleSavePic={handleSavePic}
+            name={taskData[detailIndex].OrderDetails.SOrderNo}
+          />
         </Overlay>
 
         <View
@@ -564,7 +607,12 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
             </View>
             <View style={styles.titleRight}>
               <Text style={{color: 'white', fontSize: 20}}>
-                {'個案' + 1 + '/' + '陪同' + (taskData[detailIndex].OrderDetails.FamilyWith+taskData[detailIndex].OrderDetails.ForeignFamilyWith)}
+                {'個案' +
+                  1 +
+                  '/' +
+                  '陪同' +
+                  (taskData[detailIndex].OrderDetails.FamilyWith +
+                    taskData[detailIndex].OrderDetails.ForeignFamilyWith)}
               </Text>
             </View>
           </View>
@@ -590,10 +638,10 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
             }
             contentContainerStyle={StyleSheet.absoluteFillObject}>
             <MapView
-            provider="google"
+              provider="google"
               style={[styles.map, {bottom: fixbottom}]}
               onKmlReady={e => console.log('HAHA', e.nativeEvent)}
-              onMarkerSelect={e => console.log("PRESS!!!!",e.nativeEvent)}
+              onMarkerSelect={e => console.log('PRESS!!!!', e.nativeEvent)}
               region={{
                 latitude: taskData[detailIndex].OrderDetails.FromLat,
                 longitude: taskData[detailIndex].OrderDetails.FromLon,
@@ -607,9 +655,23 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
                 }}
                 icon="write"
                 pinColor="blue"
-                onPress={(e) => console.log("AAAAAAA",e.nativeEvent)}
-                title={taskData[detailIndex].OrderDetails.FromAddr}
-              />
+                onPress={e => console.log('OOOOOOO', e.nativeEvent)}
+                onCalloutPress={e => console.log('BBBBBBBBB', e.nativeEvent)}
+                title={taskData[detailIndex].OrderDetails.FromAddr}>
+                <Callout
+                  tooltip={true}
+                  onPress={e => {
+                    console.log('CCCCCCCCCCC', e.nativeEvent);
+                    handleNav(taskData[detailIndex].OrderDetails.FromAddr);
+                  }}>
+                  <Button
+                    icon="navigation"
+                    mode="contained"
+                    onPress={() => console.log('Pressed')}>
+                    {taskData[detailIndex].OrderDetails.FromAddr}
+                  </Button>
+                </Callout>
+              </Marker>
               <Marker
                 coordinate={{
                   latitude: taskData[detailIndex].OrderDetails.ToLat,
@@ -618,7 +680,21 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
                 icon="write"
                 onPress={() => setfixbottom(0)}
                 title={taskData[detailIndex].OrderDetails.ToAddr}
-              />
+              >
+              <Callout
+                  tooltip={true}
+                  onPress={e => {
+                    console.log('DDDDDDDDDD', e.nativeEvent);
+                    handleNav(taskData[detailIndex].OrderDetails.ToAddr);
+                  }}>
+                  <Button
+                    icon="navigation"
+                    mode="contained"
+                    onPress={() => console.log('Pressed')}>
+                    {taskData[detailIndex].OrderDetails.ToAddr}
+                  </Button>
+                </Callout>
+              </Marker>
 
               <MapViewDirections
                 origin={{
@@ -740,11 +816,16 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
               ? '客上'
               : '客下'}
           </Button>
-          <View style={
-              caseStatus[detailIndex] >= 5 ? {display: 'none'} : {width:'80%',alignItems:'flex-start',alignSelf:'center'}
+          <View
+            style={
+              caseStatus[detailIndex] >= 5
+                ? {display: 'none'}
+                : {width: '80%', alignItems: 'flex-start', alignSelf: 'center'}
             }>
-          <Text style={{fontSize:20}}>{`備註:${taskData[detailIndex].CaseUser.Remark}`}</Text>
-            </View>
+            <Text style={{fontSize: 20}}>{`備註:${
+              taskData[detailIndex].CaseUser.Remark
+            }`}</Text>
+          </View>
           <Button
             style={
               caseStatus[detailIndex] == 3
@@ -813,7 +894,13 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
           <View
             style={
               caseStatus[detailIndex] == 5
-                ? {flexDirection: 'row', alignItems: 'center',justifyContent:'center',alignContent:'center',padding:10}
+                ? {
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    alignContent: 'center',
+                    padding: 10,
+                  }
                 : {display: 'none'}
             }>
             <Text
@@ -825,26 +912,25 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
               }}>
               陪同人數:
             </Text>
-            <View style={{transform: [{scale:1.5}]}}>
-            <RNPickerSelect
-                onValueChange={(value) => setpeople(value)}
-            disabled={(cashSteps == 0 && !askingMoney)? false : true}
-            value={people}
-            textInputProps={{borderBottomWidth:0.5,borderColor:'black'}}
+            <View style={{transform: [{scale: 1.5}]}}>
+              <RNPickerSelect
+                onValueChange={value => setpeople(value)}
+                disabled={cashSteps == 0 && !askingMoney ? false : true}
+                value={people}
+                textInputProps={{borderBottomWidth: 0.5, borderColor: 'black'}}
                 items={[
-                    { label: "0人", value: 0 },
-                    { label: "1人", value: 1 },
-                        { label: "2人", value: 2 },
-                        { label: "3人", value: 3 },
-                        { label: "4人", value: 4 },
-                        { label: "5人", value: 5 },
-                        { label: "6人", value: 6 },
-                        { label: "7人", value: 7 },
+                  {label: '0人', value: 0},
+                  {label: '1人', value: 1},
+                  {label: '2人', value: 2},
+                  {label: '3人', value: 3},
+                  {label: '4人', value: 4},
+                  {label: '5人', value: 5},
+                  {label: '6人', value: 6},
+                  {label: '7人', value: 7},
                 ]}
-            placeholder={{}}
-            />
+                placeholder={{}}
+              />
             </View>
-
           </View>
           <View
             style={
@@ -938,7 +1024,11 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
             mode="outlined"
             disabled={askingMoney}
             onPress={() => handleCashNext()}>
-            {cashSteps == 0 ? (askingMoney ?'金額計算中...':'現金') : '確認收款'}
+            {cashSteps == 0
+              ? askingMoney
+                ? '金額計算中...'
+                : '現金'
+              : '確認收款'}
           </Button>
           <Button
             style={
