@@ -133,6 +133,7 @@ const TodayTaskList = props => {
           'http://slllcapi.1966.org.tw/api/DriverInfo/GetAllGroupDriverSide/' +
           obj_value.response.Id;
         //let url = `http://slllcapi.1966.org.tw/api/DriverInfo/GetAllGroup/${obj_value.Cars.DriverId}`;
+        console.log("request to ",url2);
         const data = await fetch(url2, {
           method: 'GET',
           headers: {

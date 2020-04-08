@@ -52,11 +52,7 @@ const TodayTaskOpen = props => {
   const GOOGLE_MAPS_APIKEY = 'AIzaSyCUaMOOcU7-pH99LS6ajo_s1WkDua92H08';
   const [data, setdata] = useState({});
   const [finish, setfinish] = useState(false);
-  const [doneCase, setdoneCase] = useState(
-    props.route.params.data.DespatchDetails.map((e, index) => {
-      return e.OrderDetails.Status >= 6 ? index : null;
-    }),
-  );
+  
   const [ps, setps] = useState(' ');
   const [picPath, setpicPath] = useState(
     '/storage/emulated/0/saved_signature/signature.png',
@@ -68,11 +64,12 @@ const TodayTaskOpen = props => {
   const [foreignPeople, setforeignPeople] = useState(0);
   const [detailIndex, setdetailIndex] = useState(0);
   const [askingMoney, setaskingMoney] = useState(false);
+  const [bTemperature, setbTemperature] = useState(0);
 
   const [isLoading, setLoading] = useState(true);
   const [carChecked, setcarChecked] = useState(false);
   const [bodyChecked, setbodyChecked] = useState(false);
-  const [overlay, setoverlay] = useState(true);
+  const [overlay, setoverlay] = useState(false);
   const [delayForMap, setdelayForMap] = useState(false);
   const [fixbottom, setfixbottom] = useState(-1);
 
@@ -91,13 +88,19 @@ const TodayTaskOpen = props => {
     return 0;
   });
 
+  const [doneCase, setdoneCase] = useState(
+    sortedArray.map((e, index) => {
+      return e.OrderDetails.Status >= 6 ? index : null;
+    }),
+  );
+
   const taskData = sortedArray;
 
-  const caseNames = props.route.params.data.DespatchDetails.map(
+  const caseNames = sortedArray.map(
     e => e.OrderDetails.CaseUserName,
   );
   const [caseStatus, setcaseStatus] = useState(
-    props.route.params.data.DespatchDetails.map(e => e.OrderDetails.Status),
+    sortedArray.map(e => e.OrderDetails.Status),
   );
   console.log('STATUS', caseStatus);
   console.log('Done', doneCase);
@@ -149,6 +152,7 @@ const TodayTaskOpen = props => {
   );
 
   const handleNextStep = async (input, index) => {
+    setoverlay(false);
     let tempStatus = caseStatus;
     tempStatus[index] = input === 6 ? 6 : caseStatus[index] + 1;
     setcaseStatus(tempStatus);
@@ -299,6 +303,9 @@ const TodayTaskOpen = props => {
     let url = `http://slllcapi.1966.org.tw/api/OrderDetails/PutDetailStatus?OrderDetailId=${
       taskData[index].OrderDetails.Id
     }&StatusInt=${caseStatus[index]}`;
+    if (caseStatus[index] == 4) {
+      url += `&bTemperature=${bTemperature}`;
+    }
 
     console.log(`Making Status request to: ${url}`);
 
@@ -563,7 +570,67 @@ const TodayTaskOpen = props => {
   } else {
     return (
       <ScrollView style={{flex: 1}}>
-        {taskData.map((item, index) => {
+        <Overlay
+          onBackdropPress={() => setoverlay(false)}
+          isVisible={overlay && caseStatus[detailIndex] === 3}
+          windowBackgroundColor="rgba(255, 255, 255, .5)"
+          overlayBackgroundColor="white"
+          width="90%"
+          height="auto">
+          <Text
+            style={{
+              backgroundColor: 'orange',
+              fontSize: 20,
+              fontWeight: 'bold',
+              color: 'white',
+              textAlign: 'center',
+              padding: 10,
+              marginBottom: 10,
+            }}>
+            {`請選擇 ${taskData[detailIndex].OrderDetails.CaseUserName} 的體溫`}
+          </Text>
+
+          <Picker
+            enabled={true}
+            selectedValue={bTemperature}
+            onValueChange={(itemValue, itemIndex) =>
+              setbTemperature(itemValue)
+            }>
+            <Picker.Item label="36.0" value={36.0} />
+            <Picker.Item label="36.1" value={36.1} />
+            <Picker.Item label="36.2" value={36.2} />
+            <Picker.Item label="36.3" value={36.3} />
+            <Picker.Item label="36.4" value={36.4} />
+            <Picker.Item label="36.5" value={36.5} />
+            <Picker.Item label="36.6" value={36.6} />
+            <Picker.Item label="36.7" value={36.7} />
+            <Picker.Item label="36.8" value={36.8} />
+            <Picker.Item label="36.9" value={36.9} />
+            <Picker.Item label="37.0" value={37.0} />
+            <Picker.Item label="37.1" value={37.1} />
+            <Picker.Item label="37.2" value={37.2} />
+            <Picker.Item label="37.3" value={37.3} />
+            <Picker.Item label="37.4" value={37.4} />
+            <Picker.Item label="37.5" value={37.5} />
+          </Picker>
+
+          <Button
+            onPress={() => {
+              handleNextStep(0, detailIndex);
+            }}
+            color="orange"
+            disabled={false}
+            mode="contained"
+            labelStyle={{
+              color: 'white',
+              fontSize: 20,
+              fontWeight: 'bold',
+            }}
+            style={{marginBottom: 10}}>
+            確認送出
+          </Button>
+        </Overlay>
+        {taskData.map((item, index, array) => {
           let startTime = item.OrderDetails.ReservationDate;
           let startDate = item.OrderDetails.ReservationDate;
           let pos = startTime.indexOf('T');
@@ -603,9 +670,7 @@ const TodayTaskOpen = props => {
                         flex: 2,
                         marginHorizontal: 10,
                       }}>
-                      <Text style={styles.titleNameText}>
-                        {startTime}
-                      </Text>
+                      <Text style={styles.titleNameText}>{startTime}</Text>
                       <Text style={styles.titleNameText}>
                         {item.OrderDetails.CaseUserName}
                       </Text>
@@ -681,6 +746,10 @@ const TodayTaskOpen = props => {
                               },
                             },
                           ]);
+                        } else if (caseStatus[index] === 3) {
+                          setoverlay(true);
+                          setdetailIndex(index);
+                          //handleNextStep(0, index);
                         } else {
                           handleNextStep(0, index);
                         }
