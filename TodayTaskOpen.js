@@ -76,7 +76,23 @@ const TodayTaskOpen = props => {
   const [delayForMap, setdelayForMap] = useState(false);
   const [fixbottom, setfixbottom] = useState(-1);
 
-  const taskData = props.route.params.data.DespatchDetails.map(e => e);
+  let sortedArray = props.route.params.data.DespatchDetails.map(e => e);
+  sortedArray.sort(function(a, b) {
+    let nameA = a.OrderDetails.ReservationDate; // ignore upper and lowercase
+    let nameB = b.OrderDetails.ReservationDate; // ignore upper and lowercase
+    if (nameA < nameB) {
+      return -1;
+    }
+    if (nameA > nameB) {
+      return 1;
+    }
+
+    // names must be equal
+    return 0;
+  });
+
+  const taskData = sortedArray;
+
   const caseNames = props.route.params.data.DespatchDetails.map(
     e => e.OrderDetails.CaseUserName,
   );
@@ -157,7 +173,7 @@ const TodayTaskOpen = props => {
     }
   };
 
-  const handleMiss = async (index,status) => {
+  const handleMiss = async (index, status) => {
     let tempStatus = caseStatus;
     tempStatus[index] = status;
     setcaseStatus(tempStatus);
@@ -500,8 +516,8 @@ const TodayTaskOpen = props => {
       return (
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
           <Image
-            resizeMode="contain"
-            style={{width:'80%',height:'80%'}}
+            resizeMode="center"
+            style={{flex: 1}}
             source={require('./img/Frame_1.png')}
           />
           <Button
@@ -548,6 +564,13 @@ const TodayTaskOpen = props => {
     return (
       <ScrollView style={{flex: 1}}>
         {taskData.map((item, index) => {
+          let startTime = item.OrderDetails.ReservationDate;
+          let startDate = item.OrderDetails.ReservationDate;
+          let pos = startTime.indexOf('T');
+          if (pos != -1) {
+            startDate = startTime.substring(0, pos);
+            startTime = startTime.substring(pos + 1, pos + 6);
+          }
           return (
             <View
               style={
@@ -572,11 +595,60 @@ const TodayTaskOpen = props => {
                   }}
                 />
 
-                <View
-                  style={(styles.titleName, {flex: 2, alignSelf: 'center'})}>
-                  <Text style={styles.titleNameText}>
-                    {item.OrderDetails.CaseUserName}
-                  </Text>
+                <View style={{flex: 2, alignSelf: 'center'}}>
+                  <View style={{flexDirection: 'row'}}>
+                    <View
+                      style={{
+                        flexDirection: 'column',
+                        flex: 2,
+                        marginHorizontal: 10,
+                      }}>
+                      <Text style={styles.titleNameText}>
+                        {startTime}
+                      </Text>
+                      <Text style={styles.titleNameText}>
+                        {item.OrderDetails.CaseUserName}
+                      </Text>
+                    </View>
+                    <Button
+                      style={
+                        caseStatus[index] == 3 || caseStatus[index] == 1
+                          ? {
+                              alignSelf: 'flex-start',
+                              justifyContent: 'center',
+                              alignContent: 'center',
+                              borderRadius: 50,
+                              backgroundColor: 'gray',
+                              borderColor: 'white',
+                              borderWidth: 1,
+                              margin: 10,
+                              flex: 1,
+                            }
+                          : {display: 'none'}
+                      }
+                      labelStyle={{color: 'white', fontSize: 15}}
+                      mode="outlined"
+                      onPress={() => {
+                        let str =
+                          caseStatus[index] == 1 ? '確定請假?' : '確定空趟?';
+                        let status = caseStatus[index] == 1 ? 8 : 10;
+                        Alert.alert(str, ' ', [
+                          {
+                            text: '取消',
+                            onPress: () => console.log('Cancel Pressed'),
+                            style: 'cancel',
+                          },
+                          {
+                            text: '確定',
+                            onPress: () => {
+                              handleMiss(index, status);
+                            },
+                          },
+                        ]);
+                      }}>
+                      {caseStatus[index] == 1 ? '請假' : '空趟'}
+                    </Button>
+                  </View>
                   <View style={{flexDirection: 'row'}}>
                     <Button
                       style={{
@@ -584,7 +656,7 @@ const TodayTaskOpen = props => {
                         justifyContent: 'center',
                         alignContent: 'center',
                         borderRadius: 50,
-                        backgroundColor: 'salmon',
+                        backgroundColor: '#669933',
                         borderColor: 'white',
                         borderWidth: 1,
                         margin: 10,
@@ -622,43 +694,6 @@ const TodayTaskOpen = props => {
                         : caseStatus[index] == 4
                         ? '客下'
                         : '讀取中...'}
-                    </Button>
-                    <Button
-                      style={
-                        caseStatus[index] == 3 || caseStatus[index] == 1
-                          ? {
-                              alignSelf: 'flex-start',
-                              justifyContent: 'center',
-                              alignContent: 'center',
-                              borderRadius: 50,
-                              backgroundColor: 'gray',
-                              borderColor: 'white',
-                              borderWidth: 1,
-                              margin: 10,
-                              flex: 1,
-                            }
-                          : {display: 'none'}
-                      }
-                      labelStyle={{color: 'white', fontSize: 20}}
-                      mode="outlined"
-                      onPress={() => {
-                        let str = caseStatus[index] == 1 ?'確定請假?':'確定空趟?';
-                        let status = caseStatus[index] == 1 ?8:10;
-                        Alert.alert(str, ' ', [
-                          {
-                            text: '取消',
-                            onPress: () => console.log('Cancel Pressed'),
-                            style: 'cancel',
-                          },
-                          {
-                            text: '確定',
-                            onPress: () => {
-                              handleMiss(index,status);
-                            },
-                          },
-                        ]);
-                      }}>
-                      {caseStatus[index] == 1 ? '請假' : '空趟'}
                     </Button>
                   </View>
                 </View>
@@ -733,16 +768,7 @@ ${item.OrderDetails.ToAddr}`}
                 }`}</Text>
               </View>
 
-              <View
-                style={
-                  caseStatus[index] == 5
-                    ? {
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        display: 'none',
-                      }
-                    : {display: 'none'}
-                }>
+              <View style={{display: 'none'}}>
                 <Text
                   style={{
                     fontSize: 20,
@@ -769,12 +795,7 @@ ${item.OrderDetails.ToAddr}`}
                   <Picker.Item label="7人" value={7} />
                 </Picker>
               </View>
-              <View
-                style={
-                  caseStatus[index] == 5
-                    ? {flexDirection: 'row', alignItems: 'center'}
-                    : {display: 'none'}
-                }>
+              <View style={{display: 'none'}}>
                 <Text
                   style={{
                     fontSize: 20,
@@ -877,18 +898,7 @@ ${item.OrderDetails.ToAddr}`}
                 />
               </View>
               <Button
-                style={
-                  caseStatus[index] == 5
-                    ? {
-                        alignSelf: 'center',
-                        justifyContent: 'center',
-                        alignContent: 'center',
-                        borderRadius: 50,
-                        backgroundColor: 'orange',
-                        margin: 10,
-                      }
-                    : {display: 'none'}
-                }
+                style={{display: 'none'}}
                 labelStyle={{color: 'white', fontSize: 20}}
                 contentStyle={{width: '100%', paddingHorizontal: 50}}
                 mode="outlined"
@@ -990,6 +1000,8 @@ const styles = StyleSheet.create({
     lineHeight: 30,
     color: 'white',
     fontWeight: 'bold',
+
+    flex: 1,
   },
   titleNameText2: {
     fontSize: 20,
