@@ -41,7 +41,7 @@ import {Button, Card, Title, Paragraph, Divider,ActivityIndicator} from 'react-n
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const HistoryTaskOpen = props => {
-  const GOOGLE_MAPS_APIKEY = 'AIzaSyCUaMOOcU7-pH99LS6ajo_s1WkDua92H08';
+  const GOOGLE_MAPS_APIKEY = 'AIzaSyA1h_cyazZLo1DExB0h0B2JBuOfv-yFtsM';
   const [data, setdata] = useState({});
   const [doneCase, setdoneCase] = useState(
     props.route.params.data.DespatchDetails.map((e, index) => {

@@ -49,7 +49,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const TodayTaskOpen = props => {
-  const GOOGLE_MAPS_APIKEY = 'AIzaSyCUaMOOcU7-pH99LS6ajo_s1WkDua92H08';
+  const GOOGLE_MAPS_APIKEY = 'AIzaSyA1h_cyazZLo1DExB0h0B2JBuOfv-yFtsM';
   const [data, setdata] = useState({});
   const [finish, setfinish] = useState(false);
   
@@ -523,8 +523,8 @@ const TodayTaskOpen = props => {
       return (
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
           <Image
-            resizeMode="center"
-            style={{flex: 1}}
+            resizeMode="contain"
+            style={{width:'80%',height:'80%'}}
             source={require('./img/Frame_1.png')}
           />
           <Button
