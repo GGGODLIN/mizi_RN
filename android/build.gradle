@@ -13,6 +13,9 @@ buildscript {
     repositories {
         google()
         jcenter()
+        flatDir {
+        dirs 'libs'
+    }
     }
     dependencies {
         classpath("com.android.tools.build:gradle:3.4.2")
@@ -34,7 +37,11 @@ allprojects {
             // Android JSC is installed from npm
             url("$rootDir/../node_modules/jsc-android/dist")
         }
-
+        repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
         google()
         jcenter()
         maven { url 'https://jitpack.io' }

@@ -5335,10 +5335,10 @@ pascalcase@^0.1.1:
   resolved "https://registry.yarnpkg.com/pascalcase/-/pascalcase-0.1.1.tgz#b363e55e8006ca6fe21784d2db22bd15d7917f14"
   integrity sha1-s2PlXoAGym/iF4TS2yK9FdeRfxQ=
 
-patch-package@^6.2.1:
-  version "6.2.1"
-  resolved "https://registry.yarnpkg.com/patch-package/-/patch-package-6.2.1.tgz#e3c55cf09dffd3984dd300e30d842672b604307f"
-  integrity sha512-dfCtQor63PPij6DDYtCzBRoO5nNAcMSg7Cmh+DLhR+s3t0OLQBdvFxJksZHBe1J2MjsSWDjTF4+oQKFbdkssIg==
+patch-package@^6.2.2:
+  version "6.2.2"
+  resolved "https://registry.yarnpkg.com/patch-package/-/patch-package-6.2.2.tgz#71d170d650c65c26556f0d0fbbb48d92b6cc5f39"
+  integrity sha512-YqScVYkVcClUY0v8fF0kWOjDYopzIM8e3bj/RU1DPeEF14+dCGm6UeOYm4jvCyxqIEQ5/eJzmbWfDWnUleFNMg==
   dependencies:
     "@yarnpkg/lockfile" "^1.1.0"
     chalk "^2.4.2"
@@ -5479,10 +5479,10 @@ posix-character-classes@^0.1.0:
   resolved "https://registry.yarnpkg.com/posix-character-classes/-/posix-character-classes-0.1.1.tgz#01eac0fe3b5af71a2a6c02feabb8c1fef7e00eab"
   integrity sha1-AerA/jta9xoqbAL+q7jB/vfgDqs=
 
-postinstall-postinstall@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/postinstall-postinstall/-/postinstall-postinstall-2.0.0.tgz#7ba6711b4420575c4f561638836a81faad47f43f"
-  integrity sha512-3f6qWexsHiT4WKtZc5DRb0FPLilHtARi5KpY4fqban/DJNn8/YhZH8U7dVKVz51WbOxEnR31gV+qYQhvEdHtdQ==
+postinstall-postinstall@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/postinstall-postinstall/-/postinstall-postinstall-2.1.0.tgz#4f7f77441ef539d1512c40bd04c71b06a4704ca3"
+  integrity sha512-7hQX6ZlZXIoRiWNrbMQaLzUUfH+sSx39u8EJ9HYuDc1kLo9IXKWjM5RSquZN1ad5GnH8CGFM78fsAAQi3OKEEQ==
 
 prelude-ls@~1.1.2:
   version "1.1.2"
@@ -5715,6 +5715,11 @@ react-native-launch-navigator@^1.0.7:
     fast-plist "^0.1.2"
     plist "^2.0.1"
     xcode "^0.9.1"
+
+react-native-line-sdk@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/react-native-line-sdk/-/react-native-line-sdk-1.3.0.tgz#ec83483a21e0378e1f8f051e94036d128ac0cee4"
+  integrity sha512-SIzGp6lSAhK6UZix0zhvcNainS/84aN/Cte81jY6XIGgNw4V87Sg1uunYaYQemEpYc/yHhYYYKUP9gcyiM+5ow==
 
 react-native-login-screen@^0.3.6:
   version "0.3.6"

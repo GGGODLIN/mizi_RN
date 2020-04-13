@@ -198,6 +198,9 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"  // From node_modules
+    implementation "io.jsonwebtoken:jjwt-api:0.11.0"
+implementation "io.jsonwebtoken:jjwt-jackson:0.11.0", {exclude group:'io.jsonwebtoken', module:'jjwt-api'}
+implementation "io.jsonwebtoken:jjwt-impl:0.11.0", {exclude group:'io.jsonwebtoken', module:'jjwt-api'}
 
     if (enableHermes) {
         def hermesPath = "../../node_modules/hermes-engine/android/";

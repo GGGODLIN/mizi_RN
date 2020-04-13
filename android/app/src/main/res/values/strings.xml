@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">士林靈糧堂</string>
+    <string name="line_channel_id" translatable="false">1654061617</string>
     <string moduleConfig="true" name="CodePushDeploymentKey">N-E2E6-Lnwgp89YAqh3rjDZ4M6uiWKDXQz4M3
     </string>
 </resources>

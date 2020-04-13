@@ -20,6 +20,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import LineLogin from 'react-native-line-sdk';
 
 import {ThemeProvider, Avatar, Overlay} from 'react-native-elements';
 import {
@@ -37,6 +38,7 @@ const InfoScreen = props => {
   const [data, setdata] = useState({});
   const [showOverlay, setshowOverlay] = useState(false);
   const [isLoading, setLoading] = useState(true);
+  const [userName, setuserName] = useState('');
   const [input1, setinput1] = useState('');
   const [input2, setinput2] = useState('');
 
@@ -53,7 +55,28 @@ const InfoScreen = props => {
       console.log('cannot get ITEM');
       // Error retrieving data
     }
+
+    
   }
+
+  const handleLineLogin = async () =>{
+    LineLogin.login()
+      .then(user => {
+        console.log(user.profile);
+        console.log(user.accessToken);
+        Alert.alert('您好',user.profile.displayName, [
+            {
+              text: '確定',
+              onPress: () => {
+                
+              },
+            },
+          ]);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
 
   const handleSubmit = async () => {
     var url3 =
@@ -117,16 +140,16 @@ const InfoScreen = props => {
   } else {
     const infoData = data.response;
     const sex = infoData.Sex == '1' ? '男' : '女';
-    const pi= infoData.Cars.Status===1?'可派發':'不可派發';
+    const pi = infoData.Cars.Status === 1 ? '可派發' : '不可派發';
     console.log('INFO PROPS IS', infoData.Sex);
     const licenceNum = infoData.DriverLicense.length;
     var licence = [];
-    for (var i=0;i<licenceNum;i++){
-      licence[i]  =  '駕照: ' +
-                infoData.DriverLicense[i].CarTypeName +
-                `  (${infoData.DriverLicense[i].ExDate})`;
+    for (var i = 0; i < licenceNum; i++) {
+      licence[i] =
+        '駕照: ' +
+        infoData.DriverLicense[i].CarTypeName +
+        `  (${infoData.DriverLicense[i].ExDate})`;
     }
-    
 
     return (
       <ScrollView style={{flex: 1, flexDirection: 'column'}}>
@@ -203,6 +226,21 @@ const InfoScreen = props => {
               修改密碼
             </Button>
           </Card.Actions>
+          <Card.Actions>
+            <Button
+              mode="contained"
+              compact={false}
+              style={{
+                flex: 1,
+                justifyContent: 'center',
+                backgroundColor:'green'
+              }}
+              onPress={() => {
+                handleLineLogin();
+              }}>
+              Line登入
+            </Button>
+          </Card.Actions>
 
           <Card.Content>
             <Title>{'性別: ' + sex}</Title>
@@ -213,17 +251,17 @@ const InfoScreen = props => {
             <Divider />
             <Title>{'電子郵件: ' + infoData.Email}</Title>
             <Divider />
-            <Title style={licenceNum>=1?{}:{display:'none'}}>
-              {licenceNum>=1 &&licence[0]}
+            <Title style={licenceNum >= 1 ? {} : {display: 'none'}}>
+              {licenceNum >= 1 && licence[0]}
             </Title>
-            <Title style={licenceNum>=2?{}:{display:'none'}}>
-              {licenceNum>=2 &&licence[1]}
+            <Title style={licenceNum >= 2 ? {} : {display: 'none'}}>
+              {licenceNum >= 2 && licence[1]}
             </Title>
-            <Title style={licenceNum>=3?{}:{display:'none'}}>
-              {licenceNum>=3 &&licence[2]}
+            <Title style={licenceNum >= 3 ? {} : {display: 'none'}}>
+              {licenceNum >= 3 && licence[2]}
             </Title>
-            <Title style={licenceNum>=4?{}:{display:'none'}}>
-              {licenceNum>=4 &&licence[3]}
+            <Title style={licenceNum >= 4 ? {} : {display: 'none'}}>
+              {licenceNum >= 4 && licence[3]}
             </Title>
             <Divider />
             <Title>
