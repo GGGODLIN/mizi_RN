@@ -41,7 +41,7 @@ import {Button, Card, Title, Paragraph, Divider,ActivityIndicator} from 'react-n
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const HistoryTaskOpen = props => {
-  const GOOGLE_MAPS_APIKEY = 'AIzaSyCUaMOOcU7-pH99LS6ajo_s1WkDua92H08';
+  const GOOGLE_MAPS_APIKEY = 'AIzaSyA1h_cyazZLo1DExB0h0B2JBuOfv-yFtsM';
   const [data, setdata] = useState({});
   const [doneCase, setdoneCase] = useState(
     props.route.params.data.DespatchDetails.map((e, index) => {
@@ -403,7 +403,7 @@ const HistoryTaskOpen = props => {
               應收車資:
             </Text>
             <Text style={{fontSize: 30, fontWeight: 'bold', color: 'orange'}}>
-              {caseStatus[detailIndex]===6? taskData[detailIndex].OrderDetails.RealTotalAmt : (taskData[detailIndex].OrderDetails.SelfPayAmt+taskData[detailIndex].OrderDetails.OtherAmt)}
+              {caseStatus[detailIndex]===6? taskData[detailIndex].OrderDetails.RevisionSelfAmt : (taskData[detailIndex].OrderDetails.SelfPayAmt+taskData[detailIndex].OrderDetails.OtherAmt)}
             </Text>
           </View>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
