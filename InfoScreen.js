@@ -46,7 +46,7 @@ const InfoScreen = props => {
     try {
       const value = await AsyncStorage.getItem('userLoginInfo');
       if (value !== null) {
-        var obj_value = JSON.parse(value);
+        let obj_value = JSON.parse(value);
         console.log(obj_value);
         setdata(obj_value);
         setLoading(false);
@@ -55,32 +55,86 @@ const InfoScreen = props => {
       console.log('cannot get ITEM');
       // Error retrieving data
     }
-
-    
   }
 
-  const handleLineLogin = async () =>{
+  const handleLineLogin = async () => {
     LineLogin.login()
       .then(user => {
         console.log(user.profile);
         console.log(user.accessToken);
         console.log(user.profile.userID);
-        Alert.alert('您好',user.profile.displayName, [
-            {
-              text: '確定',
-              onPress: () => {
-                
-              },
-            },
-          ]);
+        bindLineId(user.profile.userID);
+        Alert.alert('您好', user.profile.displayName, [
+          {
+            text: '確定',
+            onPress: () => {},
+          },
+        ]);
       })
       .catch(err => {
         console.log(err);
       });
   };
 
+  const bindLineId = async id => {
+    let url3 =
+      'http://slllcapi.1966.org.tw/api/DriverInfo/DriverLine/' +
+      data.response.Id +
+      ',' +
+      id;
+    console.log(`Making bindLineId request to: ${url3}`);
+    const data2 = await fetch(url3, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(res => {
+        console.log('bind AJAX', res);
+        putLineMessage(id);
+      })
+      .catch(err =>{
+        console.log(err);
+        Alert.alert('網路異常，請稍後再試...', ' ', [
+          {
+            text: '確定',
+            onPress: () => {},
+          },
+        ]);
+      }
+      );
+  };
+
+  const putLineMessage = async id => {
+    let message = '收到此訊息表示Line綁定成功!';
+    let url3 =
+      'http://slllcapi.1966.org.tw/api/OrderDetails/PutLineMessage/' +
+      id +
+      ',' +
+      message;
+    console.log(`Making send request to: ${url3}`);
+    const data2 = await fetch(url3, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(res => {
+        console.log('send AJAX', res);
+      })
+      .catch(err => {
+        console.log(err);
+        Alert.alert('網路異常，請稍後再試...', ' ', [
+          {
+            text: '確定',
+            onPress: () => {},
+          },
+        ]);
+      });
+  };
+
   const handleSubmit = async () => {
-    var url3 =
+    let url3 =
       'http://slllcapi.1966.org.tw/api/DriverInfo/PutDriverPwd?DriverId=' +
       data.response.Id +
       '&oldPwd=' +
@@ -144,8 +198,8 @@ const InfoScreen = props => {
     const pi = infoData.Cars.Status === 1 ? '可派發' : '不可派發';
     console.log('INFO PROPS IS', infoData.Sex);
     const licenceNum = infoData.DriverLicense.length;
-    var licence = [];
-    for (var i = 0; i < licenceNum; i++) {
+    let licence = [];
+    for (let i = 0; i < licenceNum; i++) {
       licence[i] =
         '駕照: ' +
         infoData.DriverLicense[i].CarTypeName +
@@ -234,7 +288,7 @@ const InfoScreen = props => {
               style={{
                 flex: 1,
                 justifyContent: 'center',
-                backgroundColor:'green'
+                backgroundColor: 'green',
               }}
               onPress={() => {
                 handleLineLogin();
