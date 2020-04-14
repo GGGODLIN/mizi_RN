@@ -65,11 +65,6 @@ class LoginScreen extends Component {
         request(PERMISSIONS.IOS.PHOTO_LIBRARY)
           .then(result => {
             console.log('PERMISSION2?', result);
-          })
-          .then(() => {
-            request(PERMISSIONS.IOS.MEDIA_LIBRARY).then(result => {
-              console.log('PERMISSION3?', result);
-            });
           });
       });
       this._test_setItem();

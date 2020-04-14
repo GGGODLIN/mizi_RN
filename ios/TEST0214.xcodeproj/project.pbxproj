@@ -1072,11 +1072,12 @@
 			baseConfigurationReference = FDB74181DFFFDC88CAD6EAC3 /* Pods-TEST0214.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 20200320;
+				CURRENT_PROJECT_VERSION = 20200414;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = V5ZUWPFB7D;
 				INFOPLIST_FILE = TEST0214/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1095,10 +1096,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20200320;
+				CURRENT_PROJECT_VERSION = 20200414;
 				DEVELOPMENT_TEAM = V5ZUWPFB7D;
 				INFOPLIST_FILE = TEST0214/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
