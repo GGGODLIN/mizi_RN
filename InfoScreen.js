@@ -64,6 +64,7 @@ const InfoScreen = props => {
       .then(user => {
         console.log(user.profile);
         console.log(user.accessToken);
+        console.log(user.profile.userID);
         Alert.alert('您好',user.profile.displayName, [
             {
               text: '確定',
