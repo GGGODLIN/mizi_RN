@@ -7,6 +7,7 @@ import {
 	Text,
 	StatusBar,
 	Platform,
+	Alert,
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import {
@@ -24,6 +25,11 @@ import codePush from 'react-native-code-push';
 import BgTracking from './BgTracking';
 
 import {setCustomText, setCustomTextInput} from 'react-native-global-props';
+import messaging from '@react-native-firebase/messaging';
+
+async function registerAppWithFCM() {
+	await messaging().registerDeviceForRemoteMessages();
+}
 
 const customTextProps = {
 	allowFontScaling: false,
@@ -87,14 +93,30 @@ const App = () => {
 			console.log('cannot get ITEM BEFORE LOGGING');
 			// Error retrieving data
 		}
-		
 	}
+
+	useEffect(() => {
+		console.log('into EFFECT');
+		messaging()
+      .getToken()
+      .then(token => {
+        console.log("TOKEN IS",token);
+      });
+		const unsubscribe = messaging().onMessage(async remoteMessage => {
+			Alert.alert(JSON.stringify(remoteMessage.notification.title), JSON.stringify(remoteMessage.notification.body));
+		});
+
+		return messaging().onTokenRefresh(token => {
+      console.log("FRESH TOKEN IS",token);
+    });
+	}, []);
+
 	if (logged) {
 		console.log('data?', logindata);
 		return (
 			<PaperProvider>
 				<NavigationContainer>
-					<BgTracking DriverId={logindata.response.Cars.DriverId}/>
+					<BgTracking DriverId={logindata.response.Cars.DriverId} />
 					<RootNavigator
 						switchOn={logged}
 						logindata={logindata}

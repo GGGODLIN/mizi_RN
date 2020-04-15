@@ -1,6 +1,6 @@
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 apply plugin: "com.android.application"
-
+apply plugin: 'com.google.gms.google-services'
 apply from: "../../node_modules/react-native-code-push/android/codepush.gradle"
 
 import com.android.build.OutputFile
@@ -198,6 +198,7 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"  // From node_modules
+    implementation 'com.google.firebase:firebase-analytics:17.2.2'
     implementation "io.jsonwebtoken:jjwt-api:0.11.0"
 implementation "io.jsonwebtoken:jjwt-jackson:0.11.0", {exclude group:'io.jsonwebtoken', module:'jjwt-api'}
 implementation "io.jsonwebtoken:jjwt-impl:0.11.0", {exclude group:'io.jsonwebtoken', module:'jjwt-api'}

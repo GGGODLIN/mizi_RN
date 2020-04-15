@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "22285765007",
+    "firebase_url": "https://melodic-nature-274307.firebaseio.com",
+    "project_id": "melodic-nature-274307",
+    "storage_bucket": "melodic-nature-274307.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:22285765007:android:c518eed8def208738fe3fa",
+        "android_client_info": {
+          "package_name": "com.LinLiang"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "22285765007-bdtk8r4f1nokhihbhuergls2uitlm5g7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBg7ZLsH0kLCxgQdULfHMFPOCLtvcq_AaU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "22285765007-bdtk8r4f1nokhihbhuergls2uitlm5g7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
