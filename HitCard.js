@@ -319,7 +319,6 @@ const HitCard = props => {
           </Text>
 
           <Picker
-          itemStyle={{color:'red'}}
             enabled={true}
             selectedValue={bTemperature}
             onValueChange={(itemValue, itemIndex) =>
@@ -351,7 +350,7 @@ const HitCard = props => {
 
           <RPButton
             onPress={() => {
-              //handleSubmitHitCard();
+              handleSubmitHitCard();
               setoverlay(false);
             }}
             color="orange"
