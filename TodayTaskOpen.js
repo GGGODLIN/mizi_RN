@@ -67,7 +67,7 @@ const TodayTaskOpen = props => {
   const [foreignPeople, setforeignPeople] = useState(0);
   const [detailIndex, setdetailIndex] = useState(0);
   const [askingMoney, setaskingMoney] = useState(false);
-  
+
   const [isLoading, setLoading] = useState(true);
   const [carChecked, setcarChecked] = useState(false);
   const [bodyChecked, setbodyChecked] = useState(false);
@@ -85,8 +85,15 @@ const TodayTaskOpen = props => {
   console.log('STATUS', caseStatus);
   console.log('Done', doneCase);
   console.log('index', detailIndex);
-  const [people, setpeople] = useState(taskData[detailIndex].OrderDetails.FamilyWith+taskData[detailIndex].OrderDetails.ForeignFamilyWith);
-  console.log('陪同', taskData[detailIndex].OrderDetails.FamilyWith+taskData[detailIndex].OrderDetails.ForeignFamilyWith);
+  const [people, setpeople] = useState(
+    taskData[detailIndex].OrderDetails.FamilyWith +
+      taskData[detailIndex].OrderDetails.ForeignFamilyWith,
+  );
+  console.log(
+    '陪同',
+    taskData[detailIndex].OrderDetails.FamilyWith +
+      taskData[detailIndex].OrderDetails.ForeignFamilyWith,
+  );
 
   const origin = {
     latitude: taskData[detailIndex].OrderDetails.FromLat,
@@ -128,7 +135,10 @@ const TodayTaskOpen = props => {
     let tempStatus = caseStatus;
     tempStatus[detailIndex] = caseStatus[detailIndex] + 1;
     setcaseStatus(tempStatus);
-    setpeople(taskData[detailIndex].OrderDetails.FamilyWith+taskData[detailIndex].OrderDetails.ForeignFamilyWith);
+    setpeople(
+      taskData[detailIndex].OrderDetails.FamilyWith +
+        taskData[detailIndex].OrderDetails.ForeignFamilyWith,
+    );
     if (tempStatus[detailIndex] == 6) {
       updateStatusToSix();
       setoverlay(true);
@@ -162,9 +172,12 @@ const TodayTaskOpen = props => {
     setLoading(true);
   };
 
-  const handleChangeIndex = async (index) => {
+  const handleChangeIndex = async index => {
     setdetailIndex(index);
-    setpeople(taskData[index].OrderDetails.FamilyWith+taskData[index].OrderDetails.ForeignFamilyWith);
+    setpeople(
+      taskData[index].OrderDetails.FamilyWith +
+        taskData[index].OrderDetails.ForeignFamilyWith,
+    );
   };
 
   const handleCashNext = async () => {
@@ -209,7 +222,9 @@ const TodayTaskOpen = props => {
         Alert.alert('網路異常，請稍後再試...', ' ', [
           {
             text: '確定',
-            onPress: () => {setLoading(false);},
+            onPress: () => {
+              setLoading(false);
+            },
           },
         ]),
       );
@@ -331,12 +346,19 @@ const TodayTaskOpen = props => {
       if (item < 6) {
         console.log('INDEX????', index);
         console.log('DONE????????', doneCase, doneCase.length);
-        
+
         if (caseStatus[0] >= 6) {
           setdetailIndex(index);
-          setpeople(taskData[index].OrderDetails.FamilyWith+taskData[index].OrderDetails.ForeignFamilyWith);
-          console.log("with?????????",taskData[index].OrderDetails.FamilyWith+taskData[index].OrderDetails.ForeignFamilyWith)
-        setforeignPeople(taskData[index].OrderDetails.ForeignFamilyWith);
+          setpeople(
+            taskData[index].OrderDetails.FamilyWith +
+              taskData[index].OrderDetails.ForeignFamilyWith,
+          );
+          console.log(
+            'with?????????',
+            taskData[index].OrderDetails.FamilyWith +
+              taskData[index].OrderDetails.ForeignFamilyWith,
+          );
+          setforeignPeople(taskData[index].OrderDetails.ForeignFamilyWith);
           setlongitudeDelta(
             Math.abs(
               taskData[index].OrderDetails.FromLon -
@@ -368,7 +390,7 @@ const TodayTaskOpen = props => {
 
   useEffect(() => {
     checkDone();
-    console.log("CHECKDONE????!?!?!?!?!?");
+    console.log('CHECKDONE????!?!?!?!?!?');
   }, []);
 
   if (isLoading || finish) {
@@ -565,7 +587,12 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
             </View>
             <View style={styles.titleRight}>
               <Text style={{color: 'white', fontSize: 20}}>
-                {'個案' + 1 + '/' + '陪同' + (taskData[detailIndex].OrderDetails.FamilyWith+taskData[detailIndex].OrderDetails.ForeignFamilyWith)}
+                {'個案' +
+                  1 +
+                  '/' +
+                  '陪同' +
+                  (taskData[detailIndex].OrderDetails.FamilyWith +
+                    taskData[detailIndex].OrderDetails.ForeignFamilyWith)}
               </Text>
             </View>
           </View>
@@ -739,11 +766,16 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
               ? '客上'
               : '客下'}
           </Button>
-          <View style={
-              caseStatus[detailIndex] >= 5 ? {display: 'none'} : {width:'80%',alignItems:'flex-start',alignSelf:'center'}
+          <View
+            style={
+              caseStatus[detailIndex] >= 5
+                ? {display: 'none'}
+                : {width: '80%', alignItems: 'flex-start', alignSelf: 'center'}
             }>
-          <Text style={{fontSize:20}}>{`備註:${taskData[detailIndex].CaseUser.Remark}`}</Text>
-            </View>
+            <Text style={{fontSize: 20}}>{`備註:${
+              taskData[detailIndex].CaseUser.Remark
+            }`}</Text>
+          </View>
           <Button
             style={
               caseStatus[detailIndex] == 3
@@ -825,7 +857,7 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
               陪同人數:
             </Text>
             <Picker
-              enabled={(cashSteps == 0 && !askingMoney) ? true : false}
+              enabled={cashSteps == 0 && !askingMoney ? true : false}
               selectedValue={people}
               style={{flex: 1}}
               onValueChange={(itemValue, itemIndex) => setpeople(itemValue)}>
@@ -930,8 +962,30 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
             contentStyle={{width: '100%', paddingHorizontal: 50}}
             mode="outlined"
             disabled={askingMoney}
-            onPress={() => handleCashNext()}>
-            {cashSteps == 0 ? (askingMoney ?'金額計算中...':'現金') : '確認收款'}
+            onPress={() => {
+              if (cashSteps === 1) {
+                Alert.alert('確定金額正確並送出?', ' ', [
+                  {
+                    text: '取消',
+                    onPress: () => console.log('Cancel Pressed'),
+                    style: 'cancel',
+                  },
+                  {
+                    text: '確定',
+                    onPress: () => {
+                      handleCashNext();
+                    },
+                  },
+                ]);
+              } else {
+                handleCashNext();
+              }
+            }}>
+            {cashSteps == 0
+              ? askingMoney
+                ? '金額計算中...'
+                : '現金'
+              : '確認收款'}
           </Button>
           <Button
             style={
