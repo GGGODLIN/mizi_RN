@@ -967,7 +967,25 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
             contentStyle={{width: '100%', paddingHorizontal: 50}}
             mode="outlined"
             disabled={askingMoney}
-            onPress={() => handleCashNext()}>
+            onPress={() => {
+              if (cashSteps === 1) {
+                Alert.alert('確定金額正確並送出?', ' ', [
+                  {
+                    text: '取消',
+                    onPress: () => console.log('Cancel Pressed'),
+                    style: 'cancel',
+                  },
+                  {
+                    text: '確定',
+                    onPress: () => {
+                      handleCashNext();
+                    },
+                  },
+                ]);
+              } else {
+                handleCashNext();
+              }
+            }}>
             {cashSteps == 0
               ? askingMoney
                 ? '金額計算中...'
