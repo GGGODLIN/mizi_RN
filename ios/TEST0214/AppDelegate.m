@@ -10,6 +10,7 @@
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
+#import <LineSDK/LineSDK.h>
 
 @import GoogleMaps;
 @implementation AppDelegate
@@ -31,6 +32,8 @@
   [self.window makeKeyAndVisible];
   return YES;
 }
+
+
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
 {

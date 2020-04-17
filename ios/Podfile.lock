@@ -34,6 +34,9 @@ PODS:
     - GoogleMaps/Base
   - JWT (3.0.0-beta.12):
     - Base64 (~> 1.1.2)
+  - LineSDKSwift (5.5.1):
+    - LineSDKSwift/Core (= 5.5.1)
+  - LineSDKSwift/Core (5.5.1)
   - RCTRequired (0.61.5)
   - RCTTypeSafety (0.61.5):
     - FBLazyVector (= 0.61.5)
@@ -276,6 +279,7 @@ DEPENDENCIES:
   - Folly (from `../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - GoogleMaps
+  - LineSDKSwift (~> 5.0)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
   - React (from `../node_modules/react-native/`)
@@ -322,6 +326,7 @@ SPEC REPOS:
     - boost-for-react-native
     - GoogleMaps
     - JWT
+    - LineSDKSwift
     - SSZipArchive
 
 EXTERNAL SOURCES:
@@ -424,6 +429,7 @@ SPEC CHECKSUMS:
   glog: 1f3da668190260b06b429bb211bfbee5cd790c28
   GoogleMaps: 7c8d66d70e4e8c300f43a7219d8fdaad7b325a9a
   JWT: 9b5c05abbcc1a0e69c3c91e1655b3387fc7e581d
+  LineSDKSwift: 7db297b690b592fbbac94b9096534cf78fceaaaa
   RCTRequired: b153add4da6e7dbc44aebf93f3cf4fcae392ddf1
   RCTTypeSafety: 9aa1b91d7f9310fc6eadc3cf95126ffe818af320
   React: b6a59ef847b2b40bb6e0180a97d0ca716969ac78
@@ -462,6 +468,6 @@ SPEC CHECKSUMS:
   SSZipArchive: fa16b8cc4cdeceb698e5e5d9f67e9558532fbf23
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
 
-PODFILE CHECKSUM: a6592bf00966734bdc52757c258634bce425d503
+PODFILE CHECKSUM: 16d071423e9d3ddb78372f283c0cf84053b9a21c
 
 COCOAPODS: 1.9.1
