@@ -175,6 +175,7 @@
 		688EEFB95C5A5531F062D991 /* Pods-TEST0214-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TEST0214-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-TEST0214-tvOS/Pods-TEST0214-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		7D9EECFEE18F3CB7F9790E95 /* libPods-TEST0214Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TEST0214Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8309B13C5AA4D515F06BD98D /* Pods-TEST0214.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TEST0214.release.xcconfig"; path = "Target Support Files/Pods-TEST0214/Pods-TEST0214.release.xcconfig"; sourceTree = "<group>"; };
+		A231106D244D89B20055C009 /* LineSDKResource.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = LineSDKResource.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		A271F8122449552400B7901E /* TEST0214.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = TEST0214.entitlements; path = TEST0214/TEST0214.entitlements; sourceTree = "<group>"; };
 		A27E8E47242DF1F100CD775B /* AIRDummyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRDummyView.m; sourceTree = "<group>"; };
 		A27E8E48242DF1F100CD775B /* AIRGoogleMapWMSTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRGoogleMapWMSTile.h; sourceTree = "<group>"; };
@@ -310,6 +311,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A231106D244D89B20055C009 /* LineSDKResource.bundle */,
 				A2D1D4EA2449B2A7000B7966 /* AuthenticationServices.framework */,
 				3A56037D2418B85F00CBBF8F /* libBackgroundGeolocation.a */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
@@ -394,6 +396,7 @@
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				84556375C9664F98BB4E7FF4 /* Resources */,
 				8B60A18B6508719C55423C7A /* Pods */,
+				A271456E244D72FD004C9CB6 /* Recovered References */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -431,6 +434,13 @@
 				CCEE9154CD54B144D351C866 /* Pods-TEST0214Tests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		A271456E244D72FD004C9CB6 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		A27E8E46242DF1F100CD775B /* AirGoogleMaps */ = {
@@ -1040,9 +1050,11 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = TEST0214Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1062,9 +1074,11 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = V5ZUWPFB7D;
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = TEST0214Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1087,6 +1101,7 @@
 				CURRENT_PROJECT_VERSION = 20200320;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = V5ZUWPFB7D;
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = TEST0214/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1112,6 +1127,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 20200320;
 				DEVELOPMENT_TEAM = V5ZUWPFB7D;
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = TEST0214/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1140,8 +1156,10 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "TEST0214-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1168,8 +1186,10 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "TEST0214-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1195,8 +1215,10 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "TEST0214-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1222,8 +1244,10 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "TEST0214-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

@@ -15,6 +15,11 @@
 @import GoogleMaps;
 @implementation AppDelegate
 
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary *)options
+{
+    return [[LineSDKLogin sharedInstance] handleOpenURL:url];
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   [GMSServices provideAPIKey:@"AIzaSyA1h_cyazZLo1DExB0h0B2JBuOfv-yFtsM"];
@@ -32,7 +37,6 @@
   [self.window makeKeyAndVisible];
   return YES;
 }
-
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
 {
