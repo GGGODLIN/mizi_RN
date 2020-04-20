@@ -55,6 +55,9 @@ const InfoScreen = props => {
       console.log('cannot get ITEM');
       // Error retrieving data
     }
+  }
+
+  const handleLineLogin = async () => {
     console.log('LOGIN?');
     LineLogin.login()
       .then(user => {
@@ -63,7 +66,7 @@ const InfoScreen = props => {
       .catch(err => {
         console.log(err);
       });
-  }
+  };
 
   const handleSubmit = async () => {
     var url3 =
@@ -212,14 +215,19 @@ const InfoScreen = props => {
               }}>
               修改密碼
             </Button>
+            
+          </Card.Actions>
+          <Card.Actions>
+            
             <Button
               mode="contained"
               compact={false}
               style={styles.button}
+              color='green'
               onPress={() => {
-                setshowOverlay(true);
+                handleLineLogin();
               }}>
-              TEST
+              Line綁定
             </Button>
           </Card.Actions>
 
