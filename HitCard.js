@@ -22,8 +22,10 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {Picker} from '@react-native-community/picker';
 
 import {ThemeProvider, Avatar, Button, Overlay} from 'react-native-elements';
+import {Button as RPButton} from 'react-native-paper';
 import {
   Card,
   Title,
@@ -46,6 +48,8 @@ const HitCard = props => {
   const [shouldReceiveAmt, setshouldReceiveAmt] = useState(' 讀取中...');
   const [realReceiveAmt, setrealReceiveAmt] = useState(' 讀取中...');
   const [status, setstatus] = useState(1);
+  const [overlay, setoverlay] = useState(false);
+  const [bTemperature, setbTemperature] = useState(0);
   const [showOverlay, setshowOverlay] = useState(false);
   const [myIcon1, setmyIcon1] = useState();
   const [myIcon2, setmyIcon2] = useState();
@@ -61,10 +65,10 @@ const HitCard = props => {
     try {
       const value = await AsyncStorage.getItem('userLoginInfo');
       if (value !== null) {
-        var obj_value = JSON.parse(value);
+        let obj_value = JSON.parse(value);
         setuser(obj_value);
         console.log('GET FROM ASYN IS', obj_value);
-        var url2 =
+        let url2 =
           'https://api.donkeymove.com/api/DriverInfo/GetAllPunchByDriver/' +
           obj_value.response.Id;
 
@@ -95,15 +99,15 @@ const HitCard = props => {
             setLoading(false);
           })
           .catch(err =>
-        Alert.alert('網路異常，請稍後再試...', ' ', [
-          {
-            text: '確定',
-            onPress: () => {},
-          },
-        ]),
-      );
+            Alert.alert('網路異常，請稍後再試...', ' ', [
+              {
+                text: '確定',
+                onPress: () => {},
+              },
+            ]),
+          );
 
-        var url3 =
+        let url3 =
           'https://api.donkeymove.com/api/DriverInfo/GetDriverReceive/' +
           obj_value.response.Id;
 
@@ -120,13 +124,13 @@ const HitCard = props => {
             setrealReceiveAmt(res.response.RealReceiveAmt);
           })
           .catch(err =>
-        Alert.alert('網路異常，請稍後再試...', ' ', [
-          {
-            text: '確定',
-            onPress: () => {},
-          },
-        ]),
-      );
+            Alert.alert('網路異常，請稍後再試...', ' ', [
+              {
+                text: '確定',
+                onPress: () => {},
+              },
+            ]),
+          );
       }
     } catch (error) {
       console.log('cannot get ITEM');
@@ -135,9 +139,13 @@ const HitCard = props => {
   }
 
   async function handleSubmitHitCard() {
-    var url2 = `https://api.donkeymove.com/api/DriverInfo/SetPunchTime/${
+    let url2 = `https://api.donkeymove.com/api/DriverInfo/SetPunchTime/${
       user.response.Id
     }?status=${status}`;
+    if(bTemperature !== 0){
+      url2 += `&bodyTemperature=${bTemperature}`;
+    }
+    console.log("Making hit request to ",url2);
 
     const data = await fetch(url2, {
       method: 'GET',
@@ -248,13 +256,13 @@ const HitCard = props => {
             console.log('PUTSIGN AJAX', res2);
           })
           .catch(err2 =>
-        Alert.alert('網路異常，請稍後再試...', ' ', [
-          {
-            text: '確定',
-            onPress: () => {},
-          },
-        ]),
-      );
+            Alert.alert('網路異常，請稍後再試...', ' ', [
+              {
+                text: '確定',
+                onPress: () => {},
+              },
+            ]),
+          );
 
         return res;
       })
@@ -291,6 +299,73 @@ const HitCard = props => {
           alignSelf: 'center',
           marginTop: 10,
         }}>
+        <Overlay
+          
+          isVisible={overlay}
+          windowBackgroundColor="rgba(255, 255, 255, .5)"
+          overlayBackgroundColor="white"
+          width="90%"
+          height="auto">
+          <Text
+            style={{
+              backgroundColor: 'orange',
+              fontSize: 20,
+              fontWeight: 'bold',
+              color: 'white',
+              textAlign: 'center',
+              padding: 10,
+              marginBottom: 10,
+            }}>
+            {`請選擇您的體溫`}
+          </Text>
+
+          <Picker
+            enabled={true}
+            selectedValue={bTemperature}
+            onValueChange={(itemValue, itemIndex) =>
+              setbTemperature(itemValue)
+            }>
+            <Picker.Item label="36.0" value={36.0} />
+            <Picker.Item label="36.1" value={36.1} />
+            <Picker.Item label="36.2" value={36.2} />
+            <Picker.Item label="36.3" value={36.3} />
+            <Picker.Item label="36.4" value={36.4} />
+            <Picker.Item label="36.5" value={36.5} />
+            <Picker.Item label="36.6" value={36.6} />
+            <Picker.Item label="36.7" value={36.7} />
+            <Picker.Item label="36.8" value={36.8} />
+            <Picker.Item label="36.9" value={36.9} />
+            <Picker.Item label="37.0" value={37.0} />
+            <Picker.Item label="37.1" value={37.1} />
+            <Picker.Item label="37.2" value={37.2} />
+            <Picker.Item label="37.3" value={37.3} />
+            <Picker.Item label="37.4" value={37.4} />
+            <Picker.Item label="37.5" value={37.5} color="red"/>
+            <Picker.Item label="37.6" value={37.6} color="red"/>
+            <Picker.Item label="37.7" value={37.7} color="red"/>
+            <Picker.Item label="37.8" value={37.8} color="red"/>
+            <Picker.Item label="37.9" value={37.9} color="red"/>
+            <Picker.Item label="38.0" value={38.0} color="red"/>
+            <Picker.Item label="略過" value={0} />
+          </Picker>
+
+          <RPButton
+            onPress={() => {
+              handleSubmitHitCard();
+              setoverlay(false);
+            }}
+            color="orange"
+            disabled={false}
+            mode="contained"
+            labelStyle={{
+              color: 'white',
+              fontSize: 20,
+              fontWeight: 'bold',
+            }}
+            style={{marginBottom: 10}}>
+            確認送出
+          </RPButton>
+        </Overlay>
         <Overlay
           isVisible={status == 3 && showOverlay ? true : false}
           //isVisible={showOverlay ? true : false}
@@ -418,7 +493,7 @@ const HitCard = props => {
               {
                 text: '確定',
                 onPress: () => {
-                  handleSubmitHitCard();
+                  setoverlay(true);
                 },
               },
             ]);

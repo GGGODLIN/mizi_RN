@@ -405,7 +405,7 @@ Linking.canOpenURL(url).then(supported => {
     } else {
         return Linking.openURL(url);
     }
-}).catch(err => console.error('An error occurred', err)); 
+}).catch(err => console.error('An error occurred', err));
   };
 
   useEffect(() => {
@@ -773,6 +773,7 @@ ${taskData[detailIndex].OrderDetails.FromAddr}`}
 ${taskData[detailIndex].OrderDetails.ToAddr}`}
             </Text>
           </View>
+          <View style={{flexDirection:'row'}}>
           <Button
             style={
               caseStatus[detailIndex] < 5
@@ -783,11 +784,12 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
                     borderRadius: 50,
                     backgroundColor: 'orange',
                     margin: 10,
+                    flex:1,
                   }
                 : {display: 'none'}
             }
-            labelStyle={{color: 'white', fontSize: 20}}
-            contentStyle={{width: '100%', paddingHorizontal: 50}}
+            labelStyle={{color: 'white', fontSize: 30}}
+            contentStyle={{width: '100%',height:100}}
             mode="outlined"
             onPress={() => {
               if (caseStatus[detailIndex] >= 4) {
@@ -804,7 +806,22 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
                     },
                   },
                 ]);
-              } else {
+              }else if (caseStatus[detailIndex] === 3) {
+                Alert.alert('確定客上?', ' ', [
+                  {
+                    text: '取消',
+                    onPress: () => console.log('Cancel Pressed'),
+                    style: 'cancel',
+                  },
+                  {
+                    text: '確定',
+                    onPress: () => {
+                      handleNextStep();
+                    },
+                  },
+                ]);
+              }
+              else {
                 handleNextStep();
               }
             }}>
@@ -816,16 +833,6 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
               ? '客上'
               : '客下'}
           </Button>
-          <View
-            style={
-              caseStatus[detailIndex] >= 5
-                ? {display: 'none'}
-                : {width: '80%', alignItems: 'flex-start', alignSelf: 'center'}
-            }>
-            <Text style={{fontSize: 20}}>{`備註:${
-              taskData[detailIndex].CaseUser.Remark
-            }`}</Text>
-          </View>
           <Button
             style={
               caseStatus[detailIndex] == 3
@@ -836,11 +843,12 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
                     borderRadius: 50,
                     backgroundColor: 'gray',
                     margin: 10,
+                    flex:1,
                   }
                 : {display: 'none'}
             }
-            labelStyle={{color: 'white', fontSize: 20}}
-            contentStyle={{width: '100%', paddingHorizontal: 50}}
+            labelStyle={{color: 'white', fontSize: 30}}
+            contentStyle={{width: '100%',height:100}}
             mode="outlined"
             onPress={() => {
               Alert.alert('確定空趟?', ' ', [
@@ -859,6 +867,13 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
             }}>
             {'空趟'}
           </Button>
+          </View>
+          <View style={
+              caseStatus[detailIndex] >= 5 ? {display: 'none'} : {width:'80%',alignItems:'flex-start',alignSelf:'center'}
+            }>
+          <Text style={{fontSize:20}}>{`備註:${taskData[detailIndex].CaseUser.Remark===null?'':taskData[detailIndex].CaseUser.Remark}`}</Text>
+            </View>
+
           <View
             style={
               caseStatus[detailIndex] == 5
