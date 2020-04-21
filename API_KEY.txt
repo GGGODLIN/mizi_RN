@@ -66,3 +66,6 @@ http://ttcapi.1966.org.tw/api/OrderDetails/PutDetailStatus?OrderDetailId=448&Sta
 /storage/emulated/0/Android/data/com.miziTaidon/files/Pictures/saved_signature/TS158329008271346.png
 file:///storage/emulated/0/Android/data/com.miziTaidon/files/Pictures/saved_signature/TS158329003689543.png
 /data/user/0/com.miziTaidon/files
+
+code-push deployment list miziTaidon -k
+code-push release-react miziTaidon android
