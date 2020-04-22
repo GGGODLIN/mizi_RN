@@ -601,12 +601,12 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
             <Picker.Item label="37.2" value={37.2} />
             <Picker.Item label="37.3" value={37.3} />
             <Picker.Item label="37.4" value={37.4} />
-            <Picker.Item label="37.5" value={37.5} color='red'/>
-            <Picker.Item label="37.6" value={37.6} color='red'/>
-            <Picker.Item label="37.7" value={37.7} color='red'/>
-            <Picker.Item label="37.8" value={37.8} color='red'/>
-            <Picker.Item label="37.9" value={37.9} color='red'/>
-            <Picker.Item label="38.0" value={38.0} color='red'/>
+            <Picker.Item label="37.5" value={37.5} />
+            <Picker.Item label="37.6" value={37.6} />
+            <Picker.Item label="37.7" value={37.7} />
+            <Picker.Item label="37.8" value={37.8} />
+            <Picker.Item label="37.9" value={37.9} />
+            <Picker.Item label="38.0" value={38.0} />
           </Picker>
 
           <Button
@@ -622,7 +622,7 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
               fontSize: 20,
               fontWeight: 'bold',
             }}
-            style={{marginBottom: 10}}>
+            style={{marginBottom: 10,marginTop:60}}>
             確認送出
           </Button>
         </Overlay>
