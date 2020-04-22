@@ -66,11 +66,13 @@ const TodayTaskOpen = props => {
   const [cashSteps, setcashSteps] = useState(0);
   const [detailIndex, setdetailIndex] = useState(0);
   const [askingMoney, setaskingMoney] = useState(false);
+  const [bTemperature, setbTemperature] = useState(0);
 
   const [isLoading, setLoading] = useState(true);
   const [carChecked, setcarChecked] = useState(false);
   const [bodyChecked, setbodyChecked] = useState(false);
   const [overlay, setoverlay] = useState(true);
+  const [BToverlay, setBToverlay] = useState(false);
   const [delayForMap, setdelayForMap] = useState(false);
   const [fixbottom, setfixbottom] = useState(-1);
 
@@ -286,6 +288,10 @@ const TodayTaskOpen = props => {
       taskData[detailIndex].OrderDetails.Id
     }&StatusInt=${caseStatus[detailIndex]}`;
 
+    if (caseStatus[detailIndex] == 4) {
+      url += `&bTemperature=${bTemperature}`;
+    }
+
     console.log(`Making Status request to: ${url}`);
 
     const data = await fetch(url, {
@@ -297,6 +303,7 @@ const TodayTaskOpen = props => {
       .then(response => response.json())
       .then(res => {
         console.log('updateStatus AJAX', res);
+        setbTemperature(0);
       })
       .catch(err =>
         Alert.alert('網路異常，請稍後再試...', ' ', [
@@ -559,6 +566,74 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
           />
         </Overlay>
 
+        <Overlay
+          onBackdropPress={() => setBToverlay(false)}
+          isVisible={BToverlay && caseStatus[detailIndex] === 3}
+          windowBackgroundColor="rgba(255, 255, 255, .5)"
+          overlayBackgroundColor="white"
+          width="90%"
+          height="auto">
+          <Text
+            style={{
+              backgroundColor: 'orange',
+              fontSize: 20,
+              fontWeight: 'bold',
+              color: 'white',
+              textAlign: 'center',
+              padding: 10,
+              marginBottom: 10,
+            }}>
+            {`請選擇 ${taskData[detailIndex].OrderDetails.CaseUserName} 的體溫`}
+          </Text>
+
+          <Picker
+            enabled={true}
+            selectedValue={bTemperature}
+            onValueChange={(itemValue, itemIndex) =>
+              setbTemperature(itemValue)
+            }>
+            <Picker.Item label="未量測" value={0} />
+            <Picker.Item label="36.0" value={36.0} />
+            <Picker.Item label="36.1" value={36.1} />
+            <Picker.Item label="36.2" value={36.2} />
+            <Picker.Item label="36.3" value={36.3} />
+            <Picker.Item label="36.4" value={36.4} />
+            <Picker.Item label="36.5" value={36.5} />
+            <Picker.Item label="36.6" value={36.6} />
+            <Picker.Item label="36.7" value={36.7} />
+            <Picker.Item label="36.8" value={36.8} />
+            <Picker.Item label="36.9" value={36.9} />
+            <Picker.Item label="37.0" value={37.0} />
+            <Picker.Item label="37.1" value={37.1} />
+            <Picker.Item label="37.2" value={37.2} />
+            <Picker.Item label="37.3" value={37.3} />
+            <Picker.Item label="37.4" value={37.4} />
+            <Picker.Item label="37.5" value={37.5} />
+            <Picker.Item label="37.6" value={37.6} />
+            <Picker.Item label="37.7" value={37.7} />
+            <Picker.Item label="37.8" value={37.8} />
+            <Picker.Item label="37.9" value={37.9} />
+            <Picker.Item label="38.0" value={38.0} />
+          </Picker>
+
+          <Button
+            onPress={() => {
+              handleNextStep();
+              setBToverlay(false);
+            }}
+            color="orange"
+            disabled={false}
+            mode="contained"
+            labelStyle={{
+              color: 'white',
+              fontSize: 20,
+              fontWeight: 'bold',
+            }}
+            style={{marginBottom: 10,marginTop:60}}>
+            確認送出
+          </Button>
+        </Overlay>
+
         <View
           style={{
             margin: '5%',
@@ -761,6 +836,11 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
                     },
                   },
                 ]);
+              } else if (caseStatus[detailIndex] === 3) {
+                setBToverlay(true);
+                console.log("NOOOOOOO~~~~~~");
+
+                //handleNextStep(0, index);
               } else {
                 handleNextStep();
               }
