@@ -586,6 +586,16 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
               setbTemperature(itemValue)
             }>
             <Picker.Item label="未量測" value={0} />
+            <Picker.Item label="35.0" value={35.0} />
+            <Picker.Item label="35.1" value={35.1} />
+            <Picker.Item label="35.2" value={35.2} />
+            <Picker.Item label="35.3" value={35.3} />
+            <Picker.Item label="35.4" value={35.4} />
+            <Picker.Item label="35.5" value={35.5} />
+            <Picker.Item label="35.6" value={35.6} />
+            <Picker.Item label="35.7" value={35.7} />
+            <Picker.Item label="35.8" value={35.8} />
+            <Picker.Item label="35.9" value={35.9} />
             <Picker.Item label="36.0" value={36.0} />
             <Picker.Item label="36.1" value={36.1} />
             <Picker.Item label="36.2" value={36.2} />
