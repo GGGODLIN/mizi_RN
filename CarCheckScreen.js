@@ -163,14 +163,19 @@ const CarCheckScreen = props => {
 
   const handleCheckAll = async () => {
     let tempData = {...checkDataModal};
-    const nameList = Object.values(tempData.response).map(
-      item => (item.HasChange = !allChecked),
-    );
-    const nameList2 = Object.values(tempData.response).map(item =>
-      item.CheckCarChildViewModel.map(item2 => (item2.HasChange = !allChecked)),
-    );
-    setallChecked(!allChecked);
-    setcheckDataModal(tempData);
+
+    if (tempData?.response !== undefined) {
+      const nameList = Object.values(tempData?.response).map(
+        item => (item.HasChange = !allChecked),
+      );
+      const nameList2 = Object.values(tempData?.response).map(item =>
+        item.CheckCarChildViewModel.map(
+          item2 => (item2.HasChange = !allChecked),
+        ),
+      );
+      setallChecked(!allChecked);
+      setcheckDataModal(tempData);
+    }
   };
 
   const checkCarChecked = async () => {
@@ -194,44 +199,46 @@ const CarCheckScreen = props => {
     let queryHasChecked = '';
     let queryNoChecked = '';
 
-    const nameList2 = Object.values(tempData.response).map(item =>
-      item.CheckCarChildViewModel.map(item2 =>
-        item2.HasChange
-          ? (queryHasChecked += `${item2.CheckCarName}` + ',')
-          : (queryNoChecked += `${item2.CheckCarName},`),
-      ),
-    );
+    if (tempData?.response !== undefined) {
+      const nameList2 = Object.values(tempData?.response).map(item =>
+        item.CheckCarChildViewModel.map(item2 =>
+          item2.HasChange
+            ? (queryHasChecked += `${item2.CheckCarName}` + ',')
+            : (queryNoChecked += `${item2.CheckCarName},`),
+        ),
+      );
 
-    console.log('queryHasChecked', queryHasChecked);
-    console.log('queryNoChecked', queryNoChecked);
+      console.log('queryHasChecked', queryHasChecked);
+      console.log('queryNoChecked', queryNoChecked);
 
-    let url =
-      'http://wheat-tainan.1966.org.tw:20021/api/CheckResult/PostCheckCarMapping';
-    const driverId = data.response.Id;
-    const carId = data.response.Cars.Id;
-    const postRes = await fetch(url, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        CarId: carId,
-        DriverId: driverId,
-        HasChecked: queryHasChecked,
-        NoChecked: queryNoChecked,
-      }),
-    }).catch(err =>
-      Alert.alert('網路異常，請稍後再試...', ' ', [
-        {
-          text: '確定',
-          onPress: () => {},
+      let url =
+        'http://wheat-tainan.1966.org.tw:20021/api/CheckResult/PostCheckCarMapping';
+      const driverId = data.response.Id;
+      const carId = data.response.Cars.Id;
+      const postRes = await fetch(url, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
         },
-      ]),
-    );
-    console.log('POST RES', postRes);
-    console.log('SUBMIT', data.response.Cars.Id);
-    props.navigation.navigate('CheckMainScreen');
+        body: JSON.stringify({
+          CarId: carId,
+          DriverId: driverId,
+          HasChecked: queryHasChecked,
+          NoChecked: queryNoChecked,
+        }),
+      }).catch(err =>
+        Alert.alert('網路異常，請稍後再試...', ' ', [
+          {
+            text: '確定',
+            onPress: () => {},
+          },
+        ]),
+      );
+      console.log('POST RES', postRes);
+      console.log('SUBMIT', data.response.Cars.Id);
+      props.navigation.navigate('CheckMainScreen');
+    }
   };
 
   useEffect(() => {
@@ -262,11 +269,12 @@ const CarCheckScreen = props => {
         <ActivityIndicator animating={true} size="large" />
       </View>
     );
-  } else {
-    const nameList = Object.values(checkDataModal.response).map(
+  } else if (checkDataModal?.response !== undefined) {
+
+    const nameList = Object.values(checkDataModal?.response).map(
       item => item.HasChange,
     );
-    const nameList2 = Object.values(checkDataModal.response).map(item =>
+    const nameList2 = Object.values(checkDataModal?.response).map(item =>
       item.CheckCarChildViewModel.map(item2 => item2.HasChange),
     );
     console.log('GET OBJ', nameList);
@@ -1618,6 +1626,13 @@ const CarCheckScreen = props => {
           </Button>
         </View>
       </ScrollView>
+    );
+  }else {
+    console.log('GG');
+    return (
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <Text style={{fontSize:32}}>網路出錯了！請重開APP試試</Text>
+      </View>
     );
   }
 };

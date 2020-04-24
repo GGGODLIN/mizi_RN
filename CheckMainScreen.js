@@ -31,7 +31,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import CarCheckScreen from './CarCheckScreen';
 
 const CheckMainScreen = props => {
-  console.log('Navigation?', props.navigation);
+  console.log('Navigation?', props?.navigation);
   const [data, setdata] = useState({});
   const [isLoading, setLoading] = useState(true);
   const [carChecked, setcarChecked] = useState(false);
@@ -43,7 +43,7 @@ const CheckMainScreen = props => {
       if (value !== null) {
         var obj_value = JSON.parse(value);
         let url = `http://wheat-tainan.1966.org.tw:20021/api/DriverInfo/GetDriverCheck/${
-          obj_value.response.Id
+          obj_value?.response?.Id
         }`;
         const res = await fetch(url, {
           method: 'GET',
@@ -53,9 +53,9 @@ const CheckMainScreen = props => {
         })
           .then(response => response.json())
           .then(res => {
-            console.log('FETCH CHECKED??????', res.response.CarCheck);
-            setcarChecked(res.response.CarCheck);
-            setbodyChecked(res.response.DriverCheck);
+            console.log('FETCH CHECKED??????', res?.response?.CarCheck);
+            setcarChecked(res?.response?.CarCheck);
+            setbodyChecked(res?.response?.DriverCheck);
           }).catch(err =>
         Alert.alert('網路異常，請稍後再試...', ' ', [
           {
@@ -191,7 +191,7 @@ const CheckMainScreen = props => {
               contentStyle={{width: '100%', height: '100%'}}
               icon="car"
               mode="contained"
-              onPress={() => props.navigation.navigate('CarCheckScreen')}>
+              onPress={() => props?.navigation?.navigate('CarCheckScreen')}>
               進行車輛檢查
             </Button>
             <Button
@@ -216,7 +216,7 @@ const CheckMainScreen = props => {
               contentStyle={{width: '100%', height: '100%'}}
               icon="heart"
               mode="contained"
-              onPress={() => props.navigation.navigate('BodyCheckScreen')}>
+              onPress={() => props?.navigation.navigate('BodyCheckScreen')}>
               進行身心檢查
             </Button>
         </View>

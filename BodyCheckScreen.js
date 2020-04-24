@@ -92,17 +92,17 @@ const BodyCheckScreen = props => {
         item,
         index,
         array,
-        checkDataModal.response.data[index].DriverCheckName,
+        checkDataModal?.response?.data[index].DriverCheckName,
       );
       if (item === 1) {
         queryNoSituation +=
-          `${checkDataModal.response.data[index].DriverCheckName}` + ',';
+          `${checkDataModal?.response?.data[index].DriverCheckName}` + ',';
       } else if (item === 3) {
         queryHasSituationAndChecked +=
-          `${checkDataModal.response.data[index].DriverCheckName}` + ',';
+          `${checkDataModal?.response?.data[index].DriverCheckName}` + ',';
       } else if (item === 2) {
         queryHasSituationNoChecked +=
-          `${checkDataModal.response.data[index].DriverCheckName}` + ',';
+          `${checkDataModal?.response?.data[index].DriverCheckName}` + ',';
       } else {
         pleaseBack = true;
         console.log(`PLEASE CHECK ${index}`);
@@ -456,7 +456,7 @@ const BodyCheckScreen = props => {
 
         <View style={styles.switchBox}>
           <Text style={styles.chooseTitle}>
-            {checkDataModal.response.data[0].DriverCheckName}
+            {checkDataModal?.response?.data[0].DriverCheckName}
           </Text>
           <View style={styles.divider} />
           <View style={styles.switchRow}>
@@ -482,7 +482,7 @@ const BodyCheckScreen = props => {
         </View>
         <View style={styles.switchBox}>
           <Text style={styles.chooseTitle}>
-            {checkDataModal.response.data[1].DriverCheckName}
+            {checkDataModal?.response?.data[1].DriverCheckName}
           </Text>
           <View style={styles.divider} />
           <View style={styles.switchRow}>
@@ -519,7 +519,7 @@ const BodyCheckScreen = props => {
 
         <View style={styles.switchBox}>
           <Text style={styles.chooseTitle}>
-            {checkDataModal.response.data[2].DriverCheckName}
+            {checkDataModal?.response?.data[2].DriverCheckName}
           </Text>
           <View style={styles.divider} />
           <View style={styles.switchRow}>
@@ -556,7 +556,7 @@ const BodyCheckScreen = props => {
 
         <View style={styles.switchBox}>
           <Text style={styles.chooseTitle}>
-            {checkDataModal.response.data[3].DriverCheckName}
+            {checkDataModal?.response?.data[3].DriverCheckName}
           </Text>
           <View style={styles.divider} />
           <View style={styles.switchRow}>
@@ -593,7 +593,7 @@ const BodyCheckScreen = props => {
 
         <View style={styles.switchBox}>
           <Text style={styles.chooseTitle}>
-            {checkDataModal.response.data[4].DriverCheckName}
+            {checkDataModal?.response?.data[4].DriverCheckName}
           </Text>
           <View style={styles.divider} />
           <View style={styles.switchRow}>
@@ -630,7 +630,7 @@ const BodyCheckScreen = props => {
 
         <View style={styles.switchBox}>
           <Text style={styles.chooseTitle}>
-            {checkDataModal.response.data[5].DriverCheckName}
+            {checkDataModal?.response?.data[5].DriverCheckName}
           </Text>
           <View style={styles.divider} />
           <View style={styles.switchRow}>
@@ -667,7 +667,7 @@ const BodyCheckScreen = props => {
 
         <View style={styles.switchBox}>
           <Text style={styles.chooseTitle}>
-            {checkDataModal.response.data[6].DriverCheckName}
+            {checkDataModal?.response?.data[6].DriverCheckName}
           </Text>
           <View style={styles.divider} />
           <View style={styles.switchRow}>
@@ -704,7 +704,7 @@ const BodyCheckScreen = props => {
 
         <View style={styles.switchBox}>
           <Text style={styles.chooseTitle}>
-            {checkDataModal.response.data[7].DriverCheckName}
+            {checkDataModal?.response?.data[7].DriverCheckName}
           </Text>
           <View style={styles.divider} />
           <View style={styles.switchRow}>
@@ -741,7 +741,7 @@ const BodyCheckScreen = props => {
 
         <View style={styles.switchBox}>
           <Text style={styles.chooseTitle}>
-            {checkDataModal.response.data[8].DriverCheckName}
+            {checkDataModal?.response?.data[8].DriverCheckName}
           </Text>
           <View style={styles.divider} />
           <View style={styles.switchRow}>
@@ -778,7 +778,7 @@ const BodyCheckScreen = props => {
 
         <View style={styles.switchBox}>
           <Text style={styles.chooseTitle}>
-            {checkDataModal.response.data[9].DriverCheckName}
+            {checkDataModal?.response?.data[9].DriverCheckName}
           </Text>
           <View style={styles.divider} />
           <View style={styles.switchRow}>
@@ -815,7 +815,7 @@ const BodyCheckScreen = props => {
 
         <View style={styles.switchBox}>
           <Text style={styles.chooseTitle}>
-            {checkDataModal.response.data[10].DriverCheckName}
+            {checkDataModal?.response?.data[10].DriverCheckName}
           </Text>
           <View style={styles.divider} />
           <View style={styles.switchRow}>
@@ -852,7 +852,7 @@ const BodyCheckScreen = props => {
 
         <View style={styles.switchBox}>
           <Text style={styles.chooseTitle}>
-            {checkDataModal.response.data[11].DriverCheckName}
+            {checkDataModal?.response?.data[11].DriverCheckName}
           </Text>
           <View style={styles.divider} />
           <View style={styles.switchRow}>
@@ -889,7 +889,7 @@ const BodyCheckScreen = props => {
 
         <View style={styles.switchBox}>
           <Text style={styles.chooseTitle}>
-            {checkDataModal.response.data[12].DriverCheckName}
+            {checkDataModal?.response?.data[12].DriverCheckName}
           </Text>
           <View style={styles.divider} />
           <View style={styles.switchRow}>
@@ -926,7 +926,7 @@ const BodyCheckScreen = props => {
 
         <View style={styles.switchBox}>
           <Text style={styles.chooseTitle}>
-            {checkDataModal.response.data[13].DriverCheckName}
+            {checkDataModal?.response?.data[13].DriverCheckName}
           </Text>
           <View style={styles.divider} />
           <View style={styles.switchRow}>
@@ -963,7 +963,7 @@ const BodyCheckScreen = props => {
 
         <View style={styles.switchBox}>
           <Text style={styles.chooseTitle}>
-            {checkDataModal.response.data[14].DriverCheckName}
+            {checkDataModal?.response?.data[14].DriverCheckName}
           </Text>
           <View style={styles.divider} />
           <View style={styles.switchRow}>
@@ -1000,7 +1000,7 @@ const BodyCheckScreen = props => {
 
         <View style={styles.switchBox}>
           <Text style={styles.chooseTitle}>
-            {checkDataModal.response.data[15].DriverCheckName}
+            {checkDataModal?.response?.data[15].DriverCheckName}
           </Text>
           <View style={styles.divider} />
           <View style={styles.switchRow}>
@@ -1037,7 +1037,7 @@ const BodyCheckScreen = props => {
 
         <View style={styles.switchBox}>
           <Text style={styles.chooseTitle}>
-            {checkDataModal.response.data[16].DriverCheckName}
+            {checkDataModal?.response?.data[16].DriverCheckName}
           </Text>
           <View style={styles.divider} />
           <View style={styles.switchRow}>
@@ -1074,7 +1074,7 @@ const BodyCheckScreen = props => {
 
         <View style={styles.switchBox}>
           <Text style={styles.chooseTitle}>
-            {checkDataModal.response.data[17].DriverCheckName}
+            {checkDataModal?.response?.data[17].DriverCheckName}
           </Text>
           <View style={styles.divider} />
           <View style={styles.switchRow}>
@@ -1111,7 +1111,7 @@ const BodyCheckScreen = props => {
 
         <View style={styles.switchBox}>
           <Text style={styles.chooseTitle}>
-            {checkDataModal.response.data[18].DriverCheckName}
+            {checkDataModal?.response?.data[18].DriverCheckName}
           </Text>
           <View style={styles.divider} />
           <View style={styles.switchRow}>
@@ -1148,7 +1148,7 @@ const BodyCheckScreen = props => {
 
         <View style={styles.switchBox}>
           <Text style={styles.chooseTitle}>
-            {checkDataModal.response.data[19].DriverCheckName}
+            {checkDataModal?.response?.data[19].DriverCheckName}
           </Text>
           <View style={styles.divider} />
           <View style={styles.switchRow}>
