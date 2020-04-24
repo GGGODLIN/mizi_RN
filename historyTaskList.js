@@ -204,14 +204,14 @@ const HistoryTaskList = props => {
         setuser(obj_value);
         console.log('GET FROM ASYN IS', obj_value);
         var url2 =
-          'http://wheathwaapi.vielife.com.tw/api/DriverInfo/GetAllPassGroup/' +
+          'http://wheat-tainan.1966.org.tw:20021/api/DriverInfo/GetAllPassGroup/' +
           obj_value.response.Id;
         seturl(
-          `http://wheathwaapi.vielife.com.tw/api/DriverInfo/GetAllPassGroup/${
+          `http://wheat-tainan.1966.org.tw:20021/api/DriverInfo/GetAllPassGroup/${
             obj_value.response.Id
           }`,
         );
-        //let url = `http://wheathwaapi.vielife.com.tw/api/DriverInfo/GetAllGroup/${obj_value.Id}`;
+        //let url = `http://wheat-tainan.1966.org.tw:20021/api/DriverInfo/GetAllGroup/${obj_value.Id}`;
         const data = await fetch(url2, {
           method: 'GET',
           headers: {
@@ -242,7 +242,7 @@ const HistoryTaskList = props => {
   async function fetchDataDate(sDate,eDate) {
     await setLoading(true);
     var url2 =
-      'http://wheathwaapi.vielife.com.tw/api/DriverInfo/GetAllPassGroup/' +
+      'http://wheat-tainan.1966.org.tw:20021/api/DriverInfo/GetAllPassGroup/' +
       user.response.Id + '?sDate=' + sDate + '&eDate=' + eDate;
       console.log(url2);
     const data = await fetch(

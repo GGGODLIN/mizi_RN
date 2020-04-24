@@ -198,7 +198,7 @@ const TodayTaskOpen = props => {
 
   const askCash = async () => {
     setaskingMoney(true);
-    let url = `http://wheathwaapi.vielife.com.tw/api/OrderDetails/PutDetailRealWith?OrderDetailId=${
+    let url = `http://wheat-tainan.1966.org.tw:20021/api/OrderDetails/PutDetailRealWith?OrderDetailId=${
       taskData[detailIndex].OrderDetails.Id
     }&RealFamily=${people}`;
 
@@ -244,7 +244,7 @@ const TodayTaskOpen = props => {
       name: `${taskData[detailIndex].OrderDetails.SOrderNo}.jpg`,
       filename: `${taskData[detailIndex].OrderDetails.SOrderNo}.jpg`,
     });
-    let url = `http://wheathwaapi.vielife.com.tw/api/Img/Pic`;
+    let url = `http://wheat-tainan.1966.org.tw:20021/api/Img/Pic`;
 
     console.log(`Making POST PIC request to: ${url}`);
     console.log(form);
@@ -275,7 +275,7 @@ const TodayTaskOpen = props => {
   };
 
   const updateStatus = async () => {
-    let url = `http://wheathwaapi.vielife.com.tw/api/OrderDetails/PutDetailStatus?OrderDetailId=${
+    let url = `http://wheat-tainan.1966.org.tw:20021/api/OrderDetails/PutDetailStatus?OrderDetailId=${
       taskData[detailIndex].OrderDetails.Id
     }&StatusInt=${caseStatus[detailIndex]}`;
 
@@ -308,7 +308,7 @@ const TodayTaskOpen = props => {
 
   const updateStatusToSix = async () => {
     console.log('???????', taskData[detailIndex].OrderDetails.SOrderNo);
-    let url = `http://wheathwaapi.vielife.com.tw/api/OrderDetails/PutDetailStatus?OrderDetailId=${
+    let url = `http://wheat-tainan.1966.org.tw:20021/api/OrderDetails/PutDetailStatus?OrderDetailId=${
       taskData[detailIndex].OrderDetails.Id
     }&StatusInt=${caseStatus[detailIndex]}&receiveAmt=${realMoney}&signPic=${
       taskData[detailIndex].OrderDetails.SOrderNo

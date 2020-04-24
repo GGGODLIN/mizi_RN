@@ -120,7 +120,7 @@ const BodyCheckScreen = props => {
       return;
     }
     let url =
-      'http://wheathwaapi.vielife.com.tw/api/CheckResult/PostCheckDriverMapping';
+      'http://wheat-tainan.1966.org.tw:20021/api/CheckResult/PostCheckDriverMapping';
     const driverId = data.response.Id;
     const carId = data.response.Cars.Id;
     const postRes = await fetch(url, {
@@ -160,7 +160,7 @@ const BodyCheckScreen = props => {
       const value = await AsyncStorage.getItem('userLoginInfo');
       if (value !== null) {
         var obj_value = JSON.parse(value);
-        let url = `http://wheathwaapi.vielife.com.tw/api/DriverInfo/GetDriverCheck/${
+        let url = `http://wheat-tainan.1966.org.tw:20021/api/DriverInfo/GetDriverCheck/${
           obj_value.response.Id
         }`;
         const res = await fetch(url, {
@@ -175,7 +175,7 @@ const BodyCheckScreen = props => {
             if (res.response.DriverCheck) {
               var nowDate = `${date.getFullYear()}-${date.getMonth() +
                 1}-${date.getDate()}`;
-              let url = `http://wheathwaapi.vielife.com.tw/api/CheckResult/GetCheckDriverMappingSingle?DriverId=${
+              let url = `http://wheat-tainan.1966.org.tw:20021/api/CheckResult/GetCheckDriverMappingSingle?DriverId=${
                 obj_value.response.Id
               }&date=${nowDate}`;
 
@@ -241,7 +241,7 @@ const BodyCheckScreen = props => {
   };
 
   const fetchDataModal = async () => {
-    let url = `http://wheathwaapi.vielife.com.tw/api/CheckItem/GetCheckDriver`;
+    let url = `http://wheat-tainan.1966.org.tw:20021/api/CheckItem/GetCheckDriver`;
 
     console.log(`Making Modal request to: ${url}`);
 

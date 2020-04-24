@@ -6,7 +6,7 @@ export const FetchApi = () => {
 
   async function fetchData() {
     const res = await fetch(
-      'http://wheathwaapi.vielife.com.tw/api/DriverInfo/Get/15',
+      'http://wheat-tainan.1966.org.tw:20021/api/DriverInfo/Get/15',
     );
     res
       .json()

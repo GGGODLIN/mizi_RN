@@ -50,7 +50,7 @@ export default class Screen extends Component {
 
   componentDidMount = async () => {
     const data = await fetch(
-      'http://wheathwaapi.vielife.com.tw/api/DriverInfo/Get/15',
+      'http://wheat-tainan.1966.org.tw:20021/api/DriverInfo/Get/15',
     )
       .then(response => response.json())
       .then(res => console.log(res));

@@ -42,7 +42,7 @@ const CheckMainScreen = props => {
       const value = await AsyncStorage.getItem('userLoginInfo');
       if (value !== null) {
         var obj_value = JSON.parse(value);
-        let url = `http://wheathwaapi.vielife.com.tw/api/DriverInfo/GetDriverCheck/${
+        let url = `http://wheat-tainan.1966.org.tw:20021/api/DriverInfo/GetDriverCheck/${
           obj_value.response.Id
         }`;
         const res = await fetch(url, {

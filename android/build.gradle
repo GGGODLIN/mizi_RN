@@ -40,4 +40,14 @@ allprojects {
         maven { url 'https://jitpack.io' }
     }
 }
-
+subprojects {
+    afterEvaluate {project ->
+    // force libs to use recent buildtools
+        if (project.hasProperty("android")) {
+            android {
+                compileSdkVersion = 28  // change to match your desired version
+                buildToolsVersion = "28.0.3" // ....
+            }
+        }
+    }
+}

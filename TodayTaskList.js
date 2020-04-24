@@ -191,9 +191,9 @@ const TodayTaskList = props => {
         var obj_value = JSON.parse(value);
         setuserLoginInfo(obj_value);
         var url2 =
-          'http://wheathwaapi.vielife.com.tw/api/DriverInfo/GetAllGroupDriverSide/' +
+          'http://wheat-tainan.1966.org.tw:20021/api/DriverInfo/GetAllGroupDriverSide/' +
           obj_value.response.Id;
-        //let url = `http://wheathwaapi.vielife.com.tw/api/DriverInfo/GetAllGroup/${obj_value.Id}`;
+        //let url = `http://wheat-tainan.1966.org.tw:20021/api/DriverInfo/GetAllGroup/${obj_value.Id}`;
         const data = await fetch(url2, {
           method: 'GET',
           headers: {
@@ -223,7 +223,7 @@ const TodayTaskList = props => {
 
   async function fetchData_test() {
     const data = await fetch(
-      'http://wheathwaapi.vielife.com.tw/api/DriverInfo/GetAllPassGroup/15',
+      'http://wheat-tainan.1966.org.tw:20021/api/DriverInfo/GetAllPassGroup/15',
       {
         method: 'GET',
         headers: {

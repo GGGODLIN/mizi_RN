@@ -1,4 +1,4 @@
-package com.miziHualan;
+package com.miziTainan;
 
 import android.app.Application;
 import android.content.Context;

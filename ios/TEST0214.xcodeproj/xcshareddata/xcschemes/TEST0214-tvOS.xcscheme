@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-               BuildableName = "miziHualan-tvOS.app"
-               BlueprintName = "miziHualan-tvOS"
-               ReferencedContainer = "container:miziHualan.xcodeproj">
+               BuildableName = "miziTainan-tvOS.app"
+               BlueprintName = "miziTainan-tvOS"
+               ReferencedContainer = "container:miziTainan.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "miziHualan-tvOSTests.xctest"
-               BlueprintName = "miziHualan-tvOSTests"
-               ReferencedContainer = "container:miziHualan.xcodeproj">
+               BuildableName = "miziTainan-tvOSTests.xctest"
+               BlueprintName = "miziTainan-tvOSTests"
+               ReferencedContainer = "container:miziTainan.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -61,9 +61,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "miziHualan-tvOSTests.xctest"
-               BlueprintName = "miziHualan-tvOSTests"
-               ReferencedContainer = "container:miziHualan.xcodeproj">
+               BuildableName = "miziTainan-tvOSTests.xctest"
+               BlueprintName = "miziTainan-tvOSTests"
+               ReferencedContainer = "container:miziTainan.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -71,9 +71,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "miziHualan-tvOS.app"
-            BlueprintName = "miziHualan-tvOS"
-            ReferencedContainer = "container:miziHualan.xcodeproj">
+            BuildableName = "miziTainan-tvOS.app"
+            BlueprintName = "miziTainan-tvOS"
+            ReferencedContainer = "container:miziTainan.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -94,9 +94,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "miziHualan-tvOS.app"
-            BlueprintName = "miziHualan-tvOS"
-            ReferencedContainer = "container:miziHualan.xcodeproj">
+            BuildableName = "miziTainan-tvOS.app"
+            BlueprintName = "miziTainan-tvOS"
+            ReferencedContainer = "container:miziTainan.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -113,9 +113,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "miziHualan-tvOS.app"
-            BlueprintName = "miziHualan-tvOS"
-            ReferencedContainer = "container:miziHualan.xcodeproj">
+            BuildableName = "miziTainan-tvOS.app"
+            BlueprintName = "miziTainan-tvOS"
+            ReferencedContainer = "container:miziTainan.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

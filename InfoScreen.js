@@ -57,7 +57,7 @@ const InfoScreen = props => {
 
   const handleSubmit = async () => {
     var url3 =
-      'http://wheathwaapi.vielife.com.tw/api/DriverInfo/PutDriverPwd?DriverId=' +
+      'http://wheat-tainan.1966.org.tw:20021/api/DriverInfo/PutDriverPwd?DriverId=' +
       data.response.Id +
       '&oldPwd=' +
       input1 +

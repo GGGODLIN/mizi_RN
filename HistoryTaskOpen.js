@@ -116,7 +116,7 @@ const HistoryTaskOpen = props => {
   };
 
   const askCash = async () => {
-    let url = `http://wheathwaapi.vielife.com.tw/api/OrderDetails/PutDetailRealWith?OrderDetailId=${
+    let url = `http://wheat-tainan.1966.org.tw:20021/api/OrderDetails/PutDetailRealWith?OrderDetailId=${
       taskData[detailIndex].OrderDetails.Id
     }&RealFamily=${people}&RealForeign=${foreignPeople}`;
 
@@ -153,7 +153,7 @@ const HistoryTaskOpen = props => {
       name: 'signature.jpg',
       filename: 'signature.jpg',
     });
-    let url = `http://wheathwaapi.vielife.com.tw/api/Img/Pic`;
+    let url = `http://wheat-tainan.1966.org.tw:20021/api/Img/Pic`;
 
     console.log(`Making POST PIC request to: ${url}`);
 
@@ -182,7 +182,7 @@ const HistoryTaskOpen = props => {
   };
 
   const updateStatus = async () => {
-    let url = `http://wheathwaapi.vielife.com.tw/api/OrderDetails/PutDetailStatus?OrderDetailId=${
+    let url = `http://wheat-tainan.1966.org.tw:20021/api/OrderDetails/PutDetailStatus?OrderDetailId=${
       taskData[detailIndex].OrderDetails.Id
     }&StatusInt=${caseStatus[detailIndex]}`;
 

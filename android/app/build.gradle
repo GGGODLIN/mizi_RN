@@ -143,7 +143,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.miziHualan"
+        applicationId "com.miziTainan"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

@@ -40,7 +40,7 @@ class BgTracking extends Component {
         // IMPORTANT: task has to be ended by endTask
 
         let url =
-          'http://wheathwaapi.vielife.com.tw/api/DriverInfo/PostDeviceGPS';
+          'http://wheat-tainan.1966.org.tw:20021/api/DriverInfo/PostDeviceGPS';
 
         console.log(`Making GPS request to: ${url}`);
         console.log(deviceId,location.longitude,location.latitude,this.props.DriverId);

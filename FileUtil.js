@@ -5,11 +5,11 @@ import {Platform} from 'react-native';
 
 // 文件路径
 //const defaultPath =(Platform.OS === 'ios' ? RNFS.MainBundlePath : RNFS.DocumentDirectoryPath) ;
-const defaultPath ='file:///storage/emulated/0/Android/data/com.miziHualan/files/Pictures/saved_signature/';
+const defaultPath ='file:///storage/emulated/0/Android/data/com.miziTainan/files/Pictures/saved_signature/';
 //const destPath = defaultPath + '/Pictures/saved_signature';
-const destPath = 'file:///storage/emulated/0/Android/data/com.miziHualan/files/Pictures/saved_signature/';
+const destPath = 'file:///storage/emulated/0/Android/data/com.miziTainan/files/Pictures/saved_signature/';
 const testPath =
-  'file:///storage/emulated/0/Android/data/com.miziHualan/files/Pictures/saved_signature/';
+  'file:///storage/emulated/0/Android/data/com.miziTainan/files/Pictures/saved_signature/';
 
 class FileUtil {
   // 向文件中添加内容
