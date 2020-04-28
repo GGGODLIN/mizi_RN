@@ -167,7 +167,17 @@ const HitCard = props => {
   }
 
   const handleSavePic = async res => {
-    console.log('RES????????????', res.pathName);
+
+    if(shouldReceiveAmt===' 讀取中...'){
+      Alert.alert('網路讀取中，請稍後再試...', ' ', [
+            {
+              text: '確定',
+              onPress: () => {handleSavePic(res)},
+            },
+          ]);
+    }
+    else{
+      console.log('RES????????????', res.pathName);
     //setcashSteps(0);
     await setpicPath(res.pathName);
     console.log('SETPATH?????????', picPath);
@@ -192,6 +202,9 @@ const HitCard = props => {
     setshowOverlay(false);
     setstatus(status + 1);
     //await checkDone();
+    }
+
+    
   };
 
   const postPic = async picPath2 => {
@@ -240,7 +253,8 @@ const HitCard = props => {
           },
           body: JSON.stringify({
             DriverId: user.response.Id,
-
+            ShouldReceiveAmt: shouldReceiveAmt,
+            RealReceiveAmt: realReceiveAmt,
             DriverSign: res.response,
           }),
         })
