@@ -76,6 +76,7 @@ const TodayTaskOpen = props => {
   const [BToverlay, setBToverlay] = useState(false);
   const [delayForMap, setdelayForMap] = useState(false);
   const [fixbottom, setfixbottom] = useState(-1);
+  const [jumpAmt, setjumpAmt] = useState('0');
 
   const taskData = props.route.params.data.DespatchDetails.map(e => e);
   const caseNames = props.route.params.data.DespatchDetails.map(
@@ -200,7 +201,7 @@ const TodayTaskOpen = props => {
     setaskingMoney(true);
     let url = `http://wheat-tainan.1966.org.tw:20021/api/OrderDetails/PutDetailRealWith?OrderDetailId=${
       taskData[detailIndex].OrderDetails.Id
-    }&RealFamily=${people}`;
+    }&RealFamily=${people}&JumpAmt=${jumpAmt}`;
 
     console.log(`Making Cash request to: ${url}`);
     const data = await fetch(url, {
@@ -347,6 +348,7 @@ const TodayTaskOpen = props => {
   };
 
   const checkDone = async () => {
+    setjumpAmt('0');
     setLoading(true);
     setdetailIndex(0);
     await caseStatus.forEach(async (item, index, array) => {
@@ -961,6 +963,43 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
               <Picker.Item label="7人" value={7} />
             </Picker>
           </View>
+
+          <View
+            style={
+              caseStatus[detailIndex] == 5
+                ? {flexDirection: 'row', alignItems: 'center'}
+                : {display: 'none'}
+            }>
+            <Text
+              style={{
+                fontSize: 20,
+                fontWeight: 'bold',
+                marginStart: 30,
+                marginEnd: 40,
+              }}>
+              跳表金額:
+            </Text>
+            <TextInput
+            editable={cashSteps == 0 && !askingMoney ? true : false}
+              keyboardType="number-pad"
+              placeholder='請輸入跳表金額'
+              underlineColorAndroid="black"
+              placeholderTextColor="gray"
+              style={{
+                fontSize: 20,
+                
+                
+                color: 'orange',
+              }}
+              onEndEditing={input => {
+                input.nativeEvent.text == ''
+                  ? setjumpAmt(money)
+                  : setjumpAmt(input.nativeEvent.text);
+              }}
+              clearTextOnFocus={true}
+            />
+          </View>
+
           <View
             style={
               cashSteps == 1

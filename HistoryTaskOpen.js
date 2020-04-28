@@ -403,7 +403,7 @@ const HistoryTaskOpen = props => {
               應收車資:
             </Text>
             <Text style={{fontSize: 30, fontWeight: 'bold', color: 'orange'}}>
-              {caseStatus[detailIndex]===6? taskData[detailIndex].OrderDetails.RevisionSelfAmt : (taskData[detailIndex].OrderDetails.SelfPayAmt+taskData[detailIndex].OrderDetails.OtherAmt)}
+              {caseStatus[detailIndex]===6? taskData[detailIndex]?.OrderDetails?.RealTotalAmt : (taskData[detailIndex].OrderDetails.SelfPayAmt+taskData[detailIndex].OrderDetails.OtherAmt)}
             </Text>
           </View>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
