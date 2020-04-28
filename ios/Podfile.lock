@@ -27,6 +27,22 @@ PODS:
     - DoubleConversion
     - glog
   - glog (0.3.5)
+  - Google-Maps-iOS-Utils (3.1.1):
+    - Google-Maps-iOS-Utils/Clustering (= 3.1.1)
+    - Google-Maps-iOS-Utils/Geometry (= 3.1.1)
+    - Google-Maps-iOS-Utils/Heatmap (= 3.1.1)
+    - Google-Maps-iOS-Utils/QuadTree (= 3.1.1)
+    - GoogleMaps
+  - Google-Maps-iOS-Utils/Clustering (3.1.1):
+    - Google-Maps-iOS-Utils/QuadTree
+    - GoogleMaps
+  - Google-Maps-iOS-Utils/Geometry (3.1.1):
+    - GoogleMaps
+  - Google-Maps-iOS-Utils/Heatmap (3.1.1):
+    - Google-Maps-iOS-Utils/QuadTree
+    - GoogleMaps
+  - Google-Maps-iOS-Utils/QuadTree (3.1.1):
+    - GoogleMaps
   - GoogleMaps (3.8.0):
     - GoogleMaps/Maps (= 3.8.0)
   - GoogleMaps/Base (3.8.0)
@@ -34,7 +50,6 @@ PODS:
     - GoogleMaps/Base
   - JWT (3.0.0-beta.12):
     - Base64 (~> 1.1.2)
-  - LineSDK (5.0.2)
   - RCTRequired (0.61.5)
   - RCTTypeSafety (0.61.5):
     - FBLazyVector (= 0.61.5)
@@ -198,7 +213,7 @@ PODS:
     - React-cxxreact (= 0.61.5)
     - React-jsi (= 0.61.5)
   - React-jsinspector (0.61.5)
-  - react-native-maps (0.25.0):
+  - react-native-maps (0.26.1):
     - React
   - react-native-safe-area-context (0.7.3):
     - React
@@ -276,8 +291,8 @@ DEPENDENCIES:
   - FBReactNativeSpec (from `../node_modules/react-native/Libraries/FBReactNativeSpec`)
   - Folly (from `../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
+  - Google-Maps-iOS-Utils
   - GoogleMaps
-  - LineSDK (~> 5.0.2)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
   - React (from `../node_modules/react-native/`)
@@ -322,9 +337,9 @@ SPEC REPOS:
   trunk:
     - Base64
     - boost-for-react-native
+    - Google-Maps-iOS-Utils
     - GoogleMaps
     - JWT
-    - LineSDK
     - SSZipArchive
 
 EXTERNAL SOURCES:
@@ -425,9 +440,9 @@ SPEC CHECKSUMS:
   FBReactNativeSpec: 118d0d177724c2d67f08a59136eb29ef5943ec75
   Folly: 30e7936e1c45c08d884aa59369ed951a8e68cf51
   glog: 1f3da668190260b06b429bb211bfbee5cd790c28
+  Google-Maps-iOS-Utils: f5d6ea55799d2ef47c113e1351b48e21cddd593c
   GoogleMaps: 7c8d66d70e4e8c300f43a7219d8fdaad7b325a9a
   JWT: 9b5c05abbcc1a0e69c3c91e1655b3387fc7e581d
-  LineSDK: 5b9aeeb637a9d1005241ba5b28952f8bcf3e4bad
   RCTRequired: b153add4da6e7dbc44aebf93f3cf4fcae392ddf1
   RCTTypeSafety: 9aa1b91d7f9310fc6eadc3cf95126ffe818af320
   React: b6a59ef847b2b40bb6e0180a97d0ca716969ac78
@@ -437,7 +452,7 @@ SPEC CHECKSUMS:
   React-jsi: cb2cd74d7ccf4cffb071a46833613edc79cdf8f7
   React-jsiexecutor: d5525f9ed5f782fdbacb64b9b01a43a9323d2386
   React-jsinspector: fa0ecc501688c3c4c34f28834a76302233e29dc0
-  react-native-maps: 190c02ca533fddac5bb49cf17bdece3644612107
+  react-native-maps: 6e499eee4eabf422ba8b6f94e993cc768bf35153
   react-native-safe-area-context: e200d4433aba6b7e60b52da5f37af11f7a0b0392
   react-native-webview: fcb5f377aadc216273300f452ee0d321fb85809b
   React-RCTActionSheet: 600b4d10e3aea0913b5a92256d2719c0cdd26d76
@@ -466,6 +481,6 @@ SPEC CHECKSUMS:
   SSZipArchive: fa16b8cc4cdeceb698e5e5d9f67e9558532fbf23
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
 
-PODFILE CHECKSUM: 5bb3d5ec0a44db250e906eff35d834246e2ffa5f
+PODFILE CHECKSUM: 86e61321a109ac2e513e1f036aa280efe9d77fb2
 
 COCOAPODS: 1.9.1

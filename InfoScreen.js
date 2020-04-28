@@ -32,7 +32,7 @@ import {
   ActivityIndicator,
 } from 'react-native-paper';
 
-import LineLogin from 'react-native-line-sdk';
+
 
 const InfoScreen = props => {
   console.log('Navigation?', props.navigation);
@@ -57,16 +57,7 @@ const InfoScreen = props => {
     }
   }
 
-  const handleLineLogin = async () => {
-    console.log('LOGIN?');
-    LineLogin.login()
-      .then(user => {
-        console.log(user.profile.displayName);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
+  
 
   const handleSubmit = async () => {
     var url3 =
@@ -217,19 +208,7 @@ const InfoScreen = props => {
             </Button>
             
           </Card.Actions>
-          <Card.Actions>
-            
-            <Button
-              mode="contained"
-              compact={false}
-              style={styles.button}
-              color='green'
-              onPress={() => {
-                handleLineLogin();
-              }}>
-              Line綁定
-            </Button>
-          </Card.Actions>
+          
 
           <Card.Content>
             <Title>{'性別: ' + sex}</Title>
