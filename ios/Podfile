@@ -4,6 +4,8 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 target 'TEST0214' do
   # Pods for TEST0214
 permissions_path = '../node_modules/react-native-permissions/ios'
+rn_path = '../node_modules/react-native'
+  rn_maps_path = '../node_modules/react-native-maps'
 pod 'Permission-BluetoothPeripheral', :path => "#{permissions_path}/BluetoothPeripheral.podspec"
   pod 'Permission-Calendars', :path => "#{permissions_path}/Calendars.podspec"
   pod 'Permission-Camera', :path => "#{permissions_path}/Camera.podspec"
@@ -39,7 +41,13 @@ pod 'Permission-BluetoothPeripheral', :path => "#{permissions_path}/BluetoothPer
   pod 'React-RCTVibration', :path => '../node_modules/react-native/Libraries/Vibration'
   pod 'React-Core/RCTWebSocket', :path => '../node_modules/react-native/'
 pod 'react-native-webview', :path => '../node_modules/react-native-webview'
-pod 'GoogleMaps' #ADD THIS LINE TO YOUR CODE IF YOU WANT GOOGLEMAPS IN IOS
+
+# react-native-maps dependencies
+  pod 'react-native-maps', path: rn_maps_path
+  pod 'react-native-google-maps', path: rn_maps_path  
+  pod 'GoogleMaps'  
+  pod 'Google-Maps-iOS-Utils' 
+  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
 
   pod 'React-cxxreact', :path => '../node_modules/react-native/ReactCommon/cxxreact'
   pod 'React-jsi', :path => '../node_modules/react-native/ReactCommon/jsi'
