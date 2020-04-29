@@ -66,7 +66,7 @@ const TodayTaskOpen = props => {
   const [cashSteps, setcashSteps] = useState(0);
   const [detailIndex, setdetailIndex] = useState(0);
   const [askingMoney, setaskingMoney] = useState(false);
-  const [bTemperature, setbTemperature] = useState(0);
+  const [bTemperature, setbTemperature] = useState(36);
 
   const [isLoading, setLoading] = useState(true);
   const [carChecked, setcarChecked] = useState(false);
