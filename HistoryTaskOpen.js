@@ -303,6 +303,7 @@ const HistoryTaskOpen = props => {
             contentContainerStyle={StyleSheet.absoluteFillObject}>
             <MapView
               style={styles.map}
+              provider="google"
               onKmlReady={e => console.log('HAHA', e.nativeEvent)}
               initialRegion={{
                 latitude: taskData[detailIndex].OrderDetails.FromLat,

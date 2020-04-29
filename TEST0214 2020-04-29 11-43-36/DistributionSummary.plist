@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>TEST0214.ipa</key>
+	<array>
+		<dict>
+			<key>architectures</key>
+			<array>
+				<string>armv7</string>
+				<string>arm64</string>
+			</array>
+			<key>certificate</key>
+			<dict>
+				<key>SHA1</key>
+				<string>B072B0F68B6E9F568BAE40435032C55DE0D2EF1A</string>
+				<key>dateExpires</key>
+				<string>2021/3/30</string>
+				<key>type</key>
+				<string>Apple Distribution</string>
+			</dict>
+			<key>entitlements</key>
+			<dict>
+				<key>application-identifier</key>
+				<string>V5ZUWPFB7D.org.reactjs.native.example.TEST0214</string>
+				<key>com.apple.developer.team-identifier</key>
+				<string>V5ZUWPFB7D</string>
+				<key>get-task-allow</key>
+				<false/>
+				<key>keychain-access-groups</key>
+				<array>
+					<string>V5ZUWPFB7D.org.reactjs.native.example.TEST0214</string>
+				</array>
+			</dict>
+			<key>name</key>
+			<string>TEST0214.app</string>
+			<key>profile</key>
+			<dict>
+				<key>UUID</key>
+				<string>0df26ca1-f905-4769-926f-8abca26fdc4a</string>
+				<key>name</key>
+				<string>iOS Team Ad Hoc Provisioning Profile: org.reactjs.native.example.TEST0214</string>
+			</dict>
+			<key>team</key>
+			<dict>
+				<key>id</key>
+				<string>V5ZUWPFB7D</string>
+				<key>name</key>
+				<string>eva huang</string>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>
