@@ -176,9 +176,14 @@ const HitCard = props => {
 
     if(shouldReceiveAmt===' 讀取中...'){
       Alert.alert('網路讀取中，請稍後再試...', ' ', [
+        {
+                    text: '取消',
+                    onPress: () => console.log('Cancel Pressed'),
+                    style: 'cancel',
+                  },
             {
               text: '確定',
-              onPress: () => {handleSavePic(res)},
+              onPress: () => console.log('OK Pressed'),
             },
           ]);
     }
