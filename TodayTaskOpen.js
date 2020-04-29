@@ -139,6 +139,7 @@ const TodayTaskOpen = props => {
   );
 
   const handleNextStep = async () => {
+    console.log("Now Status",caseStatus);
     let tempStatus = caseStatus;
     tempStatus[detailIndex] = caseStatus[detailIndex] + 1;
     setcaseStatus(tempStatus);
@@ -235,6 +236,7 @@ const TodayTaskOpen = props => {
             text: '確定',
             onPress: () => {
               setLoading(false);
+              props.navigation.navigate('TodayTaskList');
             },
           },
         ]),
@@ -276,7 +278,7 @@ const TodayTaskOpen = props => {
         Alert.alert('網路異常，請稍後再試...', ' ', [
           {
             text: '確定',
-            onPress: () => {},
+            onPress: () => {props.navigation.navigate('TodayTaskList')},
           },
         ]),
       );
@@ -309,7 +311,7 @@ const TodayTaskOpen = props => {
         Alert.alert('網路異常，請稍後再試...', ' ', [
           {
             text: '確定',
-            onPress: () => {},
+            onPress: () => {props.navigation.navigate('TodayTaskList')},
           },
         ]),
       );
@@ -339,7 +341,7 @@ const TodayTaskOpen = props => {
         Alert.alert('網路異常，請稍後再試...', ' ', [
           {
             text: '確定',
-            onPress: () => {},
+            onPress: () => {props.navigation.navigate('TodayTaskList')},
           },
         ]),
       );
