@@ -299,5 +299,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#DDDDDD',
     padding: '7%',
   },
-  container: {},
+  container: {flex:1},
 });
