@@ -219,7 +219,7 @@ const PastReceive = props => {
       </View>
     );
   } else {
-    const list = box.response;
+    const list = box.response?.reverse();
     var nowDate = `${date.getFullYear()}-${date.getMonth() +
       1}-${date.getDate()}`;
     var nowDate2 = `${date2.getFullYear()}-${date2.getMonth() +
@@ -279,7 +279,7 @@ const PastReceive = props => {
           ) : null}
         </View>
         <FlatList
-          inverted
+          
           data={list}
           renderItem={({item}) => (
             <Item data={item} navigation={props.navigation} />
