@@ -110,7 +110,14 @@ class LoginScreen extends Component {
           Alert.alert(res.msg, ' ', [
             {
               text: '確定',
-              onPress: () => {},
+              onPress: () => {
+                if(res?.response?.Id)
+                {
+                  this.setState({
+                      showOverlay1: true,
+                    });
+                }
+              },
             },
           ]);
         }
@@ -218,7 +225,7 @@ class LoginScreen extends Component {
     console.log(`Making SendNewPwd request to: ${url}`);
 
     const data = await fetch(url, {
-      method: 'GET',
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -331,13 +338,13 @@ class LoginScreen extends Component {
           onBackdropPress={() => {
             this.setState({
               showOverlay1: false,
-              showOverlay2: false,
+              //showOverlay2: false,
               showOverlay3: false,
-              input1: '0',
-              input2: '0',
-              input3: '0',
-              timeUp: false,
-              countDownTime: 5,
+              //input1: '0',
+              //input2: '0',
+              //input3: '0',
+              //timeUp: false,
+              //countDownTime: 5,
             });
           }}
           isVisible={this.state.showOverlay2}
@@ -420,12 +427,12 @@ class LoginScreen extends Component {
             this.setState({
               showOverlay1: false,
               showOverlay2: false,
-              showOverlay3: false,
-              input1: '0',
-              input2: '0',
-              input3: '0',
-              timeUp: false,
-              countDownTime: 5,
+              //showOverlay3: false,
+              //input1: '0',
+              //input2: '0',
+              //input3: '0',
+              //timeUp: false,
+              //countDownTime: 5,
             });
           }}
           isVisible={this.state.showOverlay3}
