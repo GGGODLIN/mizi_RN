@@ -77,6 +77,7 @@ const TodayTaskOpen = props => {
   const [delayForMap, setdelayForMap] = useState(false);
   const [fixbottom, setfixbottom] = useState(-1);
   const [jumpAmt, setjumpAmt] = useState('0');
+  const [signWho, setsignWho] = useState('請選擇關係人');
 
   const taskData = props.route.params.data.DespatchDetails.map(e => e);
   const caseNames = props.route.params.data.DespatchDetails.map(
@@ -184,10 +185,11 @@ const TodayTaskOpen = props => {
   };
 
   const handleCashNext = async () => {
-    setLoading(true);
+    
+    if (cashSteps == 0) {
+      setLoading(true);
     const res = await askCash();
     setmoney(res.response);
-    if (cashSteps == 0) {
       setrealMoney(res.response);
     }
     setcashSteps(cashSteps + 1);
@@ -313,7 +315,7 @@ const TodayTaskOpen = props => {
       taskData[detailIndex].OrderDetails.Id
     }&StatusInt=${caseStatus[detailIndex]}&receiveAmt=${realMoney}&signPic=${
       taskData[detailIndex].OrderDetails.SOrderNo
-    }.png&remark=${ps}`;
+    }.png&remark=${ps}&sid=${signWho}`;
 
     console.log(`Making Status6 request to: ${url}`);
 
@@ -1074,6 +1076,36 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
               clearTextOnFocus={true}
             />
           </View>
+          <View
+            style={
+              cashSteps == 1
+                ? {flexDirection: 'row', alignItems: 'center'}
+                : {display: 'none'}
+            }>
+            <Text
+              style={{
+                fontSize: 20,
+                fontWeight: 'bold',
+                paddingStart: 30,
+                flex: 1,
+              }}>
+              簽名關係人:
+            </Text>
+            <Picker
+              enabled={true}
+              selectedValue={signWho}
+              style={{flex: 1.5}}
+              onValueChange={(itemValue, itemIndex) => setsignWho(itemValue)}>
+              <Picker.Item label="本人" value="本人" />
+              <Picker.Item label="家人" value="家人" />
+              <Picker.Item label="朋友" value="朋友" />
+              <Picker.Item label="看護" value="看護" />
+              <Picker.Item label="長照人員" value="長照人員" />
+              <Picker.Item label="其他" value="其他" />
+              <Picker.Item label="請選擇關係人" value="請選擇關係人" />
+              
+            </Picker>
+          </View>
           <Button
             style={
               caseStatus[detailIndex] == 5
@@ -1093,10 +1125,22 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
             disabled={askingMoney}
             onPress={() => {
               if (cashSteps === 1) {
-                Alert.alert('確定金額正確並送出?', ' ', [
+                if (signWho==='請選擇關係人'){
+                  Alert.alert('尚未選擇簽名關係人!', ' ', [
+                  
+                  {
+                    text: '確定',
+                    onPress: () => {
+                      
+                    },
+                  },
+                ]);
+                }
+                else{
+                  Alert.alert('確定金額正確並送出?', ' ', [
                   {
                     text: '取消',
-                    onPress: () => console.log('Cancel Pressed'),
+                    onPress: () => console.log(signWho),
                     style: 'cancel',
                   },
                   {
@@ -1106,8 +1150,34 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
                     },
                   },
                 ]);
+                }
               } else {
-                handleCashNext();
+                if(jumpAmt==='0'||jumpAmt===''){
+                  Alert.alert('跳表金額不可為0或未輸入', ' ', [
+                  
+                  {
+                    text: '確定',
+                    onPress: () => {
+                      console.log(jumpAmt);
+                    },
+                  },
+                ]);
+                }else if(jumpAmt%5 !== 0)
+                {
+                  Alert.alert('跳表金額須為五的倍數', ' ', [
+                  
+                  {
+                    text: '確定',
+                    onPress: () => {
+                      console.log(jumpAmt);
+                    },
+                  },
+                ]);
+                }
+                else{
+                  handleCashNext();
+                }
+                
               }
             }}>
             {cashSteps == 0
