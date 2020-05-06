@@ -65,7 +65,7 @@ class BgTracking extends Component {
             
           })
           .catch(err =>
-        console.log(err);
+        console.log(err)
       );
 
         BackgroundGeolocation.endTask(taskKey);
