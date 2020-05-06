@@ -85,8 +85,15 @@ const TodayTaskOpen = props => {
   console.log('STATUS', caseStatus);
   console.log('Done', doneCase);
   console.log('index', detailIndex);
-  const [people, setpeople] = useState(taskData[detailIndex].OrderDetails.FamilyWith+taskData[detailIndex].OrderDetails.ForeignFamilyWith);
-  console.log('陪同', taskData[detailIndex].OrderDetails.FamilyWith+taskData[detailIndex].OrderDetails.ForeignFamilyWith);
+  const [people, setpeople] = useState(
+    taskData[detailIndex].OrderDetails.FamilyWith +
+      taskData[detailIndex].OrderDetails.ForeignFamilyWith,
+  );
+  console.log(
+    '陪同',
+    taskData[detailIndex].OrderDetails.FamilyWith +
+      taskData[detailIndex].OrderDetails.ForeignFamilyWith,
+  );
 
   const origin = {
     latitude: taskData[detailIndex].OrderDetails.FromLat,
@@ -128,7 +135,10 @@ const TodayTaskOpen = props => {
     let tempStatus = caseStatus;
     tempStatus[detailIndex] = caseStatus[detailIndex] + 1;
     setcaseStatus(tempStatus);
-    setpeople(taskData[detailIndex].OrderDetails.FamilyWith+taskData[detailIndex].OrderDetails.ForeignFamilyWith);
+    setpeople(
+      taskData[detailIndex].OrderDetails.FamilyWith +
+        taskData[detailIndex].OrderDetails.ForeignFamilyWith,
+    );
     if (tempStatus[detailIndex] == 6) {
       updateStatusToSix();
       setoverlay(true);
@@ -162,9 +172,12 @@ const TodayTaskOpen = props => {
     setLoading(true);
   };
 
-  const handleChangeIndex = async (index) => {
+  const handleChangeIndex = async index => {
     setdetailIndex(index);
-    setpeople(taskData[index].OrderDetails.FamilyWith+taskData[index].OrderDetails.ForeignFamilyWith);
+    setpeople(
+      taskData[index].OrderDetails.FamilyWith +
+        taskData[index].OrderDetails.ForeignFamilyWith,
+    );
   };
 
   const handleCashNext = async () => {
@@ -196,20 +209,33 @@ const TodayTaskOpen = props => {
     })
       .then(response => response.json())
       .then(res => {
-        setmoney(res.response);
-        if (cashSteps == 0) {
-          setrealMoney(res.response);
-          setLoading(false);
+        if (!res?.success) {
+          Alert.alert(res?.msg, ' ', [
+            {
+              text: '確定',
+              onPress: () => {
+                props.navigation.navigate('TodayTaskList');
+              },
+            },
+          ]);
+        } else {
+          setmoney(res.response);
+          if (cashSteps == 0) {
+            setrealMoney(res.response);
+            setLoading(false);
+          }
+          console.log('updateStatus AJAX', res);
+          setaskingMoney(false);
+          return res;
         }
-        console.log('updateStatus AJAX', res);
-        setaskingMoney(false);
-        return res;
       })
       .catch(err =>
         Alert.alert('網路異常，請稍後再試...', ' ', [
           {
             text: '確定',
-            onPress: () => {setLoading(false);},
+            onPress: () => {
+              setLoading(false);
+            },
           },
         ]),
       );
@@ -242,9 +268,21 @@ const TodayTaskOpen = props => {
     })
       .then(response => response.json())
       .then(res => {
-        console.log('postPic AJAX', res);
+        if (!res?.success) {
+          Alert.alert(res?.msg, ' ', [
+            {
+              text: '確定',
+              onPress: () => {
+                props.navigation.navigate('TodayTaskList');
+              },
+            },
+          ]);
+        } else {
+          console.log('postPic AJAX', res);
         setpicPathOnServer(res.response);
         return res;
+        }
+        
       })
       .catch(err =>
         Alert.alert('網路異常，請稍後再試...', ' ', [
@@ -272,6 +310,17 @@ const TodayTaskOpen = props => {
     })
       .then(response => response.json())
       .then(res => {
+        if (!res?.success) {
+          Alert.alert(res?.msg, ' ', [
+            {
+              text: '確定',
+              onPress: () => {
+                props.navigation.navigate('TodayTaskList');
+              },
+            },
+          ]);
+        } 
+
         console.log('updateStatus AJAX', res);
       })
       .catch(err =>
@@ -302,6 +351,16 @@ const TodayTaskOpen = props => {
     })
       .then(response => response.json())
       .then(res => {
+        if (!res?.success) {
+          Alert.alert(res?.msg, ' ', [
+            {
+              text: '確定',
+              onPress: () => {
+                props.navigation.navigate('TodayTaskList');
+              },
+            },
+          ]);
+        } 
         console.log('updateStatus AJAX', res);
       })
       .catch(err =>
@@ -334,9 +393,16 @@ const TodayTaskOpen = props => {
 
         if (caseStatus[0] >= 6) {
           setdetailIndex(index);
-          setpeople(taskData[index].OrderDetails.FamilyWith+taskData[index].OrderDetails.ForeignFamilyWith);
-          console.log("with?????????",taskData[index].OrderDetails.FamilyWith+taskData[index].OrderDetails.ForeignFamilyWith)
-        setforeignPeople(taskData[index].OrderDetails.ForeignFamilyWith);
+          setpeople(
+            taskData[index].OrderDetails.FamilyWith +
+              taskData[index].OrderDetails.ForeignFamilyWith,
+          );
+          console.log(
+            'with?????????',
+            taskData[index].OrderDetails.FamilyWith +
+              taskData[index].OrderDetails.ForeignFamilyWith,
+          );
+          setforeignPeople(taskData[index].OrderDetails.ForeignFamilyWith);
           setlongitudeDelta(
             Math.abs(
               taskData[index].OrderDetails.FromLon -
@@ -368,7 +434,7 @@ const TodayTaskOpen = props => {
 
   useEffect(() => {
     checkDone();
-    console.log("CHECKDONE????!?!?!?!?!?");
+    console.log('CHECKDONE????!?!?!?!?!?');
   }, []);
 
   if (isLoading || finish) {
@@ -565,7 +631,12 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
             </View>
             <View style={styles.titleRight}>
               <Text style={{color: 'white', fontSize: 20}}>
-                {'個案' + 1 + '/' + '陪同' + (taskData[detailIndex].OrderDetails.FamilyWith+taskData[detailIndex].OrderDetails.ForeignFamilyWith)}
+                {'個案' +
+                  1 +
+                  '/' +
+                  '陪同' +
+                  (taskData[detailIndex].OrderDetails.FamilyWith +
+                    taskData[detailIndex].OrderDetails.ForeignFamilyWith)}
               </Text>
             </View>
           </View>
@@ -696,107 +767,113 @@ ${taskData[detailIndex].OrderDetails.FromAddr}`}
 ${taskData[detailIndex].OrderDetails.ToAddr}`}
             </Text>
           </View>
-          <View style={{flexDirection:'row'}}>
-          <Button
-            style={
-              caseStatus[detailIndex] < 5
-                ? {
-                    alignSelf: 'center',
-                    justifyContent: 'center',
-                    alignContent: 'center',
-                    borderRadius: 50,
-                    backgroundColor: 'orange',
-                    margin: 10,
-                    flex:1,
-                  }
-                : {display: 'none'}
-            }
-            labelStyle={{color: 'white', fontSize: 30}}
-            contentStyle={{width: '100%',height:100}}
-            mode="outlined"
-            onPress={() => {
-              if (caseStatus[detailIndex] >= 4) {
-                Alert.alert('確定客下?', ' ', [
-                  {
-                    text: '取消',
-                    onPress: () => console.log('Cancel Pressed'),
-                    style: 'cancel',
-                  },
-                  {
-                    text: '確定',
-                    onPress: () => {
-                      handleNextStep();
-                    },
-                  },
-                ]);
-              }else if (caseStatus[detailIndex] === 3) {
-                Alert.alert('確定客上?', ' ', [
-                  {
-                    text: '取消',
-                    onPress: () => console.log('Cancel Pressed'),
-                    style: 'cancel',
-                  },
-                  {
-                    text: '確定',
-                    onPress: () => {
-                      handleNextStep();
-                    },
-                  },
-                ]);
-              } 
-              else {
-                handleNextStep();
+          <View style={{flexDirection: 'row'}}>
+            <Button
+              style={
+                caseStatus[detailIndex] < 5
+                  ? {
+                      alignSelf: 'center',
+                      justifyContent: 'center',
+                      alignContent: 'center',
+                      borderRadius: 50,
+                      backgroundColor: 'orange',
+                      margin: 10,
+                      flex: 1,
+                    }
+                  : {display: 'none'}
               }
-            }}>
-            {caseStatus[detailIndex] == 1
-              ? '出發前往'
-              : caseStatus[detailIndex] == 2
-              ? '抵達上車地點'
-              : caseStatus[detailIndex] == 3
-              ? '客上'
-              : '客下'}
-          </Button>
-          <Button
-            style={
-              caseStatus[detailIndex] == 3
-                ? {
-                    alignSelf: 'center',
-                    justifyContent: 'center',
-                    alignContent: 'center',
-                    borderRadius: 50,
-                    backgroundColor: 'gray',
-                    margin: 10,
-                    flex:1,
-                  }
-                : {display: 'none'}
-            }
-            labelStyle={{color: 'white', fontSize: 30}}
-            contentStyle={{width: '100%',height:100}}
-            mode="outlined"
-            onPress={() => {
-              Alert.alert('確定空趟?', ' ', [
-                {
-                  text: '取消',
-                  onPress: () => console.log('Cancel Pressed'),
-                  style: 'cancel',
-                },
-                {
-                  text: '確定',
-                  onPress: () => {
-                    handleMiss();
+              labelStyle={{color: 'white', fontSize: 30}}
+              contentStyle={{width: '100%', height: 100}}
+              mode="outlined"
+              onPress={() => {
+                if (caseStatus[detailIndex] >= 4) {
+                  Alert.alert('確定客下?', ' ', [
+                    {
+                      text: '取消',
+                      onPress: () => console.log('Cancel Pressed'),
+                      style: 'cancel',
+                    },
+                    {
+                      text: '確定',
+                      onPress: () => {
+                        handleNextStep();
+                      },
+                    },
+                  ]);
+                } else if (caseStatus[detailIndex] === 3) {
+                  Alert.alert('確定客上?', ' ', [
+                    {
+                      text: '取消',
+                      onPress: () => console.log('Cancel Pressed'),
+                      style: 'cancel',
+                    },
+                    {
+                      text: '確定',
+                      onPress: () => {
+                        handleNextStep();
+                      },
+                    },
+                  ]);
+                } else {
+                  handleNextStep();
+                }
+              }}>
+              {caseStatus[detailIndex] == 1
+                ? '出發前往'
+                : caseStatus[detailIndex] == 2
+                ? '抵達上車地點'
+                : caseStatus[detailIndex] == 3
+                ? '客上'
+                : '客下'}
+            </Button>
+            <Button
+              style={
+                caseStatus[detailIndex] == 3
+                  ? {
+                      alignSelf: 'center',
+                      justifyContent: 'center',
+                      alignContent: 'center',
+                      borderRadius: 50,
+                      backgroundColor: 'gray',
+                      margin: 10,
+                      flex: 1,
+                    }
+                  : {display: 'none'}
+              }
+              labelStyle={{color: 'white', fontSize: 30}}
+              contentStyle={{width: '100%', height: 100}}
+              mode="outlined"
+              onPress={() => {
+                Alert.alert('確定空趟?', ' ', [
+                  {
+                    text: '取消',
+                    onPress: () => console.log('Cancel Pressed'),
+                    style: 'cancel',
                   },
-                },
-              ]);
-            }}>
-            {'空趟'}
-          </Button>
+                  {
+                    text: '確定',
+                    onPress: () => {
+                      handleMiss();
+                    },
+                  },
+                ]);
+              }}>
+              {'空趟'}
+            </Button>
           </View>
-          <View style={
-              caseStatus[detailIndex] >= 5 ? {display: 'none'} : {width:'80%',alignItems:'flex-start',alignSelf:'center'}
+          <View
+            style={
+              caseStatus[detailIndex] >= 5
+                ? {display: 'none'}
+                : {width: '80%', alignItems: 'flex-start', alignSelf: 'center'}
             }>
-          <Text style={{fontSize:20}}>{`備註:${taskData[detailIndex].CaseUser.Remark===null?'':taskData[detailIndex].CaseUser.Remark}`}</Text>
-            </View>
-          
+            <Text style={{fontSize: 20}}>{`備註:${
+              taskData[detailIndex].CaseUser.Remark === null
+                ? ''
+                : taskData[detailIndex].CaseUser.Remark
+            }`}</Text>
+          </View>
+
           <View
             style={
               caseStatus[detailIndex] == 5
@@ -845,7 +922,7 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
               陪同人數:
             </Text>
             <Picker
-              enabled={(cashSteps == 0 && !askingMoney) ? true : false}
+              enabled={cashSteps == 0 && !askingMoney ? true : false}
               selectedValue={people}
               style={{flex: 1}}
               onValueChange={(itemValue, itemIndex) => setpeople(itemValue)}>
@@ -951,7 +1028,11 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
             mode="outlined"
             disabled={askingMoney}
             onPress={() => handleCashNext()}>
-            {cashSteps == 0 ? (askingMoney ?'金額計算中...':'現金') : '確認收款'}
+            {cashSteps == 0
+              ? askingMoney
+                ? '金額計算中...'
+                : '現金'
+              : '確認收款'}
           </Button>
           <Button
             style={

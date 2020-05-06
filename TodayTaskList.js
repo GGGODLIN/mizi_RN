@@ -337,6 +337,7 @@ const TodayTaskList = props => {
           keyExtractor={item => item.DespatchId}
         />
         <Text
+        onPress={() => _onRefresh()}
           style={
             list.length === 0
               ? {
