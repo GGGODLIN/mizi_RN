@@ -20,7 +20,8 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import AsyncStorage from '@react-native-community/async-storage';
-import MapView, {PROVIDER_GOOGLE, Marker, Polyline} from 'react-native-maps';
+import MapView, {PROVIDER_GOOGLE, Marker, Polyline,Callout,
+  CalloutSubview,} from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 
 import {NavigationContainer} from '@react-navigation/native';
@@ -302,6 +303,7 @@ const HistoryTaskOpen = props => {
             style={{height: 250, position: 'relative', backgroundColor: 'pink'}}
             contentContainerStyle={StyleSheet.absoluteFillObject}>
             <MapView
+            provider="google"
               style={styles.map}
               onKmlReady={e => console.log('HAHA', e.nativeEvent)}
               initialRegion={{
