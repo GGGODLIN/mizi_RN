@@ -507,7 +507,7 @@ const HitCard = props => {
               {
                 text: '確定',
                 onPress: () => {
-                  setoverlay(true);
+                  handleSubmitHitCard();
                 },
               },
             ]);

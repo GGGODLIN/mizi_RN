@@ -463,8 +463,8 @@ Linking.canOpenURL(url).then(supported => {
       return (
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
           <Image
-            resizeMode="center"
-            style={{flex: 1}}
+            resizeMode="contain"
+            style={{flex: 9}}
             source={require('./img/Frame_1.png')}
           />
           <Button
@@ -475,6 +475,7 @@ Linking.canOpenURL(url).then(supported => {
               borderRadius: 50,
               backgroundColor: 'orange',
               margin: 10,
+              flex:1,
             }}
             labelStyle={{color: 'white', fontSize: 20}}
             contentStyle={{width: '100%', paddingHorizontal: 50}}
@@ -964,7 +965,7 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
                     alignItems: 'center',
                     justifyContent: 'center',
                     alignContent: 'center',
-                    padding: 10,
+                    paddingVertical: 10,
                   }
                 : {display: 'none'}
             }>
@@ -972,7 +973,8 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
               style={{
                 fontSize: 20,
                 fontWeight: 'bold',
-                paddingStart: 30,
+                marginStart: 30,
+                
                 flex: 0.9,
               }}>
               陪同人數:
@@ -980,7 +982,7 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
             <Picker
               enabled={cashSteps == 0 && !askingMoney ? true : false}
               selectedValue={people}
-              style={{flex: 1}}
+              style={cashSteps == 0 && !askingMoney ?{flex: 1}:{display:'none'}}
               onValueChange={(itemValue, itemIndex) => setpeople(itemValue)}>
               <Picker.Item label="0人" value={0} />
               <Picker.Item label="1人" value={1} />
@@ -991,6 +993,15 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
               <Picker.Item label="6人" value={6} />
               <Picker.Item label="7人" value={7} />
             </Picker>
+            <Text
+              style={cashSteps == 0 && !askingMoney ?{display:'none'}:{
+                fontSize: 20,
+                fontWeight: 'bold',
+                marginStart:100,
+                flex: 1,
+              }}>
+              {`${people}人`}
+            </Text>
           </View>
           <View
             style={
@@ -1022,7 +1033,7 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
                 fontSize: 20,
                 fontWeight: 'bold',
                 marginStart: 30,
-                marginEnd: 99,
+                marginEnd: 100,
               }}>
               實收車資:
             </Text>
