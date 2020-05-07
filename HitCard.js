@@ -218,11 +218,12 @@ const HitCard = props => {
     let indexTS = picPath2.indexOf('TS');
 
     let fname = picPath2.substr(indexTS);
-
+    let isDriverSign = false;
     if (fname == 'g') {
       fname = 'sign.png';
+      isDriverSign = true;
     }
-    console.log('FNAME?', fname == 'g');
+    console.log('isDriverSign?', isDriverSign);
     let urii = `file://${picPath2}`;
     console.log('PICPATH?????????', urii);
     let form = new FormData();
@@ -250,7 +251,8 @@ const HitCard = props => {
         console.log('postPic AJAX', res);
         setpicPathOnServer(res.response);
 
-        let url2 =
+        if (isDriverSign){
+          let url2 =
           'https://api.donkeymove.com/api/DriverInfo/PutDriverReceiveSign';
         const data2 = await fetch(url2, {
           method: 'PUT',
@@ -277,6 +279,8 @@ const HitCard = props => {
               },
             ]),
           );
+        }
+        
 
         return res;
       })
