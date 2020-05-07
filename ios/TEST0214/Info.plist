@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>長照交通預約系統</string>
+	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -39,8 +39,18 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>App requires AppleMusicUsageDescription </string>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>App requires background tracking</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>App requires background tracking</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>App requires background tracking</string>
 	<key>NSCameraUsageDescription</key>
 	<string></string>
+	<key>NSContactsUsageDescription</key>
+	<string>App requires background tracking</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>App requires background tracking</string>
 	<key>NSLocationAlwaysUsageDescription</key>
@@ -50,7 +60,11 @@
 	<key>NSMotionUsageDescription</key>
 	<string>App requires motion tracking</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string></string>
+	<string>App requires background tracking</string>
+	<key>NSSiriUsageDescription</key>
+	<string>App requires background tracking</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>App requires background tracking</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>FontAwesome.ttf</string>

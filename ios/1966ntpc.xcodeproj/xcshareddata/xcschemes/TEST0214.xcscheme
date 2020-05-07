@@ -29,23 +29,23 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "TEST0214.app"
-               BlueprintName = "TEST0214"
-               ReferencedContainer = "container:TEST0214.xcodeproj">
+               BuildableName = "1966&#x9577;&#x7167;&#x6d3e;&#x9063;&#x7cfb;&#x7d71;-&#x65b0;&#x5317;.app"
+               BlueprintName = "1966ntpc"
+               ReferencedContainer = "container:1966ntpc.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
             buildForTesting = "YES"
-            buildForRunning = "YES"
+            buildForRunning = "NO"
             buildForProfiling = "NO"
             buildForArchiving = "NO"
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "TEST0214Tests.xctest"
-               BlueprintName = "TEST0214Tests"
-               ReferencedContainer = "container:TEST0214.xcodeproj">
+               BuildableName = "1966ntpcTests.xctest"
+               BlueprintName = "1966ntpcTests"
+               ReferencedContainer = "container:1966ntpc.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -59,9 +59,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "TEST0214.app"
-            BlueprintName = "TEST0214"
-            ReferencedContainer = "container:TEST0214.xcodeproj">
+            BuildableName = "1966&#x9577;&#x7167;&#x6d3e;&#x9063;&#x7cfb;&#x7d71;-&#x65b0;&#x5317;.app"
+            BlueprintName = "1966ntpc"
+            ReferencedContainer = "container:1966ntpc.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <Testables>
@@ -70,15 +70,15 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "TEST0214Tests.xctest"
-               BlueprintName = "TEST0214Tests"
-               ReferencedContainer = "container:TEST0214.xcodeproj">
+               BuildableName = "1966ntpcTests.xctest"
+               BlueprintName = "1966ntpcTests"
+               ReferencedContainer = "container:1966ntpc.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Release"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
@@ -92,9 +92,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "TEST0214.app"
-            BlueprintName = "TEST0214"
-            ReferencedContainer = "container:TEST0214.xcodeproj">
+            BuildableName = "1966&#x9577;&#x7167;&#x6d3e;&#x9063;&#x7cfb;&#x7d71;-&#x65b0;&#x5317;.app"
+            BlueprintName = "1966ntpc"
+            ReferencedContainer = "container:1966ntpc.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -109,9 +109,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "TEST0214.app"
-            BlueprintName = "TEST0214"
-            ReferencedContainer = "container:TEST0214.xcodeproj">
+            BuildableName = "1966&#x9577;&#x7167;&#x6d3e;&#x9063;&#x7cfb;&#x7d71;-&#x65b0;&#x5317;.app"
+            BlueprintName = "1966ntpc"
+            ReferencedContainer = "container:1966ntpc.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
