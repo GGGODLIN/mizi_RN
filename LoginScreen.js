@@ -57,7 +57,7 @@ class LoginScreen extends Component {
     this.handleSendNewPwd = this.handleSendNewPwd.bind(this);
     this._test_setItem = this._test_setItem.bind(this);
 
-    request(PERMISSIONS.IOS.CAMERA)
+    /*request(PERMISSIONS.IOS.CAMERA)
       .then(result => {
         console.log('PERMISSION?', result);
       })
@@ -66,7 +66,7 @@ class LoginScreen extends Component {
           .then(result => {
             console.log('PERMISSION2?', result);
           });
-      });
+      });*/
       this._test_setItem();
   }
 

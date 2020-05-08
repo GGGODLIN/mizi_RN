@@ -52,11 +52,11 @@
 	<key>NSContactsUsageDescription</key>
 	<string>App requires background tracking</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>App requires background tracking</string>
+	<string>需要定位權限以繪製行車路線</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>App requires background tracking</string>
+	<string>需要定位權限以繪製行車路線</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>App requires background tracking</string>
+	<string>需要定位權限以繪製行車路線</string>
 	<key>NSMotionUsageDescription</key>
 	<string>App requires motion tracking</string>
 	<key>NSPhotoLibraryUsageDescription</key>
