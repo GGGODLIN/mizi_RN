@@ -182,6 +182,7 @@ const TodayTaskOpen = props => {
       taskData[index].OrderDetails.FamilyWith +
         taskData[index].OrderDetails.ForeignFamilyWith,
     );
+    setsignWho('請選擇關係人');
   };
 
   const handleCashNext = async () => {
@@ -350,6 +351,7 @@ const TodayTaskOpen = props => {
   };
 
   const checkDone = async () => {
+    setsignWho('請選擇關係人');
     setjumpAmt('0');
     setLoading(true);
     setdetailIndex(0);
