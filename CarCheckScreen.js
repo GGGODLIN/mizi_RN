@@ -111,10 +111,10 @@ const CarCheckScreen = props => {
         Alert.alert(
           '今日車況已檢查完畢',
           `合格項目:
-          ${res.response.data[0].HasChecked}
+          ${res?.response?.data[0]?.HasChecked}
 
 不合格項目:
-          ${res.response.data[0].NoChecked}`,
+          ${res?.response?.data[0]?.NoChecked}`,
           [
             {
               text: '確定',
