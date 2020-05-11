@@ -65,7 +65,7 @@ const CarCheckScreen = props => {
     try {
       const value = await AsyncStorage.getItem('userLoginInfo');
       if (value !== null) {
-        var obj_value = JSON.parse(value);
+        let obj_value = JSON.parse(value);
         let url = `http://wheathwaapi.vielife.com.tw/api/DriverInfo/GetDriverCheck/${
           obj_value.response.Id
         }`;
@@ -79,7 +79,7 @@ const CarCheckScreen = props => {
           .then(res => {
             console.log('FETCH CHECKED?', res.response.CarCheck);
             if (res.response.CarCheck) {
-              var nowDate = `${date.getFullYear()}-${date.getMonth() +
+              let nowDate = `${date.getFullYear()}-${date.getMonth() +
                 1}-${date.getDate()}`;
               let url = `http://wheathwaapi.vielife.com.tw/api/CheckResult/GetCheckCarMapping?CarId=${
                 obj_value.response.Cars.Id
@@ -111,10 +111,10 @@ const CarCheckScreen = props => {
         Alert.alert(
           '今日車況已檢查完畢',
           `合格項目:
-          ${res.response.data[0].HasChecked}
+          ${res?.response?.data[0]?.HasChecked}
 
 不合格項目:
-          ${res.response.data[0].NoChecked}`,
+          ${res?.response?.data[0]?.NoChecked}`,
           [
             {
               text: '確定',
@@ -163,10 +163,10 @@ const CarCheckScreen = props => {
 
   const handleCheckAll = async () => {
     let tempData = {...checkDataModal};
-    const nameList = Object.values(tempData.response).map(
+    const nameList = Object?.values(tempData?.response).map(
       item => (item.HasChange = !allChecked),
     );
-    const nameList2 = Object.values(tempData.response).map(item =>
+    const nameList2 = Object?.values(tempData?.response).map(item =>
       item.CheckCarChildViewModel.map(item2 => (item2.HasChange = !allChecked)),
     );
     setallChecked(!allChecked);
@@ -194,7 +194,7 @@ const CarCheckScreen = props => {
     let queryHasChecked = '';
     let queryNoChecked = '';
 
-    const nameList2 = Object.values(tempData.response).map(item =>
+    const nameList2 = Object?.values(tempData?.response).map(item =>
       item.CheckCarChildViewModel.map(item2 =>
         item2.HasChange
           ? (queryHasChecked += `${item2.CheckCarName}` + ',')
@@ -263,10 +263,18 @@ const CarCheckScreen = props => {
       </View>
     );
   } else {
-    const nameList = Object.values(checkDataModal.response).map(
+    if (!checkDataModal?.response){
+      console.warn("!!!");
+      return (
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <ActivityIndicator animating={true} size="large" />
+      </View>
+    );
+    }
+    const nameList = Object?.values(checkDataModal?.response).map(
       item => item.HasChange,
     );
-    const nameList2 = Object.values(checkDataModal.response).map(item =>
+    const nameList2 = Object?.values(checkDataModal?.response).map(item =>
       item.CheckCarChildViewModel.map(item2 => item2.HasChange),
     );
     console.log('GET OBJ', nameList);
