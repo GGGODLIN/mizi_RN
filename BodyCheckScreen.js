@@ -253,6 +253,13 @@ const BodyCheckScreen = props => {
     );
   } else {
     console.log('RENDER', checkedItem);
+    if (!checkDataModal?.response?.data[0]?.DriverCheckName){
+      return (
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <ActivityIndicator animating={true} size='large' />
+      </View>
+    );
+    }
     return (
       <ScrollView>
         <View

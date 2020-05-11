@@ -105,10 +105,10 @@ const CarCheckScreen = props => {
 
   const handleCheckAll = async () => {
     let tempData = {...checkDataModal};
-    const nameList = Object.values(tempData.response).map(
+    const nameList = Object?.values(tempData?.response).map(
       item => (item.HasChange = !allChecked),
     );
-    const nameList2 = Object.values(tempData.response).map(item =>
+    const nameList2 = Object?.values(tempData?.response).map(item =>
       item.CheckCarChildViewModel.map(item2 => (item2.HasChange = !allChecked)),
     );
     setallChecked(!allChecked);
@@ -136,7 +136,7 @@ const CarCheckScreen = props => {
     let queryHasChecked = '';
     let queryNoChecked = '';
 
-    const nameList2 = Object.values(tempData.response).map(item =>
+    const nameList2 = Object?.values(tempData?.response).map(item =>
       item.CheckCarChildViewModel.map(item2 =>
         item2.HasChange
           ? (queryHasChecked += `${item2.CheckCarName}` + ',')
@@ -186,7 +186,7 @@ const CarCheckScreen = props => {
     React.useCallback(() => {
       //alert('Screen was focused');
       fetchData().then(()=>setLoading(false));
-      
+
       return () => {
         setLoading(true);
         props.navigation.dispatch(pushAction);
@@ -205,10 +205,18 @@ const CarCheckScreen = props => {
       </View>
     );
   } else {
-    const nameList = Object.values(checkDataModal.response).map(
+    if (!checkDataModal?.response){
+      console.warn("!!!");
+      return (
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <ActivityIndicator animating={true} size="large" />
+      </View>
+    );
+    }
+    const nameList = Object?.values(checkDataModal?.response).map(
       item => item.HasChange,
     );
-    const nameList2 = Object.values(checkDataModal.response).map(item =>
+    const nameList2 = Object?.values(checkDataModal?.response).map(item =>
       item.CheckCarChildViewModel.map(item2 => item2.HasChange),
     );
     console.log('GET OBJ', nameList);

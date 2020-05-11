@@ -222,7 +222,7 @@ const CheckMainScreen = props => {
         </View>
         <View style={{flex:1}}></View>
         <Image
-          resizeMode='center'
+          resizeMode="contain"
           style={(carChecked&&bodyChecked)?{flex:6}:{display:'none'}}
           source={require('./img/ok.png')}
         />
