@@ -57,12 +57,7 @@ const CheckMainScreen = props => {
             setcarChecked(res.response.CarCheck);
             setbodyChecked(res.response.DriverCheck);
           }).catch(err =>
-        Alert.alert('網路異常，請稍後再試...', ' ', [
-          {
-            text: '確定',
-            onPress: () => {},
-          },
-        ]),
+        console.warn(err)
       );
         setdata(obj_value);
         setLoading(false);

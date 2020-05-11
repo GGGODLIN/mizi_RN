@@ -173,7 +173,7 @@ const BodyCheckScreen = props => {
           .then(res => {
             console.log('FETCH BODY CHECKED?', res.response.DriverCheck);
             if (res.response.DriverCheck) {
-              var nowDate = `${date.getFullYear()}-${date.getMonth() +
+              let nowDate = `${date.getFullYear()}-${date.getMonth() +
                 1}-${date.getDate()}`;
               let url = `http://ttcapi.1966.org.tw/api/CheckResult/GetCheckDriverMappingSingle?DriverId=${
                 obj_value.response.Id
@@ -191,7 +191,7 @@ const BodyCheckScreen = props => {
   }
 
   const fetchDataChecked = async url => {
-    
+
 
     console.log(`Making CheckedList request to: ${url}`);
 
@@ -206,19 +206,19 @@ const BodyCheckScreen = props => {
         console.log('CheckedList AJAX', res);
         Alert.alert(
           '今日身心已檢查完畢',
-          `收縮壓:${res.response.SystolicBlood}
-舒張壓:${res.response.DiastolicBlood}
-額溫值:${res.response.TemperatureValue}
-心率值:${res.response.HeartRate}
+          `收縮壓:${res.response?.SystolicBlood}
+舒張壓:${res.response?.DiastolicBlood}
+額溫值:${res.response?.TemperatureValue}
+心率值:${res.response?.HeartRate}
 
 沒有:
-          ${res.response.NoSituation}
-          
+          ${res.response?.NoSituation}
+
 有、但沒去看醫生:
-          ${res.response.HasSituationNoChecked}
+          ${res.response?.HasSituationNoChecked}
 
 有、已經看過醫生:
-          ${res.response.HasSituationAndChecked}`,
+          ${res.response?.HasSituationAndChecked}`,
           [
             {
               text: '確定',
@@ -313,6 +313,13 @@ const BodyCheckScreen = props => {
     );
   } else {
     console.log('RENDER', checkedItem);
+    if (!checkDataModal?.response?.data[0]?.DriverCheckName){
+      return (
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <ActivityIndicator animating={true} size='large' />
+      </View>
+    );
+    }
     return (
       <ScrollView>
         <View
