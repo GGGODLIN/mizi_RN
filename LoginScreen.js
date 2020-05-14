@@ -52,6 +52,7 @@ class LoginScreen extends Component {
       countDownTime: 5,
     };
     this.handleLogin = this.handleLogin.bind(this);
+    this.handleReLogin = this.handleReLogin.bind(this);
     this.handleSendAcc = this.handleSendAcc.bind(this);
     this.handleSendVCode = this.handleSendVCode.bind(this);
     this.handleSendNewPwd = this.handleSendNewPwd.bind(this);
@@ -78,11 +79,14 @@ class LoginScreen extends Component {
   _test_setItem = async () => {
     try {
       const value = await AsyncStorage.getItem('userLoginInfo');
+      const ascAcc = await AsyncStorage.getItem('ascAcc');
+      const ascPwd = await AsyncStorage.getItem('ascPwd');
       if (value !== null) {
-        var obj_value = JSON.parse(value);
+        let obj_value = JSON.parse(value);
         console.log("BEFORE LOGGING",obj_value);
         if (obj_value.success){
-          this.props.handleLogin(obj_value);
+          //this.props.handleLogin(obj_value);
+          this.handleReLogin(ascAcc,ascPwd);
         }
       } else {
         console.log('NOTHING HEHEXD');
@@ -126,7 +130,58 @@ class LoginScreen extends Component {
             },
           ]);
         }
-        this.props.handleLogin(res);
+        else{
+          this.props.handleLogin(res,this.emailInput.input._lastNativeText,this.passwordInput.input._lastNativeText);
+        }
+        
+      })
+      .catch(err =>
+        Alert.alert('網路異常，請稍後再試...', ' ', [
+          {
+            text: '確定',
+            onPress: () => {},
+          },
+        ]),
+      );
+  };
+
+  handleReLogin = async (acc,pwd) => {
+    let deviceId = DeviceInfo.getUniqueId();
+    let url = `https://api.donkeymove.com/api/DriverInfo/DriverLogin?`;
+    let query = `acc=${acc}`;
+    let query2 = `pwd=${pwd}`;
+    let query3 = `mDevice=${deviceId}`;
+    url += query + '&' + query2 + '&' + query3;
+    console.log(`Making RELOGGING request to: ${url}`);
+
+    const data = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(response => response.json())
+      .then(res => {
+        console.log('LOGGING AJAX', res);
+        if (!res.success) {
+          Alert.alert(res.msg, ' ', [
+            {
+              text: '確定',
+              onPress: () => {
+                if(res?.response?.Id)
+                {
+                  this.setState({
+                      showOverlay1: true,
+                    });
+                }
+              },
+            },
+          ]);
+        }
+        else{
+          this.props.handleLogin(res,acc,pwd);
+        }
+        
       })
       .catch(err =>
         Alert.alert('網路異常，請稍後再試...', ' ', [
