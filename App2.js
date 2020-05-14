@@ -56,10 +56,12 @@ const App = () => {
 
 	const _handleMore = () => console.log('Shown more');
 
-	async function handleLogin(res) {
+	async function handleLogin(res,ascAcc,ascPwd) {
 		try {
 			await AsyncStorage.setItem('userLoginInfo', JSON.stringify(res));
-			console.log('SAVED ASYNC', res);
+			await AsyncStorage.setItem('ascAcc', ascAcc);
+			await AsyncStorage.setItem('ascPwd', ascPwd);
+			console.log('SAVED ASYNC', res,ascAcc,ascPwd);
 			await setdata(res);
 			setlogged(res.success);
 		} catch (error) {
@@ -88,6 +90,8 @@ const App = () => {
 	async function handleLogout(res) {
 		try {
 			await AsyncStorage.removeItem('userLoginInfo');
+			await AsyncStorage.removeItem('ascAcc');
+			await AsyncStorage.removeItem('ascPwd');
 			setlogged(res);
 		} catch (error) {
 			console.log('cannot get ITEM BEFORE LOGGING');
