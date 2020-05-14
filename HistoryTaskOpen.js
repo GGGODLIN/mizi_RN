@@ -241,13 +241,14 @@ const HistoryTaskOpen = props => {
   if (isLoading) {
     setLoading(false);
     console.log('info screen is loading...');
-    let withPeople = caseStatus[detailIndex]<6?taskData[detailIndex].OrderDetails.FamilyWith:taskData[detailIndex].OrderDetails.RealFamilyWith;
+    
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <ActivityIndicator animating={true} size='large' />
       </View>
     );
   } else {
+    let withPeople = caseStatus[detailIndex]<6?taskData[detailIndex].OrderDetails.FamilyWith:taskData[detailIndex].OrderDetails.RealFamilyWith;
     return (
       <ScrollView style={{flex: 1}}>
         <View
