@@ -27,18 +27,18 @@ export default function TodayTasksStackScreen(props) {
         headerTintColor: 'black',
         headerStyle: { backgroundColor: '#f6a91e' },
         headerRight:({color, size}) => (
-                                        <Icon name="bars" color='white' size={20} style={{paddingBottom:20}} onPress={() => props.navigation.openDrawer()}/>
+                                        <Icon name="bars" color='white' size={25} style={{paddingBottom:50}} onPress={() => props.navigation.openDrawer()}/>
 
           ),
        headerLeft:({color, size}) => (
             <Image
-          style={{width:'100%', height:'100%',padding:20,paddingStart:'500%'}}
+          //style={{width:'100%', height:'100%',padding:20,paddingStart:'500%'}}
           source={require('../img/driver_logo.png')}
         />
 
           ),
         headerRightContainerStyle:{padding:20},
-        headerLeftContainerStyle:{padding:20},
+        headerLeftContainerStyle:{paddingHorizontal:20,paddingBottom:20},
         title: ' ',
       }}
     >

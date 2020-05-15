@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>TEST0214.ipa</key>
+	<array>
+		<dict>
+			<key>architectures</key>
+			<array>
+				<string>armv7</string>
+				<string>arm64</string>
+			</array>
+			<key>certificate</key>
+			<dict>
+				<key>SHA1</key>
+				<string>652BC32D7EB58A84C4C2423273E1AFC954825B5E</string>
+				<key>dateExpires</key>
+				<string>2021/5/7</string>
+				<key>type</key>
+				<string>iOS Distribution</string>
+			</dict>
+			<key>entitlements</key>
+			<dict>
+				<key>application-identifier</key>
+				<string>FCDA6DJLTQ.org.reactjs.native.example.1966ntpc</string>
+				<key>com.apple.developer.team-identifier</key>
+				<string>FCDA6DJLTQ</string>
+				<key>get-task-allow</key>
+				<false/>
+				<key>keychain-access-groups</key>
+				<array>
+					<string>FCDA6DJLTQ.org.reactjs.native.example.1966ntpc</string>
+				</array>
+			</dict>
+			<key>name</key>
+			<string>1966長照派遣系統-新北.app</string>
+			<key>profile</key>
+			<dict>
+				<key>UUID</key>
+				<string>3a7dc146-d7a8-4e2c-9a73-0673fd0443cf</string>
+				<key>name</key>
+				<string>0511ADHOC</string>
+			</dict>
+			<key>team</key>
+			<dict>
+				<key>id</key>
+				<string>FCDA6DJLTQ</string>
+				<key>name</key>
+				<string>DonKeymove Co., Ltd.</string>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>
