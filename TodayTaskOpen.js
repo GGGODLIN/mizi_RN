@@ -234,6 +234,7 @@ const TodayTaskOpen = props => {
           {
             text: '確定',
             onPress: () => {
+              props.navigation.navigate('TodayTaskList');
               setLoading(false);
             },
           },
@@ -288,7 +289,7 @@ const TodayTaskOpen = props => {
         Alert.alert('網路異常，請稍後再試...', ' ', [
           {
             text: '確定',
-            onPress: () => {},
+            onPress: () => {props.navigation.navigate('TodayTaskList');},
           },
         ]),
       );
@@ -327,7 +328,7 @@ const TodayTaskOpen = props => {
         Alert.alert('網路異常，請稍後再試...', ' ', [
           {
             text: '確定',
-            onPress: () => {},
+            onPress: () => {props.navigation.navigate('TodayTaskList');},
           },
         ]),
       );
@@ -367,7 +368,7 @@ const TodayTaskOpen = props => {
         Alert.alert('網路異常，請稍後再試...', ' ', [
           {
             text: '確定',
-            onPress: () => {},
+            onPress: () => {props.navigation.navigate('TodayTaskList');},
           },
         ]),
       );
