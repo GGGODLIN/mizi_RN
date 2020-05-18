@@ -7,6 +7,8 @@ import {
 	Text,
 	StatusBar,
 	Platform,
+	BackHandler,
+	Alert,
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import {
@@ -93,6 +95,28 @@ const App = () => {
 		}
 		
 	}
+	useEffect(() => {
+    const backAction = () => {
+      Alert.alert('確定要離開APP?', ' ', [
+        {
+          text: '取消',
+          onPress: () => null,
+          style: 'cancel',
+        },
+        {text: '確定', onPress: () => BackHandler.exitApp()},
+      ]);
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
+
+    return () => {
+      backHandler.remove();
+    };
+  }, []);
 	if (logged) {
 		return (
 			<PaperProvider>
