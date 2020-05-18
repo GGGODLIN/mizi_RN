@@ -309,6 +309,7 @@ const HitCard = props => {
   } else {
     console.log('STATUS?', status);
     return (
+      <ScrollView style={{flex: 1}}>
       <View
         style={{
           width: '95%',
@@ -567,6 +568,7 @@ const HitCard = props => {
           }}
         />
       </View>
+      </ScrollView>
     );
   }
 };
