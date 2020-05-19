@@ -84,7 +84,18 @@ const HitCard = props => {
             setdata(res);
             setOn(res.response.OnTime !== null);
             setOff(res.response.OffTime !== null);
-            if (res.response.DriverSign !== null) {
+
+            if (res.response.OnTime === null){
+              setstatus(1);
+            } else if (res.response.OffTime === null){
+              setstatus(2);
+            } else if (res.response.DriverSign === null){
+              setstatus(3);
+            }else{
+              setstatus(3);
+            }
+
+            /*if (res.response.DriverSign !== null) {
               setstatus(4);
             } else if (
               res.response.OnTime !== null &&
@@ -95,7 +106,9 @@ const HitCard = props => {
               setstatus(2);
             } else {
               setstatus(1);
-            }
+            }*/
+
+
             setLoading(false);
           })
           .catch(err =>
