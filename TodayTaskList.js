@@ -33,6 +33,7 @@ import {
   ActivityIndicator,
 } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import FileUtil from './FileUtil';
 
 function Item({data, navigation}) {
   var caseName = data.DespatchDetails[0].CaseUser.Name;
@@ -221,6 +222,122 @@ const TodayTaskList = props => {
     }
   }
 
+  const handleSavePic = async () => {
+
+    
+   
+ 
+
+    const res3 = await FileUtil.readDir();
+    console.log("res3?",res3?.length);
+    if (res3){
+      res3.forEach(async function(item, index, array) {
+      await postPic(item)
+        .then(() => FileUtil.deleteFile(`file://${item}`))
+        .catch(err => {
+          Alert.alert('網路異常，請稍後再試...', '後台上傳圖片失敗', [
+            {
+              text: '確定',
+              onPress: () => {console.warn(err)},
+            },
+          ]);
+        });
+      // forEach 就如同 for，不過寫法更容易
+    });
+    }
+    
+
+    //setdoneCase(detailIndex);
+    //handleNextStep();
+    //setshowOverlay(false);
+    //setstatus(status + 1);
+    //await checkDone();
+  
+
+    
+  };
+
+  const postPic = async picPath2 => {
+    let indexTS = picPath2.indexOf('TS');
+
+    let fname = picPath2.substr(indexTS);
+    let isDriverSign = false;
+    if (fname == 'g') {
+      fname = 'sign.png';
+      isDriverSign = true;
+    }
+    console.log('isDriverSign?', isDriverSign);
+    let urii = `file://${picPath2}`;
+    console.log('PICPATH?????????', urii);
+    let form = new FormData();
+    form.append('image', {
+      uri: urii,
+      type: 'image/png',
+      name: fname,
+      filename: fname,
+    });
+    let url = `https://api.donkeymove.com/api/Img/Pic`;
+
+    console.log(`Making POST PIC request to: ${url}`);
+    console.log(form);
+
+    const data = await fetch(url, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'multipart/form-data',
+      },
+      body: form,
+    })
+      .then(response => response.json())
+      .then(async res => {
+        console.log('postPic AJAX', res);
+        //setpicPathOnServer(res.response);
+
+        if (isDriverSign){
+          let url2 =
+          'https://api.donkeymove.com/api/DriverInfo/PutDriverReceiveSign';
+        const data2 = await fetch(url2, {
+          method: 'PUT',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            DriverId: user.response.Id,
+            ShouldReceiveAmt: shouldReceiveAmt,
+            RealReceiveAmt: realReceiveAmt,
+            DriverSign: res.response,
+          }),
+        })
+          .then(response2 => response2.json())
+          .then(res2 => {
+            console.log('PUTSIGN AJAX', res2);
+          })
+          .catch(err2 =>
+            Alert.alert('網路異常，請稍後再試...', ' ', [
+              {
+                text: '確定',
+                onPress: () => {console.warn(err2)},
+              },
+            ]),
+          );
+        }
+        
+
+        return res;
+      })
+      .catch(err =>
+        Alert.alert('網路異常，請稍後再試...', '後台上傳圖片失敗2', [
+          {
+            text: '確定',
+            onPress: () => {console.warn(err)},
+          },
+        ]),
+      );
+    return data;
+  };
+
   async function fetchData_test() {
     const data = await fetch(
       'https://api.donkeymove.com/api/DriverInfo/GetAllPassGroup/15',
@@ -258,6 +375,7 @@ const TodayTaskList = props => {
       setLoading(true);
       //alert('Screen was focused');
       fetchData().then(() => setLoading(false));
+      handleSavePic().then(()=>console.warn("upload done!!!!!"));
       return () => {
         setLoading(true);
         //alert('Screen was unfocused');
