@@ -1,8 +1,8 @@
 platform :ios, '9.0'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
-target 'TEST0214' do
-  # Pods for TEST0214
+target 'nantou' do
+  # Pods for nantou
   pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
   pod 'FBReactNativeSpec', :path => "../node_modules/react-native/Libraries/FBReactNativeSpec"
   pod 'RCTRequired', :path => "../node_modules/react-native/Libraries/RCTRequired"
@@ -35,7 +35,7 @@ target 'TEST0214' do
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
 
-  target 'TEST0214Tests' do
+  target 'nantouTests' do
     inherit! :search_paths
     # Pods for testing
   end
@@ -43,10 +43,10 @@ target 'TEST0214' do
   use_native_modules!
 end
 
-target 'TEST0214-tvOS' do
-  # Pods for TEST0214-tvOS
+target 'nantou-tvOS' do
+  # Pods for nantou-tvOS
 
-  target 'TEST0214-tvOSTests' do
+  target 'nantou-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end

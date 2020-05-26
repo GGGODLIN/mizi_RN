@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "TEST0214.app"
-               BlueprintName = "TEST0214"
-               ReferencedContainer = "container:TEST0214.xcodeproj">
+               BuildableName = "nantou.app"
+               BlueprintName = "nantou"
+               ReferencedContainer = "container:nantou.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "TEST0214Tests.xctest"
-               BlueprintName = "TEST0214Tests"
-               ReferencedContainer = "container:TEST0214.xcodeproj">
+               BuildableName = "nantouTests.xctest"
+               BlueprintName = "nantouTests"
+               ReferencedContainer = "container:nantou.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -61,9 +61,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "TEST0214Tests.xctest"
-               BlueprintName = "TEST0214Tests"
-               ReferencedContainer = "container:TEST0214.xcodeproj">
+               BuildableName = "nantouTests.xctest"
+               BlueprintName = "nantouTests"
+               ReferencedContainer = "container:nantou.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -71,9 +71,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "TEST0214.app"
-            BlueprintName = "TEST0214"
-            ReferencedContainer = "container:TEST0214.xcodeproj">
+            BuildableName = "nantou.app"
+            BlueprintName = "nantou"
+            ReferencedContainer = "container:nantou.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -94,9 +94,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "TEST0214.app"
-            BlueprintName = "TEST0214"
-            ReferencedContainer = "container:TEST0214.xcodeproj">
+            BuildableName = "nantou.app"
+            BlueprintName = "nantou"
+            ReferencedContainer = "container:nantou.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -113,9 +113,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "TEST0214.app"
-            BlueprintName = "TEST0214"
-            ReferencedContainer = "container:TEST0214.xcodeproj">
+            BuildableName = "nantou.app"
+            BlueprintName = "nantou"
+            ReferencedContainer = "container:nantou.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
