@@ -763,7 +763,7 @@ const styles = StyleSheet.create({
 });
 LoginScreen = codePush({
   updateDialog: {
-    title: 'APP有新版本，是否更新?',
+    title: 'APP有新版本',
     descriptionPrefix: '版本號',
     optionalUpdateMessage: ' ',
     optionalIgnoreButtonLabel: '下次再說',
