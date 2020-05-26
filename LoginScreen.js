@@ -773,6 +773,8 @@ LoginScreen = codePush({
     optionalUpdateMessage: ' ',
     optionalIgnoreButtonLabel: '下次再說',
     optionalInstallButtonLabel: '立即安裝並重啟',
+    mandatoryUpdateMessage:' ',
+    mandatoryContinueButtonLabel:'立即安裝並重啟!',
   },
   installMode: codePush.InstallMode.IMMEDIATE,
 })(LoginScreen);
