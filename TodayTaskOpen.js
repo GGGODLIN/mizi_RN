@@ -140,12 +140,12 @@ const TodayTaskOpen = props => {
         taskData[detailIndex].OrderDetails.ForeignFamilyWith,
     );
     if (tempStatus[detailIndex] == 6) {
-      updateStatusToSix();
+      await updateStatusToSix();
       setoverlay(true);
       setLoading(true);
       setdelayForMap(true);
     } else {
-      updateStatus();
+      await updateStatus();
       setoverlay(true);
       setLoading(true);
       if (tempStatus[detailIndex] == 3) {
@@ -166,7 +166,7 @@ const TodayTaskOpen = props => {
 
     setcashSteps(0);
     setdoneCase(detailIndex);
-    updateStatus();
+    await updateStatus();
     await checkDone();
     setoverlay(true);
     setLoading(true);
