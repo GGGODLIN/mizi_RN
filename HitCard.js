@@ -69,7 +69,7 @@ const HitCard = props => {
         setuser(obj_value);
         console.log('GET FROM ASYN IS', obj_value);
         let url2 =
-          'https://api.donkeymove.com/api/DriverInfo/GetAllPunchByDriver/' +
+          'http://qif-nantou.1966.org.tw:20022/api/DriverInfo/GetAllPunchByDriver/' +
           obj_value.response.Id;
 
         const data = await fetch(url2, {
@@ -121,7 +121,7 @@ const HitCard = props => {
           );
 
         let url3 =
-          'https://api.donkeymove.com/api/DriverInfo/GetDriverReceive/' +
+          'http://qif-nantou.1966.org.tw:20022/api/DriverInfo/GetDriverReceive/' +
           obj_value.response.Id;
 
         const data2 = await fetch(url3, {
@@ -152,7 +152,7 @@ const HitCard = props => {
   }
 
   async function handleSubmitHitCard() {
-    let url2 = `https://api.donkeymove.com/api/DriverInfo/SetPunchTime/${
+    let url2 = `http://qif-nantou.1966.org.tw:20022/api/DriverInfo/SetPunchTime/${
       user.response.Id
     }?status=${status}`;
     if(bTemperature !== 0){
@@ -246,7 +246,7 @@ const HitCard = props => {
       name: fname,
       filename: fname,
     });
-    let url = `https://api.donkeymove.com/api/Img/Pic`;
+    let url = `http://qif-nantou.1966.org.tw:20022/api/Img/Pic`;
 
     console.log(`Making POST PIC request to: ${url}`);
     console.log(form);
@@ -266,7 +266,7 @@ const HitCard = props => {
 
         if (isDriverSign){
           let url2 =
-          'https://api.donkeymove.com/api/DriverInfo/PutDriverReceiveSign';
+          'http://qif-nantou.1966.org.tw:20022/api/DriverInfo/PutDriverReceiveSign';
         const data2 = await fetch(url2, {
           method: 'PUT',
           headers: {
