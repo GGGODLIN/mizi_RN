@@ -78,7 +78,7 @@ const InfoScreen = props => {
 
   const bindLineId = async id => {
     let url3 =
-      'http://slllcapi.1966.org.tw/api/DriverInfo/DriverLine/' +
+      'http://care.1966.org.tw/api/api/DriverInfo/DriverLine/' +
       data.response.Id +
       ',' +
       id;
@@ -108,7 +108,7 @@ const InfoScreen = props => {
   const putLineMessage = async id => {
     let message = '收到此訊息表示Line綁定成功!';
     let url3 =
-      'http://slllcapi.1966.org.tw/api/OrderDetails/PutLineMessage/' +
+      'http://care.1966.org.tw/api/api/OrderDetails/PutLineMessage/' +
       id +
       ',' +
       message;
@@ -135,7 +135,7 @@ const InfoScreen = props => {
 
   const handleSubmit = async () => {
     let url3 =
-      'http://slllcapi.1966.org.tw/api/DriverInfo/PutDriverPwd?DriverId=' +
+      'http://care.1966.org.tw/api/api/DriverInfo/PutDriverPwd?DriverId=' +
       data.response.Id +
       '&oldPwd=' +
       input1 +

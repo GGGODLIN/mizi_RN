@@ -1,4 +1,4 @@
-package com.LinLiang;
+package com.1966Android;
 
 import com.facebook.react.ReactActivity;
 
@@ -10,6 +10,6 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "LinLiang";
+    return "1966Android";
   }
 }

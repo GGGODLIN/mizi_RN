@@ -223,7 +223,7 @@ const TodayTaskOpen = props => {
 
   const askCash = async index => {
     setaskingMoney(true);
-    let url = `http://slllcapi.1966.org.tw/api/OrderDetails/PutDetailRealWith?OrderDetailId=${
+    let url = `http://care.1966.org.tw/api/api/OrderDetails/PutDetailRealWith?OrderDetailId=${
       taskData[detailIndex].OrderDetails.Id
     }&RealFamily=${people}`;
 
@@ -269,7 +269,7 @@ const TodayTaskOpen = props => {
       name: `${taskData[detailIndex].OrderDetails.SOrderNo}.jpg`,
       filename: `${taskData[detailIndex].OrderDetails.SOrderNo}.jpg`,
     });
-    let url = `http://slllcapi.1966.org.tw/api/Img/Pic`;
+    let url = `http://care.1966.org.tw/api/api/Img/Pic`;
 
     console.log(`Making POST PIC request to: ${url}`);
     console.log(form);
@@ -300,7 +300,7 @@ const TodayTaskOpen = props => {
   };
 
   const updateStatus = async index => {
-    let url = `http://slllcapi.1966.org.tw/api/OrderDetails/PutDetailStatus?OrderDetailId=${
+    let url = `http://care.1966.org.tw/api/api/OrderDetails/PutDetailStatus?OrderDetailId=${
       taskData[index].OrderDetails.Id
     }&StatusInt=${caseStatus[index]}`;
     if (caseStatus[index] == 4) {
@@ -330,7 +330,7 @@ const TodayTaskOpen = props => {
   };
 
   const updateStatusToSix = async index => {
-    let url2 = `http://slllcapi.1966.org.tw/api/OrderDetails/PutDetailStatus?OrderDetailId=${
+    let url2 = `http://care.1966.org.tw/api/api/OrderDetails/PutDetailStatus?OrderDetailId=${
       taskData[index].OrderDetails.Id
     }&StatusInt=5`;
 
@@ -348,7 +348,7 @@ const TodayTaskOpen = props => {
       })
       .then(async () => {
         console.log('???????', taskData[index].OrderDetails.SOrderNo);
-        let url = `http://slllcapi.1966.org.tw/api/OrderDetails/PutDetailStatus?OrderDetailId=${
+        let url = `http://care.1966.org.tw/api/api/OrderDetails/PutDetailStatus?OrderDetailId=${
           taskData[index].OrderDetails.Id
         }&StatusInt=6&receiveAmt=0&signPic=${
           taskData[index].OrderDetails.SOrderNo
@@ -392,7 +392,7 @@ const TodayTaskOpen = props => {
   };
 
   const updateStatusToEight = async index => {
-    let url2 = `http://slllcapi.1966.org.tw/api/OrderDetails/PutDetailStatus?OrderDetailId=${
+    let url2 = `http://care.1966.org.tw/api/api/OrderDetails/PutDetailStatus?OrderDetailId=${
       taskData[index].OrderDetails.Id
     }&StatusInt=8`;
 
@@ -410,7 +410,7 @@ const TodayTaskOpen = props => {
       })
       .then(async () => {
         console.log('???????', taskData[index].OrderDetails.SOrderNo);
-        let url = `http://slllcapi.1966.org.tw/api/OrderDetails/PutDetailStatus?OrderDetailId=${
+        let url = `http://care.1966.org.tw/api/api/OrderDetails/PutDetailStatus?OrderDetailId=${
           taskData[index].OrderDetails.Id
         }&StatusInt=6&receiveAmt=0&signPic=${
           taskData[index].OrderDetails.SOrderNo

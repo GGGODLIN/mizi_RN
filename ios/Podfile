@@ -1,8 +1,8 @@
 platform :ios, '9.0'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
-target 'LinLiang' do
-  # Pods for LinLiang
+target '1966Android' do
+  # Pods for 1966Android
   pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
   pod 'FBReactNativeSpec', :path => "../node_modules/react-native/Libraries/FBReactNativeSpec"
   pod 'RCTRequired', :path => "../node_modules/react-native/Libraries/RCTRequired"
@@ -35,7 +35,7 @@ target 'LinLiang' do
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
 
-  target 'LinLiangTests' do
+  target '1966AndroidTests' do
     inherit! :search_paths
     # Pods for testing
   end
@@ -43,10 +43,10 @@ target 'LinLiang' do
   use_native_modules!
 end
 
-target 'LinLiang-tvOS' do
-  # Pods for LinLiang-tvOS
+target '1966Android-tvOS' do
+  # Pods for 1966Android-tvOS
 
-  target 'LinLiang-tvOSTests' do
+  target '1966Android-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end

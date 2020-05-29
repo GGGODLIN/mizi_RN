@@ -66,7 +66,7 @@ const CarCheckScreen = props => {
       const value = await AsyncStorage.getItem('userLoginInfo');
       if (value !== null) {
         var obj_value = JSON.parse(value);
-        let url = `http://slllcapi.1966.org.tw/api/DriverInfo/GetDriverCheck/${
+        let url = `http://care.1966.org.tw/api/api/DriverInfo/GetDriverCheck/${
           obj_value.response.Id
         }`;
         console.log(`Making CheckedList1 request to: ${url}`);
@@ -82,7 +82,7 @@ const CarCheckScreen = props => {
             if (res.response.CarCheck) {
               var nowDate = `${date.getFullYear()}-${date.getMonth() +
                 1}-${date.getDate()}`;
-              let url = `http://slllcapi.1966.org.tw/api/CheckResult/GetCheckCarMapping?CarId=${
+              let url = `http://care.1966.org.tw/api/api/CheckResult/GetCheckCarMapping?CarId=${
                 obj_value.response.Cars.Id
               }&date=${nowDate}`;
 
@@ -137,7 +137,7 @@ const CarCheckScreen = props => {
   };
 
   const fetchDataModal = async () => {
-    let url = `http://slllcapi.1966.org.tw/api/CheckItem/GetCheckCarViewModel`;
+    let url = `http://care.1966.org.tw/api/api/CheckItem/GetCheckCarViewModel`;
 
     console.log(`Making Modal request to: ${url}`);
 
@@ -175,7 +175,7 @@ const CarCheckScreen = props => {
   };
 
   const checkCarChecked = async () => {
-    let url = `http://slllcapi.1966.org.tw/api/DriverInfo/GetDriverCheck/${
+    let url = `http://care.1966.org.tw/api/api/DriverInfo/GetDriverCheck/${
       data.response.Id
     }`;
     const res = await fetch(url, {
@@ -207,7 +207,7 @@ const CarCheckScreen = props => {
     console.log('queryNoChecked', queryNoChecked);
 
     let url =
-      'http://slllcapi.1966.org.tw/api/CheckResult/PostCheckCarMapping';
+      'http://care.1966.org.tw/api/api/CheckResult/PostCheckCarMapping';
     const driverId = data.response.Id;
     const carId = data.response.Cars.Id;
     const postRes = await fetch(url, {

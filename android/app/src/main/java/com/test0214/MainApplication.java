@@ -1,4 +1,4 @@
-package com.LinLiang;
+package com.1966Android;
 
 import android.app.Application;
 import android.content.Context;
