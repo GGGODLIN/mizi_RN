@@ -1,4 +1,4 @@
-package com.1966Android;
+package com.Android1966;
 
 import com.facebook.react.ReactActivity;
 

@@ -1,4 +1,4 @@
-package com.1966Android;
+package com.Android1966;
 
 import android.app.Application;
 import android.content.Context;

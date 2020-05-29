@@ -27,7 +27,7 @@ export default function PastReceiveStackScreen(props) {
           ),
        headerLeft:({color, size}) => (
             <Image
-          style={{width:'100%', height:'100%',padding:20,paddingStart:'500%'}}
+          style={{width:'440%', height:'100%',padding:20,paddingStart:'300%'}}
           source={require('../img/driver_logo.png')}
         />
 
