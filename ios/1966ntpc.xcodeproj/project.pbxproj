@@ -109,7 +109,7 @@
 		00E356EE1AD99517003FC87E /* 1966ntpcTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = 1966ntpcTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* TEST0214Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TEST0214Tests.m; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /*  南投-愚人之友.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = " 南投-愚人之友.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07F961A680F5B00A75B9A /* I南投-愚人之友.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "I南投-愚人之友.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = TEST0214/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = TEST0214/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -321,7 +321,7 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /*  南投-愚人之友.app */,
+				13B07F961A680F5B00A75B9A /* I南投-愚人之友.app */,
 				00E356EE1AD99517003FC87E /* 1966ntpcTests.xctest */,
 				2D02E47B1E0B4A5D006451C7 /* 1966ntpc-tvOS.app */,
 				2D02E4901E0B4A5D006451C7 /* 1966ntpc-tvOSTests.xctest */,
@@ -391,7 +391,7 @@
 			);
 			name = 1966ntpc;
 			productName = TEST0214;
-			productReference = 13B07F961A680F5B00A75B9A /*  南投-愚人之友.app */;
+			productReference = 13B07F961A680F5B00A75B9A /* I南投-愚人之友.app */;
 			productType = "com.apple.product-type.application";
 		};
 		2D02E47A1E0B4A5D006451C7 /* 1966ntpc-tvOS */ = {
@@ -928,7 +928,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.nantou;
-				PRODUCT_NAME = " 南投-愚人之友";
+				PRODUCT_NAME = "I南投-愚人之友";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -952,7 +952,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.nantou;
-				PRODUCT_NAME = " 南投-愚人之友";
+				PRODUCT_NAME = "I南投-愚人之友";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
