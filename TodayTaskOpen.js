@@ -194,6 +194,28 @@ const TodayTaskOpen = props => {
     setcashSteps(0);
   };
 
+  const logMyApp = async (odid,content) => {
+    let url = `http://aso.1966.org.tw:20020/api/Login`;
+
+    const data = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        
+      },
+      body: JSON.stringify({
+        Odid:odid,
+        LogContents: content,
+        
+      })
+    })
+    .then(response => console.log("logMyApp",response))
+    .catch(err =>
+       console.warn(err)
+      );
+      
+  }
+
   const askCash = async () => {
     setaskingMoney(true);
     let url = `https://api.donkeymove.com/api/OrderDetails/PutDetailRealWith?OrderDetailId=${
@@ -201,6 +223,8 @@ const TodayTaskOpen = props => {
     }&RealFamily=${people}`;
 
     console.log(`Making Cash request to: ${url}`);
+    let logContent = `Making Cash request to: ${url}`;
+    await logMyApp(taskData[detailIndex].OrderDetails.Id,logContent);
     const data = await fetch(url, {
       method: 'PUT',
       headers: {
@@ -226,8 +250,9 @@ const TodayTaskOpen = props => {
           }
           console.log('updateStatus AJAX', res);
           setaskingMoney(false);
-          return res;
+          
         }
+        return res;
       })
       .catch(err =>
         Alert.alert('網路異常，請稍後再試...', ' ', [
@@ -240,6 +265,7 @@ const TodayTaskOpen = props => {
           },
         ]),
       );
+      await logMyApp(taskData[detailIndex].OrderDetails.Id,JSON.stringify(data));
     return data;
   };
 
@@ -302,7 +328,8 @@ const TodayTaskOpen = props => {
     }&StatusInt=${caseStatus[detailIndex]}`;
 
     console.log(`Making Status request to: ${url}`);
-
+    let logContent = `Making Status request to: ${url}`;
+    await logMyApp(taskData[detailIndex].OrderDetails.Id,logContent);
     const data = await fetch(url, {
       method: 'PUT',
       headers: {
@@ -320,9 +347,11 @@ const TodayTaskOpen = props => {
               },
             },
           ]);
-        } 
+        }  
+
 
         console.log('updateStatus AJAX', res);
+        return res;
       })
       .catch(err =>
         Alert.alert('網路異常，請稍後再試...', ' ', [
@@ -332,6 +361,7 @@ const TodayTaskOpen = props => {
           },
         ]),
       );
+      await logMyApp(taskData[detailIndex].OrderDetails.Id,JSON.stringify(data));
   };
 
   const updateStatusToSix = async () => {
@@ -343,6 +373,8 @@ const TodayTaskOpen = props => {
     }.png&remark=${ps}`;
 
     console.log(`Making Status6 request to: ${url}`);
+    let logContent = `Making Status6 request to: ${url}`;
+    await logMyApp(taskData[detailIndex].OrderDetails.Id,logContent);
 
     const data = await fetch(url, {
       method: 'PUT',
@@ -363,6 +395,7 @@ const TodayTaskOpen = props => {
           ]);
         } 
         console.log('updateStatus AJAX', res);
+        return res;
       })
       .catch(err =>
         Alert.alert('網路異常，請稍後再試...', ' ', [
@@ -372,6 +405,7 @@ const TodayTaskOpen = props => {
           },
         ]),
       );
+      await logMyApp(taskData[detailIndex].OrderDetails.Id,JSON.stringify(data));
   };
 
   const handleSavePic = async res => {
