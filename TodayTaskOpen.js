@@ -51,6 +51,7 @@ const TodayTaskOpen = props => {
   const GOOGLE_MAPS_APIKEY = 'AIzaSyA1h_cyazZLo1DExB0h0B2JBuOfv-yFtsM';
   const [data, setdata] = useState({});
   const [finish, setfinish] = useState(false);
+  const [endCount, setendCount] = useState(0);
   const [doneCase, setdoneCase] = useState(
     props.route.params.data.DespatchDetails.map((e, index) => {
       return e.OrderDetails.Status >= 6 ? index : null;
@@ -132,18 +133,19 @@ const TodayTaskOpen = props => {
   );
 
   const handleNextStep = async () => {
-    let tempStatus = caseStatus;
+    let tempStatus = [...caseStatus];
     tempStatus[detailIndex] = caseStatus[detailIndex] + 1;
     setcaseStatus(tempStatus);
+    console.warn(tempStatus);
     setpeople(
       taskData[detailIndex].OrderDetails.FamilyWith +
         taskData[detailIndex].OrderDetails.ForeignFamilyWith,
     );
     if (tempStatus[detailIndex] == 6) {
       await updateStatusToSix();
-      setoverlay(true);
-      setLoading(true);
-      setdelayForMap(true);
+      //setoverlay(true);
+      //setLoading(true);
+      //setdelayForMap(true);
     } else {
       await updateStatus();
       setoverlay(true);
@@ -368,7 +370,7 @@ const TodayTaskOpen = props => {
     console.log('???????', taskData[detailIndex].OrderDetails.SOrderNo);
     let url = `https://api.donkeymove.com/api/OrderDetails/PutDetailStatus?OrderDetailId=${
       taskData[detailIndex].OrderDetails.Id
-    }&StatusInt=${caseStatus[detailIndex]}&receiveAmt=${realMoney}&signPic=${
+    }&StatusInt=${5}&receiveAmt=${realMoney}&signPic=${
       taskData[detailIndex].OrderDetails.SOrderNo
     }.png&remark=${ps}`;
 
@@ -413,8 +415,10 @@ const TodayTaskOpen = props => {
     setcashSteps(0);
     await setpicPath(res.pathName);
     //await postPic(res.pathName);
+    setendCount(endCount+1);
+    //console.log("WTF???????????????????",endCount);
     setdoneCase(detailIndex);
-    handleNextStep();
+    await handleNextStep();
     await checkDone();
   };
 
@@ -458,19 +462,15 @@ const TodayTaskOpen = props => {
         console.log('done!!!!!!', doneCase, doneCase.length);
       }
     });
-    setfinish(
-      doneCase.every((item, index, array) => {
-        return item != null;
-      }),
-    );
-    console.log('FINISHED???????????????????', finish);
+    setfinish(endCount===caseStatus.length);
+    console.log('FINISHED???????????????????', finish,endCount,caseStatus.length);
     setLoading(true);
   };
 
   useEffect(() => {
     checkDone();
     console.log('CHECKDONE????!?!?!?!?!?');
-  }, []);
+  }, [endCount]);
 
   if (isLoading || finish) {
     if (finish) {
@@ -523,7 +523,7 @@ const TodayTaskOpen = props => {
       );
     }
   } else {
-    console.log('DELTA', latitudeDelta, longitudeDelta);
+    console.log('DELTA', latitudeDelta, longitudeDelta,endCount,caseStatus);
     return (
       <ScrollView style={{flex: 1}}>
         <Overlay
