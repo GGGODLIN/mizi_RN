@@ -61,14 +61,13 @@ const TodayTaskOpen = props => {
     '/storage/emulated/0/saved_signature/signature.png',
   );
   const [picPathOnServer, setpicPathOnServer] = useState();
-  const [money, setmoney] = useState('讀取中...');
-  const [realMoney, setrealMoney] = useState('讀取中...');
+  const [money, setmoney] = useState('0');
+  const [realMoney, setrealMoney] = useState('0');
   const [cashSteps, setcashSteps] = useState(0);
   const [foreignPeople, setforeignPeople] = useState(0);
   const [detailIndex, setdetailIndex] = useState(0);
   const [askingMoney, setaskingMoney] = useState(false);
 
-  const [bottonLoading, setbottonLoading] = useState(false);
   const [isLoading, setLoading] = useState(true);
   const [carChecked, setcarChecked] = useState(false);
   const [bodyChecked, setbodyChecked] = useState(false);
@@ -133,31 +132,20 @@ const TodayTaskOpen = props => {
   );
 
   const handleNextStep = async () => {
-    console.log('caseStatus[detailIndex]0', caseStatus[detailIndex]);
-    let tempStatus = [...caseStatus];
+    let tempStatus = caseStatus;
     tempStatus[detailIndex] = caseStatus[detailIndex] + 1;
-    console.log('caseStatus[detailIndex]', caseStatus[detailIndex]);
+    setcaseStatus(tempStatus);
     setpeople(
       taskData[detailIndex].OrderDetails.FamilyWith +
         taskData[detailIndex].OrderDetails.ForeignFamilyWith,
     );
-    setcaseStatus(tempStatus);
     if (tempStatus[detailIndex] == 6) {
-      console.log('TO6');
-      setbottonLoading(true);
-      await updateStatusToSix(tempStatus);
-      //setbottonLoading(false);
-      //setcaseStatus(tempStatus);
+      await updateStatusToSix();
       setoverlay(true);
       setLoading(true);
       setdelayForMap(true);
     } else {
-      console.log('caseStatus[detailIndex]2', caseStatus[detailIndex]);
-      setbottonLoading(true);
-      await updateStatus(tempStatus);
-      setbottonLoading(false);
-      console.log('caseStatus[detailIndex]3', caseStatus[detailIndex]);
-      //console.log("FAST?");
+      await updateStatus();
       setoverlay(true);
       setLoading(true);
       if (tempStatus[detailIndex] == 3) {
@@ -193,12 +181,10 @@ const TodayTaskOpen = props => {
   };
 
   const handleCashNext = async () => {
+    setLoading(true);
+    const res = await askCash();
+    setmoney(res.response);
     if (cashSteps == 0) {
-      setLoading(true);
-      const res = await askCash();
-      setaskingMoney(false);
-      setmoney(res.response);
-
       setrealMoney(res.response);
     }
     setcashSteps(cashSteps + 1);
@@ -208,22 +194,27 @@ const TodayTaskOpen = props => {
     setcashSteps(0);
   };
 
-  const logMyApp = async (odid, content) => {
+  const logMyApp = async (odid,content) => {
     let url = `http://aso.1966.org.tw:20020/api/Login`;
 
     const data = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        
       },
       body: JSON.stringify({
-        Odid: odid,
+        Odid:odid,
         LogContents: content,
-      }),
+        
+      })
     })
-      .then(response => console.log('logMyApp', response))
-      .catch(err => console.warn(err));
-  };
+    .then(response => console.log("logMyApp",response))
+    .catch(err =>
+       console.warn(err)
+      );
+      
+  }
 
   const askCash = async () => {
     setaskingMoney(true);
@@ -233,7 +224,7 @@ const TodayTaskOpen = props => {
 
     console.log(`Making Cash request to: ${url}`);
     let logContent = `Making Cash request to: ${url}`;
-    await logMyApp(taskData[detailIndex].OrderDetails.Id, logContent);
+    await logMyApp(taskData[detailIndex].OrderDetails.Id,logContent);
     const data = await fetch(url, {
       method: 'PUT',
       headers: {
@@ -258,6 +249,8 @@ const TodayTaskOpen = props => {
             setLoading(false);
           }
           console.log('updateStatus AJAX', res);
+          setaskingMoney(false);
+          
         }
         return res;
       })
@@ -272,7 +265,7 @@ const TodayTaskOpen = props => {
           },
         ]),
       );
-    await logMyApp(taskData[detailIndex].OrderDetails.Id, JSON.stringify(data));
+      await logMyApp(taskData[detailIndex].OrderDetails.Id,JSON.stringify(data));
     return data;
   };
 
@@ -313,32 +306,30 @@ const TodayTaskOpen = props => {
           ]);
         } else {
           console.log('postPic AJAX', res);
-          setpicPathOnServer(res.response);
-          return res;
+        setpicPathOnServer(res.response);
+        return res;
         }
+        
       })
       .catch(err =>
         Alert.alert('網路異常，請稍後再試...', ' ', [
           {
             text: '確定',
-            onPress: () => {
-              props.navigation.navigate('TodayTaskList');
-            },
+            onPress: () => {props.navigation.navigate('TodayTaskList');},
           },
         ]),
       );
     return data;
   };
 
-  const updateStatus = async tempStatus => {
-    console.log('caseStatus[detailIndex]inf', caseStatus[detailIndex]);
+  const updateStatus = async () => {
     let url = `https://api.donkeymove.com/api/OrderDetails/PutDetailStatus?OrderDetailId=${
       taskData[detailIndex].OrderDetails.Id
-    }&StatusInt=${tempStatus[detailIndex]}`;
+    }&StatusInt=${caseStatus[detailIndex]}`;
 
     console.log(`Making Status request to: ${url}`);
     let logContent = `Making Status request to: ${url}`;
-    await logMyApp(taskData[detailIndex].OrderDetails.Id, logContent);
+    await logMyApp(taskData[detailIndex].OrderDetails.Id,logContent);
     const data = await fetch(url, {
       method: 'PUT',
       headers: {
@@ -356,36 +347,34 @@ const TodayTaskOpen = props => {
               },
             },
           ]);
-        }
+        }  
+
 
         console.log('updateStatus AJAX', res);
-        setcaseStatus(tempStatus);
         return res;
       })
       .catch(err =>
         Alert.alert('網路異常，請稍後再試...', ' ', [
           {
             text: '確定',
-            onPress: () => {
-              props.navigation.navigate('TodayTaskList');
-            },
+            onPress: () => {props.navigation.navigate('TodayTaskList');},
           },
         ]),
       );
-    await logMyApp(taskData[detailIndex].OrderDetails.Id, JSON.stringify(data));
+      await logMyApp(taskData[detailIndex].OrderDetails.Id,JSON.stringify(data));
   };
 
-  const updateStatusToSix = async tempStatus => {
+  const updateStatusToSix = async () => {
     console.log('???????', taskData[detailIndex].OrderDetails.SOrderNo);
     let url = `https://api.donkeymove.com/api/OrderDetails/PutDetailStatus?OrderDetailId=${
       taskData[detailIndex].OrderDetails.Id
-    }&StatusInt=${5}&receiveAmt=${realMoney}&signPic=${
+    }&StatusInt=${caseStatus[detailIndex]}&receiveAmt=${realMoney}&signPic=${
       taskData[detailIndex].OrderDetails.SOrderNo
     }.png&remark=${ps}`;
 
     console.log(`Making Status6 request to: ${url}`);
     let logContent = `Making Status6 request to: ${url}`;
-    await logMyApp(taskData[detailIndex].OrderDetails.Id, logContent);
+    await logMyApp(taskData[detailIndex].OrderDetails.Id,logContent);
 
     const data = await fetch(url, {
       method: 'PUT',
@@ -404,32 +393,28 @@ const TodayTaskOpen = props => {
               },
             },
           ]);
-        }
+        } 
         console.log('updateStatus AJAX', res);
-        setcaseStatus(tempStatus);
         return res;
       })
       .catch(err =>
         Alert.alert('網路異常，請稍後再試...', ' ', [
           {
             text: '確定',
-            onPress: () => {
-              props.navigation.navigate('TodayTaskList');
-            },
+            onPress: () => {props.navigation.navigate('TodayTaskList');},
           },
         ]),
       );
-    await logMyApp(taskData[detailIndex].OrderDetails.Id, JSON.stringify(data));
+      await logMyApp(taskData[detailIndex].OrderDetails.Id,JSON.stringify(data));
   };
 
   const handleSavePic = async res => {
     console.log('RES????????????', res.pathName);
     setcashSteps(0);
-    setdoneCase(detailIndex);
     await setpicPath(res.pathName);
     //await postPic(res.pathName);
-
-    await handleNextStep();
+    setdoneCase(detailIndex);
+    handleNextStep();
     await checkDone();
   };
 
@@ -467,14 +452,14 @@ const TodayTaskOpen = props => {
           );
         }
       } else {
-        let temp = [...doneCase];
+        let temp = doneCase;
         temp[index] = index;
         await setdoneCase(temp);
         console.log('done!!!!!!', doneCase, doneCase.length);
       }
     });
     setfinish(
-      doneCase?.every((item, index, array) => {
+      doneCase.every((item, index, array) => {
         return item != null;
       }),
     );
@@ -514,27 +499,13 @@ const TodayTaskOpen = props => {
           </Button>
         </View>
       );
-    } else if (bottonLoading) {
-     
-        //checkDone();
-     
-      console.log('info screen is loading...?????????????',doneCase.length,caseStatus.length);
-      if (doneCase.length === caseStatus.length){
-        setfinish(true);
-      }
-      return (
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          <ActivityIndicator animating={true} size="large" />
-        </View>
-      );
     } else if (delayForMap) {
       setTimeout(() => {
         setLoading(false);
         setdelayForMap(false);
-        checkDone();
       }, 1);
 
-      console.log('info screen is loading...!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+      console.log('info screen is loading...');
       return (
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
           <ActivityIndicator animating={true} size="large" />
@@ -552,7 +523,7 @@ const TodayTaskOpen = props => {
       );
     }
   } else {
-    console.log('DELTA', latitudeDelta, longitudeDelta, finish);
+    console.log('DELTA', latitudeDelta, longitudeDelta);
     return (
       <ScrollView style={{flex: 1}}>
         <Overlay
@@ -849,7 +820,6 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
               labelStyle={{color: 'white', fontSize: 30}}
               contentStyle={{width: '100%', height: 100}}
               mode="outlined"
-              disabled={bottonLoading}
               onPress={() => {
                 if (caseStatus[detailIndex] >= 4) {
                   Alert.alert('確定客下?', ' ', [
