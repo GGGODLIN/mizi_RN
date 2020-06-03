@@ -48,6 +48,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const TodayTaskOpen = props => {
+  const [pressLoading, setpressLoading] = useState(false);
   const GOOGLE_MAPS_APIKEY = 'AIzaSyA1h_cyazZLo1DExB0h0B2JBuOfv-yFtsM';
   const [data, setdata] = useState({});
   const [finish, setfinish] = useState(false);
@@ -140,14 +141,18 @@ const TodayTaskOpen = props => {
         taskData[detailIndex].OrderDetails.ForeignFamilyWith,
     );
     if (tempStatus[detailIndex] == 6) {
+      setpressLoading(true);
       await updateStatusToSix();
-      setoverlay(true);
-      setLoading(true);
-      setdelayForMap(true);
+      setpressLoading(false);
+      //setoverlay(true);
+      //setLoading(true);
+      //setdelayForMap(true);
     } else {
+      setpressLoading(true);
       await updateStatus();
-      setoverlay(true);
-      setLoading(true);
+      setpressLoading(false);
+      //setoverlay(true);
+      //setLoading(true);
       if (tempStatus[detailIndex] == 3) {
         Alert.alert(' ', '請與個案核對身分及目的地，若有問題請聯繫行控中心', [
           {
@@ -181,10 +186,13 @@ const TodayTaskOpen = props => {
   };
 
   const handleCashNext = async () => {
-    setLoading(true);
-    const res = await askCash();
-    setmoney(res.response);
     if (cashSteps == 0) {
+    //setLoading(true);
+    setpressLoading(true);
+    const res = await askCash();
+    setpressLoading(false);
+    setmoney(res.response);
+    
       setrealMoney(res.response);
     }
     setcashSteps(cashSteps + 1);
@@ -472,7 +480,7 @@ const TodayTaskOpen = props => {
     console.log('CHECKDONE????!?!?!?!?!?');
   }, []);
 
-  if (isLoading || finish) {
+  if (isLoading || finish || pressLoading) {
     if (finish) {
       console.log('info screen is FINISH...');
       return (
@@ -511,7 +519,17 @@ const TodayTaskOpen = props => {
           <ActivityIndicator animating={true} size="large" />
         </View>
       );
-    } else {
+    } else if (pressLoading) {
+      
+
+      console.log('info screen is loading press...');
+      return (
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+          <ActivityIndicator animating={true} size="large" />
+        </View>
+      );
+    }
+    else {
       setLoading(false);
       setdelayForMap(false);
 
