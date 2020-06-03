@@ -1,4 +1,4 @@
-import React, {useState, useEffect, Component} from 'react';
+import React, {useState, useEffect,useRef, Component} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -48,6 +48,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const TodayTaskOpen = props => {
+  
   const [pressLoading, setpressLoading] = useState(false);
   const GOOGLE_MAPS_APIKEY = 'AIzaSyA1h_cyazZLo1DExB0h0B2JBuOfv-yFtsM';
   const [data, setdata] = useState({});
@@ -58,6 +59,14 @@ const TodayTaskOpen = props => {
       return e.OrderDetails.Status >= 6 ? index : null;
     }),
   );
+  const [doneCase2, setdoneCase2] = useState(
+    props.route.params.data.DespatchDetails.map((e, index) => {
+      return e.OrderDetails.Status >= 6 ? index : null;
+    }),
+  );
+  
+  const endCountRef = useRef(doneCase2.filter(x=>x).length);
+  console.warn(endCountRef);
   const [ps, setps] = useState(' ');
   const [picPath, setpicPath] = useState(
     '/storage/emulated/0/saved_signature/signature.png',
@@ -173,7 +182,10 @@ const TodayTaskOpen = props => {
     setcashSteps(0);
     setdoneCase(detailIndex);
     setdoneCount(doneCount+1);
-    await updateStatus();
+    endCountRef.current += 1;
+    setpressLoading(true);
+    await updateStatus(tempStatus);
+    setpressLoading(false);
     await checkDone();
     setoverlay(true);
     setLoading(true);
@@ -425,12 +437,15 @@ const TodayTaskOpen = props => {
     //await postPic(res.pathName);
     setdoneCase(detailIndex);
     setdoneCount(doneCount+1);
-    handleNextStep();
+    //console.log(endCountRef.current);
+    endCountRef.current += 1;
+    //console.log(endCountRef.current);
+    await handleNextStep();
     await checkDone();
   };
 
   const checkDone = async () => {
-    setLoading(true);
+    //setLoading(true);
     setdetailIndex(0);
     await caseStatus.forEach(async (item, index, array) => {
       if (item < 6) {
@@ -469,16 +484,16 @@ const TodayTaskOpen = props => {
         console.log('done!!!!!!', doneCase, doneCase.length);
       }
     });
-    setfinish(doneCount===caseStatus.length);
+    setfinish(endCountRef.current===1);
     
-    console.log('FINISHED???????????????????', finish);
-    setLoading(true);
+    console.log('FINISHED???????????????????', endCountRef.current,caseStatus.length);
+    //setLoading(true);
   };
 
   useEffect(() => {
     checkDone();
     console.log('CHECKDONE????!?!?!?!?!?');
-  }, [pressLoading]);
+  }, []);
 
   if (isLoading || finish || pressLoading) {
     if (finish) {
