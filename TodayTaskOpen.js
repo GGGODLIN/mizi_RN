@@ -246,7 +246,7 @@ const TodayTaskOpen = props => {
 
     console.log(`Making Cash request to: ${url}`);
     let logContent = `Making Cash request to: ${url}`;
-    await logMyApp(taskData[detailIndex].OrderDetails.Id,logContent);
+    //await logMyApp(taskData[detailIndex].OrderDetails.Id,logContent);
     const data = await fetch(url, {
       method: 'PUT',
       headers: {
@@ -287,7 +287,7 @@ const TodayTaskOpen = props => {
           },
         ]),
       );
-      await logMyApp(taskData[detailIndex].OrderDetails.Id,JSON.stringify(data));
+      //await logMyApp(taskData[detailIndex].OrderDetails.Id,JSON.stringify(data));
     return data;
   };
 
@@ -351,7 +351,7 @@ const TodayTaskOpen = props => {
 
     console.log(`Making Status request to: ${url}`);
     let logContent = `Making Status request to: ${url}`;
-    await logMyApp(taskData[detailIndex].OrderDetails.Id,logContent);
+    //await logMyApp(taskData[detailIndex].OrderDetails.Id,logContent);
     const data = await fetch(url, {
       method: 'PUT',
       headers: {
@@ -383,7 +383,7 @@ const TodayTaskOpen = props => {
           },
         ]),
       );
-      await logMyApp(taskData[detailIndex].OrderDetails.Id,JSON.stringify(data));
+      //await logMyApp(taskData[detailIndex].OrderDetails.Id,JSON.stringify(data));
   };
 
   const updateStatusToSix = async (tempStatus) => {
@@ -396,7 +396,7 @@ const TodayTaskOpen = props => {
 
     console.log(`Making Status6 request to: ${url}`);
     let logContent = `Making Status6 request to: ${url}`;
-    await logMyApp(taskData[detailIndex].OrderDetails.Id,logContent);
+    //await logMyApp(taskData[detailIndex].OrderDetails.Id,logContent);
 
     const data = await fetch(url, {
       method: 'PUT',
@@ -427,7 +427,7 @@ const TodayTaskOpen = props => {
           },
         ]),
       );
-      await logMyApp(taskData[detailIndex].OrderDetails.Id,JSON.stringify(data));
+      //await logMyApp(taskData[detailIndex].OrderDetails.Id,JSON.stringify(data));
   };
 
   const handleSavePic = async res => {
