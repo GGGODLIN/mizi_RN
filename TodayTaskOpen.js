@@ -1,4 +1,4 @@
-import React, {useState, useEffect,useRef, Component} from 'react';
+import React, { useState, useEffect, useRef, Component } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -30,9 +30,9 @@ import MapView, {
 } from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import SignatureScreen from './SignatureScreen';
-import {NavigationContainer} from '@react-navigation/native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Picker} from '@react-native-community/picker';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Picker } from '@react-native-community/picker';
 import Signature from 'react-native-signature-canvas';
 import SignatureCapture from 'react-native-signature-capture';
 import LaunchNavigator from 'react-native-launch-navigator';
@@ -57,7 +57,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import RNPickerSelect from 'react-native-picker-select';
 
 const TodayTaskOpen = props => {
-  
+
   const [pressLoading, setpressLoading] = useState(false);
   const GOOGLE_MAPS_APIKEY = 'AIzaSyA1h_cyazZLo1DExB0h0B2JBuOfv-yFtsM';
   const [data, setdata] = useState({});
@@ -73,8 +73,8 @@ const TodayTaskOpen = props => {
       return e.OrderDetails.Status >= 6 ? index : null;
     }),
   );
-  
-  const endCountRef = useRef(doneCase2.filter(x=>x).length);
+
+  const endCountRef = useRef(doneCase2.filter(x => x).length);
   console.warn(endCountRef);
   const [ps, setps] = useState(' ');
   const [picPath, setpicPath] = useState(
@@ -107,12 +107,12 @@ const TodayTaskOpen = props => {
   console.log('index', detailIndex);
   const [people, setpeople] = useState(
     taskData[detailIndex].OrderDetails.FamilyWith +
-      taskData[detailIndex].OrderDetails.ForeignFamilyWith,
+    taskData[detailIndex].OrderDetails.ForeignFamilyWith,
   );
   console.log(
     '陪同',
     taskData[detailIndex].OrderDetails.FamilyWith +
-      taskData[detailIndex].OrderDetails.ForeignFamilyWith,
+    taskData[detailIndex].OrderDetails.ForeignFamilyWith,
   );
 
   const origin = {
@@ -129,25 +129,25 @@ const TodayTaskOpen = props => {
     latitudeDelta:
       Math.abs(
         taskData[detailIndex].OrderDetails.FromLat -
-          taskData[detailIndex].OrderDetails.ToLat,
+        taskData[detailIndex].OrderDetails.ToLat,
       ) * 2.2,
     longitudeDelta:
       Math.abs(
         taskData[detailIndex].OrderDetails.FromLon -
-          taskData[detailIndex].OrderDetails.ToLon,
+        taskData[detailIndex].OrderDetails.ToLon,
       ) * 2.2,
   };
 
   const [latitudeDelta, setlatitudeDelta] = useState(
     Math.abs(
       taskData[detailIndex].OrderDetails.FromLat -
-        taskData[detailIndex].OrderDetails.ToLat,
+      taskData[detailIndex].OrderDetails.ToLat,
     ) * 2.2,
   );
   const [longitudeDelta, setlongitudeDelta] = useState(
     Math.abs(
       taskData[detailIndex].OrderDetails.FromLon -
-        taskData[detailIndex].OrderDetails.ToLon,
+      taskData[detailIndex].OrderDetails.ToLon,
     ) * 2.2,
   );
 
@@ -157,7 +157,7 @@ const TodayTaskOpen = props => {
     setcaseStatus(tempStatus);
     setpeople(
       taskData[detailIndex].OrderDetails.FamilyWith +
-        taskData[detailIndex].OrderDetails.ForeignFamilyWith,
+      taskData[detailIndex].OrderDetails.ForeignFamilyWith,
     );
     if (tempStatus[detailIndex] == 6) {
       setpressLoading(true);
@@ -176,7 +176,7 @@ const TodayTaskOpen = props => {
         Alert.alert(' ', '請與個案核對身分及目的地，若有問題請聯繫行控中心', [
           {
             text: '確定',
-            onPress: () => {},
+            onPress: () => { },
           },
         ]);
       }
@@ -190,7 +190,7 @@ const TodayTaskOpen = props => {
 
     setcashSteps(0);
     setdoneCase(detailIndex);
-    setdoneCount(doneCount+1);
+    setdoneCount(doneCount + 1);
     endCountRef.current += 1;
     setpressLoading(true);
     await updateStatus(tempStatus);
@@ -204,18 +204,18 @@ const TodayTaskOpen = props => {
     setdetailIndex(index);
     setpeople(
       taskData[index].OrderDetails.FamilyWith +
-        taskData[index].OrderDetails.ForeignFamilyWith,
+      taskData[index].OrderDetails.ForeignFamilyWith,
     );
   };
 
   const handleCashNext = async () => {
     if (cashSteps == 0) {
-    //setLoading(true);
-    setpressLoading(true);
-    const res = await askCash();
-    setpressLoading(false);
-    setmoney(res.response);
-    
+      //setLoading(true);
+      setpressLoading(true);
+      const res = await askCash();
+      setpressLoading(false);
+      setmoney(res.response);
+
       setrealMoney(res.response);
     }
     setcashSteps(cashSteps + 1);
@@ -229,7 +229,7 @@ const TodayTaskOpen = props => {
     setaskingMoney(true);
     let url = `https://api.donkeymove.com/api/OrderDetails/PutDetailRealWith?OrderDetailId=${
       taskData[detailIndex].OrderDetails.Id
-    }&RealFamily=${people}`;
+      }&RealFamily=${people}`;
 
     console.log(`Making Cash request to: ${url}`);
     const data = await fetch(url, {
@@ -311,8 +311,8 @@ const TodayTaskOpen = props => {
           ]);
         } else {
           console.log('postPic AJAX', res);
-        setpicPathOnServer(res.response);
-        return res;
+          setpicPathOnServer(res.response);
+          return res;
         }
 
       })
@@ -320,7 +320,7 @@ const TodayTaskOpen = props => {
         Alert.alert('網路異常，請稍後再試...', ' ', [
           {
             text: '確定',
-            onPress: () => {props.navigation.navigate('TodayTaskList');},
+            onPress: () => { props.navigation.navigate('TodayTaskList'); },
           },
         ]),
       );
@@ -330,10 +330,9 @@ const TodayTaskOpen = props => {
   const updateStatus = async (tempStatus) => {
     let url = `https://api.donkeymove.com/api/OrderDetails/PutDetailStatus?OrderDetailId=${
       taskData[detailIndex].OrderDetails.Id
-    }&StatusInt=${tempStatus[detailIndex]}`;
+      }&StatusInt=${tempStatus[detailIndex]}`;
 
     console.log(`Making Status request to: ${url}`);
-
     const data = await fetch(url, {
       method: 'PUT',
       headers: {
@@ -359,7 +358,7 @@ const TodayTaskOpen = props => {
         Alert.alert('網路異常，請稍後再試...', ' ', [
           {
             text: '確定',
-            onPress: () => {props.navigation.navigate('TodayTaskList');},
+            onPress: () => { props.navigation.navigate('TodayTaskList'); },
           },
         ]),
       );
@@ -369,9 +368,9 @@ const TodayTaskOpen = props => {
     console.log('???????', taskData[detailIndex].OrderDetails.SOrderNo);
     let url = `https://api.donkeymove.com/api/OrderDetails/PutDetailStatus?OrderDetailId=${
       taskData[detailIndex].OrderDetails.Id
-    }&StatusInt=6&receiveAmt=${realMoney}&signPic=${
+      }&StatusInt=6&receiveAmt=${realMoney}&signPic=${
       taskData[detailIndex].OrderDetails.SOrderNo
-    }.png&remark=${ps}`;
+      }.png&remark=${ps}`;
 
     console.log(`Making Status6 request to: ${url}`);
 
@@ -399,7 +398,7 @@ const TodayTaskOpen = props => {
         Alert.alert('網路異常，請稍後再試...', ' ', [
           {
             text: '確定',
-            onPress: () => {props.navigation.navigate('TodayTaskList');},
+            onPress: () => { props.navigation.navigate('TodayTaskList'); },
           },
         ]),
       );
@@ -411,7 +410,7 @@ const TodayTaskOpen = props => {
     await setpicPath(res);
     //await postPic(res.pathName);
     setdoneCase(detailIndex);
-    setdoneCount(doneCount+1);
+    setdoneCount(doneCount + 1);
     //console.log(endCountRef.current);
     endCountRef.current += 1;
     //console.log(endCountRef.current);
@@ -431,24 +430,24 @@ const TodayTaskOpen = props => {
           setdetailIndex(index);
           setpeople(
             taskData[index].OrderDetails.FamilyWith +
-              taskData[index].OrderDetails.ForeignFamilyWith,
+            taskData[index].OrderDetails.ForeignFamilyWith,
           );
           console.log(
             'with?????????',
             taskData[index].OrderDetails.FamilyWith +
-              taskData[index].OrderDetails.ForeignFamilyWith,
+            taskData[index].OrderDetails.ForeignFamilyWith,
           );
           setforeignPeople(taskData[index].OrderDetails.ForeignFamilyWith);
           setlongitudeDelta(
             Math.abs(
               taskData[index].OrderDetails.FromLon -
-                taskData[index].OrderDetails.ToLon,
+              taskData[index].OrderDetails.ToLon,
             ) * 2.2,
           );
           setlatitudeDelta(
             Math.abs(
               taskData[index].OrderDetails.FromLat -
-                taskData[index].OrderDetails.ToLat,
+              taskData[index].OrderDetails.ToLat,
             ) * 2.2,
           );
         }
@@ -459,21 +458,21 @@ const TodayTaskOpen = props => {
         console.log('done!!!!!!', doneCase, doneCase.length);
       }
     });
-    setfinish(endCountRef.current===1);
-    
-    console.log('FINISHED???????????????????', endCountRef.current,caseStatus.length);
+    setfinish(endCountRef.current === 1);
+
+    console.log('FINISHED???????????????????', endCountRef.current, caseStatus.length);
     //setLoading(true);
   };
 
   const handleNav = async (input) => {
     var url = `https://www.google.com/maps/dir/?api=1&travelmode=driving&dir_action=navigate&destination=${input}`;
-Linking.canOpenURL(url).then(supported => {
-    if (!supported) {
+    Linking.canOpenURL(url).then(supported => {
+      if (!supported) {
         console.log('Can\'t handle url: ' + url);
-    } else {
+      } else {
         return Linking.openURL(url);
-    }
-}).catch(err => console.error('An error occurred', err));
+      }
+    }).catch(err => console.error('An error occurred', err));
   };
 
   useEffect(() => {
@@ -485,10 +484,10 @@ Linking.canOpenURL(url).then(supported => {
     if (finish) {
       console.log('info screen is FINISH...');
       return (
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
           <Image
             resizeMode="contain"
-            style={{flex: 9}}
+            style={{ flex: 9 }}
             source={require('./img/Frame_1.png')}
           />
           <Button
@@ -499,10 +498,10 @@ Linking.canOpenURL(url).then(supported => {
               borderRadius: 50,
               backgroundColor: 'orange',
               margin: 10,
-              flex:1,
+              flex: 1,
             }}
-            labelStyle={{color: 'white', fontSize: 20}}
-            contentStyle={{width: '100%', paddingHorizontal: 50}}
+            labelStyle={{ color: 'white', fontSize: 20 }}
+            contentStyle={{ width: '100%', paddingHorizontal: 50 }}
             mode="outlined"
             onPress={() => props.navigation.navigate('TodayTaskList')}>
             {'開啟下一趟任務'}
@@ -517,16 +516,16 @@ Linking.canOpenURL(url).then(supported => {
 
       console.log('info screen is loading...');
       return (
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
           <ActivityIndicator animating={true} size="large" />
         </View>
       );
     } else if (pressLoading) {
-      
+
 
       console.log('info screen is loading press...');
       return (
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
           <ActivityIndicator animating={true} size="large" />
         </View>
       );
@@ -537,7 +536,7 @@ Linking.canOpenURL(url).then(supported => {
 
       console.log('info screen is loading...22222222');
       return (
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
           <ActivityIndicator animating={true} size="large" />
         </View>
       );
@@ -545,21 +544,21 @@ Linking.canOpenURL(url).then(supported => {
   } else {
     console.log('DELTA', latitudeDelta, longitudeDelta);
     return (
-      <ScrollView style={{flex: 1}}>
+      <ScrollView style={{ flex: 1 }}>
         <Overlay
           isVisible={caseStatus[detailIndex] == 3 && overlay ? false : false}
           windowBackgroundColor="rgba(255, 255, 255, .5)"
           overlayBackgroundColor="white"
           width="auto"
           height="auto">
-          <View style={{margin: 0, padding: 0}}>
+          <View style={{ margin: 0, padding: 0 }}>
             <Text
-              style={{alignSelf: 'center', fontWeight: 'bold', fontSize: 20}}>
+              style={{ alignSelf: 'center', fontWeight: 'bold', fontSize: 20 }}>
               核對身分
             </Text>
             <Divider />
             <View
-              style={{flexDirection: 'row', alignItems: 'center', margin: 10}}>
+              style={{ flexDirection: 'row', alignItems: 'center', margin: 10 }}>
               <Avatar
                 size="large"
                 rounded
@@ -585,7 +584,7 @@ Linking.canOpenURL(url).then(supported => {
                 name="circle-o"
                 size={30}
                 color="orange"
-                style={{paddingLeft: 10}}
+                style={{ paddingLeft: 10 }}
               />
               <Text style={styles.addrText2}>
                 {`<${taskData[detailIndex].OrderDetails.FromAddrRemark}>
@@ -597,7 +596,7 @@ ${taskData[detailIndex].OrderDetails.FromAddr}`}
                 name="angle-double-down"
                 size={30}
                 color="orange"
-                style={{paddingLeft: 12}}
+                style={{ paddingLeft: 12 }}
               />
             </View>
             <View style={styles.addr2}>
@@ -605,7 +604,7 @@ ${taskData[detailIndex].OrderDetails.FromAddr}`}
                 name="circle-o"
                 size={30}
                 color="orange"
-                style={{paddingLeft: 10}}
+                style={{ paddingLeft: 10 }}
               />
               <Text style={styles.addrText2}>
                 {`<${taskData[detailIndex].OrderDetails.ToAddrRemark}>
@@ -617,24 +616,24 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
             onPress={() => setoverlay(false)}
             color="orange"
             mode="contained"
-            labelStyle={{color: 'white', fontSize: 20, fontWeight: 'bold'}}
-            style={{marginBottom: 10}}>
+            labelStyle={{ color: 'white', fontSize: 20, fontWeight: 'bold' }}
+            style={{ marginBottom: 10 }}>
             確認身分及目的地無誤
           </Button>
           <Button
             onPress={() => setoverlay(false)}
             color="black"
             mode="contained"
-            labelStyle={{color: 'white', fontSize: 20, fontWeight: 'bold'}}
-            style={{marginBottom: 10}}>
+            labelStyle={{ color: 'white', fontSize: 20, fontWeight: 'bold' }}
+            style={{ marginBottom: 10 }}>
             身分不符
           </Button>
           <Button
             onPress={() => setoverlay(false)}
             color="black"
             mode="contained"
-            labelStyle={{color: 'white', fontSize: 20, fontWeight: 'bold'}}
-            style={{marginBottom: 10}}>
+            labelStyle={{ color: 'white', fontSize: 20, fontWeight: 'bold' }}
+            style={{ marginBottom: 10 }}>
             更換地點
           </Button>
         </Overlay>
@@ -663,15 +662,15 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
           <View style={styles.titleBox}>
             <View style={styles.titleTime}>
               <View style={styles.titleLeft}>
-                <Text style={{color: 'white', fontSize: 20}}>
+                <Text style={{ color: 'white', fontSize: 20 }}>
                   {props.route.params.startTime}
                 </Text>
               </View>
               <View style={styles.titleDate}>
-                <Text style={{color: 'white', fontSize: 20}}>
+                <Text style={{ color: 'white', fontSize: 20 }}>
                   {props.route.params.startDate}
                 </Text>
-                <Text style={{color: 'white', fontSize: 20}}>
+                <Text style={{ color: 'white', fontSize: 20 }}>
                   {props.route.params.canShared}
                 </Text>
               </View>
@@ -685,7 +684,7 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
               </Text>
             </View>
             <View style={styles.titleRight}>
-              <Text style={{color: 'white', fontSize: 20}}>
+              <Text style={{ color: 'white', fontSize: 20 }}>
                 {'個案' +
                   1 +
                   '/' +
@@ -697,28 +696,28 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
           </View>
           <View
             style={
-              caseStatus[detailIndex] >= 5 ? {display: 'none'} : styles.predict
+              caseStatus[detailIndex] >= 5 ? { display: 'none' } : styles.predict
             }>
             <Text>預估里程</Text>
-            <Text style={{fontSize: 20, fontWeight: 'bold'}}>
+            <Text style={{ fontSize: 20, fontWeight: 'bold' }}>
               {taskData[detailIndex].OrderDetails.TotalMileage / 1000 + 'km'}
             </Text>
             <Divider />
             <Text>預估時間</Text>
-            <Text style={{fontSize: 20, fontWeight: 'bold'}}>
+            <Text style={{ fontSize: 20, fontWeight: 'bold' }}>
               {taskData[detailIndex].OrderDetails.ExpectedMinute + '分鐘'}
             </Text>
           </View>
           <View
             style={
               caseStatus[detailIndex] >= 5
-                ? {height: 0.1, position: 'relative'}
-                : {height: 250, position: 'relative', backgroundColor: 'pink'}
+                ? { height: 0.1, position: 'relative' }
+                : { height: 250, position: 'relative', backgroundColor: 'pink' }
             }
             contentContainerStyle={StyleSheet.absoluteFillObject}>
             <MapView
               provider="google"
-              style={[styles.map, {bottom: fixbottom}]}
+              style={[styles.map, { bottom: fixbottom }]}
               onKmlReady={e => console.log('HAHA', e.nativeEvent)}
               onMarkerSelect={e => console.log('PRESS!!!!', e.nativeEvent)}
               region={{
@@ -760,7 +759,7 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
                 onPress={() => setfixbottom(0)}
                 title={taskData[detailIndex].OrderDetails.ToAddr}
               >
-              <Callout
+                <Callout
                   tooltip={true}
                   onPress={e => {
                     console.log('DDDDDDDDDD', e.nativeEvent);
@@ -799,27 +798,27 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
             buttons={caseNames}
             containerStyle={
               caseStatus[detailIndex] >= 5
-                ? {display: 'none'}
+                ? { display: 'none' }
                 : {
-                    margin: 0,
-                    padding: 0,
-                    alignItems: 'flex-start',
-                    justifyContent: 'flex-start',
-                    alignSelf: 'flex-start',
-                  }
+                  margin: 0,
+                  padding: 0,
+                  alignItems: 'flex-start',
+                  justifyContent: 'flex-start',
+                  alignSelf: 'flex-start',
+                }
             }
-            buttonStyle={{margin: 0, padding: 0, alignItems: 'center'}}
-            textStyle={{margin: 0, padding: 0}}
+            buttonStyle={{ margin: 0, padding: 0, alignItems: 'center' }}
+            textStyle={{ margin: 0, padding: 0 }}
           />
           <View
             style={
-              caseStatus[detailIndex] >= 5 ? {display: 'none'} : styles.addr
+              caseStatus[detailIndex] >= 5 ? { display: 'none' } : styles.addr
             }>
             <Icon
               name="circle-o"
               size={30}
               color="orange"
-              style={{paddingLeft: 30}}
+              style={{ paddingLeft: 30 }}
             />
             <Text style={styles.addrText}>
               {`<${taskData[detailIndex].OrderDetails.FromAddrRemark}>
@@ -828,47 +827,47 @@ ${taskData[detailIndex].OrderDetails.FromAddr}`}
           </View>
           <View
             style={
-              caseStatus[detailIndex] >= 5 ? {display: 'none'} : styles.addr
+              caseStatus[detailIndex] >= 5 ? { display: 'none' } : styles.addr
             }>
             <Icon
               name="angle-double-down"
               size={30}
               color="orange"
-              style={{paddingLeft: 32}}
+              style={{ paddingLeft: 32 }}
             />
           </View>
           <View
             style={
-              caseStatus[detailIndex] >= 5 ? {display: 'none'} : styles.addr
+              caseStatus[detailIndex] >= 5 ? { display: 'none' } : styles.addr
             }>
             <Icon
               name="circle-o"
               size={30}
               color="orange"
-              style={{paddingLeft: 30}}
+              style={{ paddingLeft: 30 }}
             />
             <Text style={styles.addrText}>
               {`<${taskData[detailIndex].OrderDetails.ToAddrRemark}>
 ${taskData[detailIndex].OrderDetails.ToAddr}`}
             </Text>
           </View>
-          <View style={{flexDirection: 'row'}}>
+          <View style={{ flexDirection: 'row' }}>
             <Button
               style={
                 caseStatus[detailIndex] < 5
                   ? {
-                      alignSelf: 'center',
-                      justifyContent: 'center',
-                      alignContent: 'center',
-                      borderRadius: 50,
-                      backgroundColor: 'orange',
-                      margin: 10,
-                      flex: 1,
-                    }
-                  : {display: 'none'}
+                    alignSelf: 'center',
+                    justifyContent: 'center',
+                    alignContent: 'center',
+                    borderRadius: 50,
+                    backgroundColor: 'orange',
+                    margin: 10,
+                    flex: 1,
+                  }
+                  : { display: 'none' }
               }
-              labelStyle={{color: 'white', fontSize: 30}}
-              contentStyle={{width: '100%', height: 100}}
+              labelStyle={{ color: 'white', fontSize: 30 }}
+              contentStyle={{ width: '100%', height: 100 }}
               mode="outlined"
               onPress={() => {
                 if (caseStatus[detailIndex] >= 4) {
@@ -906,27 +905,27 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
               {caseStatus[detailIndex] == 1
                 ? '出發前往'
                 : caseStatus[detailIndex] == 2
-                ? '抵達上車地點'
-                : caseStatus[detailIndex] == 3
-                ? '客上'
-                : '客下'}
+                  ? '抵達上車地點'
+                  : caseStatus[detailIndex] == 3
+                    ? '客上'
+                    : '客下'}
             </Button>
             <Button
               style={
                 caseStatus[detailIndex] == 3
                   ? {
-                      alignSelf: 'center',
-                      justifyContent: 'center',
-                      alignContent: 'center',
-                      borderRadius: 50,
-                      backgroundColor: 'gray',
-                      margin: 10,
-                      flex: 1,
-                    }
-                  : {display: 'none'}
+                    alignSelf: 'center',
+                    justifyContent: 'center',
+                    alignContent: 'center',
+                    borderRadius: 50,
+                    backgroundColor: 'gray',
+                    margin: 10,
+                    flex: 1,
+                  }
+                  : { display: 'none' }
               }
-              labelStyle={{color: 'white', fontSize: 30}}
-              contentStyle={{width: '100%', height: 100}}
+              labelStyle={{ color: 'white', fontSize: 30 }}
+              contentStyle={{ width: '100%', height: 100 }}
               mode="outlined"
               onPress={() => {
                 Alert.alert('確定空趟?', ' ', [
@@ -949,21 +948,21 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
           <View
             style={
               caseStatus[detailIndex] >= 5
-                ? {display: 'none'}
-                : {width: '80%', alignItems: 'flex-start', alignSelf: 'center'}
+                ? { display: 'none' }
+                : { width: '80%', alignItems: 'flex-start', alignSelf: 'center' }
             }>
-            <Text style={{fontSize: 20}}>{`備註:${
+            <Text style={{ fontSize: 20 }}>{`備註:${
               taskData[detailIndex].CaseUser.Remark === null
                 ? ''
                 : taskData[detailIndex].CaseUser.Remark
-            }`}</Text>
+              }`}</Text>
           </View>
 
           <View
             style={
               caseStatus[detailIndex] == 5
-                ? {flexDirection: 'row', alignItems: 'center', display: 'none'}
-                : {display: 'none'}
+                ? { flexDirection: 'row', alignItems: 'center', display: 'none' }
+                : { display: 'none' }
             }>
             <Text
               style={{
@@ -977,7 +976,7 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
             <Picker
               enabled={cashSteps == 0 ? true : false}
               selectedValue={foreignPeople}
-              style={{height: 50, width: 150}}
+              style={{ height: 50, width: 150 }}
               onValueChange={(itemValue, itemIndex) =>
                 setforeignPeople(itemValue)
               }>
@@ -995,20 +994,20 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
             style={
               caseStatus[detailIndex] == 5
                 ? {
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    alignContent: 'center',
-                    paddingVertical: 10,
-                  }
-                : {display: 'none'}
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  alignContent: 'center',
+                  paddingVertical: 10,
+                }
+                : { display: 'none' }
             }>
             <Text
               style={{
                 fontSize: 20,
                 fontWeight: 'bold',
                 marginStart: 30,
-                
+
                 flex: 0.9,
               }}>
               陪同人數:
@@ -1016,7 +1015,7 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
             <Picker
               enabled={cashSteps == 0 && !askingMoney ? true : false}
               selectedValue={people}
-              style={cashSteps == 0 && !askingMoney ?{flex: 1}:{display:'none'}}
+              style={cashSteps == 0 && !askingMoney ? { flex: 1 } : { display: 'none' }}
               onValueChange={(itemValue, itemIndex) => setpeople(itemValue)}>
               <Picker.Item label="0人" value={0} />
               <Picker.Item label="1人" value={1} />
@@ -1028,10 +1027,10 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
               <Picker.Item label="7人" value={7} />
             </Picker>
             <Text
-              style={cashSteps == 0 && !askingMoney ?{display:'none'}:{
+              style={cashSteps == 0 && !askingMoney ? { display: 'none' } : {
                 fontSize: 20,
                 fontWeight: 'bold',
-                marginStart:100,
+                marginStart: 100,
                 flex: 1,
               }}>
               {`${people}人`}
@@ -1040,8 +1039,8 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
           <View
             style={
               cashSteps == 1
-                ? {flexDirection: 'row', alignItems: 'center'}
-                : {display: 'none'}
+                ? { flexDirection: 'row', alignItems: 'center' }
+                : { display: 'none' }
             }>
             <Text
               style={{
@@ -1052,15 +1051,15 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
               }}>
               應收車資:
             </Text>
-            <Text style={{fontSize: 30, fontWeight: 'bold', color: 'orange'}}>
+            <Text style={{ fontSize: 30, fontWeight: 'bold', color: 'orange' }}>
               {money}
             </Text>
           </View>
           <View
             style={
               cashSteps == 1
-                ? {flexDirection: 'row', alignItems: 'center'}
-                : {display: 'none'}
+                ? { flexDirection: 'row', alignItems: 'center' }
+                : { display: 'none' }
             }>
             <Text
               style={{
@@ -1090,7 +1089,7 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
               clearTextOnFocus={true}
             />
           </View>
-          <View style={cashSteps == 1 ? {} : {display: 'none'}}>
+          <View style={cashSteps == 1 ? {} : { display: 'none' }}>
             <Text
               style={{
                 fontSize: 20,
@@ -1104,7 +1103,7 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
               placeholder={'請輸入備註'}
               underlineColorAndroid="white"
               placeholderTextColor="gray"
-              style={{fontSize: 20, width: '80%', alignSelf: 'center'}}
+              style={{ fontSize: 20, width: '80%', alignSelf: 'center' }}
               onEndEditing={input => {
                 setps(input.nativeEvent.text);
               }}
@@ -1115,17 +1114,17 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
             style={
               caseStatus[detailIndex] == 5
                 ? {
-                    alignSelf: 'center',
-                    justifyContent: 'center',
-                    alignContent: 'center',
-                    borderRadius: 50,
-                    backgroundColor: 'orange',
-                    margin: 10,
-                  }
-                : {display: 'none'}
+                  alignSelf: 'center',
+                  justifyContent: 'center',
+                  alignContent: 'center',
+                  borderRadius: 50,
+                  backgroundColor: 'orange',
+                  margin: 10,
+                }
+                : { display: 'none' }
             }
-            labelStyle={{color: 'white', fontSize: 20}}
-            contentStyle={{width: '100%', paddingHorizontal: 50}}
+            labelStyle={{ color: 'white', fontSize: 20 }}
+            contentStyle={{ width: '100%', paddingHorizontal: 50 }}
             mode="outlined"
             disabled={askingMoney}
             onPress={() => handleCashNext()}>
@@ -1139,17 +1138,17 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
             style={
               caseStatus[detailIndex] == 5 && cashSteps == 1
                 ? {
-                    alignSelf: 'center',
-                    justifyContent: 'center',
-                    alignContent: 'center',
-                    borderRadius: 50,
-                    backgroundColor: 'orange',
-                    margin: 10,
-                  }
-                : {display: 'none'}
+                  alignSelf: 'center',
+                  justifyContent: 'center',
+                  alignContent: 'center',
+                  borderRadius: 50,
+                  backgroundColor: 'orange',
+                  margin: 10,
+                }
+                : { display: 'none' }
             }
-            labelStyle={{color: 'white', fontSize: 20}}
-            contentStyle={{width: '100%', paddingHorizontal: 50}}
+            labelStyle={{ color: 'white', fontSize: 20 }}
+            contentStyle={{ width: '100%', paddingHorizontal: 50 }}
             mode="outlined"
             onPress={() => handleCashPrev()}>
             {'回上一步'}
