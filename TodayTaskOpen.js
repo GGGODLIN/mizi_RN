@@ -345,13 +345,9 @@ const TodayTaskOpen = props => {
   };
 
   const updateStatus = async (tempStatus) => {
-    let statusInt = tempStatus[detailIndex];
-    if (tempStatus[detailIndex] === 5){
-      statusInt = 4;
-    }
     let url = `https://api.donkeymove.com/api/OrderDetails/PutDetailStatus?OrderDetailId=${
       taskData[detailIndex].OrderDetails.Id
-    }&StatusInt=${statusInt}`;
+    }&StatusInt=${tempStatus[detailIndex]}`;
 
     console.log(`Making Status request to: ${url}`);
     let logContent = `Making Status request to: ${url}`;
