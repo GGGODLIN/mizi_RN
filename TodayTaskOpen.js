@@ -726,59 +726,59 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
               {taskData[detailIndex].OrderDetails.ExpectedMinute + '分鐘'}
             </Text>
           </View>
-          <View
-            style={
-              caseStatus[detailIndex] >= 5
-                ? {height: 0.1, position: 'relative'}
-                : {height: 250, position: 'relative', backgroundColor: 'pink'}
-            }
-            contentContainerStyle={StyleSheet.absoluteFillObject}>
-            <MapView
-              style={[styles.map, {bottom: fixbottom}]}
-              onKmlReady={e => console.log('HAHA', e.nativeEvent)}
-              region={{
-                latitude: taskData[detailIndex].OrderDetails.FromLat,
-                longitude: taskData[detailIndex].OrderDetails.FromLon,
-                latitudeDelta: latitudeDelta * 1.1,
-                longitudeDelta: longitudeDelta * 1.1,
-              }}>
-              <Marker
-                coordinate={{
-                  latitude: taskData[detailIndex].OrderDetails.FromLat,
-                  longitude: taskData[detailIndex].OrderDetails.FromLon,
-                }}
-                icon="write"
-                pinColor="blue"
-                onPress={() => setfixbottom(0)}
-                title={taskData[detailIndex].OrderDetails.FromAddr}
-              />
-              <Marker
-                coordinate={{
-                  latitude: taskData[detailIndex].OrderDetails.ToLat,
-                  longitude: taskData[detailIndex].OrderDetails.ToLon,
-                }}
-                icon="write"
-                onPress={() => setfixbottom(0)}
-                title={taskData[detailIndex].OrderDetails.ToAddr}
-              />
-
-              <MapViewDirections
-                origin={{
-                  latitude: taskData[detailIndex].OrderDetails.FromLat,
-                  longitude: taskData[detailIndex].OrderDetails.FromLon,
-                }}
-                destination={{
-                  latitude: taskData[detailIndex].OrderDetails.ToLat,
-                  longitude: taskData[detailIndex].OrderDetails.ToLon,
-                }}
-                apikey={GOOGLE_MAPS_APIKEY}
-                strokeWidth={5}
-                strokeColor="#6495ED"
-                lineCap="round"
-                lineJoin="bevel"
-              />
-            </MapView>
-          </View>
+          {caseStatus[detailIndex] < 5 && <View
+                      style={
+                        caseStatus[detailIndex] >= 5
+                          ? {height: 0.1, position: 'relative'}
+                          : {height: 250, position: 'relative', backgroundColor: 'pink'}
+                      }
+                      contentContainerStyle={StyleSheet.absoluteFillObject}>
+                      <MapView
+                        style={[styles.map, {bottom: fixbottom}]}
+                        onKmlReady={e => console.log('HAHA', e.nativeEvent)}
+                        region={{
+                          latitude: taskData[detailIndex].OrderDetails.FromLat,
+                          longitude: taskData[detailIndex].OrderDetails.FromLon,
+                          latitudeDelta: latitudeDelta * 1.1,
+                          longitudeDelta: longitudeDelta * 1.1,
+                        }}>
+                        <Marker
+                          coordinate={{
+                            latitude: taskData[detailIndex].OrderDetails.FromLat,
+                            longitude: taskData[detailIndex].OrderDetails.FromLon,
+                          }}
+                          icon="write"
+                          pinColor="blue"
+                          onPress={() => setfixbottom(0)}
+                          title={taskData[detailIndex].OrderDetails.FromAddr}
+                        />
+                        <Marker
+                          coordinate={{
+                            latitude: taskData[detailIndex].OrderDetails.ToLat,
+                            longitude: taskData[detailIndex].OrderDetails.ToLon,
+                          }}
+                          icon="write"
+                          onPress={() => setfixbottom(0)}
+                          title={taskData[detailIndex].OrderDetails.ToAddr}
+                        />
+          
+                        <MapViewDirections
+                          origin={{
+                            latitude: taskData[detailIndex].OrderDetails.FromLat,
+                            longitude: taskData[detailIndex].OrderDetails.FromLon,
+                          }}
+                          destination={{
+                            latitude: taskData[detailIndex].OrderDetails.ToLat,
+                            longitude: taskData[detailIndex].OrderDetails.ToLon,
+                          }}
+                          apikey={GOOGLE_MAPS_APIKEY}
+                          strokeWidth={5}
+                          strokeColor="#6495ED"
+                          lineCap="round"
+                          lineJoin="bevel"
+                        />
+                      </MapView>
+                    </View>}
           <ButtonGroup
             onPress={handleChangeIndex}
             selectedIndex={detailIndex}
