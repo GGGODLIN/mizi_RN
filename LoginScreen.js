@@ -86,7 +86,7 @@ class LoginScreen extends Component {
         console.log("BEFORE LOGGING",obj_value);
         if (obj_value.success){
           //this.props.handleLogin(obj_value);
-          //this.handleReLogin(ascAcc,ascPwd);
+          this.handleReLogin(ascAcc,ascPwd);
         }
       } else {
         console.log('NOTHING HEHEXD');
