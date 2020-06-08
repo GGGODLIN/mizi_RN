@@ -61,7 +61,7 @@ const InfoScreen = props => {
 
   const handleSubmit = async () => {
     var url3 =
-      'http://slllcapi.1966.org.tw/api/DriverInfo/PutDriverPwd?DriverId=' +
+      'http://care.1966.org.tw/api/api/DriverInfo/PutDriverPwd?DriverId=' +
       data.response.Id +
       '&oldPwd=' +
       input1 +

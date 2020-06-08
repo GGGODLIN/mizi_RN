@@ -130,9 +130,9 @@ const TodayTaskList = props => {
         var obj_value = JSON.parse(value);
         setuserLoginInfo(obj_value);
         var url2 =
-          'http://slllcapi.1966.org.tw/api/DriverInfo/GetAllGroupDriverSide/' +
+          'http://care.1966.org.tw/api/api/DriverInfo/GetAllGroupDriverSide/' +
           obj_value.response.Id;
-        //let url = `http://slllcapi.1966.org.tw/api/DriverInfo/GetAllGroup/${obj_value.Cars.DriverId}`;
+        //let url = `http://care.1966.org.tw/api/api/DriverInfo/GetAllGroup/${obj_value.Cars.DriverId}`;
         const data = await fetch(url2, {
           method: 'GET',
           headers: {
@@ -162,7 +162,7 @@ const TodayTaskList = props => {
 
   async function fetchData_test() {
     const data = await fetch(
-      'http://slllcapi.1966.org.tw/api/DriverInfo/GetAllPassGroup/15',
+      'http://care.1966.org.tw/api/api/DriverInfo/GetAllPassGroup/15',
       {
         method: 'GET',
         headers: {

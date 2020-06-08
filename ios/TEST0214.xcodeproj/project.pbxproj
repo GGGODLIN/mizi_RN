@@ -463,7 +463,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = V5ZUWPFB7D;
+						DevelopmentTeam = FCDA6DJLTQ;
 						ProvisioningStyle = Automatic;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
@@ -939,7 +939,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 20200320;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = V5ZUWPFB7D;
+				DEVELOPMENT_TEAM = FCDA6DJLTQ;
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = TEST0214/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -949,7 +949,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.LinLiang;
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.1966ios;
 				PRODUCT_NAME = TEST0214;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -965,7 +965,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 20200320;
-				DEVELOPMENT_TEAM = V5ZUWPFB7D;
+				DEVELOPMENT_TEAM = FCDA6DJLTQ;
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = TEST0214/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -975,7 +975,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.LinLiang;
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.1966ios;
 				PRODUCT_NAME = TEST0214;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
