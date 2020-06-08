@@ -110,7 +110,7 @@
 		00E356EE1AD99517003FC87E /* TEST0214Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TEST0214Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* TEST0214Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TEST0214Tests.m; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* TEST0214.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TEST0214.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07F961A680F5B00A75B9A /* 1966日照交通預約系統.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "1966日照交通預約系統.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = TEST0214/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = TEST0214/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -330,7 +330,7 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* TEST0214.app */,
+				13B07F961A680F5B00A75B9A /* 1966日照交通預約系統.app */,
 				00E356EE1AD99517003FC87E /* TEST0214Tests.xctest */,
 				2D02E47B1E0B4A5D006451C7 /* TEST0214-tvOS.app */,
 				2D02E4901E0B4A5D006451C7 /* TEST0214-tvOSTests.xctest */,
@@ -407,7 +407,7 @@
 			);
 			name = TEST0214;
 			productName = TEST0214;
-			productReference = 13B07F961A680F5B00A75B9A /* TEST0214.app */;
+			productReference = 13B07F961A680F5B00A75B9A /* 1966日照交通預約系統.app */;
 			productType = "com.apple.product-type.application";
 		};
 		2D02E47A1E0B4A5D006451C7 /* TEST0214-tvOS */ = {
@@ -937,20 +937,21 @@
 				CODE_SIGN_ENTITLEMENTS = TEST0214/TEST0214.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20200320;
+				CURRENT_PROJECT_VERSION = 20200608;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = FCDA6DJLTQ;
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = TEST0214/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.1966ios;
-				PRODUCT_NAME = TEST0214;
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.only1966;
+				PRODUCT_NAME = "1966日照交通預約系統";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -964,19 +965,20 @@
 				CODE_SIGN_ENTITLEMENTS = TEST0214/TEST0214.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20200320;
+				CURRENT_PROJECT_VERSION = 20200608;
 				DEVELOPMENT_TEAM = FCDA6DJLTQ;
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = TEST0214/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.1966ios;
-				PRODUCT_NAME = TEST0214;
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.only1966;
+				PRODUCT_NAME = "1966日照交通預約系統";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
