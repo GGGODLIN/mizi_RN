@@ -8,15 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* TEST0214Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* TEST0214Tests.m */; };
-		0A2462A301F174128C5661FE /* libPods-TEST0214Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E8D3880115CAEA844889DE1 /* libPods-TEST0214Tests.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		18E5A5E1056D177BBDAAE851 /* libPods-taichongSonderIos.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E215FB1462936B906A39FF4 /* libPods-taichongSonderIos.a */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* TEST0214Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* TEST0214Tests.m */; };
+		2F3694121A69EB0018F83DEF /* libPods-taichongSonderIos-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 10D1F4AF6B70DF4F1B6A4DD8 /* libPods-taichongSonderIos-tvOSTests.a */; };
 		3A56036D241899A100CBBF8F /* bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3A56036B241899A000CBBF8F /* bundle */; };
 		3A56036F241899B700CBBF8F /* bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3A56036E241899B600CBBF8F /* bundle */; };
 		3A560371241899CE00CBBF8F /* bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3A560370241899CE00CBBF8F /* bundle */; };
@@ -68,9 +69,8 @@
 		3A608CB82417337C00AD3647 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3A608C7A2417337C00AD3647 /* MaterialIcons.ttf */; };
 		3A608CB92417337C00AD3647 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3A608C7A2417337C00AD3647 /* MaterialIcons.ttf */; };
 		3A608CBA2417337C00AD3647 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3A608C7A2417337C00AD3647 /* MaterialIcons.ttf */; };
-		3BCA629642C16A690A52589D /* libPods-TEST0214-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FAB0863F011BA7D2B81231D6 /* libPods-TEST0214-tvOS.a */; };
-		40902111A73E8F5018C0C7C1 /* libPods-TEST0214.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 527AB24E23AE71EB1D6E03E4 /* libPods-TEST0214.a */; };
-		AB6ED5487302926F55897242 /* libPods-TEST0214-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA06EC6A5568BA51CDF9EAC4 /* libPods-TEST0214-tvOSTests.a */; };
+		79600737952A18EE03C4A823 /* libPods-taichongSonderIos-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A488319DA5BC661196C5DBB /* libPods-taichongSonderIos-tvOS.a */; };
+		D3F1900C11770D16A0E119B9 /* libPods-taichongSonderIosTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 748883FB26F062F68C4CBCC4 /* libPods-taichongSonderIosTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,19 +106,27 @@
 
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
-		00E356EE1AD99517003FC87E /* 1966ntpcTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = 1966ntpcTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		00E356EE1AD99517003FC87E /* taichongSonderIosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = taichongSonderIosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* TEST0214Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TEST0214Tests.m; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* I南投-愚人之友.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "I南投-愚人之友.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0EBCB39F0403915A5F5AF71F /* Pods-taichongSonderIos-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-taichongSonderIos-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-taichongSonderIos-tvOS/Pods-taichongSonderIos-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		10D1F4AF6B70DF4F1B6A4DD8 /* libPods-taichongSonderIos-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-taichongSonderIos-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07F961A680F5B00A75B9A /* 台中-松德.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "台中-松德.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = TEST0214/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = TEST0214/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = TEST0214/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = TEST0214/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = TEST0214/main.m; sourceTree = "<group>"; };
+		196C5BF6CC5B297BD370AFED /* Pods-taichongSonderIos-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-taichongSonderIos-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-taichongSonderIos-tvOSTests/Pods-taichongSonderIos-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		1A488319DA5BC661196C5DBB /* libPods-taichongSonderIos-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-taichongSonderIos-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C6BB395FF23E15D46C97986 /* Pods-TEST0214-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TEST0214-tvOS.release.xcconfig"; path = "Target Support Files/Pods-TEST0214-tvOS/Pods-TEST0214-tvOS.release.xcconfig"; sourceTree = "<group>"; };
-		2D02E47B1E0B4A5D006451C7 /* 1966ntpc-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "1966ntpc-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2D02E4901E0B4A5D006451C7 /* 1966ntpc-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "1966ntpc-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		225284CCA2A828D9CD67BA2A /* Pods-taichongSonderIos.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-taichongSonderIos.release.xcconfig"; path = "Target Support Files/Pods-taichongSonderIos/Pods-taichongSonderIos.release.xcconfig"; sourceTree = "<group>"; };
+		22ED7516A991F51DE700C2DB /* Pods-taichongSonderIosTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-taichongSonderIosTests.release.xcconfig"; path = "Target Support Files/Pods-taichongSonderIosTests/Pods-taichongSonderIosTests.release.xcconfig"; sourceTree = "<group>"; };
+		2D02E47B1E0B4A5D006451C7 /* taichongSonderIos-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "taichongSonderIos-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D02E4901E0B4A5D006451C7 /* taichongSonderIos-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "taichongSonderIos-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D67F40921248CBC3F89A659 /* Pods-taichongSonderIosTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-taichongSonderIosTests.debug.xcconfig"; path = "Target Support Files/Pods-taichongSonderIosTests/Pods-taichongSonderIosTests.debug.xcconfig"; sourceTree = "<group>"; };
+		2E215FB1462936B906A39FF4 /* libPods-taichongSonderIos.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-taichongSonderIos.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A56036B241899A000CBBF8F /* bundle */ = {isa = PBXFileReference; lastKnownFileType = folder; path = bundle; sourceTree = "<group>"; };
 		3A56036E241899B600CBBF8F /* bundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bundle; sourceTree = SOURCE_ROOT; };
 		3A560370241899CE00CBBF8F /* bundle */ = {isa = PBXFileReference; lastKnownFileType = folder; path = bundle; sourceTree = "<group>"; };
@@ -144,17 +152,17 @@
 		3A608C7A2417337C00AD3647 /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialIcons.ttf; sourceTree = "<group>"; };
 		3A608CBB2417377100AD3647 /* RSSignatureCapture.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RSSignatureCapture.xcodeproj; path = "../node_modules/react-native-signature-capture/ios/RSSignatureCapture.xcodeproj"; sourceTree = "<group>"; };
 		478E6FE3664CCE00D704D15D /* Pods-TEST0214-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TEST0214-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-TEST0214-tvOSTests/Pods-TEST0214-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
-		527AB24E23AE71EB1D6E03E4 /* libPods-TEST0214.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TEST0214.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		688EEFB95C5A5531F062D991 /* Pods-TEST0214-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TEST0214-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-TEST0214-tvOS/Pods-TEST0214-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
-		7E8D3880115CAEA844889DE1 /* libPods-TEST0214Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TEST0214Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6B0E4CDC2CB930934D1FDDF4 /* Pods-taichongSonderIos-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-taichongSonderIos-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-taichongSonderIos-tvOSTests/Pods-taichongSonderIos-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		748883FB26F062F68C4CBCC4 /* libPods-taichongSonderIosTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-taichongSonderIosTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8309B13C5AA4D515F06BD98D /* Pods-TEST0214.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TEST0214.release.xcconfig"; path = "Target Support Files/Pods-TEST0214/Pods-TEST0214.release.xcconfig"; sourceTree = "<group>"; };
+		A0CC49711ACB337DE86F848F /* Pods-taichongSonderIos-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-taichongSonderIos-tvOS.release.xcconfig"; path = "Target Support Files/Pods-taichongSonderIos-tvOS/Pods-taichongSonderIos-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		CCEE9154CD54B144D351C866 /* Pods-TEST0214Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TEST0214Tests.release.xcconfig"; path = "Target Support Files/Pods-TEST0214Tests/Pods-TEST0214Tests.release.xcconfig"; sourceTree = "<group>"; };
 		D86B4C55B7B50AE57341B537 /* Pods-TEST0214Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TEST0214Tests.debug.xcconfig"; path = "Target Support Files/Pods-TEST0214Tests/Pods-TEST0214Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		DA06EC6A5568BA51CDF9EAC4 /* libPods-TEST0214-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TEST0214-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E9F2A57597B78CCEF1CD9207 /* Pods-taichongSonderIos.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-taichongSonderIos.debug.xcconfig"; path = "Target Support Files/Pods-taichongSonderIos/Pods-taichongSonderIos.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		F0AD645750D31553B5E7A380 /* Pods-TEST0214-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TEST0214-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-TEST0214-tvOSTests/Pods-TEST0214-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		FAB0863F011BA7D2B81231D6 /* libPods-TEST0214-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TEST0214-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDB74181DFFFDC88CAD6EAC3 /* Pods-TEST0214.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TEST0214.debug.xcconfig"; path = "Target Support Files/Pods-TEST0214/Pods-TEST0214.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -163,7 +171,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A2462A301F174128C5661FE /* libPods-TEST0214Tests.a in Frameworks */,
+				D3F1900C11770D16A0E119B9 /* libPods-taichongSonderIosTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,7 +179,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				40902111A73E8F5018C0C7C1 /* libPods-TEST0214.a in Frameworks */,
+				18E5A5E1056D177BBDAAE851 /* libPods-taichongSonderIos.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,7 +187,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3BCA629642C16A690A52589D /* libPods-TEST0214-tvOS.a in Frameworks */,
+				79600737952A18EE03C4A823 /* libPods-taichongSonderIos-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,7 +195,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB6ED5487302926F55897242 /* libPods-TEST0214-tvOSTests.a in Frameworks */,
+				2F3694121A69EB0018F83DEF /* libPods-taichongSonderIos-tvOSTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -233,10 +241,10 @@
 				3A56037D2418B85F00CBBF8F /* libBackgroundGeolocation.a */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
-				527AB24E23AE71EB1D6E03E4 /* libPods-TEST0214.a */,
-				FAB0863F011BA7D2B81231D6 /* libPods-TEST0214-tvOS.a */,
-				DA06EC6A5568BA51CDF9EAC4 /* libPods-TEST0214-tvOSTests.a */,
-				7E8D3880115CAEA844889DE1 /* libPods-TEST0214Tests.a */,
+				2E215FB1462936B906A39FF4 /* libPods-taichongSonderIos.a */,
+				1A488319DA5BC661196C5DBB /* libPods-taichongSonderIos-tvOS.a */,
+				10D1F4AF6B70DF4F1B6A4DD8 /* libPods-taichongSonderIos-tvOSTests.a */,
+				748883FB26F062F68C4CBCC4 /* libPods-taichongSonderIosTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -321,10 +329,10 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* I南投-愚人之友.app */,
-				00E356EE1AD99517003FC87E /* 1966ntpcTests.xctest */,
-				2D02E47B1E0B4A5D006451C7 /* 1966ntpc-tvOS.app */,
-				2D02E4901E0B4A5D006451C7 /* 1966ntpc-tvOSTests.xctest */,
+				13B07F961A680F5B00A75B9A /* 台中-松德.app */,
+				00E356EE1AD99517003FC87E /* taichongSonderIosTests.xctest */,
+				2D02E47B1E0B4A5D006451C7 /* taichongSonderIos-tvOS.app */,
+				2D02E4901E0B4A5D006451C7 /* taichongSonderIos-tvOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -347,6 +355,14 @@
 				F0AD645750D31553B5E7A380 /* Pods-TEST0214-tvOSTests.release.xcconfig */,
 				D86B4C55B7B50AE57341B537 /* Pods-TEST0214Tests.debug.xcconfig */,
 				CCEE9154CD54B144D351C866 /* Pods-TEST0214Tests.release.xcconfig */,
+				E9F2A57597B78CCEF1CD9207 /* Pods-taichongSonderIos.debug.xcconfig */,
+				225284CCA2A828D9CD67BA2A /* Pods-taichongSonderIos.release.xcconfig */,
+				0EBCB39F0403915A5F5AF71F /* Pods-taichongSonderIos-tvOS.debug.xcconfig */,
+				A0CC49711ACB337DE86F848F /* Pods-taichongSonderIos-tvOS.release.xcconfig */,
+				196C5BF6CC5B297BD370AFED /* Pods-taichongSonderIos-tvOSTests.debug.xcconfig */,
+				6B0E4CDC2CB930934D1FDDF4 /* Pods-taichongSonderIos-tvOSTests.release.xcconfig */,
+				2D67F40921248CBC3F89A659 /* Pods-taichongSonderIosTests.debug.xcconfig */,
+				22ED7516A991F51DE700C2DB /* Pods-taichongSonderIosTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -354,9 +370,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		00E356ED1AD99517003FC87E /* 1966ntpcTests */ = {
+		00E356ED1AD99517003FC87E /* taichongSonderIosTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "1966ntpcTests" */;
+			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "taichongSonderIosTests" */;
 			buildPhases = (
 				3107AEBBECC9A1533F05816A /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
@@ -368,14 +384,14 @@
 			dependencies = (
 				00E356F51AD99517003FC87E /* PBXTargetDependency */,
 			);
-			name = 1966ntpcTests;
+			name = taichongSonderIosTests;
 			productName = TEST0214Tests;
-			productReference = 00E356EE1AD99517003FC87E /* 1966ntpcTests.xctest */;
+			productReference = 00E356EE1AD99517003FC87E /* taichongSonderIosTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		13B07F861A680F5B00A75B9A /* 1966ntpc */ = {
+		13B07F861A680F5B00A75B9A /* taichongSonderIos */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "1966ntpc" */;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "taichongSonderIos" */;
 			buildPhases = (
 				6FF85C94660B2E2A26966548 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
@@ -389,14 +405,14 @@
 			);
 			dependencies = (
 			);
-			name = 1966ntpc;
+			name = taichongSonderIos;
 			productName = TEST0214;
-			productReference = 13B07F961A680F5B00A75B9A /* I南投-愚人之友.app */;
+			productReference = 13B07F961A680F5B00A75B9A /* 台中-松德.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2D02E47A1E0B4A5D006451C7 /* 1966ntpc-tvOS */ = {
+		2D02E47A1E0B4A5D006451C7 /* taichongSonderIos-tvOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "1966ntpc-tvOS" */;
+			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "taichongSonderIos-tvOS" */;
 			buildPhases = (
 				1E929CC79D212A4290746966 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F122414F3F0027D42C /* Start Packager */,
@@ -409,14 +425,14 @@
 			);
 			dependencies = (
 			);
-			name = "1966ntpc-tvOS";
+			name = "taichongSonderIos-tvOS";
 			productName = "TEST0214-tvOS";
-			productReference = 2D02E47B1E0B4A5D006451C7 /* 1966ntpc-tvOS.app */;
+			productReference = 2D02E47B1E0B4A5D006451C7 /* taichongSonderIos-tvOS.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2D02E48F1E0B4A5D006451C7 /* 1966ntpc-tvOSTests */ = {
+		2D02E48F1E0B4A5D006451C7 /* taichongSonderIos-tvOSTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "1966ntpc-tvOSTests" */;
+			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "taichongSonderIos-tvOSTests" */;
 			buildPhases = (
 				00C636F14A484F00222041CA /* [CP] Check Pods Manifest.lock */,
 				2D02E48C1E0B4A5D006451C7 /* Sources */,
@@ -428,9 +444,9 @@
 			dependencies = (
 				2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */,
 			);
-			name = "1966ntpc-tvOSTests";
+			name = "taichongSonderIos-tvOSTests";
 			productName = "TEST0214-tvOSTests";
-			productReference = 2D02E4901E0B4A5D006451C7 /* 1966ntpc-tvOSTests.xctest */;
+			productReference = 2D02E4901E0B4A5D006451C7 /* taichongSonderIos-tvOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -461,7 +477,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "1966ntpc" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "taichongSonderIos" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -484,10 +500,10 @@
 			);
 			projectRoot = "";
 			targets = (
-				13B07F861A680F5B00A75B9A /* 1966ntpc */,
-				00E356ED1AD99517003FC87E /* 1966ntpcTests */,
-				2D02E47A1E0B4A5D006451C7 /* 1966ntpc-tvOS */,
-				2D02E48F1E0B4A5D006451C7 /* 1966ntpc-tvOSTests */,
+				13B07F861A680F5B00A75B9A /* taichongSonderIos */,
+				00E356ED1AD99517003FC87E /* taichongSonderIosTests */,
+				2D02E47A1E0B4A5D006451C7 /* taichongSonderIos-tvOS */,
+				2D02E48F1E0B4A5D006451C7 /* taichongSonderIos-tvOSTests */,
 			);
 		};
 /* End PBXProject section */
@@ -610,7 +626,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-TEST0214-tvOSTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-taichongSonderIos-tvOSTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -646,7 +662,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-TEST0214-tvOS-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-taichongSonderIos-tvOS-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -682,7 +698,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-TEST0214Tests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-taichongSonderIosTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -695,7 +711,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-TEST0214/Pods-TEST0214-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-taichongSonderIos/Pods-taichongSonderIos-resources.sh",
 				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Entypo.ttf",
@@ -736,7 +752,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TEST0214/Pods-TEST0214-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-taichongSonderIos/Pods-taichongSonderIos-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6FF85C94660B2E2A26966548 /* [CP] Check Pods Manifest.lock */ = {
@@ -754,7 +770,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-TEST0214-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-taichongSonderIos-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -841,12 +857,12 @@
 /* Begin PBXTargetDependency section */
 		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 13B07F861A680F5B00A75B9A /* 1966ntpc */;
+			target = 13B07F861A680F5B00A75B9A /* taichongSonderIos */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
 		2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 2D02E47A1E0B4A5D006451C7 /* 1966ntpc-tvOS */;
+			target = 2D02E47A1E0B4A5D006451C7 /* taichongSonderIos-tvOS */;
 			targetProxy = 2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -866,7 +882,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D86B4C55B7B50AE57341B537 /* Pods-TEST0214Tests.debug.xcconfig */;
+			baseConfigurationReference = 2D67F40921248CBC3F89A659 /* Pods-taichongSonderIosTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -883,13 +899,13 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/1966ntpc.app/1966ntpc";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/taichongSonderIos.app/taichongSonderIos";
 			};
 			name = Debug;
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CCEE9154CD54B144D351C866 /* Pods-TEST0214Tests.release.xcconfig */;
+			baseConfigurationReference = 22ED7516A991F51DE700C2DB /* Pods-taichongSonderIosTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
@@ -905,18 +921,18 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/1966ntpc.app/1966ntpc";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/taichongSonderIos.app/taichongSonderIos";
 			};
 			name = Release;
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FDB74181DFFFDC88CAD6EAC3 /* Pods-TEST0214.debug.xcconfig */;
+			baseConfigurationReference = E9F2A57597B78CCEF1CD9207 /* Pods-taichongSonderIos.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 202005028;
+				CURRENT_PROJECT_VERSION = 20200609;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = FCDA6DJLTQ;
 				INFOPLIST_FILE = TEST0214/Info.plist;
@@ -927,8 +943,8 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.nantou;
-				PRODUCT_NAME = "I南投-愚人之友";
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.taichongSonderIos;
+				PRODUCT_NAME = "台中-松德";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -936,12 +952,12 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8309B13C5AA4D515F06BD98D /* Pods-TEST0214.release.xcconfig */;
+			baseConfigurationReference = 225284CCA2A828D9CD67BA2A /* Pods-taichongSonderIos.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 202005028;
+				CURRENT_PROJECT_VERSION = 20200609;
 				DEVELOPMENT_TEAM = FCDA6DJLTQ;
 				INFOPLIST_FILE = TEST0214/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -951,8 +967,8 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.nantou;
-				PRODUCT_NAME = "I南投-愚人之友";
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.taichongSonderIos;
+				PRODUCT_NAME = "台中-松德";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -960,7 +976,7 @@
 		};
 		2D02E4971E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 688EEFB95C5A5531F062D991 /* Pods-TEST0214-tvOS.debug.xcconfig */;
+			baseConfigurationReference = 0EBCB39F0403915A5F5AF71F /* Pods-taichongSonderIos-tvOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -988,7 +1004,7 @@
 		};
 		2D02E4981E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1C6BB395FF23E15D46C97986 /* Pods-TEST0214-tvOS.release.xcconfig */;
+			baseConfigurationReference = A0CC49711ACB337DE86F848F /* Pods-taichongSonderIos-tvOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1016,7 +1032,7 @@
 		};
 		2D02E4991E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 478E6FE3664CCE00D704D15D /* Pods-TEST0214-tvOSTests.debug.xcconfig */;
+			baseConfigurationReference = 196C5BF6CC5B297BD370AFED /* Pods-taichongSonderIos-tvOSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1036,14 +1052,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.TEST0214-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/1966ntpc-tvOS.app/1966ntpc-tvOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/taichongSonderIos-tvOS.app/taichongSonderIos-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 			};
 			name = Debug;
 		};
 		2D02E49A1E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F0AD645750D31553B5E7A380 /* Pods-TEST0214-tvOSTests.release.xcconfig */;
+			baseConfigurationReference = 6B0E4CDC2CB930934D1FDDF4 /* Pods-taichongSonderIos-tvOSTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1063,7 +1079,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.TEST0214-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/1966ntpc-tvOS.app/1966ntpc-tvOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/taichongSonderIos-tvOS.app/taichongSonderIos-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 			};
 			name = Release;
@@ -1176,7 +1192,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "1966ntpcTests" */ = {
+		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "taichongSonderIosTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				00E356F61AD99517003FC87E /* Debug */,
@@ -1185,7 +1201,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "1966ntpc" */ = {
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "taichongSonderIos" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
@@ -1194,7 +1210,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "1966ntpc-tvOS" */ = {
+		2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "taichongSonderIos-tvOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D02E4971E0B4A5E006451C7 /* Debug */,
@@ -1203,7 +1219,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "1966ntpc-tvOSTests" */ = {
+		2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "taichongSonderIos-tvOSTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D02E4991E0B4A5E006451C7 /* Debug */,
@@ -1212,7 +1228,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "1966ntpc" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "taichongSonderIos" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,

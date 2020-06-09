@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-               BuildableName = "1966ntpc-tvOS.app"
-               BlueprintName = "1966ntpc-tvOS"
-               ReferencedContainer = "container:1966ntpc.xcodeproj">
+               BuildableName = "taichongSonderIos-tvOS.app"
+               BlueprintName = "taichongSonderIos-tvOS"
+               ReferencedContainer = "container:taichongSonderIos.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "1966ntpc-tvOSTests.xctest"
-               BlueprintName = "1966ntpc-tvOSTests"
-               ReferencedContainer = "container:1966ntpc.xcodeproj">
+               BuildableName = "taichongSonderIos-tvOSTests.xctest"
+               BlueprintName = "taichongSonderIos-tvOSTests"
+               ReferencedContainer = "container:taichongSonderIos.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -59,9 +59,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "1966ntpc-tvOS.app"
-            BlueprintName = "1966ntpc-tvOS"
-            ReferencedContainer = "container:1966ntpc.xcodeproj">
+            BuildableName = "taichongSonderIos-tvOS.app"
+            BlueprintName = "taichongSonderIos-tvOS"
+            ReferencedContainer = "container:taichongSonderIos.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <Testables>
@@ -70,9 +70,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "1966ntpc-tvOSTests.xctest"
-               BlueprintName = "1966ntpc-tvOSTests"
-               ReferencedContainer = "container:1966ntpc.xcodeproj">
+               BuildableName = "taichongSonderIos-tvOSTests.xctest"
+               BlueprintName = "taichongSonderIos-tvOSTests"
+               ReferencedContainer = "container:taichongSonderIos.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -92,9 +92,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "1966ntpc-tvOS.app"
-            BlueprintName = "1966ntpc-tvOS"
-            ReferencedContainer = "container:1966ntpc.xcodeproj">
+            BuildableName = "taichongSonderIos-tvOS.app"
+            BlueprintName = "taichongSonderIos-tvOS"
+            ReferencedContainer = "container:taichongSonderIos.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -109,9 +109,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "1966ntpc-tvOS.app"
-            BlueprintName = "1966ntpc-tvOS"
-            ReferencedContainer = "container:1966ntpc.xcodeproj">
+            BuildableName = "taichongSonderIos-tvOS.app"
+            BlueprintName = "taichongSonderIos-tvOS"
+            ReferencedContainer = "container:taichongSonderIos.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

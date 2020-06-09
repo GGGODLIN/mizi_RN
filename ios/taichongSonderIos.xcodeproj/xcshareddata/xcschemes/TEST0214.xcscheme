@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = " &#x5357;&#x6295;-&#x611a;&#x4eba;&#x4e4b;&#x53cb;.app"
-               BlueprintName = "1966ntpc"
-               ReferencedContainer = "container:1966ntpc.xcodeproj">
+               BuildableName = "&#x53f0;&#x4e2d;-&#x677e;&#x5fb7;.app"
+               BlueprintName = "taichongSonderIos"
+               ReferencedContainer = "container:taichongSonderIos.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "1966ntpcTests.xctest"
-               BlueprintName = "1966ntpcTests"
-               ReferencedContainer = "container:1966ntpc.xcodeproj">
+               BuildableName = "taichongSonderIosTests.xctest"
+               BlueprintName = "taichongSonderIosTests"
+               ReferencedContainer = "container:taichongSonderIos.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -59,9 +59,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = " &#x5357;&#x6295;-&#x611a;&#x4eba;&#x4e4b;&#x53cb;.app"
-            BlueprintName = "1966ntpc"
-            ReferencedContainer = "container:1966ntpc.xcodeproj">
+            BuildableName = "&#x53f0;&#x4e2d;-&#x677e;&#x5fb7;.app"
+            BlueprintName = "taichongSonderIos"
+            ReferencedContainer = "container:taichongSonderIos.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <Testables>
@@ -70,9 +70,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "1966ntpcTests.xctest"
-               BlueprintName = "1966ntpcTests"
-               ReferencedContainer = "container:1966ntpc.xcodeproj">
+               BuildableName = "taichongSonderIosTests.xctest"
+               BlueprintName = "taichongSonderIosTests"
+               ReferencedContainer = "container:taichongSonderIos.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -92,9 +92,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = " &#x5357;&#x6295;-&#x611a;&#x4eba;&#x4e4b;&#x53cb;.app"
-            BlueprintName = "1966ntpc"
-            ReferencedContainer = "container:1966ntpc.xcodeproj">
+            BuildableName = "&#x53f0;&#x4e2d;-&#x677e;&#x5fb7;.app"
+            BlueprintName = "taichongSonderIos"
+            ReferencedContainer = "container:taichongSonderIos.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -109,9 +109,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = " &#x5357;&#x6295;-&#x611a;&#x4eba;&#x4e4b;&#x53cb;.app"
-            BlueprintName = "1966ntpc"
-            ReferencedContainer = "container:1966ntpc.xcodeproj">
+            BuildableName = "&#x53f0;&#x4e2d;-&#x677e;&#x5fb7;.app"
+            BlueprintName = "taichongSonderIos"
+            ReferencedContainer = "container:taichongSonderIos.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

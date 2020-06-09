@@ -29,7 +29,7 @@ import {
   Button,
 } from 'react-native-paper';
 const args = {
-  number: '049-2917146', // String value with the number to call
+  number: '0423950256', // String value with the number to call
   prompt: false, // Optional boolean property. Determines if the user should be prompt prior to the call
 };
 const Tab = createMaterialBottomTabNavigator();
@@ -73,7 +73,7 @@ export default function BottomTab(props) {
         }}
       />
 
-      {/*<Tab.Screen
+      <Tab.Screen
         name="每日檢查"
         component={CheckStackScreen}
         options={{
@@ -83,8 +83,8 @@ export default function BottomTab(props) {
           tabPress: e => {
             console.log('HAHA56974957912779455712945957462416119457------------------------------');
           },
-        }}/>*/}
-      <Tab.Screen
+        }}/>
+      {/*<Tab.Screen
         name="收入列表"
         component={PastReceiveStackScreen}
         options={{
@@ -95,7 +95,7 @@ export default function BottomTab(props) {
             e.preventDefault();
           },
         }}
-      />
+      />*/}
 
       <Tab.Screen
         name="今日任務"

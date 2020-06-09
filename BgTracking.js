@@ -41,7 +41,7 @@ class BgTracking extends Component {
         // IMPORTANT: task has to be ended by endTask
 
         let url =
-          'http://qif-nantou.1966.org.tw:20022/api/DriverInfo/PostDeviceGPS';
+          'http://tccapi.1966.org.tw/api/DriverInfo/PostDeviceGPS';
 
         console.log(`Making GPS request to: ${url}`);
         console.log(deviceId,location.longitude,location.latitude);
