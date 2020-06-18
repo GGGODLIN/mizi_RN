@@ -1,4 +1,4 @@
-import React, {useState, useEffect, Component} from 'react';
+import React, { useState, useEffect, Component } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -20,52 +20,52 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import AsyncStorage from '@react-native-community/async-storage';
 
-import {NavigationContainer} from '@react-navigation/native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import {ThemeProvider, Avatar, ListItem} from 'react-native-elements';
-import {Button, Card, Title, Paragraph, Divider,ActivityIndicator} from 'react-native-paper';
+import { ThemeProvider, Avatar, ListItem } from 'react-native-elements';
+import { Button, Card, Title, Paragraph, Divider, ActivityIndicator } from 'react-native-paper';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-function Item({data, navigation}) {
+function Item({ data, navigation }) {
   var caseName = data.DespatchDetails[0].CaseUser.Name;
   var startTime = data.DespatchDetails[0].Despatch.StartDate;
   var startDate = data.DespatchDetails[0].Despatch.StartDate;
   var pos = startTime.indexOf('T');
   if (pos != -1) {
     startDate = startTime.substring(0, pos);
-    startTime = startTime.substring(pos + 1,pos+6);
+    startTime = startTime.substring(pos + 1, pos + 6);
   }
- var canShared = data.DespatchDetails.length>=2?'有共乘':'無共乘';
+  var canShared = data.DespatchDetails.length >= 2 ? '有共乘' : '無共乘';
   var statusString =
     data.DespatchDetails[0].OrderDetails.Status == 0
       ? '新訂單'
       : data.DespatchDetails[0].OrderDetails.Status == 1
-      ? '已排班'
-      : data.DespatchDetails[0].OrderDetails.Status == 2
-      ? '已出發'
-      : data.DespatchDetails[0].OrderDetails.Status == 3
-      ? '已抵達'
-      : data.DespatchDetails[0].OrderDetails.Status == 4
-      ? '客上'
-      : data.DespatchDetails[0].OrderDetails.Status == 5
-      ? '客下'
-      : data.DespatchDetails[0].OrderDetails.Status == 6
-      ? '已完成'
-      : data.DespatchDetails[0].OrderDetails.Status == 7
-      ? '未執行'
-      : data.DespatchDetails[0].OrderDetails.Status == 8
-      ? '個案取消'
-      : data.DespatchDetails[0].OrderDetails.Status == 9
-      ? '服務單位取消'
-      : data.DespatchDetails[0].OrderDetails.Status == 10
-      ? '空趟'
-      : data.DespatchDetails[0].OrderDetails.Status == 11
-      ? '無派車'
-      : data.DespatchDetails[0].OrderDetails.Status == 12
-      ? '服務單位取消-變更時間'
-      : '可撥的Bug';
+        ? '已排班'
+        : data.DespatchDetails[0].OrderDetails.Status == 2
+          ? '已出發'
+          : data.DespatchDetails[0].OrderDetails.Status == 3
+            ? '已抵達'
+            : data.DespatchDetails[0].OrderDetails.Status == 4
+              ? '客上'
+              : data.DespatchDetails[0].OrderDetails.Status == 5
+                ? '客下'
+                : data.DespatchDetails[0].OrderDetails.Status == 6
+                  ? '已完成'
+                  : data.DespatchDetails[0].OrderDetails.Status == 7
+                    ? '未執行'
+                    : data.DespatchDetails[0].OrderDetails.Status == 8
+                      ? '個案取消'
+                      : data.DespatchDetails[0].OrderDetails.Status == 9
+                        ? '服務單位取消'
+                        : data.DespatchDetails[0].OrderDetails.Status == 10
+                          ? '空趟'
+                          : data.DespatchDetails[0].OrderDetails.Status == 11
+                            ? '無派車'
+                            : data.DespatchDetails[0].OrderDetails.Status == 12
+                              ? '服務單位取消-變更時間'
+                              : '可撥的Bug';
   var FamilyWith = data.DespatchDetails[0].OrderDetails.FamilyWith;
   var ForeignFamilyWith =
     data.DespatchDetails[0].OrderDetails.ForeignFamilyWith;
@@ -79,7 +79,7 @@ function Item({data, navigation}) {
           data: data,
           startTime: startTime,
           startDate: startDate,
-          canShared:canShared,
+          canShared: canShared,
         })
       }>
       <View
@@ -92,46 +92,46 @@ function Item({data, navigation}) {
         <View style={styles.titleBox}>
           <View style={styles.titleTime}>
             <View style={styles.titleLeft}>
-              <Text style={{color: 'white', fontSize: 20}}>{startTime}</Text>
+              <Text style={{ color: 'white', fontSize: 20 }}>{startTime}</Text>
             </View>
             <View style={styles.titleDate}>
-              <Text style={{color: 'white', fontSize: 20}}>{startDate}</Text>
+              <Text style={{ color: 'white', fontSize: 20 }}>{startDate}</Text>
               <Text
-                style={{color: 'white', fontSize: 20,marginStart:20}}
+                style={{ color: 'white', fontSize: 20, marginStart: 20 }}
                 allowFontScaling={false}>
-                {data.DespatchDetails.length>=2?'有共乘':'無共乘'}
+                {data.DespatchDetails.length >= 2 ? '有共乘' : '無共乘'}
               </Text>
             </View>
           </View>
           <View style={styles.titleName}>
-            <View style={{flexDirection: 'row'}}>
-              <View style={{flexDirection: 'column', justifyContent: 'center',flex:1.2}}>
-             
-              {data.DespatchDetails.map((val, index)=>{
-                return (
-                  <Text
-                style={{
-                  color: 'white',
-                  fontSize: 24,
-                  fontWeight: 'bold',
-                  paddingEnd:10,
-                }}>
-                {val.CaseUser.Name}
-              </Text>
+            <View style={{ flexDirection: 'row' }}>
+              <View style={{ flexDirection: 'column', justifyContent: 'center', flex: 1.2 }}>
+
+                {data.DespatchDetails.map((val, index) => {
+                  return (
+                    <Text
+                      style={{
+                        color: 'white',
+                        fontSize: 24,
+                        fontWeight: 'bold',
+                        paddingEnd: 10,
+                      }}>
+                      {val.CaseUser.Name}
+                    </Text>
                   );
-              })}
-              
+                })}
+
               </View>
-              <View style={{flexDirection: 'column', justifyContent: 'center',flex:2}}>
+              <View style={{ flexDirection: 'column', justifyContent: 'center', flex: 2 }}>
                 <Text
-                  style={{color: 'white', fontSize: 18, fontWeight: 'bold'}}>
+                  style={{ color: 'white', fontSize: 18, fontWeight: 'bold' }}>
                   {data.DespatchDetails[0].OrderDetails.SOrderNo}
                 </Text>
                 <Divider
-                  style={{width: 220, backgroundColor: 'white', height: 1}}
+                  style={{ width: 220, backgroundColor: 'white', height: 1 }}
                 />
                 <Text
-                  style={{color: 'white', fontSize: 18, fontWeight: 'bold'}}>
+                  style={{ color: 'white', fontSize: 18, fontWeight: 'bold' }}>
                   {statusString}
                 </Text>
                 <Text style={styles.addrText}>
@@ -165,25 +165,25 @@ const HistoryTaskList = props => {
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
     setShow(false);
-    if(event.type === 'neutralButtonPressed'){
+    if (event.type === 'neutralButtonPressed') {
       setDate(new Date());
       setgoPicked(false);
     }
-    else{
+    else {
       setDate(currentDate);
       setgoPicked(true);
     }
-   
+
   };
 
   const onChange2 = (event, selectedDate) => {
     const currentDate = selectedDate || date2;
     setShow2(false);
-    if(event.type === 'neutralButtonPressed'){
+    if (event.type === 'neutralButtonPressed') {
       setDate2(new Date());
       setgoPicked2(false);
     }
-    else{
+    else {
       setDate2(currentDate);
       setgoPicked2(true);
     }
@@ -204,14 +204,14 @@ const HistoryTaskList = props => {
         setuser(obj_value);
         console.log('GET FROM ASYN IS', obj_value);
         var url2 =
-          'http://qif-nantou.1966.org.tw:20022/api/DriverInfo/GetAllPassGroup/' +
+          'http://ymca.1966.org.tw:20023/api/DriverInfo/GetAllPassGroup/' +
           obj_value.response.Id;
         seturl(
-          `http://qif-nantou.1966.org.tw:20022/api/DriverInfo/GetAllPassGroup/${
-            obj_value.response.Id
+          `http://ymca.1966.org.tw:20023/api/DriverInfo/GetAllPassGroup/${
+          obj_value.response.Id
           }`,
         );
-        //let url = `http://qif-nantou.1966.org.tw:20022/api/DriverInfo/GetAllGroup/${obj_value.Id}`;
+        //let url = `http://ymca.1966.org.tw:20023/api/DriverInfo/GetAllGroup/${obj_value.Id}`;
         const data = await fetch(url2, {
           method: 'GET',
           headers: {
@@ -225,13 +225,13 @@ const HistoryTaskList = props => {
             setLoading(false);
           })
           .catch(err =>
-        Alert.alert('網路異常，請稍後再試...', ' ', [
-          {
-            text: '確定',
-            onPress: () => {},
-          },
-        ]),
-      );
+            Alert.alert('網路異常，請稍後再試...', ' ', [
+              {
+                text: '確定',
+                onPress: () => { },
+              },
+            ]),
+          );
       }
     } catch (error) {
       console.log('cannot get ITEM');
@@ -239,12 +239,12 @@ const HistoryTaskList = props => {
     }
   }
 
-  async function fetchDataDate(sDate,eDate) {
+  async function fetchDataDate(sDate, eDate) {
     await setLoading(true);
     var url2 =
-      'http://qif-nantou.1966.org.tw:20022/api/DriverInfo/GetAllPassGroup/' +
+      'http://ymca.1966.org.tw:20023/api/DriverInfo/GetAllPassGroup/' +
       user.response.Id + '?sDate=' + sDate + '&eDate=' + eDate;
-      console.log(url2);
+    console.log(url2);
     const data = await fetch(
       url2,
       {
@@ -258,13 +258,13 @@ const HistoryTaskList = props => {
       .then(res => {
         console.log('TASK AJAX', res);
         setdata(res);
-            setLoading(false);
+        setLoading(false);
       })
       .catch(err =>
         Alert.alert('網路異常，請稍後再試...', ' ', [
           {
             text: '確定',
-            onPress: () => {},
+            onPress: () => { },
           },
         ]),
       );
@@ -277,7 +277,7 @@ const HistoryTaskList = props => {
   if (isLoading) {
     console.log('TASKS screen is loading...');
     return (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <ActivityIndicator animating={true} size='large' />
       </View>
     );
@@ -291,12 +291,12 @@ const HistoryTaskList = props => {
 
     return (
       <SafeAreaView style={styles.container}>
-        <View style={{width: '70%'}}>
-          <View style={{flexDirection: 'row'}}>
-            <View style={{flexDirection: 'column'}}>
+        <View style={{ width: '70%' }}>
+          <View style={{ flexDirection: 'row' }}>
+            <View style={{ flexDirection: 'column' }}>
               <View>
                 <Button
-                  contentStyle={{width: '100%'}}
+                  contentStyle={{ width: '100%' }}
                   onPress={showDatepicker}
                   color="white"
                   mode="contained">
@@ -315,7 +315,7 @@ const HistoryTaskList = props => {
             </View>
             <Button
               mode="contained"
-              onPress={()=>fetchDataDate(nowDate,nowDate2)}
+              onPress={() => fetchDataDate(nowDate, nowDate2)}
               style={{
                 marginStart: 10,
                 alignItems: 'center',
@@ -344,7 +344,7 @@ const HistoryTaskList = props => {
         </View>
         <FlatList
           data={list}
-          renderItem={({item}) => (
+          renderItem={({ item }) => (
             <Item
               title={item.DespatchDetails[0].CaseUser.Name}
               data={item}
@@ -432,11 +432,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   addrText: {
-    width:'80%',
+    width: '80%',
     fontSize: 15,
     color: 'white',
     paddingLeft: 0,
-    marginTop:5,
+    marginTop: 5,
     flexWrap: 'wrap',
   },
   addr2: {

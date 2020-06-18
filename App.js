@@ -7,7 +7,7 @@ import 'react-native-gesture-handler';
  * @flow
  */
 
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -26,10 +26,10 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-import {NavigationContainer} from '@react-navigation/native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import {Button, ThemeProvider} from 'react-native-elements';
+import { Button, ThemeProvider } from 'react-native-elements';
 
 import Screen from './Screen';
 import LoginScreen from './LoginScreen';
@@ -42,7 +42,7 @@ const App: () => React$Node = () => {
     const [loading, setloading] = useState({lodingOrNot:true});
   
     async function fetchData() {
-      const res = await fetch("http://qif-nantou.1966.org.tw:20022/api/DriverInfo/Get/15");
+      const res = await fetch("http://ymca.1966.org.tw:20023/api/DriverInfo/Get/15");
       res.json()
         .then(res => {
           console.log(res.msg);
@@ -83,24 +83,24 @@ const App: () => React$Node = () => {
   handleLogin = async res => {
     try {
       await AsyncStorage.setItem('userLoginInfo', JSON.stringify(res));
-      console.log('SAVED ASYNC',res);
+      console.log('SAVED ASYNC', res);
       setlogged(res.success);
     } catch (error) {
       console.log('LOCALSTORAGE WRONG');
       // Error saving data
     }
     //console.log("handel",res);
-    
+
   };
 
   return (
     <>
       <ThemeProvider>
-      <LoginScreen handleLogin={handleLogin} switchOn={!logged} />
-      <Screen switchOn={logged} />
+        <LoginScreen handleLogin={handleLogin} switchOn={!logged} />
+        <Screen switchOn={logged} />
       </ThemeProvider>
-      
-      
+
+
       <StatusBar barStyle="dark-content" />
 
     </>

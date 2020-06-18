@@ -1,4 +1,4 @@
-import React, {useState, useEffect, Component} from 'react';
+import React, { useState, useEffect, Component } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -19,11 +19,11 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import AsyncStorage from '@react-native-community/async-storage';
 
-import {NavigationContainer,useFocusEffect,StackActions} from '@react-navigation/native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { NavigationContainer, useFocusEffect, StackActions } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import {ThemeProvider, Avatar, CheckBox} from 'react-native-elements';
-import {Button, Card, Title, Paragraph, Divider,ActivityIndicator} from 'react-native-paper';
+import { ThemeProvider, Avatar, CheckBox } from 'react-native-elements';
+import { Button, Card, Title, Paragraph, Divider, ActivityIndicator } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ToggleSwitch from 'toggle-switch-react-native';
 
@@ -54,9 +54,9 @@ const CarCheckScreen = props => {
       const value = await AsyncStorage.getItem('userLoginInfo');
       if (value !== null) {
         var obj_value = JSON.parse(value);
-        let url = `http://qif-nantou.1966.org.tw:20022/api/DriverInfo/GetDriverCheck/${
+        let url = `http://ymca.1966.org.tw:20023/api/DriverInfo/GetDriverCheck/${
           obj_value.response.Id
-        }`;
+          }`;
         const res = await fetch(url, {
           method: 'GET',
           headers: {
@@ -66,7 +66,7 @@ const CarCheckScreen = props => {
           .then(response => response.json())
           .then(res => {
             console.log('FETCH CHECKED?', res.response.CarCheck);
-            if(res.response.CarCheck){
+            if (res.response.CarCheck) {
               props.navigation.navigate('CheckMainScreen');
             }
           });
@@ -79,7 +79,7 @@ const CarCheckScreen = props => {
   }
 
   const fetchDataModal = async () => {
-    let url = `http://qif-nantou.1966.org.tw:20022/api/CheckItem/GetCheckCarViewModel`;
+    let url = `http://ymca.1966.org.tw:20023/api/CheckItem/GetCheckCarViewModel`;
 
     console.log(`Making Modal request to: ${url}`);
 
@@ -97,14 +97,14 @@ const CarCheckScreen = props => {
         Alert.alert('網路異常，請稍後再試...', ' ', [
           {
             text: '確定',
-            onPress: () => {},
+            onPress: () => { },
           },
         ]),
       );
   };
 
   const handleCheckAll = async () => {
-    let tempData = {...checkDataModal};
+    let tempData = { ...checkDataModal };
     const nameList = Object.values(tempData.response).map(
       item => (item.HasChange = !allChecked),
     );
@@ -116,9 +116,9 @@ const CarCheckScreen = props => {
   };
 
   const checkCarChecked = async () => {
-    let url = `http://qif-nantou.1966.org.tw:20022/api/DriverInfo/GetDriverCheck/${
+    let url = `http://ymca.1966.org.tw:20023/api/DriverInfo/GetDriverCheck/${
       data.response.Id
-    }`;
+      }`;
     const res = await fetch(url, {
       method: 'GET',
       headers: {
@@ -132,7 +132,7 @@ const CarCheckScreen = props => {
   };
 
   const handleSubmit = async () => {
-    let tempData = {...checkDataModal};
+    let tempData = { ...checkDataModal };
     let queryHasChecked = '';
     let queryNoChecked = '';
 
@@ -148,7 +148,7 @@ const CarCheckScreen = props => {
     console.log('queryNoChecked', queryNoChecked);
 
     let url =
-      'http://qif-nantou.1966.org.tw:20022/api/CheckResult/PostCheckCarMapping';
+      'http://ymca.1966.org.tw:20023/api/CheckResult/PostCheckCarMapping';
     const driverId = data.response.Id;
     const carId = data.response.Cars.Id;
     const postRes = await fetch(url, {
@@ -164,13 +164,13 @@ const CarCheckScreen = props => {
         NoChecked: queryNoChecked,
       }),
     }).catch(err =>
-        Alert.alert('網路異常，請稍後再試...', ' ', [
-          {
-            text: '確定',
-            onPress: () => {},
-          },
-        ]),
-      );
+      Alert.alert('網路異常，請稍後再試...', ' ', [
+        {
+          text: '確定',
+          onPress: () => { },
+        },
+      ]),
+    );
     console.log('POST RES', postRes);
     console.log('SUBMIT', data.response.Cars.Id);
     props.navigation.navigate('CheckMainScreen');
@@ -185,8 +185,8 @@ const CarCheckScreen = props => {
   useFocusEffect(
     React.useCallback(() => {
       //alert('Screen was focused');
-      fetchData().then(()=>setLoading(false));
-      
+      fetchData().then(() => setLoading(false));
+
       return () => {
         setLoading(true);
         props.navigation.dispatch(pushAction);
@@ -200,7 +200,7 @@ const CarCheckScreen = props => {
   if (isLoading) {
     console.log('CHECKCAR screen is loading...');
     return (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <ActivityIndicator animating={true} size='large' />
       </View>
     );
@@ -223,7 +223,7 @@ const CarCheckScreen = props => {
             padding: 15,
             backgroundColor: '#3C4856',
           }}>
-          <Text style={{color: 'white', fontSize: 20, fontWeight: 'bold'}}>
+          <Text style={{ color: 'white', fontSize: 20, fontWeight: 'bold' }}>
             每日車輛檢查
           </Text>
           <ToggleSwitch
@@ -231,7 +231,7 @@ const CarCheckScreen = props => {
             onColor="#F8A91E"
             offColor="#CACACA"
             label="全部檢查完畢"
-            labelStyle={{color: 'white'}}
+            labelStyle={{ color: 'white' }}
             size="medium"
             onToggle={isOn => handleCheckAll()}
           />
@@ -257,7 +257,7 @@ const CarCheckScreen = props => {
                   margin: 0,
                 }}
                 onToggle={() => {
-                  let newData = {...checkDataModal};
+                  let newData = { ...checkDataModal };
                   newData.response[0].HasChange = newData.response[0].HasChange
                     ? false
                     : true;
@@ -320,7 +320,7 @@ const CarCheckScreen = props => {
                 }
                 containerStyle={styles.checkElement}
                 onPress={() => {
-                  let newData = {...checkDataModal};
+                  let newData = { ...checkDataModal };
                   newData.response[0].CheckCarChildViewModel[0].HasChange = checkDataModal
                     .response[0].CheckCarChildViewModel[0].HasChange
                     ? false
@@ -340,7 +340,7 @@ const CarCheckScreen = props => {
                 }
                 containerStyle={styles.checkElement}
                 onPress={() => {
-                  let newData = {...checkDataModal};
+                  let newData = { ...checkDataModal };
                   newData.response[0].CheckCarChildViewModel[1].HasChange = checkDataModal
                     .response[0].CheckCarChildViewModel[1].HasChange
                     ? false
@@ -360,7 +360,7 @@ const CarCheckScreen = props => {
                 }
                 containerStyle={styles.checkElement}
                 onPress={() => {
-                  let newData = {...checkDataModal};
+                  let newData = { ...checkDataModal };
                   newData.response[0].CheckCarChildViewModel[2].HasChange = checkDataModal
                     .response[0].CheckCarChildViewModel[2].HasChange
                     ? false
@@ -380,7 +380,7 @@ const CarCheckScreen = props => {
                 }
                 containerStyle={styles.checkElement}
                 onPress={() => {
-                  let newData = {...checkDataModal};
+                  let newData = { ...checkDataModal };
                   newData.response[0].CheckCarChildViewModel[3].HasChange = checkDataModal
                     .response[0].CheckCarChildViewModel[3].HasChange
                     ? false
@@ -400,7 +400,7 @@ const CarCheckScreen = props => {
                 }
                 containerStyle={styles.checkElement}
                 onPress={() => {
-                  let newData = {...checkDataModal};
+                  let newData = { ...checkDataModal };
                   newData.response[0].CheckCarChildViewModel[4].HasChange = checkDataModal
                     .response[0].CheckCarChildViewModel[4].HasChange
                     ? false
@@ -420,7 +420,7 @@ const CarCheckScreen = props => {
                 }
                 containerStyle={styles.checkElement}
                 onPress={() => {
-                  let newData = {...checkDataModal};
+                  let newData = { ...checkDataModal };
                   newData.response[0].CheckCarChildViewModel[5].HasChange = checkDataModal
                     .response[0].CheckCarChildViewModel[5].HasChange
                     ? false
@@ -440,7 +440,7 @@ const CarCheckScreen = props => {
                 }
                 containerStyle={styles.checkElement}
                 onPress={() => {
-                  let newData = {...checkDataModal};
+                  let newData = { ...checkDataModal };
                   newData.response[0].CheckCarChildViewModel[6].HasChange = checkDataModal
                     .response[0].CheckCarChildViewModel[6].HasChange
                     ? false
@@ -460,7 +460,7 @@ const CarCheckScreen = props => {
                 }
                 containerStyle={styles.checkElement}
                 onPress={() => {
-                  let newData = {...checkDataModal};
+                  let newData = { ...checkDataModal };
                   newData.response[0].CheckCarChildViewModel[7].HasChange = checkDataModal
                     .response[0].CheckCarChildViewModel[7].HasChange
                     ? false
@@ -486,7 +486,7 @@ const CarCheckScreen = props => {
                   margin: 0,
                 }}
                 onToggle={() => {
-                  let newData = {...checkDataModal};
+                  let newData = { ...checkDataModal };
                   newData.response[1].HasChange = newData.response[1].HasChange
                     ? false
                     : true;
@@ -533,7 +533,7 @@ const CarCheckScreen = props => {
                 }
                 containerStyle={styles.checkElement}
                 onPress={() => {
-                  let newData = {...checkDataModal};
+                  let newData = { ...checkDataModal };
                   newData.response[1].CheckCarChildViewModel[0].HasChange = checkDataModal
                     .response[1].CheckCarChildViewModel[0].HasChange
                     ? false
@@ -553,7 +553,7 @@ const CarCheckScreen = props => {
                 }
                 containerStyle={styles.checkElement}
                 onPress={() => {
-                  let newData = {...checkDataModal};
+                  let newData = { ...checkDataModal };
                   newData.response[1].CheckCarChildViewModel[1].HasChange = checkDataModal
                     .response[1].CheckCarChildViewModel[1].HasChange
                     ? false
@@ -573,7 +573,7 @@ const CarCheckScreen = props => {
                 }
                 containerStyle={styles.checkElement}
                 onPress={() => {
-                  let newData = {...checkDataModal};
+                  let newData = { ...checkDataModal };
                   newData.response[1].CheckCarChildViewModel[2].HasChange = checkDataModal
                     .response[1].CheckCarChildViewModel[2].HasChange
                     ? false
@@ -593,7 +593,7 @@ const CarCheckScreen = props => {
                 }
                 containerStyle={styles.checkElement}
                 onPress={() => {
-                  let newData = {...checkDataModal};
+                  let newData = { ...checkDataModal };
                   newData.response[1].CheckCarChildViewModel[3].HasChange = checkDataModal
                     .response[1].CheckCarChildViewModel[3].HasChange
                     ? false
@@ -619,7 +619,7 @@ const CarCheckScreen = props => {
                   margin: 0,
                 }}
                 onToggle={() => {
-                  let newData = {...checkDataModal};
+                  let newData = { ...checkDataModal };
                   newData.response[2].HasChange = newData.response[2].HasChange
                     ? false
                     : true;
@@ -666,7 +666,7 @@ const CarCheckScreen = props => {
                 }
                 containerStyle={styles.checkElement}
                 onPress={() => {
-                  let newData = {...checkDataModal};
+                  let newData = { ...checkDataModal };
                   newData.response[2].CheckCarChildViewModel[0].HasChange = checkDataModal
                     .response[2].CheckCarChildViewModel[0].HasChange
                     ? false
@@ -686,7 +686,7 @@ const CarCheckScreen = props => {
                 }
                 containerStyle={styles.checkElement}
                 onPress={() => {
-                  let newData = {...checkDataModal};
+                  let newData = { ...checkDataModal };
                   newData.response[2].CheckCarChildViewModel[1].HasChange = checkDataModal
                     .response[2].CheckCarChildViewModel[1].HasChange
                     ? false
@@ -706,7 +706,7 @@ const CarCheckScreen = props => {
                 }
                 containerStyle={styles.checkElement}
                 onPress={() => {
-                  let newData = {...checkDataModal};
+                  let newData = { ...checkDataModal };
                   newData.response[2].CheckCarChildViewModel[2].HasChange = checkDataModal
                     .response[2].CheckCarChildViewModel[2].HasChange
                     ? false
@@ -726,7 +726,7 @@ const CarCheckScreen = props => {
                 }
                 containerStyle={styles.checkElement}
                 onPress={() => {
-                  let newData = {...checkDataModal};
+                  let newData = { ...checkDataModal };
                   newData.response[2].CheckCarChildViewModel[3].HasChange = checkDataModal
                     .response[2].CheckCarChildViewModel[3].HasChange
                     ? false
@@ -752,7 +752,7 @@ const CarCheckScreen = props => {
                   margin: 0,
                 }}
                 onToggle={() => {
-                  let newData = {...checkDataModal};
+                  let newData = { ...checkDataModal };
                   newData.response[3].HasChange = newData.response[3].HasChange
                     ? false
                     : true;
@@ -799,7 +799,7 @@ const CarCheckScreen = props => {
                 }
                 containerStyle={styles.checkElement}
                 onPress={() => {
-                  let newData = {...checkDataModal};
+                  let newData = { ...checkDataModal };
                   newData.response[3].CheckCarChildViewModel[0].HasChange = checkDataModal
                     .response[3].CheckCarChildViewModel[0].HasChange
                     ? false
@@ -819,7 +819,7 @@ const CarCheckScreen = props => {
                 }
                 containerStyle={styles.checkElement}
                 onPress={() => {
-                  let newData = {...checkDataModal};
+                  let newData = { ...checkDataModal };
                   newData.response[3].CheckCarChildViewModel[1].HasChange = checkDataModal
                     .response[3].CheckCarChildViewModel[1].HasChange
                     ? false
@@ -839,7 +839,7 @@ const CarCheckScreen = props => {
                 }
                 containerStyle={styles.checkElement}
                 onPress={() => {
-                  let newData = {...checkDataModal};
+                  let newData = { ...checkDataModal };
                   newData.response[3].CheckCarChildViewModel[2].HasChange = checkDataModal
                     .response[3].CheckCarChildViewModel[2].HasChange
                     ? false
@@ -859,7 +859,7 @@ const CarCheckScreen = props => {
                 }
                 containerStyle={styles.checkElement}
                 onPress={() => {
-                  let newData = {...checkDataModal};
+                  let newData = { ...checkDataModal };
                   newData.response[3].CheckCarChildViewModel[3].HasChange = checkDataModal
                     .response[3].CheckCarChildViewModel[3].HasChange
                     ? false
@@ -885,7 +885,7 @@ const CarCheckScreen = props => {
                   margin: 0,
                 }}
                 onToggle={() => {
-                  let newData = {...checkDataModal};
+                  let newData = { ...checkDataModal };
                   newData.response[4].HasChange = newData.response[4].HasChange
                     ? false
                     : true;
@@ -932,7 +932,7 @@ const CarCheckScreen = props => {
                 }
                 containerStyle={styles.checkElement}
                 onPress={() => {
-                  let newData = {...checkDataModal};
+                  let newData = { ...checkDataModal };
                   newData.response[4].CheckCarChildViewModel[0].HasChange = checkDataModal
                     .response[4].CheckCarChildViewModel[0].HasChange
                     ? false
@@ -952,7 +952,7 @@ const CarCheckScreen = props => {
                 }
                 containerStyle={styles.checkElement}
                 onPress={() => {
-                  let newData = {...checkDataModal};
+                  let newData = { ...checkDataModal };
                   newData.response[4].CheckCarChildViewModel[1].HasChange = checkDataModal
                     .response[4].CheckCarChildViewModel[1].HasChange
                     ? false
@@ -972,7 +972,7 @@ const CarCheckScreen = props => {
                 }
                 containerStyle={styles.checkElement}
                 onPress={() => {
-                  let newData = {...checkDataModal};
+                  let newData = { ...checkDataModal };
                   newData.response[4].CheckCarChildViewModel[2].HasChange = checkDataModal
                     .response[4].CheckCarChildViewModel[2].HasChange
                     ? false
@@ -992,7 +992,7 @@ const CarCheckScreen = props => {
                 }
                 containerStyle={styles.checkElement}
                 onPress={() => {
-                  let newData = {...checkDataModal};
+                  let newData = { ...checkDataModal };
                   newData.response[4].CheckCarChildViewModel[3].HasChange = checkDataModal
                     .response[4].CheckCarChildViewModel[3].HasChange
                     ? false
@@ -1018,7 +1018,7 @@ const CarCheckScreen = props => {
                   margin: 0,
                 }}
                 onToggle={() => {
-                  let newData = {...checkDataModal};
+                  let newData = { ...checkDataModal };
                   newData.response[5].HasChange = newData.response[5].HasChange
                     ? false
                     : true;
@@ -1081,7 +1081,7 @@ const CarCheckScreen = props => {
                 }
                 containerStyle={styles.checkElement}
                 onPress={() => {
-                  let newData = {...checkDataModal};
+                  let newData = { ...checkDataModal };
                   newData.response[5].CheckCarChildViewModel[0].HasChange = checkDataModal
                     .response[5].CheckCarChildViewModel[0].HasChange
                     ? false
@@ -1101,7 +1101,7 @@ const CarCheckScreen = props => {
                 }
                 containerStyle={styles.checkElement}
                 onPress={() => {
-                  let newData = {...checkDataModal};
+                  let newData = { ...checkDataModal };
                   newData.response[5].CheckCarChildViewModel[1].HasChange = checkDataModal
                     .response[5].CheckCarChildViewModel[1].HasChange
                     ? false
@@ -1121,7 +1121,7 @@ const CarCheckScreen = props => {
                 }
                 containerStyle={styles.checkElement}
                 onPress={() => {
-                  let newData = {...checkDataModal};
+                  let newData = { ...checkDataModal };
                   newData.response[5].CheckCarChildViewModel[2].HasChange = checkDataModal
                     .response[5].CheckCarChildViewModel[2].HasChange
                     ? false
@@ -1141,7 +1141,7 @@ const CarCheckScreen = props => {
                 }
                 containerStyle={styles.checkElement}
                 onPress={() => {
-                  let newData = {...checkDataModal};
+                  let newData = { ...checkDataModal };
                   newData.response[5].CheckCarChildViewModel[3].HasChange = checkDataModal
                     .response[5].CheckCarChildViewModel[3].HasChange
                     ? false
@@ -1161,7 +1161,7 @@ const CarCheckScreen = props => {
                 }
                 containerStyle={styles.checkElement}
                 onPress={() => {
-                  let newData = {...checkDataModal};
+                  let newData = { ...checkDataModal };
                   newData.response[5].CheckCarChildViewModel[4].HasChange = checkDataModal
                     .response[5].CheckCarChildViewModel[4].HasChange
                     ? false
@@ -1181,7 +1181,7 @@ const CarCheckScreen = props => {
                 }
                 containerStyle={styles.checkElement}
                 onPress={() => {
-                  let newData = {...checkDataModal};
+                  let newData = { ...checkDataModal };
                   newData.response[5].CheckCarChildViewModel[5].HasChange = checkDataModal
                     .response[5].CheckCarChildViewModel[5].HasChange
                     ? false
@@ -1201,7 +1201,7 @@ const CarCheckScreen = props => {
                 }
                 containerStyle={styles.checkElement}
                 onPress={() => {
-                  let newData = {...checkDataModal};
+                  let newData = { ...checkDataModal };
                   newData.response[5].CheckCarChildViewModel[6].HasChange = checkDataModal
                     .response[5].CheckCarChildViewModel[6].HasChange
                     ? false
@@ -1221,7 +1221,7 @@ const CarCheckScreen = props => {
                 }
                 containerStyle={styles.checkElement}
                 onPress={() => {
-                  let newData = {...checkDataModal};
+                  let newData = { ...checkDataModal };
                   newData.response[5].CheckCarChildViewModel[7].HasChange = checkDataModal
                     .response[5].CheckCarChildViewModel[7].HasChange
                     ? false
@@ -1247,7 +1247,7 @@ const CarCheckScreen = props => {
                   margin: 0,
                 }}
                 onToggle={() => {
-                  let newData = {...checkDataModal};
+                  let newData = { ...checkDataModal };
                   newData.response[6].HasChange = newData.response[6].HasChange
                     ? false
                     : true;
@@ -1306,7 +1306,7 @@ const CarCheckScreen = props => {
                 }
                 containerStyle={styles.checkElement}
                 onPress={() => {
-                  let newData = {...checkDataModal};
+                  let newData = { ...checkDataModal };
                   newData.response[6].CheckCarChildViewModel[0].HasChange = checkDataModal
                     .response[6].CheckCarChildViewModel[0].HasChange
                     ? false
@@ -1326,7 +1326,7 @@ const CarCheckScreen = props => {
                 }
                 containerStyle={styles.checkElement}
                 onPress={() => {
-                  let newData = {...checkDataModal};
+                  let newData = { ...checkDataModal };
                   newData.response[6].CheckCarChildViewModel[1].HasChange = checkDataModal
                     .response[6].CheckCarChildViewModel[1].HasChange
                     ? false
@@ -1346,7 +1346,7 @@ const CarCheckScreen = props => {
                 }
                 containerStyle={styles.checkElement}
                 onPress={() => {
-                  let newData = {...checkDataModal};
+                  let newData = { ...checkDataModal };
                   newData.response[6].CheckCarChildViewModel[2].HasChange = checkDataModal
                     .response[6].CheckCarChildViewModel[2].HasChange
                     ? false
@@ -1366,7 +1366,7 @@ const CarCheckScreen = props => {
                 }
                 containerStyle={styles.checkElement}
                 onPress={() => {
-                  let newData = {...checkDataModal};
+                  let newData = { ...checkDataModal };
                   newData.response[6].CheckCarChildViewModel[3].HasChange = checkDataModal
                     .response[6].CheckCarChildViewModel[3].HasChange
                     ? false
@@ -1386,7 +1386,7 @@ const CarCheckScreen = props => {
                 }
                 containerStyle={styles.checkElement}
                 onPress={() => {
-                  let newData = {...checkDataModal};
+                  let newData = { ...checkDataModal };
                   newData.response[6].CheckCarChildViewModel[4].HasChange = checkDataModal
                     .response[6].CheckCarChildViewModel[4].HasChange
                     ? false
@@ -1406,7 +1406,7 @@ const CarCheckScreen = props => {
                 }
                 containerStyle={styles.checkElement}
                 onPress={() => {
-                  let newData = {...checkDataModal};
+                  let newData = { ...checkDataModal };
                   newData.response[6].CheckCarChildViewModel[5].HasChange = checkDataModal
                     .response[6].CheckCarChildViewModel[5].HasChange
                     ? false
@@ -1426,7 +1426,7 @@ const CarCheckScreen = props => {
                 }
                 containerStyle={styles.checkElement}
                 onPress={() => {
-                  let newData = {...checkDataModal};
+                  let newData = { ...checkDataModal };
                   newData.response[6].CheckCarChildViewModel[6].HasChange = checkDataModal
                     .response[6].CheckCarChildViewModel[6].HasChange
                     ? false
@@ -1452,7 +1452,7 @@ const CarCheckScreen = props => {
                   margin: 0,
                 }}
                 onToggle={() => {
-                  let newData = {...checkDataModal};
+                  let newData = { ...checkDataModal };
                   newData.response[7].HasChange = newData.response[7].HasChange
                     ? false
                     : true;
@@ -1495,7 +1495,7 @@ const CarCheckScreen = props => {
                 }
                 containerStyle={styles.checkElement}
                 onPress={() => {
-                  let newData = {...checkDataModal};
+                  let newData = { ...checkDataModal };
                   newData.response[7].CheckCarChildViewModel[0].HasChange = checkDataModal
                     .response[7].CheckCarChildViewModel[0].HasChange
                     ? false
@@ -1515,7 +1515,7 @@ const CarCheckScreen = props => {
                 }
                 containerStyle={styles.checkElement}
                 onPress={() => {
-                  let newData = {...checkDataModal};
+                  let newData = { ...checkDataModal };
                   newData.response[7].CheckCarChildViewModel[1].HasChange = checkDataModal
                     .response[7].CheckCarChildViewModel[1].HasChange
                     ? false
@@ -1535,7 +1535,7 @@ const CarCheckScreen = props => {
                 }
                 containerStyle={styles.checkElement}
                 onPress={() => {
-                  let newData = {...checkDataModal};
+                  let newData = { ...checkDataModal };
                   newData.response[7].CheckCarChildViewModel[2].HasChange = checkDataModal
                     .response[7].CheckCarChildViewModel[2].HasChange
                     ? false
@@ -1552,8 +1552,8 @@ const CarCheckScreen = props => {
               borderRadius: 50,
               backgroundColor: 'orange',
             }}
-            labelStyle={{color: 'black'}}
-            contentStyle={{width: '100%'}}
+            labelStyle={{ color: 'black' }}
+            contentStyle={{ width: '100%' }}
             mode="outlined"
             onPress={() => handleSubmit()}>
             提交

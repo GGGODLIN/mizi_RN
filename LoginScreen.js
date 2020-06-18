@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   View,
   ScrollView,
@@ -20,8 +20,8 @@ import {
 } from 'react-native-elements';
 import AsyncStorage from '@react-native-community/async-storage';
 import DeviceInfo from 'react-native-device-info';
-import {Divider, TextInput} from 'react-native-paper';
-import {request, PERMISSIONS} from 'react-native-permissions';
+import { Divider, TextInput } from 'react-native-paper';
+import { request, PERMISSIONS } from 'react-native-permissions';
 import CountdownCircle from 'react-native-countdown-circle';
 import codePush from 'react-native-code-push';
 
@@ -73,7 +73,7 @@ class LoginScreen extends Component {
             });
           });
       });
-      this._test_setItem();
+    this._test_setItem();
   }
 
   _test_setItem = async () => {
@@ -83,10 +83,10 @@ class LoginScreen extends Component {
       const ascPwd = await AsyncStorage.getItem('ascPwd');
       if (value !== null) {
         let obj_value = JSON.parse(value);
-        console.log("BEFORE LOGGING",obj_value);
-        if (obj_value.success){
+        console.log("BEFORE LOGGING", obj_value);
+        if (obj_value.success) {
           //this.props.handleLogin(obj_value);
-          this.handleReLogin(ascAcc,ascPwd);
+          this.handleReLogin(ascAcc, ascPwd);
         }
       } else {
         console.log('NOTHING HEHEXD');
@@ -99,7 +99,7 @@ class LoginScreen extends Component {
 
   handleLogin = async () => {
     let deviceId = DeviceInfo.getUniqueId();
-    let url = `http://qif-nantou.1966.org.tw:20022/api/DriverInfo/DriverLogin?`;
+    let url = `http://ymca.1966.org.tw:20023/api/DriverInfo/DriverLogin?`;
     let query = `acc=${this.emailInput.input._lastNativeText}`;
     let query2 = `pwd=${this.passwordInput.input._lastNativeText}`;
     let query3 = `mDevice=${deviceId}`;
@@ -120,34 +120,33 @@ class LoginScreen extends Component {
             {
               text: '確定',
               onPress: () => {
-                if(res?.response?.Id)
-                {
+                if (res?.response?.Id) {
                   this.setState({
-                      showOverlay1: true,
-                    });
+                    showOverlay1: true,
+                  });
                 }
               },
             },
           ]);
         }
-        else{
-          this.props.handleLogin(res,this.emailInput.input._lastNativeText,this.passwordInput.input._lastNativeText);
+        else {
+          this.props.handleLogin(res, this.emailInput.input._lastNativeText, this.passwordInput.input._lastNativeText);
         }
-        
+
       })
       .catch(err =>
         Alert.alert('網路異常，請稍後再試...', ' ', [
           {
             text: '確定',
-            onPress: () => {},
+            onPress: () => { },
           },
         ]),
       );
   };
 
-  handleReLogin = async (acc,pwd) => {
+  handleReLogin = async (acc, pwd) => {
     let deviceId = DeviceInfo.getUniqueId();
-    let url = `http://qif-nantou.1966.org.tw:20022/api/DriverInfo/DriverLogin?`;
+    let url = `http://ymca.1966.org.tw:20023/api/DriverInfo/DriverLogin?`;
     let query = `acc=${acc}`;
     let query2 = `pwd=${pwd}`;
     let query3 = `mDevice=${deviceId}`;
@@ -168,35 +167,34 @@ class LoginScreen extends Component {
             {
               text: '確定',
               onPress: () => {
-                if(res?.response?.Id)
-                {
+                if (res?.response?.Id) {
                   this.setState({
-                      showOverlay1: true,
-                    });
+                    showOverlay1: true,
+                  });
                 }
               },
             },
           ]);
         }
-        else{
-          this.props.handleLogin(res,acc,pwd);
+        else {
+          this.props.handleLogin(res, acc, pwd);
         }
-        
+
       })
       .catch(err =>
         Alert.alert('網路異常，請稍後再試...', ' ', [
           {
             text: '確定',
-            onPress: () => {},
+            onPress: () => { },
           },
         ]),
       );
   };
 
   handleSendAcc = async () => {
-    let url = `http://qif-nantou.1966.org.tw:20022/api/DriverInfo/PushPhoneMessage?phoneNum=${
+    let url = `http://ymca.1966.org.tw:20023/api/DriverInfo/PushPhoneMessage?phoneNum=${
       this.state.input1
-    }`;
+      }`;
 
     console.log(`Making SendAcc request to: ${url}`);
 
@@ -221,7 +219,7 @@ class LoginScreen extends Component {
           Alert.alert(res.msg, ' ', [
             {
               text: '確定',
-              onPress: () => {},
+              onPress: () => { },
             },
           ]);
         }
@@ -230,16 +228,16 @@ class LoginScreen extends Component {
         Alert.alert('網路異常，請稍後再試...', ' ', [
           {
             text: '確定',
-            onPress: () => {},
+            onPress: () => { },
           },
         ]),
       );
   };
 
   handleSendVCode = async () => {
-    let url = `http://qif-nantou.1966.org.tw:20022/api/DriverInfo/CheckPhoneCode?phoneNum=${
+    let url = `http://ymca.1966.org.tw:20023/api/DriverInfo/CheckPhoneCode?phoneNum=${
       this.state.input1
-    }&vCode=${this.state.input2}`;
+      }&vCode=${this.state.input2}`;
 
     console.log(`Making SendVCode request to: ${url}`);
 
@@ -262,7 +260,7 @@ class LoginScreen extends Component {
           Alert.alert(res.msg, '  ', [
             {
               text: '確定',
-              onPress: () => {},
+              onPress: () => { },
             },
           ]);
         }
@@ -271,16 +269,16 @@ class LoginScreen extends Component {
         Alert.alert('網路異常，請稍後再試...', ' ', [
           {
             text: '確定',
-            onPress: () => {},
+            onPress: () => { },
           },
         ]),
       );
   };
 
   handleSendNewPwd = async () => {
-    let url = `http://qif-nantou.1966.org.tw:20022/api/DriverInfo/PutForgetPassword?cAccount=${
+    let url = `http://ymca.1966.org.tw:20023/api/DriverInfo/PutForgetPassword?cAccount=${
       this.state.input1
-    }&cPassword=${this.state.input3}`;
+      }&cPassword=${this.state.input3}`;
 
     console.log(`Making SendNewPwd request to: ${url}`);
 
@@ -302,14 +300,14 @@ class LoginScreen extends Component {
           Alert.alert('修改密碼完成！', '請用新密碼重新登入', [
             {
               text: '確定',
-              onPress: () => {},
+              onPress: () => { },
             },
           ]);
         } else {
           Alert.alert(res.msg, '  ', [
             {
               text: '確定',
-              onPress: () => {},
+              onPress: () => { },
             },
           ]);
         }
@@ -318,7 +316,7 @@ class LoginScreen extends Component {
         Alert.alert('網路異常，請稍後再試...', ' ', [
           {
             text: '確定',
-            onPress: () => {},
+            onPress: () => { },
           },
         ]),
       );
@@ -372,7 +370,7 @@ class LoginScreen extends Component {
             mode="outlined"
             dense={true}
             placeholder="請輸入帳號(預設為手機號碼)"
-            style={{width: '100%'}}
+            style={{ width: '100%' }}
             onChangeText={text => {
               this.setState({
                 input1: text,
@@ -429,7 +427,7 @@ class LoginScreen extends Component {
             mode="outlined"
             dense={true}
             placeholder="請輸入驗證碼"
-            style={{width: '100%'}}
+            style={{ width: '100%' }}
             onChangeText={text => {
               this.setState({
                 input2: text,
@@ -443,7 +441,7 @@ class LoginScreen extends Component {
                 radius={this.state.timeUp ? 0 : 15}
                 borderWidth={4}
                 color="#ff003f"
-                textStyle={{fontSize: 15}}
+                textStyle={{ fontSize: 15 }}
                 onTimeElapsed={() => {
                   this.setState({
                     timeUp: true,
@@ -517,7 +515,7 @@ class LoginScreen extends Component {
             mode="outlined"
             dense={true}
             placeholder="請輸入新密碼"
-            style={{width: '100%'}}
+            style={{ width: '100%' }}
             onChangeText={text => {
               this.setState({
                 input3: text,
@@ -540,7 +538,7 @@ class LoginScreen extends Component {
           />
         </Overlay>
 
-        <View style={{flex: 0.3, backgroundColor: 'transparent'}}>
+        <View style={{ flex: 0.3, backgroundColor: 'transparent' }}>
           <Image
             style={{
               height: width * 1.2,
@@ -576,7 +574,7 @@ class LoginScreen extends Component {
                 }}>
                 司機登入
               </Text>
-              
+
 
               <View style={styles.overlay}>
                 <View style={styles.triangleLeft} />
@@ -592,7 +590,7 @@ class LoginScreen extends Component {
                     marginBottom: 10,
                   }}
                   underlineColorAndroid="gray"
-                  containerStyle={{paddingHorizontal: 0}}
+                  containerStyle={{ paddingHorizontal: 0 }}
                   placeholder="請輸入帳號 (預設為手機號碼)"
                   placeholderTextColor="gray"
                   autoCapitalize="none"
@@ -613,7 +611,7 @@ class LoginScreen extends Component {
                 <View style={styles.triangleRight} />
               </View>
 
-              <View style={[styles.overlay, {marginBottom: 30, marginTop: 1}]}>
+              <View style={[styles.overlay, { marginBottom: 30, marginTop: 1 }]}>
                 <View style={styles.triangleLeft} />
                 <Input
                   label="Password"
@@ -625,7 +623,7 @@ class LoginScreen extends Component {
                     width: '85%',
                     backgroundColor: 'white',
                   }}
-                  containerStyle={{paddingHorizontal: 0}}
+                  containerStyle={{ paddingHorizontal: 0 }}
                   placeholder="請輸入密碼(預設為身分證後4碼)"
                   underlineColorAndroid="gray"
                   placeholderTextColor="gray"
@@ -666,7 +664,7 @@ class LoginScreen extends Component {
 
           <Button
             title="司機端登入  LOGIN"
-            titleStyle={{fontSize:20,fontWeight:'bold'}}
+            titleStyle={{ fontSize: 20, fontWeight: 'bold' }}
             buttonStyle={{
               width: '70%',
               alignSelf: 'center',

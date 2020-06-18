@@ -1,4 +1,4 @@
-import React, {useState, useEffect, Component} from 'react';
+import React, { useState, useEffect, Component } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -18,10 +18,10 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import AsyncStorage from '@react-native-community/async-storage';
 
-import {NavigationContainer} from '@react-navigation/native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import {ThemeProvider, Avatar, Overlay} from 'react-native-elements';
+import { ThemeProvider, Avatar, Overlay } from 'react-native-elements';
 import {
   Button,
   Card,
@@ -57,7 +57,7 @@ const InfoScreen = props => {
 
   const handleSubmit = async () => {
     var url3 =
-      'http://qif-nantou.1966.org.tw:20022/api/DriverInfo/PutDriverPwd?DriverId=' +
+      'http://ymca.1966.org.tw:20023/api/DriverInfo/PutDriverPwd?DriverId=' +
       data.response.Id +
       '&oldPwd=' +
       input1 +
@@ -97,7 +97,7 @@ const InfoScreen = props => {
         Alert.alert('網路異常，請稍後再試...', ' ', [
           {
             text: '確定',
-            onPress: () => {},
+            onPress: () => { },
           },
         ]),
       );
@@ -110,26 +110,26 @@ const InfoScreen = props => {
   if (isLoading) {
     console.log('info screen is loading...');
     return (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <ActivityIndicator animating={true} size="large" />
       </View>
     );
   } else {
     const infoData = data.response;
     const sex = infoData.Sex == '1' ? '男' : '女';
-    const pi= infoData.Cars.Status===1?'可派發':'不可派發';
+    const pi = infoData.Cars.Status === 1 ? '可派發' : '不可派發';
     console.log('INFO PROPS IS', infoData.Sex);
     const licenceNum = infoData.DriverLicense.length;
     var licence = [];
-    for (var i=0;i<licenceNum;i++){
-      licence[i]  =  '駕照: ' +
-                infoData.DriverLicense[i].CarTypeName +
-                `  (${infoData.DriverLicense[i].ExDate})`;
+    for (var i = 0; i < licenceNum; i++) {
+      licence[i] = '駕照: ' +
+        infoData.DriverLicense[i].CarTypeName +
+        `  (${infoData.DriverLicense[i].ExDate})`;
     }
-    
+
 
     return (
-      <ScrollView style={{flex: 1, flexDirection: 'column'}}>
+      <ScrollView style={{ flex: 1, flexDirection: 'column' }}>
         <Overlay
           onBackdropPress={() => setshowOverlay(false)}
           isVisible={showOverlay}
@@ -154,7 +154,7 @@ const InfoScreen = props => {
             dense={true}
             error={input1 === 0 ? true : false}
             placeholder="請輸入舊密碼"
-            style={{width: '100%'}}
+            style={{ width: '100%' }}
             onChangeText={text => {
               setinput1(text);
             }}
@@ -164,7 +164,7 @@ const InfoScreen = props => {
             dense={true}
             error={input1 === 0 ? true : false}
             placeholder="請輸入新密碼"
-            style={{width: '100%', marginBottom: 10}}
+            style={{ width: '100%', marginBottom: 10 }}
             onChangeText={text => {
               setinput2(text);
             }}
@@ -174,8 +174,8 @@ const InfoScreen = props => {
             color="orange"
             disabled={false}
             mode="contained"
-            labelStyle={{color: 'white', fontSize: 20, fontWeight: 'bold'}}
-            style={{marginBottom: 10}}>
+            labelStyle={{ color: 'white', fontSize: 20, fontWeight: 'bold' }}
+            style={{ marginBottom: 10 }}>
             確定修改
           </Button>
         </Overlay>
@@ -184,7 +184,7 @@ const InfoScreen = props => {
             title={infoData.DriverName}
             subtitle={'車牌號碼:' + infoData.Cars.CarNo}
             left={props => (
-              <Avatar rounded size="medium" source={{uri: data.response.Pic}} />
+              <Avatar rounded size="medium" source={{ uri: data.response.Pic }} />
             )}
           />
           <Card.Content>
@@ -213,17 +213,17 @@ const InfoScreen = props => {
             <Divider />
             <Title>{'電子郵件: ' + infoData.Email}</Title>
             <Divider />
-            <Title style={licenceNum>=1?{}:{display:'none'}}>
-              {licenceNum>=1 &&licence[0]}
+            <Title style={licenceNum >= 1 ? {} : { display: 'none' }}>
+              {licenceNum >= 1 && licence[0]}
             </Title>
-            <Title style={licenceNum>=2?{}:{display:'none'}}>
-              {licenceNum>=2 &&licence[1]}
+            <Title style={licenceNum >= 2 ? {} : { display: 'none' }}>
+              {licenceNum >= 2 && licence[1]}
             </Title>
-            <Title style={licenceNum>=3?{}:{display:'none'}}>
-              {licenceNum>=3 &&licence[2]}
+            <Title style={licenceNum >= 3 ? {} : { display: 'none' }}>
+              {licenceNum >= 3 && licence[2]}
             </Title>
-            <Title style={licenceNum>=4?{}:{display:'none'}}>
-              {licenceNum>=4 &&licence[3]}
+            <Title style={licenceNum >= 4 ? {} : { display: 'none' }}>
+              {licenceNum >= 4 && licence[3]}
             </Title>
             <Divider />
             <Title>

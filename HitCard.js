@@ -1,4 +1,4 @@
-import React, {useState, useEffect, Component} from 'react';
+import React, { useState, useEffect, Component } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -20,12 +20,12 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import AsyncStorage from '@react-native-community/async-storage';
 
-import {NavigationContainer} from '@react-navigation/native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Picker} from '@react-native-community/picker';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Picker } from '@react-native-community/picker';
 
-import {ThemeProvider, Avatar, Button, Overlay} from 'react-native-elements';
-import {Button as RPButton} from 'react-native-paper';
+import { ThemeProvider, Avatar, Button, Overlay } from 'react-native-elements';
+import { Button as RPButton } from 'react-native-paper';
 import {
   Card,
   Title,
@@ -68,7 +68,7 @@ const HitCard = props => {
         setuser(obj_value);
         console.log('GET FROM ASYN IS', obj_value);
         let url2 =
-          'http://qif-nantou.1966.org.tw:20022/api/DriverInfo/GetAllPunchByDriver/' +
+          'http://ymca.1966.org.tw:20023/api/DriverInfo/GetAllPunchByDriver/' +
           obj_value.response.Id;
 
         const data = await fetch(url2, {
@@ -84,13 +84,13 @@ const HitCard = props => {
             setOn(res.response.OnTime !== null);
             setOff(res.response.OffTime !== null);
 
-            if (res.response.OnTime === null){
+            if (res.response.OnTime === null) {
               setstatus(1);
-            } else if (res.response.OffTime === null){
+            } else if (res.response.OffTime === null) {
               setstatus(2);
-            } else if (res.response.DriverSign === null){
+            } else if (res.response.DriverSign === null) {
               setstatus(3);
-            }else{
+            } else {
               setstatus(3);
             }
 
@@ -114,13 +114,13 @@ const HitCard = props => {
             Alert.alert('網路異常，請稍後再試...', ' ', [
               {
                 text: '確定',
-                onPress: () => {console.log(err,url2)},
+                onPress: () => { console.log(err, url2) },
               },
             ]),
           );
 
         let url3 =
-          'http://qif-nantou.1966.org.tw:20022/api/DriverInfo/GetDriverReceive/' +
+          'http://ymca.1966.org.tw:20023/api/DriverInfo/GetDriverReceive/' +
           obj_value.response.Id;
 
         const data2 = await fetch(url3, {
@@ -139,7 +139,7 @@ const HitCard = props => {
             Alert.alert('網路異常，請稍後再試...', ' ', [
               {
                 text: '確定',
-                onPress: () => {},
+                onPress: () => { },
               },
             ]),
           );
@@ -151,13 +151,13 @@ const HitCard = props => {
   }
 
   async function handleSubmitHitCard() {
-    let url2 = `http://qif-nantou.1966.org.tw:20022/api/DriverInfo/SetPunchTime/${
+    let url2 = `http://ymca.1966.org.tw:20023/api/DriverInfo/SetPunchTime/${
       user.response.Id
-    }?status=${status}`;
-    if(bTemperature !== 0){
+      }?status=${status}`;
+    if (bTemperature !== 0) {
       url2 += `&bodyTemperature=${bTemperature}`;
     }
-    console.log("Making hit request to ",url2);
+    console.log("Making hit request to ", url2);
 
     const data = await fetch(url2, {
       method: 'GET',
@@ -179,7 +179,7 @@ const HitCard = props => {
         Alert.alert('網路異常，請稍後再試...', ' ', [
           {
             text: '確定',
-            onPress: () => {},
+            onPress: () => { },
           },
         ]),
       );
@@ -187,48 +187,48 @@ const HitCard = props => {
 
   const handleSavePic = async res => {
 
-    if(shouldReceiveAmt===' 讀取中...'){
+    if (shouldReceiveAmt === ' 讀取中...') {
       Alert.alert('網路讀取中，請稍後再試...', ' ', [
         {
-                    text: '取消',
-                    onPress: () => console.log('Cancel Pressed'),
-                    style: 'cancel',
-                  },
-            {
-              text: '確定',
-              onPress: () => console.log('OK Pressed'),
-            },
-          ]);
+          text: '取消',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {
+          text: '確定',
+          onPress: () => console.log('OK Pressed'),
+        },
+      ]);
     }
-    else{
+    else {
       console.log('RES????????????', res.pathName);
-    //setcashSteps(0);
-    await setpicPath(res.pathName);
-    console.log('SETPATH?????????', picPath);
+      //setcashSteps(0);
+      await setpicPath(res.pathName);
+      console.log('SETPATH?????????', picPath);
 
-    const res2 = await FileUtil.readDir();
-    res2.forEach(async function(item, index, array) {
-      await postPic(item)
-        .then(() => FileUtil.deleteFile(`file://${item}`))
-        .catch(err => {
-          Alert.alert('網路異常，請稍後再試...', ' ', [
-            {
-              text: '確定',
-              onPress: () => {},
-            },
-          ]);
-        });
-      // forEach 就如同 for，不過寫法更容易
-    });
+      const res2 = await FileUtil.readDir();
+      res2.forEach(async function (item, index, array) {
+        await postPic(item)
+          .then(() => FileUtil.deleteFile(`file://${item}`))
+          .catch(err => {
+            Alert.alert('網路異常，請稍後再試...', ' ', [
+              {
+                text: '確定',
+                onPress: () => { },
+              },
+            ]);
+          });
+        // forEach 就如同 for，不過寫法更容易
+      });
 
-    //setdoneCase(detailIndex);
-    //handleNextStep();
-    setshowOverlay(false);
-    setstatus(status + 1);
-    //await checkDone();
+      //setdoneCase(detailIndex);
+      //handleNextStep();
+      setshowOverlay(false);
+      setstatus(status + 1);
+      //await checkDone();
     }
 
-    
+
   };
 
   const postPic = async picPath2 => {
@@ -249,7 +249,7 @@ const HitCard = props => {
       name: fname,
       filename: fname,
     });
-    let url = `http://qif-nantou.1966.org.tw:20022/api/Img/Pic`;
+    let url = `http://ymca.1966.org.tw:20023/api/Img/Pic`;
 
     console.log(`Making POST PIC request to: ${url}`);
     console.log(form);
@@ -268,7 +268,7 @@ const HitCard = props => {
         setpicPathOnServer(res.response);
 
         let url2 =
-          'http://qif-nantou.1966.org.tw:20022/api/DriverInfo/PutDriverReceiveSign';
+          'http://ymca.1966.org.tw:20023/api/DriverInfo/PutDriverReceiveSign';
         const data2 = await fetch(url2, {
           method: 'PUT',
           headers: {
@@ -290,7 +290,7 @@ const HitCard = props => {
             Alert.alert('網路異常，請稍後再試...', ' ', [
               {
                 text: '確定',
-                onPress: () => {},
+                onPress: () => { },
               },
             ]),
           );
@@ -301,7 +301,7 @@ const HitCard = props => {
         Alert.alert('網路異常，請稍後再試...', ' ', [
           {
             text: '確定',
-            onPress: () => {},
+            onPress: () => { },
           },
         ]),
       );
@@ -315,251 +315,251 @@ const HitCard = props => {
   if (isLoading) {
     console.log('info screen is loading...');
     return (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <ActivityIndicator animating={true} size="large" />
       </View>
     );
   } else {
     console.log('STATUS?', status);
     return (
-      <ScrollView style={{flex: 1}}>
-      <View
-        style={{
-          width: '95%',
-          alignItems: 'center',
-          backgroundColor: 'white',
-          alignSelf: 'center',
-          marginTop: 10,
-        }}>
-        <Overlay
-          
-          isVisible={overlay}
-          windowBackgroundColor="rgba(255, 255, 255, .5)"
-          overlayBackgroundColor="white"
-          width="90%"
-          height="auto">
-          <Text
-            style={{
-              backgroundColor: 'orange',
-              fontSize: 20,
-              fontWeight: 'bold',
-              color: 'white',
-              textAlign: 'center',
-              padding: 10,
-              marginBottom: 10,
-            }}>
-            {`請選擇您的體溫`}
-          </Text>
-
-          <Picker
-            enabled={true}
-            selectedValue={bTemperature}
-            onValueChange={(itemValue, itemIndex) =>
-              setbTemperature(itemValue)
-            }>
-            <Picker.Item label="36.0" value={36.0} />
-            <Picker.Item label="36.1" value={36.1} />
-            <Picker.Item label="36.2" value={36.2} />
-            <Picker.Item label="36.3" value={36.3} />
-            <Picker.Item label="36.4" value={36.4} />
-            <Picker.Item label="36.5" value={36.5} />
-            <Picker.Item label="36.6" value={36.6} />
-            <Picker.Item label="36.7" value={36.7} />
-            <Picker.Item label="36.8" value={36.8} />
-            <Picker.Item label="36.9" value={36.9} />
-            <Picker.Item label="37.0" value={37.0} />
-            <Picker.Item label="37.1" value={37.1} />
-            <Picker.Item label="37.2" value={37.2} />
-            <Picker.Item label="37.3" value={37.3} />
-            <Picker.Item label="37.4" value={37.4} />
-            <Picker.Item label="37.5" value={37.5} color="red"/>
-            <Picker.Item label="37.6" value={37.6} color="red"/>
-            <Picker.Item label="37.7" value={37.7} color="red"/>
-            <Picker.Item label="37.8" value={37.8} color="red"/>
-            <Picker.Item label="37.9" value={37.9} color="red"/>
-            <Picker.Item label="38.0" value={38.0} color="red"/>
-            <Picker.Item label="略過" value={0} />
-          </Picker>
-
-          <RPButton
-            onPress={() => {
-              handleSubmitHitCard();
-              setoverlay(false);
-            }}
-            color="orange"
-            disabled={false}
-            mode="contained"
-            labelStyle={{
-              color: 'white',
-              fontSize: 20,
-              fontWeight: 'bold',
-            }}
-            style={{marginBottom: 10}}>
-            確認送出
-          </RPButton>
-        </Overlay>
-        <Overlay
-          isVisible={status == 3 && showOverlay ? true : false}
-          //isVisible={showOverlay ? true : false}
-          windowBackgroundColor="rgba(255, 255, 255, .5)"
-          overlayBackgroundColor="white"
-          width="90%"
-          height="80%">
-          <RNSignatureExample handleSavePic={handleSavePic} name={'sign'} />
-        </Overlay>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <Image style={{}} source={require('./img/icons8-clock_8.png')} />
-          <View style={{flexDirection: 'column', margin: 15}}>
-            <Text>上班時間</Text>
-            <Text
-              style={
-                status === 1
-                  ? {fontSize: 35, fontWeight: 'bold', color: 'white'}
-                  : {fontSize: 35, fontWeight: 'bold'}
-              }>
-              {status === 1 ? '77:77' : data.response.OnTime.slice(11, 16)}
-            </Text>
-          </View>
-          <Button
-            disabled={!isOn}
-            title={isOn ? '已打卡' : '未打卡'}
-            containerStyle={{
-              alignItems: 'center',
-              justifyContent: 'center',
-              alignContent: 'center',
-              alignSelf: 'center',
-              height: 80,
-              width: 80,
-            }}
-            buttonStyle={{
-              height: 80,
-              width: 80,
-              borderRadius: 160,
-              borderWidth: 5,
-              borderColor: 'orange',
-            }}
-            titleStyle={{
-              color: 'orange',
-              fontWeight: 'bold',
-            }}
-            type="outline"
-            onPress={() => {}}
-          />
-        </View>
+      <ScrollView style={{ flex: 1 }}>
         <View
           style={{
-            flexDirection: 'row',
+            width: '95%',
             alignItems: 'center',
-            borderTopColor: 'gray',
-            borderTopWidth: 0.5,
+            backgroundColor: 'white',
+            alignSelf: 'center',
+            marginTop: 10,
           }}>
-          <Image style={{}} source={require('./img/icons8-watch.png')} />
-          <View style={{flexDirection: 'column', margin: 15}}>
-            <Text>下班時間</Text>
+          <Overlay
+
+            isVisible={overlay}
+            windowBackgroundColor="rgba(255, 255, 255, .5)"
+            overlayBackgroundColor="white"
+            width="90%"
+            height="auto">
             <Text
-              style={
-                status >= 3
-                  ? {fontSize: 35, fontWeight: 'bold'}
-                  : {fontSize: 35, fontWeight: 'bold', color: 'white'}
-              }>
-              {status >= 3 ? data.response.OffTime.slice(11, 16) : '88:88'}
+              style={{
+                backgroundColor: 'orange',
+                fontSize: 20,
+                fontWeight: 'bold',
+                color: 'white',
+                textAlign: 'center',
+                padding: 10,
+                marginBottom: 10,
+              }}>
+              {`請選擇您的體溫`}
             </Text>
+
+            <Picker
+              enabled={true}
+              selectedValue={bTemperature}
+              onValueChange={(itemValue, itemIndex) =>
+                setbTemperature(itemValue)
+              }>
+              <Picker.Item label="36.0" value={36.0} />
+              <Picker.Item label="36.1" value={36.1} />
+              <Picker.Item label="36.2" value={36.2} />
+              <Picker.Item label="36.3" value={36.3} />
+              <Picker.Item label="36.4" value={36.4} />
+              <Picker.Item label="36.5" value={36.5} />
+              <Picker.Item label="36.6" value={36.6} />
+              <Picker.Item label="36.7" value={36.7} />
+              <Picker.Item label="36.8" value={36.8} />
+              <Picker.Item label="36.9" value={36.9} />
+              <Picker.Item label="37.0" value={37.0} />
+              <Picker.Item label="37.1" value={37.1} />
+              <Picker.Item label="37.2" value={37.2} />
+              <Picker.Item label="37.3" value={37.3} />
+              <Picker.Item label="37.4" value={37.4} />
+              <Picker.Item label="37.5" value={37.5} color="red" />
+              <Picker.Item label="37.6" value={37.6} color="red" />
+              <Picker.Item label="37.7" value={37.7} color="red" />
+              <Picker.Item label="37.8" value={37.8} color="red" />
+              <Picker.Item label="37.9" value={37.9} color="red" />
+              <Picker.Item label="38.0" value={38.0} color="red" />
+              <Picker.Item label="略過" value={0} />
+            </Picker>
+
+            <RPButton
+              onPress={() => {
+                handleSubmitHitCard();
+                setoverlay(false);
+              }}
+              color="orange"
+              disabled={false}
+              mode="contained"
+              labelStyle={{
+                color: 'white',
+                fontSize: 20,
+                fontWeight: 'bold',
+              }}
+              style={{ marginBottom: 10 }}>
+              確認送出
+          </RPButton>
+          </Overlay>
+          <Overlay
+            isVisible={status == 3 && showOverlay ? true : false}
+            //isVisible={showOverlay ? true : false}
+            windowBackgroundColor="rgba(255, 255, 255, .5)"
+            overlayBackgroundColor="white"
+            width="90%"
+            height="80%">
+            <RNSignatureExample handleSavePic={handleSavePic} name={'sign'} />
+          </Overlay>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Image style={{}} source={require('./img/icons8-clock_8.png')} />
+            <View style={{ flexDirection: 'column', margin: 15 }}>
+              <Text>上班時間</Text>
+              <Text
+                style={
+                  status === 1
+                    ? { fontSize: 35, fontWeight: 'bold', color: 'white' }
+                    : { fontSize: 35, fontWeight: 'bold' }
+                }>
+                {status === 1 ? '77:77' : data.response.OnTime.slice(11, 16)}
+              </Text>
+            </View>
+            <Button
+              disabled={!isOn}
+              title={isOn ? '已打卡' : '未打卡'}
+              containerStyle={{
+                alignItems: 'center',
+                justifyContent: 'center',
+                alignContent: 'center',
+                alignSelf: 'center',
+                height: 80,
+                width: 80,
+              }}
+              buttonStyle={{
+                height: 80,
+                width: 80,
+                borderRadius: 160,
+                borderWidth: 5,
+                borderColor: 'orange',
+              }}
+              titleStyle={{
+                color: 'orange',
+                fontWeight: 'bold',
+              }}
+              type="outline"
+              onPress={() => { }}
+            />
           </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              borderTopColor: 'gray',
+              borderTopWidth: 0.5,
+            }}>
+            <Image style={{}} source={require('./img/icons8-watch.png')} />
+            <View style={{ flexDirection: 'column', margin: 15 }}>
+              <Text>下班時間</Text>
+              <Text
+                style={
+                  status >= 3
+                    ? { fontSize: 35, fontWeight: 'bold' }
+                    : { fontSize: 35, fontWeight: 'bold', color: 'white' }
+                }>
+                {status >= 3 ? data.response.OffTime.slice(11, 16) : '88:88'}
+              </Text>
+            </View>
+            <Button
+              disabled={!isOff}
+              title={isOff ? '已打卡' : '未打卡'}
+              containerStyle={{
+                alignItems: 'center',
+                justifyContent: 'center',
+                alignContent: 'center',
+                alignSelf: 'center',
+                height: 80,
+                width: 80,
+              }}
+              buttonStyle={{
+                height: 80,
+                width: 80,
+                borderRadius: 160,
+                borderWidth: 5,
+                borderColor: 'orange',
+              }}
+              titleStyle={{
+                color: 'orange',
+                fontWeight: 'bold',
+              }}
+              type="outline"
+              onPress={() => { }}
+            />
+          </View>
+
           <Button
-            disabled={!isOff}
-            title={isOff ? '已打卡' : '未打卡'}
+            disabled={status >= 3 ? true : false}
+            title={
+              status === 1 ? '上班打卡' : status === 2 ? '下班打卡' : '已下班'
+            }
             containerStyle={{
               alignItems: 'center',
               justifyContent: 'center',
               alignContent: 'center',
               alignSelf: 'center',
-              height: 80,
-              width: 80,
+              width: '70%',
             }}
             buttonStyle={{
-              height: 80,
-              width: 80,
-              borderRadius: 160,
-              borderWidth: 5,
-              borderColor: 'orange',
+              width: '90%',
+              alignSelf: 'center',
+              backgroundColor: 'orange',
+              borderRadius: 50,
+              marginBottom: 20,
+              marginTop: 20,
             }}
-            titleStyle={{
-              color: 'orange',
-              fontWeight: 'bold',
-            }}
-            type="outline"
-            onPress={() => {}}
-          />
-        </View>
-
-        <Button
-          disabled={status >= 3 ? true : false}
-          title={
-            status === 1 ? '上班打卡' : status === 2 ? '下班打卡' : '已下班'
-          }
-          containerStyle={{
-            alignItems: 'center',
-            justifyContent: 'center',
-            alignContent: 'center',
-            alignSelf: 'center',
-            width: '70%',
-          }}
-          buttonStyle={{
-            width: '90%',
-            alignSelf: 'center',
-            backgroundColor: 'orange',
-            borderRadius: 50,
-            marginBottom: 20,
-            marginTop: 20,
-          }}
-          type="solid"
-          onPress={() => {
-            Alert.alert('確定打卡?', ' ', [
-              {
-                text: '取消',
-                onPress: () => console.log('Cancel Pressed'),
-                style: 'cancel',
-              },
-              {
-                text: '確定',
-                onPress: () => {
-                  //setoverlay(true);
-                  handleSubmitHitCard();
+            type="solid"
+            onPress={() => {
+              Alert.alert('確定打卡?', ' ', [
+                {
+                  text: '取消',
+                  onPress: () => console.log('Cancel Pressed'),
+                  style: 'cancel',
                 },
-              },
-            ]);
-          }}
-        />
-        <View style={{alignSelf: 'center', width: '90%', paddingBottom: 10}}>
-          <Text
-            style={{
-              borderBottomWidth: 1,
-              fontSize: 20,
-              color: 'orange',
-              fontWeight: 'bold',
-            }}>
-            本日收入
+                {
+                  text: '確定',
+                  onPress: () => {
+                    //setoverlay(true);
+                    handleSubmitHitCard();
+                  },
+                },
+              ]);
+            }}
+          />
+          <View style={{ alignSelf: 'center', width: '90%', paddingBottom: 10 }}>
+            <Text
+              style={{
+                borderBottomWidth: 1,
+                fontSize: 20,
+                color: 'orange',
+                fontWeight: 'bold',
+              }}>
+              本日收入
           </Text>
-          <Text style={{fontSize: 20}}>
-            {'應收金額:                       $' + shouldReceiveAmt}
-          </Text>
-          <Text style={{fontSize: 20}}>
-            {'實收金額:                       $' + realReceiveAmt}
-          </Text>
-        </View>
-        <Button
-          disabled={status >= 4 ? true : false}
-          title={status >= 4 ? '已簽名' : '司機簽名'}
-          containerStyle={
-            status >= 3
-              ? {
+            <Text style={{ fontSize: 20 }}>
+              {'應收金額:                       $' + shouldReceiveAmt}
+            </Text>
+            <Text style={{ fontSize: 20 }}>
+              {'實收金額:                       $' + realReceiveAmt}
+            </Text>
+          </View>
+          <Button
+            disabled={status >= 4 ? true : false}
+            title={status >= 4 ? '已簽名' : '司機簽名'}
+            containerStyle={
+              status >= 3
+                ? {
                   alignItems: 'center',
                   justifyContent: 'center',
                   alignContent: 'center',
                   alignSelf: 'center',
                   width: '70%',
                 }
-              : {
+                : {
                   alignItems: 'center',
                   justifyContent: 'center',
                   alignContent: 'center',
@@ -567,21 +567,21 @@ const HitCard = props => {
                   width: '70%',
                   display: 'none',
                 }
-          }
-          buttonStyle={{
-            width: '90%',
-            alignSelf: 'center',
-            backgroundColor: 'orange',
-            borderRadius: 50,
-            marginBottom: 20,
-            marginTop: 10,
-          }}
-          type="solid"
-          onPress={() => {
-            setshowOverlay(true);
-          }}
-        />
-      </View>
+            }
+            buttonStyle={{
+              width: '90%',
+              alignSelf: 'center',
+              backgroundColor: 'orange',
+              borderRadius: 50,
+              marginBottom: 20,
+              marginTop: 10,
+            }}
+            type="solid"
+            onPress={() => {
+              setshowOverlay(true);
+            }}
+          />
+        </View>
       </ScrollView>
     );
   }

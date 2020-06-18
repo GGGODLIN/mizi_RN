@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {Alert} from 'react-native';
+import React, { Component } from 'react';
+import { Alert } from 'react-native';
 import BackgroundGeolocation from '@mauron85/react-native-background-geolocation';
 import DeviceInfo from 'react-native-device-info';
 
@@ -26,8 +26,8 @@ class BgTracking extends Component {
       activitiesInterval: 30000,
       stopOnStillActivity: false,
       maxLocations: 10000,
-      
-      
+
+
     });
 
     BackgroundGeolocation.on('location', location => {
@@ -41,10 +41,10 @@ class BgTracking extends Component {
         // IMPORTANT: task has to be ended by endTask
 
         let url =
-          'http://qif-nantou.1966.org.tw:20022/api/DriverInfo/PostDeviceGPS';
+          'http://ymca.1966.org.tw:20023/api/DriverInfo/PostDeviceGPS';
 
         console.log(`Making GPS request to: ${url}`);
-        console.log(deviceId,location.longitude,location.latitude);
+        console.log(deviceId, location.longitude, location.latitude);
 
         const data = fetch(url, {
           method: 'POST',
@@ -52,8 +52,8 @@ class BgTracking extends Component {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-     
-            DriverId:this.props.DriverId,
+
+            DriverId: this.props.DriverId,
             DeviceID: deviceId,
             Lon: location.longitude,
             Lat: location.latitude,
@@ -62,11 +62,11 @@ class BgTracking extends Component {
           .then(response => response.json())
           .then(res => {
             console.log('GPS AJAX', res);
-            
+
           })
           .catch(err =>
-        console.log(err)
-      );
+            console.log(err)
+          );
 
         BackgroundGeolocation.endTask(taskKey);
       });

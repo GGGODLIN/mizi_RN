@@ -1,4 +1,4 @@
-import React, {useState, useEffect, Component} from 'react';
+import React, { useState, useEffect, Component } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -21,10 +21,10 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import AsyncStorage from '@react-native-community/async-storage';
 
-import {NavigationContainer, useFocusEffect} from '@react-navigation/native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { NavigationContainer, useFocusEffect } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import {Button, ThemeProvider, Avatar, ListItem} from 'react-native-elements';
+import { Button, ThemeProvider, Avatar, ListItem } from 'react-native-elements';
 import {
   Card,
   Title,
@@ -34,7 +34,7 @@ import {
 } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-function Item({data, navigation}) {
+function Item({ data, navigation }) {
   var caseName = data.DespatchDetails[0].CaseUser.Name;
   var startTime = data.DespatchDetails[0].Despatch.StartDate;
   var startDate = data.DespatchDetails[0].Despatch.StartDate;
@@ -43,20 +43,20 @@ function Item({data, navigation}) {
     startDate = startTime.substring(0, pos);
     startTime = startTime.substring(pos + 1, pos + 6);
   }
-  var canShared = data.DespatchDetails.length>=2?'有共乘':'無共乘';
+  var canShared = data.DespatchDetails.length >= 2 ? '有共乘' : '無共乘';
   var FamilyWith = data.DespatchDetails[0].OrderDetails.FamilyWith;
-  const sum = (data.DespatchDetails.length===1)?data.DespatchDetails[0].OrderDetails.FamilyWith+data.DespatchDetails[0].OrderDetails.ForeignFamilyWith:data.DespatchDetails.reduce(function (accumulator, currentValue, currentIndex, array) {
-  console.log("font",accumulator);
-  return currentValue.OrderDetails.FamilyWith+currentValue.OrderDetails.ForeignFamilyWith+accumulator;
-},0);
+  const sum = (data.DespatchDetails.length === 1) ? data.DespatchDetails[0].OrderDetails.FamilyWith + data.DespatchDetails[0].OrderDetails.ForeignFamilyWith : data.DespatchDetails.reduce(function (accumulator, currentValue, currentIndex, array) {
+    console.log("font", accumulator);
+    return currentValue.OrderDetails.FamilyWith + currentValue.OrderDetails.ForeignFamilyWith + accumulator;
+  }, 0);
   var ForeignFamilyWith =
     data.DespatchDetails[0].OrderDetails.ForeignFamilyWith;
   var FromAddr = data.DespatchDetails[0].OrderDetails.FromAddr;
   var ToAddr = data.DespatchDetails[0].OrderDetails.ToAddr;
-  var startOrNot = data.DespatchDetails.every(function(item, index, array){
+  var startOrNot = data.DespatchDetails.every(function (item, index, array) {
     return item.OrderDetails.Status <= 1;
   });
-   console.log("startOrNot",startOrNot);
+  console.log("startOrNot", startOrNot);
   return (
     <TouchableOpacity
       style={styles.button}
@@ -66,8 +66,8 @@ function Item({data, navigation}) {
           data: data,
           startTime: startTime,
           startDate: startDate,
-          withPeople: FamilyWith+ForeignFamilyWith,
-          canShared:canShared,
+          withPeople: FamilyWith + ForeignFamilyWith,
+          canShared: canShared,
         })
       }>
       <View
@@ -83,57 +83,57 @@ function Item({data, navigation}) {
           <View style={styles.titleTime}>
             <View style={styles.titleLeft}>
               <Text
-                style={{color: 'white', fontSize: 20}}
+                style={{ color: 'white', fontSize: 20 }}
                 allowFontScaling={false}>
                 {startTime}
               </Text>
             </View>
             <View style={styles.titleDate}>
               <Text
-                style={{color: 'white', fontSize: 20}}
+                style={{ color: 'white', fontSize: 20 }}
                 allowFontScaling={false}>
                 {startDate}
               </Text>
               <Text
-                style={{color: 'white', fontSize: 20,marginStart:20}}
+                style={{ color: 'white', fontSize: 20, marginStart: 20 }}
                 allowFontScaling={false}>
-                {data.DespatchDetails.length>=2?'有共乘':'無共乘'}
+                {data.DespatchDetails.length >= 2 ? '有共乘' : '無共乘'}
               </Text>
             </View>
           </View>
           <View style={styles.titleName}>
-            <View style={{flexDirection: 'row'}}>
-            <View style={{flexDirection: 'column', justifyContent: 'center',flex:1.2}}>
-             
-              {data.DespatchDetails.map((val, index)=>{
-                return (
-                  <Text
-                style={{
-                  color: 'white',
-                  fontSize: 24,
-                  fontWeight: 'bold',
-                  paddingEnd:10,
-                }}>
-                {val.CaseUser.Name}
-              </Text>
+            <View style={{ flexDirection: 'row' }}>
+              <View style={{ flexDirection: 'column', justifyContent: 'center', flex: 1.2 }}>
+
+                {data.DespatchDetails.map((val, index) => {
+                  return (
+                    <Text
+                      style={{
+                        color: 'white',
+                        fontSize: 24,
+                        fontWeight: 'bold',
+                        paddingEnd: 10,
+                      }}>
+                      {val.CaseUser.Name}
+                    </Text>
                   );
-              })}
-              
+                })}
+
               </View>
-              <View style={{flexDirection: 'column', justifyContent: 'center',flex:2}}>
+              <View style={{ flexDirection: 'column', justifyContent: 'center', flex: 2 }}>
                 <Text
                   allowFontScaling={false}
-                  style={{color: 'white', fontSize: 18}}>
+                  style={{ color: 'white', fontSize: 18 }}>
                   {data.DespatchDetails[0].OrderDetails.SOrderNo}
                 </Text>
                 <Text
                   allowFontScaling={false}
-                  style={{color: 'white', fontSize: 24}}>
+                  style={{ color: 'white', fontSize: 24 }}>
                   {'個案' + data.DespatchDetails.length + '/' + '陪同' + sum}
                 </Text>
                 <Text
                   allowFontScaling={false}
-                  style={startOrNot?{display:'none'}:{color: 'red', fontSize: 30,alignSelf:'flex-end',fontWeight:'bold'}}>
+                  style={startOrNot ? { display: 'none' } : { color: 'red', fontSize: 30, alignSelf: 'flex-end', fontWeight: 'bold' }}>
                   執行中
                 </Text>
               </View>
@@ -141,37 +141,37 @@ function Item({data, navigation}) {
           </View>
         </View>
         <View>
-        <View style={styles.addr}>
-          <Icon
-            name="circle-o"
-            size={30}
-            color="orange"
-            style={{paddingLeft: 30}}
-          />
-          <Text allowFontScaling={false} style={styles.addrText}>
-            {data.DespatchDetails[0].OrderDetails.FromAddr}
-          </Text>
+          <View style={styles.addr}>
+            <Icon
+              name="circle-o"
+              size={30}
+              color="orange"
+              style={{ paddingLeft: 30 }}
+            />
+            <Text allowFontScaling={false} style={styles.addrText}>
+              {data.DespatchDetails[0].OrderDetails.FromAddr}
+            </Text>
+          </View>
+          <View style={styles.addr}>
+            <Icon
+              name="angle-double-down"
+              size={30}
+              color="orange"
+              style={{ paddingLeft: 32 }}
+            />
+          </View>
+          <View style={styles.addr}>
+            <Icon
+              name="circle-o"
+              size={30}
+              color="orange"
+              style={{ paddingLeft: 30 }}
+            />
+            <Text allowFontScaling={false} style={styles.addrText}>
+              {data.DespatchDetails[0].OrderDetails.ToAddr}
+            </Text>
+          </View>
         </View>
-        <View style={styles.addr}>
-          <Icon
-            name="angle-double-down"
-            size={30}
-            color="orange"
-            style={{paddingLeft: 32}}
-          />
-        </View>
-        <View style={styles.addr}>
-          <Icon
-            name="circle-o"
-            size={30}
-            color="orange"
-            style={{paddingLeft: 30}}
-          />
-          <Text allowFontScaling={false} style={styles.addrText}>
-            {data.DespatchDetails[0].OrderDetails.ToAddr}
-          </Text>
-        </View>
-      </View>
       </View>
     </TouchableOpacity>
   );
@@ -191,9 +191,9 @@ const TodayTaskList = props => {
         var obj_value = JSON.parse(value);
         setuserLoginInfo(obj_value);
         var url2 =
-          'http://qif-nantou.1966.org.tw:20022/api/DriverInfo/GetAllGroupDriverSide/' +
+          'http://ymca.1966.org.tw:20023/api/DriverInfo/GetAllGroupDriverSide/' +
           obj_value.response.Id;
-        //let url = `http://qif-nantou.1966.org.tw:20022/api/DriverInfo/GetAllGroup/${obj_value.Id}`;
+        //let url = `http://ymca.1966.org.tw:20023/api/DriverInfo/GetAllGroup/${obj_value.Id}`;
         const data = await fetch(url2, {
           method: 'GET',
           headers: {
@@ -210,7 +210,7 @@ const TodayTaskList = props => {
             Alert.alert('網路異常，請稍後再試...', ' ', [
               {
                 text: '確定',
-                onPress: () => {fetchData()},
+                onPress: () => { fetchData() },
               },
             ]),
           );
@@ -223,7 +223,7 @@ const TodayTaskList = props => {
 
   async function fetchData_test() {
     const data = await fetch(
-      'http://qif-nantou.1966.org.tw:20022/api/DriverInfo/GetAllPassGroup/15',
+      'http://ymca.1966.org.tw:20023/api/DriverInfo/GetAllPassGroup/15',
       {
         method: 'GET',
         headers: {
@@ -239,7 +239,7 @@ const TodayTaskList = props => {
         Alert.alert('網路異常，請稍後再試...', ' ', [
           {
             text: '確定',
-            onPress: () => {},
+            onPress: () => { },
           },
         ]),
       );
@@ -267,10 +267,10 @@ const TodayTaskList = props => {
     }, []),
   );
 
-  if (isLoading || data.response===undefined) {
+  if (isLoading || data.response === undefined) {
     console.log('TASKS screen is loading...');
     return (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <ActivityIndicator animating={true} size="large" />
       </View>
     );
@@ -285,7 +285,7 @@ const TodayTaskList = props => {
             backgroundColor: '#ACB3EC',
             justifyContent: 'space-between',
           }}>
-          <Text style={{fontSize: 24, padding: 10, fontWeight: 'bold'}}>
+          <Text style={{ fontSize: 24, padding: 10, fontWeight: 'bold' }}>
             {userLoginInfo.response.Cars.CarNo +
               ' | ' +
               userLoginInfo.response.DriverName}
@@ -327,7 +327,7 @@ const TodayTaskList = props => {
               progressBackgroundColor="#ffff00"
             />
           }
-          renderItem={({item}) => (
+          renderItem={({ item }) => (
             <Item
               title={item.DespatchDetails[0].CaseUser.Name}
               data={item}
@@ -337,16 +337,16 @@ const TodayTaskList = props => {
           keyExtractor={item => item.DespatchId}
         />
         <Text
-        onPress={() => _onRefresh()}
+          onPress={() => _onRefresh()}
           style={
             list.length === 0
               ? {
-                  flex: 20,
-                  alignSelf: 'center',
-                  fontSize: 36,
-                  fontWeight: 'bold',
-                }
-              : {display: 'none'}
+                flex: 20,
+                alignSelf: 'center',
+                fontSize: 36,
+                fontWeight: 'bold',
+              }
+              : { display: 'none' }
           }>
           尚無任務
         </Text>
@@ -427,13 +427,13 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
     paddingTop: 10,
-    height:50,
+    height: 50,
   },
   addrText: {
     fontSize: 20,
     paddingLeft: 20,
     flexWrap: 'wrap',
-    width:'80%'
+    width: '80%'
   },
   addr2: {
     flexDirection: 'row',

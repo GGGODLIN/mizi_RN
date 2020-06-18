@@ -1,4 +1,4 @@
-import React, {useState, useEffect, Component} from 'react';
+import React, { useState, useEffect, Component } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -18,13 +18,13 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import AsyncStorage from '@react-native-community/async-storage';
 
-import {NavigationContainer} from '@react-navigation/native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import {ThemeProvider, Avatar, ListItem, Icon} from 'react-native-elements';
-import {Button, Card, Title, Paragraph, Divider} from 'react-native-paper';
+import { ThemeProvider, Avatar, ListItem, Icon } from 'react-native-elements';
+import { Button, Card, Title, Paragraph, Divider } from 'react-native-paper';
 
-function Item({data}) {
+function Item({ data }) {
   var caseName = data.DespatchDetails[0].CaseUser.Name;
   var startTime = data.DespatchDetails[0].Despatch.StartDate;
   var pos = startTime.indexOf('T');
@@ -58,26 +58,26 @@ function Item({data}) {
       </View>
       <View style={styles.item3}>
         <View style={styles.item3_1}>
-          <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
+          <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
             <Icon
               name="circle"
               type="font-awesome"
               color="orange"
               size={16}
             />
-            <Text style={{flex:1}}>{"  "+FromAddr}</Text>
+            <Text style={{ flex: 1 }}>{"  " + FromAddr}</Text>
 
           </View>
-          <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
+          <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
             <Icon
               name="circle"
               type="font-awesome"
               color="orange"
               size={16}
             />
-            <Text >{"  "+ToAddr}</Text>
+            <Text >{"  " + ToAddr}</Text>
           </View>
-          
+
         </View>
       </View>
     </View>
@@ -96,14 +96,14 @@ const HistoryTaskList = props => {
         var obj_value = JSON.parse(value);
         console.log('GET FROM ASYN IS', obj_value);
         var url2 =
-          'http://qif-nantou.1966.org.tw:20022/api/DriverInfo/GetAllPassGroup/' +
+          'http://ymca.1966.org.tw:20023/api/DriverInfo/GetAllPassGroup/' +
           obj_value.response.Id;
         seturl(
-          `http://qif-nantou.1966.org.tw:20022/api/DriverInfo/GetAllPassGroup/${
-            obj_value.response.Id
+          `http://ymca.1966.org.tw:20023/api/DriverInfo/GetAllPassGroup/${
+          obj_value.response.Id
           }`,
         );
-        //let url = `http://qif-nantou.1966.org.tw:20022/api/DriverInfo/GetAllGroup/${obj_value.Id}`;
+        //let url = `http://ymca.1966.org.tw:20023/api/DriverInfo/GetAllGroup/${obj_value.Id}`;
         const data = await fetch(url2, {
           method: 'GET',
           headers: {
@@ -128,7 +128,7 @@ const HistoryTaskList = props => {
 
   async function fetchData_test() {
     const data = await fetch(
-      'http://qif-nantou.1966.org.tw:20022/api/DriverInfo/GetAllPassGroup/15',
+      'http://ymca.1966.org.tw:20023/api/DriverInfo/GetAllPassGroup/15',
       {
         method: 'GET',
         headers: {
@@ -152,7 +152,7 @@ const HistoryTaskList = props => {
   if (isLoading) {
     console.log('TASKS screen is loading...');
     return (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <Text>TASKS LOADING.............</Text>
       </View>
     );
@@ -163,7 +163,7 @@ const HistoryTaskList = props => {
       <SafeAreaView style={styles.container}>
         <FlatList
           data={list}
-          renderItem={({item}) => (
+          renderItem={({ item }) => (
             <Item title={item.DespatchDetails[0].CaseUser.Name} data={item} />
           )}
           keyExtractor={item => item.DespatchId}
@@ -199,14 +199,14 @@ const styles = StyleSheet.create({
   },
   item2_1: {
     backgroundColor: 'white',
-  
+
     padding: 10,
 
     flexDirection: 'column',
   },
   item3: {
     backgroundColor: 'gray',
- 
+
 
     padding: 0,
 
@@ -217,7 +217,7 @@ const styles = StyleSheet.create({
   },
   item3_1: {
     backgroundColor: 'white',
-  
+
     padding: 10,
 
     flexDirection: 'column',

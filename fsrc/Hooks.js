@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 
 // The hook is just a simple function which we can export
 export const FetchApi = () => {
@@ -6,7 +6,7 @@ export const FetchApi = () => {
 
   async function fetchData() {
     const res = await fetch(
-      'http://qif-nantou.1966.org.tw:20022/api/DriverInfo/Get/15',
+      'http://ymca.1966.org.tw:20023/api/DriverInfo/Get/15',
     );
     res
       .json()
@@ -23,7 +23,7 @@ export const FetchApi = () => {
     fetchData();
   }, []);
 
-  return {data};
+  return { data };
 };
 
 componentDidMount = async () => {

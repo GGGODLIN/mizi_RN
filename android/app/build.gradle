@@ -143,7 +143,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.nantou"
+        applicationId "com.ymca"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

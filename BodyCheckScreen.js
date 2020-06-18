@@ -1,4 +1,4 @@
-import React, {useState, useEffect, Component} from 'react';
+import React, { useState, useEffect, Component } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -24,9 +24,9 @@ import {
   useFocusEffect,
   StackActions,
 } from '@react-navigation/native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import {ThemeProvider, Avatar} from 'react-native-elements';
+import { ThemeProvider, Avatar } from 'react-native-elements';
 import {
   Button,
   Card,
@@ -84,7 +84,7 @@ const BodyCheckScreen = props => {
     let queryHasSituationNoChecked = '';
     let pleaseBack = false;
 
-    checkedItem.forEach(function(item, index, array) {
+    checkedItem.forEach(function (item, index, array) {
       console.log(
         item,
         index,
@@ -112,12 +112,12 @@ const BodyCheckScreen = props => {
 
     if (pleaseBack) {
       Alert.alert('請回答所有問題', '', [
-        {text: '確定', onPress: () => {}},
+        { text: '確定', onPress: () => { } },
       ]);
       return;
     }
     let url =
-      'http://qif-nantou.1966.org.tw:20022/api/CheckResult/PostCheckDriverMapping';
+      'http://ymca.1966.org.tw:20023/api/CheckResult/PostCheckDriverMapping';
     const driverId = data.response.Id;
     const carId = data.response.Cars.Id;
     const postRes = await fetch(url, {
@@ -142,13 +142,13 @@ const BodyCheckScreen = props => {
       console.log('SUBMIT', data.response.Cars.Id);
       props.navigation.navigate('CheckMainScreen');
     }).catch(err =>
-        Alert.alert('網路異常，請稍後再試...', ' ', [
-          {
-            text: '確定',
-            onPress: () => {},
-          },
-        ]),
-      );
+      Alert.alert('網路異常，請稍後再試...', ' ', [
+        {
+          text: '確定',
+          onPress: () => { },
+        },
+      ]),
+    );
   };
 
   async function fetchData() {
@@ -156,9 +156,9 @@ const BodyCheckScreen = props => {
       const value = await AsyncStorage.getItem('userLoginInfo');
       if (value !== null) {
         var obj_value = JSON.parse(value);
-        let url = `http://qif-nantou.1966.org.tw:20022/api/DriverInfo/GetDriverCheck/${
+        let url = `http://ymca.1966.org.tw:20023/api/DriverInfo/GetDriverCheck/${
           obj_value.response.Id
-        }`;
+          }`;
         const res = await fetch(url, {
           method: 'GET',
           headers: {
@@ -181,7 +181,7 @@ const BodyCheckScreen = props => {
   }
 
   const fetchDataModal = async () => {
-    let url = `http://qif-nantou.1966.org.tw:20022/api/CheckItem/GetCheckDriver`;
+    let url = `http://ymca.1966.org.tw:20023/api/CheckItem/GetCheckDriver`;
 
     console.log(`Making Modal request to: ${url}`);
 
@@ -199,7 +199,7 @@ const BodyCheckScreen = props => {
         Alert.alert('網路異常，請稍後再試...', ' ', [
           {
             text: '確定',
-            onPress: () => {},
+            onPress: () => { },
           },
         ]),
       );
@@ -247,7 +247,7 @@ const BodyCheckScreen = props => {
   if (isLoading) {
     console.log('info screen is loading...');
     return (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <ActivityIndicator animating={true} size='large' />
       </View>
     );
@@ -263,7 +263,7 @@ const BodyCheckScreen = props => {
             padding: 15,
             backgroundColor: '#3C4856',
           }}>
-          <Text style={{color: 'white', fontSize: 20, fontWeight: 'bold'}}>
+          <Text style={{ color: 'white', fontSize: 20, fontWeight: 'bold' }}>
             每日身心檢查
           </Text>
           <ToggleSwitch
@@ -271,14 +271,14 @@ const BodyCheckScreen = props => {
             onColor="#F8A91E"
             offColor="#CACACA"
             label="全部檢查完畢"
-            labelStyle={{color: 'white'}}
+            labelStyle={{ color: 'white' }}
             size="medium"
             onToggle={isOn => {
               handleCheckAll();
             }}
           />
         </View>
-        <View style={{backgroundColor: 'white'}}>
+        <View style={{ backgroundColor: 'white' }}>
           <Text
             style={{
               color: 'black',
@@ -298,9 +298,9 @@ const BodyCheckScreen = props => {
             對您現在的身心狀況進行評估並點選適當欄位
           </Text>
         </View>
-        <View style={{backgroundColor: 'white'}}>
+        <View style={{ backgroundColor: 'white' }}>
           <View />
-          <View style={{flexDirection: 'row'}}>
+          <View style={{ flexDirection: 'row' }}>
             <Text
               style={{
                 color: 'black',
@@ -317,13 +317,13 @@ const BodyCheckScreen = props => {
               dense={true}
               error={input1 === 0 ? true : false}
               placeholder="收縮壓－單位:mmHg"
-              style={{paddingStart: '10%', width: '65%'}}
+              style={{ paddingStart: '10%', width: '65%' }}
               onChangeText={text => {
                 setinput1(text);
               }}
             />
           </View>
-          <View style={{flexDirection: 'row'}}>
+          <View style={{ flexDirection: 'row' }}>
             <Text
               style={{
                 color: 'white',
@@ -340,13 +340,13 @@ const BodyCheckScreen = props => {
               dense={true}
               error={input2 === 0 ? true : false}
               placeholder="舒張壓－單位:mmHg"
-              style={{paddingStart: '10%', width: '65%'}}
+              style={{ paddingStart: '10%', width: '65%' }}
               onChangeText={text => {
                 setinput2(text);
               }}
             />
           </View>
-          <View style={{flexDirection: 'row'}}>
+          <View style={{ flexDirection: 'row' }}>
             <Text
               style={{
                 color: 'black',
@@ -363,13 +363,13 @@ const BodyCheckScreen = props => {
               dense={true}
               error={input3 === 0 ? true : false}
               placeholder="單位:°C"
-              style={{paddingStart: '10%', width: '65%'}}
+              style={{ paddingStart: '10%', width: '65%' }}
               onChangeText={text => {
                 setinput3(text);
               }}
             />
           </View>
-          <View style={{flexDirection: 'row'}}>
+          <View style={{ flexDirection: 'row' }}>
             <Text
               style={{
                 color: 'black',
@@ -386,7 +386,7 @@ const BodyCheckScreen = props => {
               dense={true}
               error={input4 === 0 ? true : false}
               placeholder="單位:次/分"
-              style={{paddingStart: '10%', width: '65%'}}
+              style={{ paddingStart: '10%', width: '65%' }}
               onChangeText={text => {
                 setinput4(text);
               }}
@@ -1129,8 +1129,8 @@ const BodyCheckScreen = props => {
             borderRadius: 50,
             backgroundColor: 'orange',
           }}
-          labelStyle={{color: 'black'}}
-          contentStyle={{width: '100%'}}
+          labelStyle={{ color: 'black' }}
+          contentStyle={{ width: '100%' }}
           mode="outlined"
           onPress={() => {
             handleSubmit();

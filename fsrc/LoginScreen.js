@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   View,
   ScrollView,
@@ -31,12 +31,12 @@ class LoginScreen extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {res: {}};
+    this.state = { res: {} };
     this.handleLogin = this.handleLogin.bind(this);
   }
 
   handleLogin = async () => {
-    let url = `http://qif-nantou.1966.org.tw:20022/api/DriverInfo/DriverLogin?`;
+    let url = `http://ymca.1966.org.tw:20023/api/DriverInfo/DriverLogin?`;
     let query = `acc=${this.emailInput.input._lastNativeText}`;
     let query2 = `pwd=${this.passwordInput.input._lastNativeText}`;
     url += query + '&' + query2;
@@ -176,7 +176,7 @@ class LoginScreen extends Component {
                     width: SCREEN_WIDTH - 80,
                     backgroundColor: 'white',
                   }}
-                  containerStyle={{paddingHorizontal: 0}}
+                  containerStyle={{ paddingHorizontal: 0 }}
                   placeholder="請輸入帳號 (預設為手機號碼)"
                   placeholderTextColor="gray"
                   autoCapitalize="none"
@@ -197,7 +197,7 @@ class LoginScreen extends Component {
                 <View style={styles.triangleRight} />
               </View>
 
-              <View style={[styles.overlay, {marginBottom: 30, marginTop: 1}]}>
+              <View style={[styles.overlay, { marginBottom: 30, marginTop: 1 }]}>
                 <View style={styles.triangleLeft} />
                 <Input
                   inputContainerStyle={{
@@ -208,7 +208,7 @@ class LoginScreen extends Component {
                     width: SCREEN_WIDTH - 80,
                     backgroundColor: 'white',
                   }}
-                  containerStyle={{paddingHorizontal: 0}}
+                  containerStyle={{ paddingHorizontal: 0 }}
                   placeholder="請輸入密碼 (預設為身分證後4碼)"
                   placeholderTextColor="gray"
                   autoCapitalize="none"

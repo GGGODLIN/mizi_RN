@@ -1,15 +1,15 @@
 // file.js
 import RNFS from 'react-native-fs';
 
-import {Platform} from 'react-native';
+import { Platform } from 'react-native';
 
 // 文件路径
 //const defaultPath =(Platform.OS === 'ios' ? RNFS.MainBundlePath : RNFS.DocumentDirectoryPath) ;
-const defaultPath ='file:///storage/emulated/0/Android/data/com.nantou/files/Pictures/saved_signature/';
+const defaultPath = 'file:///storage/emulated/0/Android/data/com.ymca/files/Pictures/saved_signature/';
 //const destPath = defaultPath + '/Pictures/saved_signature';
-const destPath = 'file:///storage/emulated/0/Android/data/com.nantou/files/Pictures/saved_signature/';
+const destPath = 'file:///storage/emulated/0/Android/data/com.ymca/files/Pictures/saved_signature/';
 const testPath =
-  'file:///storage/emulated/0/Android/data/com.nantou/files/Pictures/saved_signature/';
+  'file:///storage/emulated/0/Android/data/com.ymca/files/Pictures/saved_signature/';
 
 class FileUtil {
   // 向文件中添加内容
@@ -78,11 +78,11 @@ class FileUtil {
             //resP[i] = this.readFile(result[i].path, result[i].name);
           }
         }
-        console.log("resP",resP);
+        console.log("resP", resP);
         return Promise.all(resP);
       })
       .then(statResult => {
-        console.log("statResult?",statResult);
+        console.log("statResult?", statResult);
         return statResult;
       })
       .catch(err => {

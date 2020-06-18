@@ -1,7 +1,7 @@
 import React from 'react';
-import {Image} from 'react-native';
-import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
-import {useIsFocused} from '@react-navigation/native';
+import { Image } from 'react-native';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { useIsFocused } from '@react-navigation/native';
 
 import InfoScreen from '../InfoScreen';
 import CheckMainScreen from '../CheckMainScreen';
@@ -15,7 +15,7 @@ import PastReceiveStackScreen from './PastReceiveStackScreen';
 import call from 'react-native-phone-call';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {Linking} from 'react-native';
+import { Linking } from 'react-native';
 import {
   useTheme,
   Avatar,
@@ -29,11 +29,11 @@ import {
   Button,
 } from 'react-native-paper';
 const args = {
-  number: '049-2917146', // String value with the number to call
+  number: '049-2306456', // String value with the number to call
   prompt: false, // Optional boolean property. Determines if the user should be prompt prior to the call
 };
 const Tab = createMaterialBottomTabNavigator();
-const callOut = ({navigation}) => {
+const callOut = ({ navigation }) => {
   const isFocused = useIsFocused();
 
   if (isFocused) {
@@ -53,7 +53,7 @@ export default function BottomTab(props) {
       shifting={false}
       activeColor="#f0edf6"
       inactiveColor="black"
-      
+
       lazy={false}
       unmountOnBlur={true}>
       <Tab.Screen
@@ -117,7 +117,7 @@ export default function BottomTab(props) {
           tabBarIcon: 'cellphone-sound',
           tabBarButton: props => <callOut {...props} />,
         }}
-        listeners={{tabPress: e => console.log('Tab press', e.target)}}
+        listeners={{ tabPress: e => console.log('Tab press', e.target) }}
       />
     </Tab.Navigator>
   );

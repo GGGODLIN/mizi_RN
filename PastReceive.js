@@ -1,4 +1,4 @@
-import React, {useState, useEffect, Component} from 'react';
+import React, { useState, useEffect, Component } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -25,9 +25,9 @@ import {
   useFocusEffect,
   StackActions,
 } from '@react-navigation/native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import {ThemeProvider, Avatar} from 'react-native-elements';
+import { ThemeProvider, Avatar } from 'react-native-elements';
 import {
   Button,
   Card,
@@ -39,7 +39,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
-function Item({data, navigation}) {
+function Item({ data, navigation }) {
   return (
     <View
       elevation={5}
@@ -59,8 +59,8 @@ function Item({data, navigation}) {
           borderBottomWidth: 1,
           width: '95%',
         }}>
-        <Text style={{flex: 2, paddingVertical: 10}}>日期</Text>
-        <Text style={{flex: 1}}>{data.CreateDate.slice(0, 10)}</Text>
+        <Text style={{ flex: 2, paddingVertical: 10 }}>日期</Text>
+        <Text style={{ flex: 1 }}>{data.CreateDate.slice(0, 10)}</Text>
       </View>
       <View
         style={{
@@ -70,8 +70,8 @@ function Item({data, navigation}) {
           borderBottomWidth: 1,
           width: '95%',
         }}>
-        <Text style={{flex: 2, paddingVertical: 10}}>應收金額</Text>
-        <Text style={{flex: 1}}>{data.ShouldReceiveAmt}</Text>
+        <Text style={{ flex: 2, paddingVertical: 10 }}>應收金額</Text>
+        <Text style={{ flex: 1 }}>{data.ShouldReceiveAmt}</Text>
       </View>
       <View
         style={{
@@ -80,8 +80,8 @@ function Item({data, navigation}) {
           alignItems: 'center',
           width: '95%',
         }}>
-        <Text style={{flex: 2, paddingVertical: 10}}>實收金額</Text>
-        <Text style={{flex: 1}}>{data.RealReceiveAmt}</Text>
+        <Text style={{ flex: 2, paddingVertical: 10 }}>實收金額</Text>
+        <Text style={{ flex: 1 }}>{data.RealReceiveAmt}</Text>
       </View>
     </View>
   );
@@ -134,7 +134,7 @@ const PastReceive = props => {
   async function fetchDataDate(sDate, eDate) {
     await setLoading(true);
     var url2 =
-      'http://qif-nantou.1966.org.tw:20022/api/DriverInfo/GetDriverReceiveListDate/' +
+      'http://ymca.1966.org.tw:20023/api/DriverInfo/GetDriverReceiveListDate/' +
       user.response.Id +
       '?StartDate=' +
       sDate +
@@ -152,15 +152,16 @@ const PastReceive = props => {
         setbox(res);
         setLoading(false);
       })
-      .catch(err =>
-        {console.log("????",err);
-                Alert.alert('網路異常，請稍後再試...', ' ', [
-                  {
-                    text: '確定',
-                    onPress: () => {},
-                  },
-                ]);}
-              );
+      .catch(err => {
+        console.log("????", err);
+        Alert.alert('網路異常，請稍後再試...', ' ', [
+          {
+            text: '確定',
+            onPress: () => { },
+          },
+        ]);
+      }
+      );
   }
 
   async function fetchData() {
@@ -172,7 +173,7 @@ const PastReceive = props => {
         setuser(obj_value);
 
         var url3 =
-          'http://qif-nantou.1966.org.tw:20022/api/DriverInfo/GetDriverReceiveListDate/' +
+          'http://ymca.1966.org.tw:20023/api/DriverInfo/GetDriverReceiveListDate/' +
           obj_value.response.Id +
           '?StartDate=' +
           '&EndDate=';
@@ -214,7 +215,7 @@ const PastReceive = props => {
   if (isLoading) {
     console.log('info screen is loading...');
     return (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <ActivityIndicator animating={true} size="large" />
       </View>
     );
@@ -227,12 +228,12 @@ const PastReceive = props => {
     console.log(list);
     return (
       <SafeAreaView style={styles.container}>
-        <View style={{width: '70%'}}>
-          <View style={{flexDirection: 'row'}}>
-            <View style={{flexDirection: 'column'}}>
+        <View style={{ width: '70%' }}>
+          <View style={{ flexDirection: 'row' }}>
+            <View style={{ flexDirection: 'column' }}>
               <View>
                 <Button
-                  contentStyle={{width: '100%'}}
+                  contentStyle={{ width: '100%' }}
                   onPress={showDatepicker}
                   color="white"
                   mode="contained">
@@ -281,7 +282,7 @@ const PastReceive = props => {
         <FlatList
           inverted
           data={list}
-          renderItem={({item}) => (
+          renderItem={({ item }) => (
             <Item data={item} navigation={props.navigation} />
           )}
           keyExtractor={item => item.Id}
