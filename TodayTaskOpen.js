@@ -47,16 +47,13 @@ import {
   ActivityIndicator,
 } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import call from 'react-native-phone-call';
 
 const TodayTaskOpen = props => {
   const GOOGLE_MAPS_APIKEY = 'AIzaSyCUaMOOcU7-pH99LS6ajo_s1WkDua92H08';
   const [data, setdata] = useState({});
   const [finish, setfinish] = useState(false);
-  const [doneCase, setdoneCase] = useState(
-    props.route.params.data.DespatchDetails.map((e, index) => {
-      return e.OrderDetails.Status >= 6 ? index : null;
-    }),
-  );
+
   const [ps, setps] = useState(' ');
   const [picPath, setpicPath] = useState(
     '/storage/emulated/0/saved_signature/signature.png',
@@ -76,10 +73,30 @@ const TodayTaskOpen = props => {
   const [delayForMap, setdelayForMap] = useState(false);
   const [fixbottom, setfixbottom] = useState(-1);
 
-  const taskData = props.route.params.data.DespatchDetails.map(e => e);
-  const caseNames = props.route.params.data.DespatchDetails.map(
-    e => e.OrderDetails.CaseUserName,
+  let sortedArray = props.route.params.data.DespatchDetails.map(e => e);
+  sortedArray.sort(function(a, b) {
+    let nameA = a.OrderDetails.ReservationDate; // ignore upper and lowercase
+    let nameB = b.OrderDetails.ReservationDate; // ignore upper and lowercase
+    if (nameA < nameB) {
+      return -1;
+    }
+    if (nameA > nameB) {
+      return 1;
+    }
+
+    // names must be equal
+    return 0;
+  });
+
+  const [doneCase, setdoneCase] = useState(
+    sortedArray.map((e, index) => {
+      return e.OrderDetails.Status >= 6 ? index : null;
+    }),
   );
+
+  const taskData = sortedArray;
+
+  const caseNames = sortedArray.map(e => e.OrderDetails.CaseUserName);
   const [caseStatus, setcaseStatus] = useState(
     props.route.params.data.DespatchDetails.map(e => e.OrderDetails.Status),
   );
@@ -662,6 +679,29 @@ const TodayTaskOpen = props => {
                     </Button>
                   </View>
                 </View>
+              </View>
+
+              <View
+                style={
+                  caseStatus[index] >= 5 ? {display: 'none'} : styles.addr
+                }>
+                <Button
+                  style={{
+                    alignSelf: 'center',
+                    justifyContent: 'center',
+                    alignContent: 'center',
+                    //marginStart: 10,
+                  }}
+                  contentStyle={{height: 40}}
+                  mode="text"
+                  onPress={() =>
+                    call({
+                      number: item.CompanyPhone, // String value with the number to call
+                      prompt: false, // Optional boolean property. Determines if the user should be prompt prior to the call
+                    })
+                  }>
+                  {`聯絡電話: ${item.CompanyPhone}`}
+                </Button>
               </View>
 
               <View
