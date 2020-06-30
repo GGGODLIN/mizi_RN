@@ -47,12 +47,13 @@ import {
   ActivityIndicator,
 } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import call from 'react-native-phone-call';
 
 const TodayTaskOpen = props => {
   const GOOGLE_MAPS_APIKEY = 'AIzaSyA1h_cyazZLo1DExB0h0B2JBuOfv-yFtsM';
   const [data, setdata] = useState({});
   const [finish, setfinish] = useState(false);
-  
+
   const [ps, setps] = useState(' ');
   const [picPath, setpicPath] = useState(
     '/storage/emulated/0/saved_signature/signature.png',
@@ -96,9 +97,7 @@ const TodayTaskOpen = props => {
 
   const taskData = sortedArray;
 
-  const caseNames = sortedArray.map(
-    e => e.OrderDetails.CaseUserName,
-  );
+  const caseNames = sortedArray.map(e => e.OrderDetails.CaseUserName);
   const [caseStatus, setcaseStatus] = useState(
     sortedArray.map(e => e.OrderDetails.Status),
   );
@@ -766,6 +765,29 @@ const TodayTaskOpen = props => {
                     </Button>
                   </View>
                 </View>
+              </View>
+
+              <View
+                style={
+                  caseStatus[index] >= 5 ? {display: 'none'} : styles.addr
+                }>
+                <Button
+                  style={{
+                    alignSelf: 'center',
+                    justifyContent: 'center',
+                    alignContent: 'center',
+                    //marginStart: 10,
+                  }}
+                  contentStyle={{height: 40}}
+                  mode="text"
+                  onPress={() =>
+                    call({
+                      number: item.CompanyPhone, // String value with the number to call
+                      prompt: false, // Optional boolean property. Determines if the user should be prompt prior to the call
+                    })
+                  }>
+                  {`聯絡電話: ${item.CompanyPhone}`}
+                </Button>
               </View>
 
               <View
