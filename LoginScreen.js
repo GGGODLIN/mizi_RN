@@ -144,7 +144,7 @@ class LoginScreen extends Component {
 
   handleReLogin = async (acc,pwd) => {
     let deviceId = DeviceInfo.getUniqueId();
-    let url = `https://api.donkeymove.com/api/DriverInfo/DriverLogin?`;
+    let url = `http://slllcapi.1966.org.tw/api/DriverInfo/DriverLogin?`;
     let query = `acc=${acc}`;
     let query2 = `pwd=${pwd}`;
     let query3 = `mDevice=${deviceId}`;
