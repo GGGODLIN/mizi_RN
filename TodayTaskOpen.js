@@ -786,7 +786,7 @@ const TodayTaskOpen = props => {
                     mode="text"
                     onPress={() =>
                       call({
-                        number: item.CompanyPhone, // String value with the number to call
+                        number: item?.CaseUser?.UrgentTel, // String value with the number to call
                         prompt: false, // Optional boolean property. Determines if the user should be prompt prior to the call
                       })
                     }>
@@ -811,7 +811,7 @@ const TodayTaskOpen = props => {
                     mode="text"
                     onPress={() =>
                       call({
-                        number: item.CompanyPhone, // String value with the number to call
+                        number: item?.CaseUser?.UrgentPhone, // String value with the number to call
                         prompt: false, // Optional boolean property. Determines if the user should be prompt prior to the call
                       })
                     }>
