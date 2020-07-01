@@ -767,28 +767,57 @@ const TodayTaskOpen = props => {
                 </View>
               </View>
 
-              <View
-                style={
-                  caseStatus[index] >= 5 ? {display: 'none'} : styles.addr
-                }>
-                <Button
-                  style={{
-                    alignSelf: 'center',
-                    justifyContent: 'center',
-                    alignContent: 'center',
-                    //marginStart: 10,
-                  }}
-                  contentStyle={{height: 40}}
-                  mode="text"
-                  onPress={() =>
-                    call({
-                      number: item.CompanyPhone, // String value with the number to call
-                      prompt: false, // Optional boolean property. Determines if the user should be prompt prior to the call
-                    })
+              {item?.CaseUser?.UrgentTel !== '' && (
+                <View
+                  style={
+                    caseStatus[index] >= 5 ? {display: 'none'} : styles.addr
                   }>
-                  {`聯絡電話: ${item.CompanyPhone}`}
-                </Button>
-              </View>
+                  <Button
+                    style={{
+                      alignSelf: 'center',
+                      justifyContent: 'center',
+                      alignContent: 'center',
+                      //marginStart: 10,
+                    }}
+                    icon="phone"
+                    contentStyle={{height: 40}}
+                    mode="text"
+                    onPress={() =>
+                      call({
+                        number: item.CompanyPhone, // String value with the number to call
+                        prompt: false, // Optional boolean property. Determines if the user should be prompt prior to the call
+                      })
+                    }>
+                    {`緊急聯絡人電話: ${item?.CaseUser?.UrgentTel}`}
+                  </Button>
+                </View>
+              )}
+              {item?.CaseUser?.UrgentPhone !== '' && (
+                <View
+                  style={
+                    caseStatus[index] >= 5 ? {display: 'none'} : styles.addr
+                  }>
+                  <Button
+                    style={{
+                      alignSelf: 'center',
+                      justifyContent: 'center',
+                      alignContent: 'center',
+                      //marginStart: 10,
+                    }}
+                    icon="phone"
+                    contentStyle={{height: 40}}
+                    mode="text"
+                    onPress={() =>
+                      call({
+                        number: item.CompanyPhone, // String value with the number to call
+                        prompt: false, // Optional boolean property. Determines if the user should be prompt prior to the call
+                      })
+                    }>
+                    {`緊急聯絡人手機: ${item?.CaseUser?.UrgentPhone}`}
+                  </Button>
+                </View>
+              )}
+              
 
               <View
                 style={
