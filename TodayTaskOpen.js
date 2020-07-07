@@ -79,10 +79,12 @@ const TodayTaskOpen = props => {
     let nameA = a.OrderDetails.ReservationDate; // ignore upper and lowercase
     let nameB = b.OrderDetails.ReservationDate; // ignore upper and lowercase
     if (nameA < nameB) {
-      return -1;
+      //return -1;
+      return 0;
     }
     if (nameA > nameB) {
-      return 1;
+      //return 1;
+      return 0;
     }
 
     // names must be equal
@@ -883,7 +885,7 @@ ${item.OrderDetails.ToAddr}`}
                         alignSelf: 'center',
                       }
                 }>
-                <Text style={{fontSize: 20}}>{`備註:${
+                <Text style={{fontSize: 20}}>{`備註:${item?.OrderDetails?.NeedLadder ?'**需要踏板** ':''} ${
                   item.CaseUser.Remark
                 }`}</Text>
               </View>
