@@ -48,7 +48,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const TodayTaskOpen = props => {
-  const GOOGLE_MAPS_APIKEY = 'AIzaSyCUaMOOcU7-pH99LS6ajo_s1WkDua92H08';
+  const GOOGLE_MAPS_APIKEY = 'AIzaSyA1h_cyazZLo1DExB0h0B2JBuOfv-yFtsM';
   const [data, setdata] = useState({});
   const [finish, setfinish] = useState(false);
   const [doneCase, setdoneCase] = useState(
@@ -87,8 +87,15 @@ const TodayTaskOpen = props => {
   console.log('STATUS', caseStatus);
   console.log('Done', doneCase);
   console.log('index', detailIndex);
-  const [people, setpeople] = useState(taskData[detailIndex].OrderDetails.FamilyWith+taskData[detailIndex].OrderDetails.ForeignFamilyWith);
-  console.log('陪同', taskData[detailIndex].OrderDetails.FamilyWith+taskData[detailIndex].OrderDetails.ForeignFamilyWith);
+  const [people, setpeople] = useState(
+    taskData[detailIndex].OrderDetails.FamilyWith +
+      taskData[detailIndex].OrderDetails.ForeignFamilyWith,
+  );
+  console.log(
+    '陪同',
+    taskData[detailIndex].OrderDetails.FamilyWith +
+      taskData[detailIndex].OrderDetails.ForeignFamilyWith,
+  );
 
   const origin = {
     latitude: taskData[detailIndex].OrderDetails.FromLat,
@@ -130,7 +137,10 @@ const TodayTaskOpen = props => {
     let tempStatus = caseStatus;
     tempStatus[detailIndex] = caseStatus[detailIndex] + 1;
     setcaseStatus(tempStatus);
-    setpeople(taskData[detailIndex].OrderDetails.FamilyWith+taskData[detailIndex].OrderDetails.ForeignFamilyWith);
+    setpeople(
+      taskData[detailIndex].OrderDetails.FamilyWith +
+        taskData[detailIndex].OrderDetails.ForeignFamilyWith,
+    );
     if (tempStatus[detailIndex] == 6) {
       updateStatusToSix();
       setoverlay(true);
@@ -164,9 +174,12 @@ const TodayTaskOpen = props => {
     setLoading(true);
   };
 
-  const handleChangeIndex = async (index) => {
+  const handleChangeIndex = async index => {
     setdetailIndex(index);
-    setpeople(taskData[index].OrderDetails.FamilyWith+taskData[index].OrderDetails.ForeignFamilyWith);
+    setpeople(
+      taskData[index].OrderDetails.FamilyWith +
+        taskData[index].OrderDetails.ForeignFamilyWith,
+    );
   };
 
   const handleCashNext = async () => {
@@ -211,7 +224,9 @@ const TodayTaskOpen = props => {
         Alert.alert('網路異常，請稍後再試...', ' ', [
           {
             text: '確定',
-            onPress: () => {setLoading(false);},
+            onPress: () => {
+              setLoading(false);
+            },
           },
         ]),
       );
@@ -341,9 +356,16 @@ const TodayTaskOpen = props => {
 
         if (caseStatus[0] >= 6) {
           setdetailIndex(index);
-          setpeople(taskData[index].OrderDetails.FamilyWith+taskData[index].OrderDetails.ForeignFamilyWith);
-          console.log("with?????????",taskData[index].OrderDetails.FamilyWith+taskData[index].OrderDetails.ForeignFamilyWith)
-        setforeignPeople(taskData[index].OrderDetails.ForeignFamilyWith);
+          setpeople(
+            taskData[index].OrderDetails.FamilyWith +
+              taskData[index].OrderDetails.ForeignFamilyWith,
+          );
+          console.log(
+            'with?????????',
+            taskData[index].OrderDetails.FamilyWith +
+              taskData[index].OrderDetails.ForeignFamilyWith,
+          );
+          setforeignPeople(taskData[index].OrderDetails.ForeignFamilyWith);
           setlongitudeDelta(
             Math.abs(
               taskData[index].OrderDetails.FromLon -
@@ -375,7 +397,7 @@ const TodayTaskOpen = props => {
 
   useEffect(() => {
     checkDone();
-    console.log("CHECKDONE????!?!?!?!?!?");
+    console.log('CHECKDONE????!?!?!?!?!?');
   }, []);
 
   if (isLoading || finish) {
@@ -430,6 +452,17 @@ const TodayTaskOpen = props => {
     }
   } else {
     console.log('DELTA', latitudeDelta, longitudeDelta);
+    let startTime =
+      props.route.params.data.DespatchDetails[detailIndex].OrderDetails
+        .ReservationDate;
+    let startDate =
+      props.route.params.data.DespatchDetails[detailIndex].OrderDetails
+        .ReservationDate;
+    let pos = startTime.indexOf('T');
+    if (pos != -1) {
+      startDate = startTime.substring(0, pos);
+      startTime = startTime.substring(pos + 1, pos + 6);
+    }
     return (
       <ScrollView style={{flex: 1}}>
         <Overlay
@@ -600,7 +633,7 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
               fontSize: 20,
               fontWeight: 'bold',
             }}
-            style={{marginBottom: 10,marginTop:60}}>
+            style={{marginBottom: 10, marginTop: 60}}>
             確認送出
           </Button>
         </Overlay>
@@ -617,9 +650,7 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
           <View style={styles.titleBox}>
             <View style={styles.titleTime}>
               <View style={styles.titleLeft}>
-                <Text style={{color: 'white', fontSize: 20}}>
-                  {props.route.params.startTime}
-                </Text>
+                <Text style={{color: 'white', fontSize: 20}}>{startTime}</Text>
               </View>
               <View style={styles.titleDate}>
                 <Text style={{color: 'white', fontSize: 20}}>
@@ -640,7 +671,12 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
             </View>
             <View style={styles.titleRight}>
               <Text style={{color: 'white', fontSize: 20}}>
-                {'個案' + 1 + '/' + '陪同' + (taskData[detailIndex].OrderDetails.FamilyWith+taskData[detailIndex].OrderDetails.ForeignFamilyWith)}
+                {'個案' +
+                  1 +
+                  '/' +
+                  '陪同' +
+                  (taskData[detailIndex].OrderDetails.FamilyWith +
+                    taskData[detailIndex].OrderDetails.ForeignFamilyWith)}
               </Text>
             </View>
           </View>
@@ -804,7 +840,7 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
                 ]);
               } else if (caseStatus[detailIndex] === 3) {
                 setBToverlay(true);
-                console.log("NOOOOOOO~~~~~~");
+                console.log('NOOOOOOO~~~~~~');
 
                 //handleNextStep(0, index);
               } else {
@@ -819,11 +855,18 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
               ? '客上'
               : '客下'}
           </Button>
-          <View style={
-              caseStatus[detailIndex] >= 5 ? {display: 'none'} : {width:'80%',alignItems:'flex-start',alignSelf:'center'}
+          <View
+            style={
+              caseStatus[detailIndex] >= 5
+                ? {display: 'none'}
+                : {width: '80%', alignItems: 'flex-start', alignSelf: 'center'}
             }>
-          <Text style={{fontSize:20}}>{`備註:${taskData[detailIndex].CaseUser.Remark===null?'':taskData[detailIndex].CaseUser.Remark}`}</Text>
-            </View>
+            <Text style={{fontSize: 20}}>{`備註:${
+              taskData[detailIndex].CaseUser.Remark === null
+                ? ''
+                : taskData[detailIndex].CaseUser.Remark
+            }`}</Text>
+          </View>
           <Button
             style={
               caseStatus[detailIndex] == 3
@@ -905,7 +948,7 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
               陪同人數:
             </Text>
             <Picker
-              enabled={(cashSteps == 0 && !askingMoney) ? true : false}
+              enabled={cashSteps == 0 && !askingMoney ? true : false}
               selectedValue={people}
               style={{flex: 1}}
               onValueChange={(itemValue, itemIndex) => setpeople(itemValue)}>
@@ -1011,7 +1054,11 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
             mode="outlined"
             disabled={askingMoney}
             onPress={() => handleCashNext()}>
-            {cashSteps == 0 ? (askingMoney ?'金額計算中...':'現金') : '確認收款'}
+            {cashSteps == 0
+              ? askingMoney
+                ? '金額計算中...'
+                : '現金'
+              : '確認收款'}
           </Button>
           <Button
             style={

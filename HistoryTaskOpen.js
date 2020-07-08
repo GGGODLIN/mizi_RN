@@ -41,7 +41,7 @@ import {Button, Card, Title, Paragraph, Divider,ActivityIndicator} from 'react-n
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const HistoryTaskOpen = props => {
-  const GOOGLE_MAPS_APIKEY = 'AIzaSyCUaMOOcU7-pH99LS6ajo_s1WkDua92H08';
+  const GOOGLE_MAPS_APIKEY = 'AIzaSyA1h_cyazZLo1DExB0h0B2JBuOfv-yFtsM';
   const [data, setdata] = useState({});
   const [doneCase, setdoneCase] = useState(
     props.route.params.data.DespatchDetails.map((e, index) => {
@@ -246,6 +246,17 @@ const HistoryTaskOpen = props => {
       </View>
     );
   } else {
+    let startTime =
+      props.route.params.data.DespatchDetails[detailIndex].OrderDetails
+        .ReservationDate;
+    let startDate =
+      props.route.params.data.DespatchDetails[detailIndex].OrderDetails
+        .ReservationDate;
+    let pos = startTime.indexOf('T');
+    if (pos != -1) {
+      startDate = startTime.substring(0, pos);
+      startTime = startTime.substring(pos + 1, pos + 6);
+    }
     return (
       <ScrollView style={{flex: 1}}>
         <View
@@ -261,7 +272,7 @@ const HistoryTaskOpen = props => {
             <View style={styles.titleTime}>
               <View style={styles.titleLeft}>
                 <Text style={{color: 'white', fontSize: 20}}>
-                  {props.route.params.startTime}
+                  {startTime}
                 </Text>
               </View>
               <View style={styles.titleDate}>
