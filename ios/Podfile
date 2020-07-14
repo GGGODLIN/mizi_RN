@@ -63,10 +63,7 @@ pod 'react-native-webview', :path => '../node_modules/react-native-webview'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
 
-  target 'TEST0214Tests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
+  
 
   use_native_modules!
 end

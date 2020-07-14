@@ -771,14 +771,14 @@
 				CODE_SIGN_ENTITLEMENTS = TEST0214/TEST0214.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20200610;
+				CURRENT_PROJECT_VERSION = 20200804;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = FCDA6DJLTQ;
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = TEST0214/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -799,13 +799,13 @@
 				CODE_SIGN_ENTITLEMENTS = TEST0214/TEST0214.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20200610;
+				CURRENT_PROJECT_VERSION = 20200804;
 				DEVELOPMENT_TEAM = FCDA6DJLTQ;
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = TEST0214/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
