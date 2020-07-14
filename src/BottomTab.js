@@ -11,6 +11,7 @@ import InfoStackScreen from './InfoStackScreen';
 import TodayTasksStackScreen from './TodayTasksStackScreen';
 import HistoryTasksStackScreen from './HistoryTasksStackScreen';
 import PastReceiveStackScreen from './PastReceiveStackScreen';
+import TomorrowTasksStackScreen from './TomorrowTasksStackScreen'
 
 import call from 'react-native-phone-call';
 
@@ -110,8 +111,20 @@ export default function BottomTab(props) {
           },
         }}
       />
-
       <Tab.Screen
+        name="明日任務"
+        component={TomorrowTasksStackScreen}
+        options={{
+          tabBarIcon: 'car-multiple',
+        }}
+        listeners={{
+          tabPress: e => {
+            e.preventDefault();
+          },
+        }}
+      />
+
+      {/*<Tab.Screen
         name="聯繫行控"
         component={callOut}
         options={{
@@ -119,7 +132,7 @@ export default function BottomTab(props) {
           tabBarButton: props => <callOut {...props} />,
         }}
         listeners={{tabPress: e => console.log('Tab press', e.target)}}
-      />
+      />*/}
     </Tab.Navigator>
   );
 }
