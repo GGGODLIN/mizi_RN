@@ -37,13 +37,13 @@ import FileUtil from './FileUtil';
 
 function Item({data, navigation}) {
   var caseName = data.DespatchDetails[0].CaseUser.Name;
-  var startTime = data.DespatchDetails[0].Despatch.StartDate;
-  var startDate = data.DespatchDetails[0].Despatch.StartDate;
-  var pos = startTime.indexOf('T');
-  if (pos != -1) {
-    startDate = startTime.substring(0, pos);
-    startTime = startTime.substring(pos + 1, pos + 6);
-  }
+  var startTime = data.DespatchDetails.map((item)=>{ return item?.OrderDetails?.ReservationDate.split('T')[1].slice(0,5)});
+  var startDate = data.DespatchDetails.map((item)=>{ return item?.OrderDetails?.ReservationDate.split('T')[0]});
+  // var pos = startTime.indexOf('T');
+  // if (pos != -1) {
+  //   startDate = startTime.substring(0, pos);
+  //   startTime = startTime.substring(pos + 1, pos + 6);
+  // }
   var canShared = data.DespatchDetails.length>=2?'有共乘':'無共乘';
   var FamilyWith = data.DespatchDetails[0].OrderDetails.FamilyWith;
   const sum = (data.DespatchDetails.length===1)?data.DespatchDetails[0].OrderDetails.FamilyWith+data.DespatchDetails[0].OrderDetails.ForeignFamilyWith:data.DespatchDetails.reduce(function (accumulator, currentValue, currentIndex, array) {
@@ -86,15 +86,15 @@ function Item({data, navigation}) {
               <Text
                 style={{color: 'white', fontSize: 20}}
                 allowFontScaling={false}>
-                {startTime}
+                {startTime.map((item)=>{return `${item}  `})}
               </Text>
             </View>
             <View style={styles.titleDate}>
-              <Text
+              {/*<Text
                 style={{color: 'white', fontSize: 20}}
                 allowFontScaling={false}>
-                {startDate}
-              </Text>
+                {startDate[0]}
+              </Text>*/}
               <Text
                 style={{color: 'white', fontSize: 20,marginStart:20}}
                 allowFontScaling={false}>
@@ -195,6 +195,7 @@ const TodayTaskList = props => {
           'https://api.donkeymove.com/api/DriverInfo/GetAllGroupDriverSide/' +
           obj_value.response.Id;
         //let url = `https://api.donkeymove.com/api/DriverInfo/GetAllGroup/${obj_value.Id}`;
+        console.log(url2);
         const data = await fetch(url2, {
           method: 'GET',
           headers: {
@@ -393,7 +394,14 @@ const TodayTaskList = props => {
       </View>
     );
   } else {
-    const list = data.response;
+    const list2 = data.response;
+    const list = data.response.map((item)=>{
+       item?.DespatchDetails?.sort((a,b)=>{
+        return a?.OrderDetails?.ReservationDate > b?.OrderDetails?.ReservationDate ? 1 : -1;
+      });
+       return item;
+    });
+    //console.log('list2',list,list2);
     return (
       <SafeAreaView style={styles.container}>
         <View

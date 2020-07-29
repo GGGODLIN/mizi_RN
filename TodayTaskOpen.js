@@ -95,7 +95,7 @@ const TodayTaskOpen = props => {
   );
   console.log('STATUS', caseStatus);
   //console.log('Done', doneCase);
-  console.log('index', detailIndex);
+  console.log('index', detailIndex,props.route.params.startTime);
   const [people, setpeople] = useState(
     taskData[detailIndex].OrderDetails.FamilyWith +
       taskData[detailIndex].OrderDetails.ForeignFamilyWith,
@@ -677,12 +677,12 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
             <View style={styles.titleTime}>
               <View style={styles.titleLeft}>
                 <Text style={{color: 'white', fontSize: 20}}>
-                  {props.route.params.startTime}
+                  {props.route.params.startTime[detailIndex]}
                 </Text>
               </View>
               <View style={styles.titleDate}>
                 <Text style={{color: 'white', fontSize: 20}}>
-                  {props.route.params.startDate}
+                  {props.route.params.startDate[detailIndex]}
                 </Text>
                 <Text style={{color: 'white', fontSize: 20}}>
                   {props.route.params.canShared}
