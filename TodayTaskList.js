@@ -583,14 +583,14 @@ const styles = StyleSheet.create({
   titleLeft: {
     margin: 0,
     padding: 0,
-    flex: 1,
+    flex: 7,
   },
   titleDate: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
     margin: 0,
     padding: 0,
-    flex: 1,
+    flex: 3,
   },
   titleName: {
     justifyContent: 'center',

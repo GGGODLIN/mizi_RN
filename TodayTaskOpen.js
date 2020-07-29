@@ -1168,7 +1168,7 @@ const styles = StyleSheet.create({
   titleLeft: {
     margin: 0,
     padding: 0,
-    flex: 1,
+    flex: 3,
   },
   titleDate: {
     flexDirection: 'row',
