@@ -145,15 +145,16 @@ const TodayTaskOpen = props => {
   const handleNextStep = async () => {
     let tempStatus = [...caseStatus];
     tempStatus[detailIndex] = caseStatus[detailIndex] + 1;
-    setcaseStatus(tempStatus);
-    setpeople(
-      taskData[detailIndex].OrderDetails.FamilyWith +
-        taskData[detailIndex].OrderDetails.ForeignFamilyWith,
-    );
+    
     if (tempStatus[detailIndex] == 6) {
       setpressLoading(true);
       await updateStatusToSix(tempStatus);
       setpressLoading(false);
+      setcaseStatus(tempStatus);
+    setpeople(
+      taskData[detailIndex].OrderDetails.FamilyWith +
+        taskData[detailIndex].OrderDetails.ForeignFamilyWith,
+    );
       //setoverlay(true);
       //setLoading(true);
       //setdelayForMap(true);
@@ -161,6 +162,11 @@ const TodayTaskOpen = props => {
       setpressLoading(true);
       await updateStatus(tempStatus);
       setpressLoading(false);
+      setcaseStatus(tempStatus);
+    setpeople(
+      taskData[detailIndex].OrderDetails.FamilyWith +
+        taskData[detailIndex].OrderDetails.ForeignFamilyWith,
+    );
       //setoverlay(true);
       //setLoading(true);
       if (tempStatus[detailIndex] == 3) {
@@ -1168,14 +1174,14 @@ const styles = StyleSheet.create({
   titleLeft: {
     margin: 0,
     padding: 0,
-    flex: 3,
+    flex: 1,
   },
   titleDate: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
     margin: 0,
     padding: 0,
-    flex: 1,
+    flex: 2,
   },
   titleName: {
     justifyContent: 'center',
