@@ -65,6 +65,8 @@ function Item({data, navigation}) {
       ? '無派車'
       : data.DespatchDetails[0].OrderDetails.Status == 12
       ? '服務單位取消-變更時間'
+      : data.DespatchDetails[0].OrderDetails.Status == 13
+      ? '已完成'
       : '可撥的Bug';
   var FamilyWith = data.DespatchDetails[0].OrderDetails.FamilyWith;
   var ForeignFamilyWith =
