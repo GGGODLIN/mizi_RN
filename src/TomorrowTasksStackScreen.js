@@ -32,7 +32,7 @@ export default function TomorrowTasksStackScreen(props) {
           ),
        headerLeft:({color, size}) => (
             <Image
-          style={{width:'300%', height:'100%',padding:20,paddingStart:'300%'}}
+          style={{width:'440%', height:'100%',padding:20,paddingStart:'300%'}}
           source={require('../img/logo-light.png')}
         />
 
