@@ -133,10 +133,10 @@ const TomorrowTaskList = props => {
         let realEnd = new Date(endDay.setDate(endDay.getDate() + 1));//此處+7取得一週後日期
         let endDayFormat = realEnd.toISOString().substring(0, 10);
         var url2 =
-      'http://slllcapi.1966.org.tw/api/DriverInfo/GetAllPassGroup/' +
+      'http://care.1966.org.tw/api/api/DriverInfo/GetAllPassGroup/' +
       obj_value.response.Id + '?sDate=' + endDayFormat + '&eDate=' + endDayFormat;
         
-        //let url = `http://slllcapi.1966.org.tw/api/DriverInfo/GetAllGroup/${obj_value.Cars.DriverId}`;
+        //let url = `http://care.1966.org.tw/api/api/DriverInfo/GetAllGroup/${obj_value.Cars.DriverId}`;
         console.log("request to ",url2);
         const data = await fetch(url2, {
           method: 'GET',
@@ -167,7 +167,7 @@ const TomorrowTaskList = props => {
 
   async function fetchData_test() {
     const data = await fetch(
-      'http://slllcapi.1966.org.tw/api/DriverInfo/GetAllPassGroup/15',
+      'http://care.1966.org.tw/api/api/DriverInfo/GetAllPassGroup/15',
       {
         method: 'GET',
         headers: {
