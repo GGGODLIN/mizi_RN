@@ -886,7 +886,7 @@ ${item.OrderDetails.ToAddr}`}
                       }
                 }>
                 <Text style={{fontSize: 20}}>{`備註:${item?.OrderDetails?.NeedLadder ?'**需要踏板** ':''} ${
-                  item.CaseUser.Remark
+                  item.CaseUser.Remark ?? ''
                 }`}</Text>
               </View>
 
