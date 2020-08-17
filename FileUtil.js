@@ -4,7 +4,7 @@ import RNFS from 'react-native-fs';
 import {Platform} from 'react-native';
 
 // 文件路径
-const defaultPath =(Platform.OS === 'ios' ? RNFS.MainBundlePath : RNFS.DocumentDirectoryPath) + '/saved_signature' ;
+const defaultPath =RNFS.DocumentDirectoryPath + '/saved_signature' ;
 //const defaultPath ='file:///storage/emulated/0/Android/data/com.test0214/files/Pictures/saved_signature/';
 //const destPath = defaultPath + '/Pictures/saved_signature';
 const destPath = defaultPath + '/test';
