@@ -751,7 +751,12 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
                           }}
                           icon="write"
                           pinColor="blue"
-                          onPress={() => setfixbottom(0)}
+                          onPress={() => {
+                            if (fixbottom === -1)
+                              setfixbottom(0)
+                            else
+                              setfixbottom(-1)
+                          }}
                           title={taskData[detailIndex].OrderDetails.FromAddr}
                         />
                         <Marker
@@ -760,7 +765,12 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
                             longitude: taskData[detailIndex].OrderDetails.ToLon,
                           }}
                           icon="write"
-                          onPress={() => setfixbottom(0)}
+                          onPress={() => {
+                            if (fixbottom === -1)
+                              setfixbottom(0)
+                            else
+                              setfixbottom(-1)
+                          }}
                           title={taskData[detailIndex].OrderDetails.ToAddr}
                         />
           
