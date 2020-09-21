@@ -42,7 +42,7 @@ const CheckMainScreen = props => {
       const value = await AsyncStorage.getItem('userLoginInfo');
       if (value !== null) {
         var obj_value = JSON.parse(value);
-        let url = `http://qif-nantou.1966.org.tw:20022/api/DriverInfo/GetDriverCheck/${
+        let url = `http://cih.1966.org.tw/api/DriverInfo/GetDriverCheck/${
           obj_value.response.Id
         }`;
         const res = await fetch(url, {

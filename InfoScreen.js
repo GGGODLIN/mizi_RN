@@ -57,7 +57,7 @@ const InfoScreen = props => {
 
   const handleSubmit = async () => {
     var url3 =
-      'http://qif-nantou.1966.org.tw:20022/api/DriverInfo/PutDriverPwd?DriverId=' +
+      'http://cih.1966.org.tw/api/DriverInfo/PutDriverPwd?DriverId=' +
       data.response.Id +
       '&oldPwd=' +
       input1 +

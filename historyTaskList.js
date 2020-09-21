@@ -204,14 +204,14 @@ const HistoryTaskList = props => {
         setuser(obj_value);
         console.log('GET FROM ASYN IS', obj_value);
         var url2 =
-          'http://qif-nantou.1966.org.tw:20022/api/DriverInfo/GetAllPassGroup/' +
+          'http://cih.1966.org.tw/api/DriverInfo/GetAllPassGroup/' +
           obj_value.response.Id;
         seturl(
-          `http://qif-nantou.1966.org.tw:20022/api/DriverInfo/GetAllPassGroup/${
+          `http://cih.1966.org.tw/api/DriverInfo/GetAllPassGroup/${
             obj_value.response.Id
           }`,
         );
-        //let url = `http://qif-nantou.1966.org.tw:20022/api/DriverInfo/GetAllGroup/${obj_value.Id}`;
+        //let url = `http://cih.1966.org.tw/api/DriverInfo/GetAllGroup/${obj_value.Id}`;
         const data = await fetch(url2, {
           method: 'GET',
           headers: {
@@ -242,7 +242,7 @@ const HistoryTaskList = props => {
   async function fetchDataDate(sDate,eDate) {
     await setLoading(true);
     var url2 =
-      'http://qif-nantou.1966.org.tw:20022/api/DriverInfo/GetAllPassGroup/' +
+      'http://cih.1966.org.tw/api/DriverInfo/GetAllPassGroup/' +
       user.response.Id + '?sDate=' + sDate + '&eDate=' + eDate;
       console.log(url2);
     const data = await fetch(

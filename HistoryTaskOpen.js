@@ -116,7 +116,7 @@ const HistoryTaskOpen = props => {
   };
 
   const askCash = async () => {
-    let url = `http://qif-nantou.1966.org.tw:20022/api/OrderDetails/PutDetailRealWith?OrderDetailId=${
+    let url = `http://cih.1966.org.tw/api/OrderDetails/PutDetailRealWith?OrderDetailId=${
       taskData[detailIndex].OrderDetails.Id
     }&RealFamily=${people}&RealForeign=${foreignPeople}`;
 
@@ -153,7 +153,7 @@ const HistoryTaskOpen = props => {
       name: 'signature.jpg',
       filename: 'signature.jpg',
     });
-    let url = `http://qif-nantou.1966.org.tw:20022/api/Img/Pic`;
+    let url = `http://cih.1966.org.tw/api/Img/Pic`;
 
     console.log(`Making POST PIC request to: ${url}`);
 
@@ -182,7 +182,7 @@ const HistoryTaskOpen = props => {
   };
 
   const updateStatus = async () => {
-    let url = `http://qif-nantou.1966.org.tw:20022/api/OrderDetails/PutDetailStatus?OrderDetailId=${
+    let url = `http://cih.1966.org.tw/api/OrderDetails/PutDetailStatus?OrderDetailId=${
       taskData[detailIndex].OrderDetails.Id
     }&StatusInt=${caseStatus[detailIndex]}`;
 
