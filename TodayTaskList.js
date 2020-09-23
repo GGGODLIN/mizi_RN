@@ -192,9 +192,9 @@ const TodayTaskList = props => {
         var obj_value = JSON.parse(value);
         setuserLoginInfo(obj_value);
         var url2 =
-          'http://qif-nantou.1966.org.tw:20022/api/DriverInfo/GetAllGroupDriverSide/' +
+          'http://cih.1966.org.tw/api/DriverInfo/GetAllGroupDriverSide/' +
           obj_value.response.Id;
-        //let url = `http://qif-nantou.1966.org.tw:20022/api/DriverInfo/GetAllGroup/${obj_value.Id}`;
+        //let url = `http://cih.1966.org.tw/api/DriverInfo/GetAllGroup/${obj_value.Id}`;
         const data = await fetch(url2, {
           method: 'GET',
           headers: {
@@ -276,7 +276,7 @@ const TodayTaskList = props => {
       name: fname,
       filename: fname,
     });
-    let url = `http://qif-nantou.1966.org.tw:20022/api/Img/Pic`;
+    let url = `http://cih.1966.org.tw/api/Img/Pic`;
 
     console.log(`Making POST PIC request to: ${url}`);
     console.log(form);
@@ -296,7 +296,7 @@ const TodayTaskList = props => {
 
         if (isDriverSign){
           let url2 =
-          'http://qif-nantou.1966.org.tw:20022/api/DriverInfo/PutDriverReceiveSign';
+          'http://cih.1966.org.tw/api/DriverInfo/PutDriverReceiveSign';
         const data2 = await fetch(url2, {
           method: 'PUT',
           headers: {
@@ -340,7 +340,7 @@ const TodayTaskList = props => {
 
   async function fetchData_test() {
     const data = await fetch(
-      'http://qif-nantou.1966.org.tw:20022/api/DriverInfo/GetAllPassGroup/15',
+      'http://cih.1966.org.tw/api/DriverInfo/GetAllPassGroup/15',
       {
         method: 'GET',
         headers: {

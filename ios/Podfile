@@ -1,8 +1,8 @@
 platform :ios, '9.0'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
-target 'TEST0214' do
-  # Pods for TEST0214
+target '1966ntpc' do
+  # Pods for 1966ntpc
 permissions_path = '../node_modules/react-native-permissions/ios'
 rn_path = '../node_modules/react-native'
   rn_maps_path = '../node_modules/react-native-maps'
@@ -62,7 +62,7 @@ pod 'react-native-webview', :path => '../node_modules/react-native-webview'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
 
-  target 'TEST0214Tests' do
+  target '1966ntpcTests' do
     inherit! :search_paths
     # Pods for testing
   end
@@ -70,10 +70,10 @@ pod 'react-native-webview', :path => '../node_modules/react-native-webview'
   use_native_modules!
 end
 
-target 'TEST0214-tvOS' do
-  # Pods for TEST0214-tvOS
+target '1966ntpc-tvOS' do
+  # Pods for 1966ntpc-tvOS
 
-  target 'TEST0214-tvOSTests' do
+  target '1966ntpc-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end
