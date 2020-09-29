@@ -2,9 +2,9 @@
 
 buildscript {
     ext {
-        compileSdkVersion           = 28
-        targetSdkVersion            = 28
-        buildToolsVersion           = "28.0.3"
+        compileSdkVersion           = 29
+        targetSdkVersion            = 29
+        buildToolsVersion           = "29.0.2"
         googlePlayServicesVersion   = "17.0.0"
         supportLibVersion           = "27.1.0"
         androidMapsUtilsVersion     = "0.5+"
@@ -45,8 +45,8 @@ subprojects {
     // force libs to use recent buildtools
         if (project.hasProperty("android")) {
             android {
-                compileSdkVersion = 28  // change to match your desired version
-                buildToolsVersion = "28.0.3" // ....
+                compileSdkVersion = 29  // change to match your desired version
+                buildToolsVersion = "29.0.2" // ....
             }
         }
     }
