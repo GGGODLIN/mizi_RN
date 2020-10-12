@@ -69,7 +69,7 @@ const HitCard = props => {
         setuser(obj_value);
         console.log('GET FROM ASYN IS', obj_value);
         let url2 =
-          'http://cih.1966.org.tw/api/DriverInfo/GetAllPunchByDriver/' +
+          'http://cic.1966.org.tw/api/DriverInfo/GetAllPunchByDriver/' +
           obj_value.response.Id;
 
         const data = await fetch(url2, {
@@ -121,7 +121,7 @@ const HitCard = props => {
           );
 
         let url3 =
-          'http://cih.1966.org.tw/api/DriverInfo/GetDriverReceive/' +
+          'http://cic.1966.org.tw/api/DriverInfo/GetDriverReceive/' +
           obj_value.response.Id;
 
         const data2 = await fetch(url3, {
@@ -152,7 +152,7 @@ const HitCard = props => {
   }
 
   async function handleSubmitHitCard() {
-    let url2 = `http://cih.1966.org.tw/api/DriverInfo/SetPunchTime/${
+    let url2 = `http://cic.1966.org.tw/api/DriverInfo/SetPunchTime/${
       user.response.Id
     }?status=${status}`;
     if(bTemperature !== 0){
@@ -246,7 +246,7 @@ const HitCard = props => {
       name: fname,
       filename: fname,
     });
-    let url = `http://cih.1966.org.tw/api/Img/Pic`;
+    let url = `http://cic.1966.org.tw/api/Img/Pic`;
 
     console.log(`Making POST PIC request to: ${url}`);
     console.log(form);
@@ -266,7 +266,7 @@ const HitCard = props => {
 
         if (isDriverSign){
           let url2 =
-          'http://cih.1966.org.tw/api/DriverInfo/PutDriverReceiveSign';
+          'http://cic.1966.org.tw/api/DriverInfo/PutDriverReceiveSign';
         const data2 = await fetch(url2, {
           method: 'PUT',
           headers: {

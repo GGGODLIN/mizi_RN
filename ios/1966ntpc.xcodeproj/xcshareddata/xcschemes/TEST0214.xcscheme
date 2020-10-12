@@ -29,7 +29,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "I&#x5357;&#x6295;-&#x611a;&#x4eba;&#x4e4b;&#x53cb;.app"
+               BuildableName = "&#x5609;&#x7fa9;&#x5e02;-&#x96d9;&#x798f;.app"
                BlueprintName = "1966ntpc"
                ReferencedContainer = "container:1966ntpc.xcodeproj">
             </BuildableReference>
@@ -59,7 +59,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "I&#x5357;&#x6295;-&#x611a;&#x4eba;&#x4e4b;&#x53cb;.app"
+            BuildableName = "&#x5609;&#x7fa9;&#x5e02;-&#x96d9;&#x798f;.app"
             BlueprintName = "1966ntpc"
             ReferencedContainer = "container:1966ntpc.xcodeproj">
          </BuildableReference>
@@ -78,7 +78,7 @@
       </Testables>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Release"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
@@ -92,7 +92,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "I&#x5357;&#x6295;-&#x611a;&#x4eba;&#x4e4b;&#x53cb;.app"
+            BuildableName = "&#x5609;&#x7fa9;&#x5e02;-&#x96d9;&#x798f;.app"
             BlueprintName = "1966ntpc"
             ReferencedContainer = "container:1966ntpc.xcodeproj">
          </BuildableReference>
@@ -109,7 +109,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "I&#x5357;&#x6295;-&#x611a;&#x4eba;&#x4e4b;&#x53cb;.app"
+            BuildableName = "&#x5609;&#x7fa9;&#x5e02;-&#x96d9;&#x798f;.app"
             BlueprintName = "1966ntpc"
             ReferencedContainer = "container:1966ntpc.xcodeproj">
          </BuildableReference>
