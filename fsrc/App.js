@@ -42,7 +42,7 @@ const App: () => React$Node = () => {
     const [loading, setloading] = useState({lodingOrNot:true});
   
     async function fetchData() {
-      const res = await fetch("http://cih.1966.org.tw/api/DriverInfo/Get/15");
+      const res = await fetch("http://cic.1966.org.tw/api/DriverInfo/Get/15");
       res.json()
         .then(res => {
           console.log(res.msg);

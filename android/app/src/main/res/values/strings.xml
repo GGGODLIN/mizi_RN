@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">嘉義縣-雙福</string>
-    <string moduleConfig="true" name="CodePushDeploymentKey">9ODf-bKSOQHzG9yoJoSdrMag-RAjWANRhIcTs
+    <string name="app_name">嘉義市-雙福</string>
+    <string moduleConfig="true" name="CodePushDeploymentKey">hZ4Fx4kK9_exHI5srWyhp5-aNF4l6uA4joUIQ
     </string>
 </resources>

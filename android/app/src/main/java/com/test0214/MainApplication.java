@@ -1,4 +1,4 @@
-package com.jayisian;
+package com.jayicity;
 
 import android.app.Application;
 import android.content.Context;

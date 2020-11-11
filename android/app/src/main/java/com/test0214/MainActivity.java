@@ -1,4 +1,4 @@
-package com.jayisian;
+package com.jayicity;
 
 import com.facebook.react.ReactActivity;
 
@@ -10,6 +10,6 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "jayisian";
+    return "jayicity";
   }
 }
