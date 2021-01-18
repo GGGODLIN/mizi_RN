@@ -29,6 +29,7 @@ import { Picker } from '@react-native-community/picker';
 import Signature from 'react-native-signature-canvas';
 import SignatureCapture from 'react-native-signature-capture';
 import RNSignatureExample from './Sign';
+import LaunchNavigator from 'react-native-launch-navigator';
 
 import {
   ThemeProvider,
@@ -814,18 +815,30 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
             style={
               caseStatus[detailIndex] >= 5 ? { display: 'none' } : styles.addr
             }>
-            <Icon
-              name="circle-o"
-              size={30}
-              color="orange"
-              style={{ paddingLeft: 30 }}
-            />
+            <Button
+              style={{
+                alignSelf: 'center',
+                justifyContent: 'center',
+                alignContent: 'center',
+                marginStart: 10,
+              }}
+              contentStyle={{ height: 60 }}
+              mode="contained"
+              onPress={() => {
+                LaunchNavigator.navigate(taskData[detailIndex].OrderDetails.FromAddr)
+                  .then(() => console.log('Launched navigator'))
+                  .catch(err =>
+                    console.error('Error launching navigator: ' + err),
+                  );
+              }}>
+              {'導航'}
+            </Button>
             <Text style={styles.addrText}>
               {`<${taskData[detailIndex].OrderDetails.FromAddrRemark}>
 ${taskData[detailIndex].OrderDetails.FromAddr}`}
             </Text>
           </View>
-          <View
+          {/* <View
             style={
               caseStatus[detailIndex] >= 5 ? { display: 'none' } : styles.addr
             }>
@@ -835,17 +848,29 @@ ${taskData[detailIndex].OrderDetails.FromAddr}`}
               color="orange"
               style={{ paddingLeft: 32 }}
             />
-          </View>
+          </View> */}
           <View
             style={
               caseStatus[detailIndex] >= 5 ? { display: 'none' } : styles.addr
             }>
-            <Icon
-              name="circle-o"
-              size={30}
-              color="orange"
-              style={{ paddingLeft: 30 }}
-            />
+            <Button
+              style={{
+                alignSelf: 'center',
+                justifyContent: 'center',
+                alignContent: 'center',
+                marginStart: 10,
+              }}
+              contentStyle={{ height: 60 }}
+              mode="contained"
+              onPress={() => {
+                LaunchNavigator.navigate(taskData[detailIndex].OrderDetails.ToAddr)
+                  .then(() => console.log('Launched navigator'))
+                  .catch(err =>
+                    console.error('Error launching navigator: ' + err),
+                  );
+              }}>
+              {'導航'}
+            </Button>
             <Text style={styles.addrText}>
               {`<${taskData[detailIndex].OrderDetails.ToAddrRemark}>
 ${taskData[detailIndex].OrderDetails.ToAddr}`}

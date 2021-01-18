@@ -146,8 +146,8 @@ android {
         applicationId "com.test0214"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "2.1"
+        versionCode 3
+        versionName "3.0"
     }
     splits {
         abi {
