@@ -1,4 +1,4 @@
-import React, {useState, useEffect, Component} from 'react';
+import React, { useState, useEffect, Component } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -20,12 +20,12 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import AsyncStorage from '@react-native-community/async-storage';
-import MapView, {PROVIDER_GOOGLE, Marker, Polyline} from 'react-native-maps';
+import MapView, { PROVIDER_GOOGLE, Marker, Polyline } from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 
-import {NavigationContainer} from '@react-navigation/native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Picker} from '@react-native-community/picker';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Picker } from '@react-native-community/picker';
 import Signature from 'react-native-signature-canvas';
 import SignatureCapture from 'react-native-signature-capture';
 import RNSignatureExample from './Sign';
@@ -37,7 +37,7 @@ import {
   Overlay,
   Input,
 } from 'react-native-elements';
-import {Button, Card, Title, Paragraph, Divider,ActivityIndicator} from 'react-native-paper';
+import { Button, Card, Title, Paragraph, Divider, ActivityIndicator } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const HistoryTaskOpen = props => {
@@ -86,12 +86,12 @@ const HistoryTaskOpen = props => {
     latitudeDelta:
       Math.abs(
         taskData[detailIndex].OrderDetails.FromLat -
-          taskData[detailIndex].OrderDetails.ToLat,
+        taskData[detailIndex].OrderDetails.ToLat,
       ) * 2.2,
     longitudeDelta:
       Math.abs(
         taskData[detailIndex].OrderDetails.FromLon -
-          taskData[detailIndex].OrderDetails.ToLon,
+        taskData[detailIndex].OrderDetails.ToLon,
       ) * 2.2,
   };
 
@@ -118,7 +118,7 @@ const HistoryTaskOpen = props => {
   const askCash = async () => {
     let url = `https://api.donkeymove.com/api/OrderDetails/PutDetailRealWith?OrderDetailId=${
       taskData[detailIndex].OrderDetails.Id
-    }&RealFamily=${people}&RealForeign=${foreignPeople}`;
+      }&RealFamily=${people}&RealForeign=${foreignPeople}`;
 
     console.log(`Making Cash request to: ${url}`);
 
@@ -136,7 +136,7 @@ const HistoryTaskOpen = props => {
         Alert.alert('網路異常，請稍後再試...', ' ', [
           {
             text: '確定',
-            onPress: () => {},
+            onPress: () => { },
           },
         ]),
       );
@@ -174,7 +174,7 @@ const HistoryTaskOpen = props => {
         Alert.alert('網路異常，請稍後再試...', ' ', [
           {
             text: '確定',
-            onPress: () => {},
+            onPress: () => { },
           },
         ]),
       );
@@ -184,7 +184,7 @@ const HistoryTaskOpen = props => {
   const updateStatus = async () => {
     let url = `https://api.donkeymove.com/api/OrderDetails/PutDetailStatus?OrderDetailId=${
       taskData[detailIndex].OrderDetails.Id
-    }&StatusInt=${caseStatus[detailIndex]}`;
+      }&StatusInt=${caseStatus[detailIndex]}`;
 
     console.log(`Making Status request to: ${url}`);
 
@@ -201,7 +201,7 @@ const HistoryTaskOpen = props => {
         Alert.alert('網路異常，請稍後再試...', ' ', [
           {
             text: '確定',
-            onPress: () => {},
+            onPress: () => { },
           },
         ]),
       );
@@ -240,16 +240,16 @@ const HistoryTaskOpen = props => {
   if (isLoading) {
     setLoading(false);
     console.log('info screen is loading...');
-    
+
     return (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <ActivityIndicator animating={true} size='large' />
       </View>
     );
   } else {
-    let withPeople = caseStatus[detailIndex]<6?taskData[detailIndex].OrderDetails.FamilyWith:taskData[detailIndex].OrderDetails.RealFamilyWith;
+    let withPeople = caseStatus[detailIndex] < 6 ? taskData[detailIndex].OrderDetails.FamilyWith : taskData[detailIndex].OrderDetails.RealFamilyWith;
     return (
-      <ScrollView style={{flex: 1}}>
+      <ScrollView style={{ flex: 1 }}>
         <View
           style={{
             margin: '5%',
@@ -262,15 +262,15 @@ const HistoryTaskOpen = props => {
           <View style={styles.titleBox}>
             <View style={styles.titleTime}>
               <View style={styles.titleLeft}>
-                <Text style={{color: 'white', fontSize: 20}}>
+                <Text style={{ color: 'white', fontSize: 20 }}>
                   {props.route.params.startTime}
                 </Text>
               </View>
               <View style={styles.titleDate}>
-                <Text style={{color: 'white', fontSize: 20}}>
+                <Text style={{ color: 'white', fontSize: 20 }}>
                   {props.route.params.startDate}
                 </Text>
-                <Text style={{color: 'white', fontSize: 20}}>
+                <Text style={{ color: 'white', fontSize: 20 }}>
                   {props.route.params.canShared}
                 </Text>
               </View>
@@ -284,23 +284,23 @@ const HistoryTaskOpen = props => {
               </Text>
             </View>
             <View style={styles.titleRight}>
-              <Text style={{color: 'white', fontSize: 20}}>
+              <Text style={{ color: 'white', fontSize: 20 }}>
                 {'個案' + 1 + '/' + '陪同' + withPeople}
               </Text>
             </View>
           </View>
           <View style={styles.predict}>
             <Text>預估里程</Text>
-            <Text style={{fontSize: 20, fontWeight: 'bold'}}>
+            <Text style={{ fontSize: 20, fontWeight: 'bold' }}>
               {taskData[detailIndex].OrderDetails.TotalMileage / 1000 + 'km'}
             </Text>
             <Divider />
             <Text>預估時間</Text>
-            <Text style={{fontSize: 20, fontWeight: 'bold'}}>
+            <Text style={{ fontSize: 20, fontWeight: 'bold' }}>
               {taskData[detailIndex].OrderDetails.ExpectedMinute + '分鐘'}
             </Text>
           </View>
-          <View
+          {/* <View
             style={{height: 250, position: 'relative', backgroundColor: 'pink'}}
             contentContainerStyle={StyleSheet.absoluteFillObject}>
             <MapView
@@ -348,7 +348,7 @@ const HistoryTaskOpen = props => {
                 lineJoin="bevel"
               />
             </MapView>
-          </View>
+          </View> */}
           <ButtonGroup
             onPress={setdetailIndex}
             selectedIndex={detailIndex}
@@ -360,15 +360,15 @@ const HistoryTaskOpen = props => {
               justifyContent: 'flex-start',
               alignSelf: 'flex-start',
             }}
-            buttonStyle={{margin: 0, padding: 0, alignItems: 'center'}}
-            textStyle={{margin: 0, padding: 0}}
+            buttonStyle={{ margin: 0, padding: 0, alignItems: 'center' }}
+            textStyle={{ margin: 0, padding: 0 }}
           />
           <View style={styles.addr}>
             <Icon
               name="circle-o"
               size={30}
               color="orange"
-              style={{paddingLeft: 30}}
+              style={{ paddingLeft: 30 }}
             />
             <Text style={styles.addrText}>
               {taskData[detailIndex].OrderDetails.FromAddr}
@@ -379,7 +379,7 @@ const HistoryTaskOpen = props => {
               name="angle-double-down"
               size={30}
               color="orange"
-              style={{paddingLeft: 32}}
+              style={{ paddingLeft: 32 }}
             />
           </View>
           <View style={styles.addr}>
@@ -387,14 +387,14 @@ const HistoryTaskOpen = props => {
               name="circle-o"
               size={30}
               color="orange"
-              style={{paddingLeft: 30}}
+              style={{ paddingLeft: 30 }}
             />
             <Text style={styles.addrText}>
               {taskData[detailIndex].OrderDetails.ToAddr}
             </Text>
           </View>
 
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Text
               style={{
                 fontSize: 20,
@@ -404,11 +404,11 @@ const HistoryTaskOpen = props => {
               }}>
               應收車資:
             </Text>
-            <Text style={{fontSize: 30, fontWeight: 'bold', color: 'orange'}}>
-              {caseStatus[detailIndex]===6? taskData[detailIndex].OrderDetails.RealTotalAmt : (taskData[detailIndex].OrderDetails.SelfPayAmt+taskData[detailIndex].OrderDetails.OtherAmt)}
+            <Text style={{ fontSize: 30, fontWeight: 'bold', color: 'orange' }}>
+              {caseStatus[detailIndex] === 6 ? taskData[detailIndex].OrderDetails.RealTotalAmt : (taskData[detailIndex].OrderDetails.SelfPayAmt + taskData[detailIndex].OrderDetails.OtherAmt)}
             </Text>
           </View>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Text
               style={{
                 fontSize: 20,
@@ -418,11 +418,11 @@ const HistoryTaskOpen = props => {
               }}>
               實收車資:
             </Text>
-            <Text style={{fontSize: 30, fontWeight: 'bold', color: 'orange'}}>
+            <Text style={{ fontSize: 30, fontWeight: 'bold', color: 'orange' }}>
               {taskData[detailIndex].OrderDetails.ReceivedAmt}
             </Text>
           </View>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Text
               style={{
                 fontSize: 20,
@@ -432,8 +432,8 @@ const HistoryTaskOpen = props => {
               }}>
               備註:
             </Text>
-            <Text style={{fontSize: 20, color: 'black', width: '50%'}}>
-              {taskData[detailIndex].DespatchDetail.Remark==='null'?' ':taskData[detailIndex].DespatchDetail.Remark}
+            <Text style={{ fontSize: 20, color: 'black', width: '50%' }}>
+              {taskData[detailIndex].DespatchDetail.Remark === 'null' ? ' ' : taskData[detailIndex].DespatchDetail.Remark}
             </Text>
           </View>
 
@@ -446,8 +446,8 @@ const HistoryTaskOpen = props => {
               backgroundColor: 'orange',
               margin: 10,
             }}
-            labelStyle={{color: 'white', fontSize: 20}}
-            contentStyle={{width: '100%', paddingHorizontal: 50}}
+            labelStyle={{ color: 'white', fontSize: 20 }}
+            contentStyle={{ width: '100%', paddingHorizontal: 50 }}
             mode="outlined"
             onPress={() => {
               props.navigation.navigate('HistoryTaskList');
