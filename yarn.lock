@@ -5688,11 +5688,6 @@ react-native-iphone-x-helper@^1.2.1:
   resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.2.1.tgz#645e2ffbbb49e80844bb4cbbe34a126fda1e6772"
   integrity sha512-/VbpIEp8tSNNHIvstuA3Swx610whci1Zpc9mqNkqn14DkMbw+ORviln2u0XyHG1kPvvwTNGZY6QpeFwxYaSdbQ==
 
-react-native-launch-navigator@^1.0.7:
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/react-native-launch-navigator/-/react-native-launch-navigator-1.0.8.tgz#c86f45406d37c0942a9d1a3e54a6d4e28c91ee81"
-  integrity sha512-9/xsmcoXa02waKYX37Fx86U3e9FUDeNz0RmWiZ/JeBRAO1U0J2yK0xmTLiGyP4J9txZ9Qc9iZBJF+qMq8LXsEQ==
-
 react-native-login-screen@^0.3.6:
   version "0.3.6"
   resolved "https://registry.yarnpkg.com/react-native-login-screen/-/react-native-login-screen-0.3.6.tgz#fde4dbe143a4e0bb1bd620bc1772c1dfcf9be724"
