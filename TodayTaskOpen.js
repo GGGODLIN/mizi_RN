@@ -104,7 +104,7 @@ const TodayTaskOpen = props => {
   );
   console.log('STATUS', caseStatus);
   //console.log('Done', doneCase);
-  console.log('index', detailIndex,props.route.params.startTime);
+  console.log('index', detailIndex, props.route.params.startTime);
   const [people, setpeople] = useState(
     taskData[detailIndex].OrderDetails.FamilyWith +
     taskData[detailIndex].OrderDetails.ForeignFamilyWith,
@@ -662,12 +662,12 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
           <View style={styles.titleBox}>
             <View style={styles.titleTime}>
               <View style={styles.titleLeft}>
-                <Text style={{color: 'white', fontSize: 20}}>
+                <Text style={{ color: 'white', fontSize: 20 }}>
                   {props.route.params.startTime[detailIndex]}
                 </Text>
               </View>
               <View style={styles.titleDate}>
-                <Text style={{color: 'white', fontSize: 20}}>
+                <Text style={{ color: 'white', fontSize: 20 }}>
                   {props.route.params.startDate[detailIndex]}
                 </Text>
                 <Text style={{ color: 'white', fontSize: 20 }}>
@@ -708,7 +708,7 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
               {taskData[detailIndex].OrderDetails.ExpectedMinute + '分鐘'}
             </Text>
           </View>
-          <View
+          {/* <View
             style={
               caseStatus[detailIndex] >= 5
                 ? { height: 0.1, position: 'relative' }
@@ -790,7 +790,7 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
                 lineJoin="bevel"
               />
             </MapView>
-          </View>
+          </View> */}
           <ButtonGroup
             onPress={handleChangeIndex}
             selectedIndex={detailIndex}
@@ -814,12 +814,24 @@ ${taskData[detailIndex].OrderDetails.ToAddr}`}
             style={
               caseStatus[detailIndex] >= 5 ? { display: 'none' } : styles.addr
             }>
-            <Icon
-              name="circle-o"
-              size={30}
-              color="orange"
-              style={{ paddingLeft: 30 }}
-            />
+            <Button
+              style={{
+                alignSelf: 'center',
+                justifyContent: 'center',
+                alignContent: 'center',
+                marginStart: 10,
+              }}
+              contentStyle={{ height: 60 }}
+              mode="contained"
+              onPress={() => {
+                LaunchNavigator.navigate(taskData[detailIndex].OrderDetails.FromAddr)
+                  .then(() => console.log('Launched navigator'))
+                  .catch(err =>
+                    console.error('Error launching navigator: ' + err),
+                  );
+              }}>
+              {'導航'}
+            </Button>
             <Text style={styles.addrText}>
               {`<${taskData[detailIndex].OrderDetails.FromAddrRemark}>
 ${taskData[detailIndex].OrderDetails.FromAddr}`}
@@ -840,12 +852,24 @@ ${taskData[detailIndex].OrderDetails.FromAddr}`}
             style={
               caseStatus[detailIndex] >= 5 ? { display: 'none' } : styles.addr
             }>
-            <Icon
-              name="circle-o"
-              size={30}
-              color="orange"
-              style={{ paddingLeft: 30 }}
-            />
+            <Button
+              style={{
+                alignSelf: 'center',
+                justifyContent: 'center',
+                alignContent: 'center',
+                marginStart: 10,
+              }}
+              contentStyle={{ height: 60 }}
+              mode="contained"
+              onPress={() => {
+                LaunchNavigator.navigate(taskData[detailIndex].OrderDetails.FromAddr)
+                  .then(() => console.log('Launched navigator'))
+                  .catch(err =>
+                    console.error('Error launching navigator: ' + err),
+                  );
+              }}>
+              {'導航'}
+            </Button>
             <Text style={styles.addrText}>
               {`<${taskData[detailIndex].OrderDetails.ToAddrRemark}>
 ${taskData[detailIndex].OrderDetails.ToAddr}`}
