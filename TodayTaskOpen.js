@@ -862,7 +862,7 @@ ${taskData[detailIndex].OrderDetails.FromAddr}`}
               contentStyle={{ height: 60 }}
               mode="contained"
               onPress={() => {
-                LaunchNavigator.navigate(taskData[detailIndex].OrderDetails.FromAddr)
+                LaunchNavigator.navigate(taskData[detailIndex].OrderDetails.ToAddr)
                   .then(() => console.log('Launched navigator'))
                   .catch(err =>
                     console.error('Error launching navigator: ' + err),
